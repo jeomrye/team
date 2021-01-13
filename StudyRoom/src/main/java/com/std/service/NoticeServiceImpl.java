@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.std.domain.Criteria;
 import com.std.domain.NoticeVO;
 import com.std.mapper.NoticeMapper;
 
@@ -49,7 +50,7 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public List<NoticeVO> getlistNotice(Criteria cri) {
 		
-		return mapper.getlistNotice(cri);
+		return mapper.getListWithPaging(cri);
 	}
 
 	@Override

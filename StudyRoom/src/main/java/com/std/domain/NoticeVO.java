@@ -8,7 +8,7 @@ public class NoticeVO {
 	private Long notNo;
 	private String title; 
 	private String content; 
-	private String wirter ;
+	private String writer ;
 	private Date regdate; 
 	private Date updatedate;
 

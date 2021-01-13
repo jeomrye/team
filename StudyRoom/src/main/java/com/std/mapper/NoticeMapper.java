@@ -2,6 +2,7 @@ package com.std.mapper;
 
 import java.util.List;
 
+import com.std.domain.Criteria;
 import com.std.domain.NoticeVO;
 
 public interface NoticeMapper {

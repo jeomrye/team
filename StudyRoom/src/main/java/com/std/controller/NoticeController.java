@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.std.domain.Criteria;
 import com.std.domain.NoticeVO;
+import com.std.domain.PageDTO;
 import com.std.service.NoticeService;
 
 import lombok.AllArgsConstructor;
@@ -22,15 +24,11 @@ import lombok.extern.log4j.Log4j;
 public class NoticeController {
 	private NoticeService service;
 
-//	@GetMapping("/list")
-//	public void list(Model model) {
-//		log.info("list");
-//		model.addAttribute("list", service.getList());
-//	}
+
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
 		log.info("list : " + cri);
-		model.addAttribute("list", service.getList(cri));
+		model.addAttribute("list", service.getlistNotice(cri));
 
 		int total = service.getTotal(cri);
 		log.info("total : " + total);
