@@ -19,16 +19,16 @@
 				<input type="hidden" name='type' value='<c:out value="${cri.type }"/>'>
 				<input type="hidden" name='keyword' value='<c:out value="${cri.keyword }"/>'>
 			<div class="form-group">
-				<label>notNo</label><input class="form-control" name='notNo' value='<c:out value="${notice.notNo }"/>' readonly="readonly">
+				<label>작성자</label><input class="form-control" name='writer' value='<c:out value="${notice.writer }"/>' readonly="readonly">
 			</div>
 			<div class="form-group">
-				<label>Title</label><input class="form-control" name='title' value='<c:out value="${notice.title }"/>'>
+				<label>공지번호</label><input class="form-control" name='notNo' value='<c:out value="${notice.notNo }"/>' readonly="readonly">
 			</div>
 			<div class="form-group">
-				<label>Text area</label><textarea class="form-control" rows="3" name='content' ><c:out value="${notice.content }"/></textarea>
+				<label>제목</label><input class="form-control" name='title' value='<c:out value="${notice.title }"/>'>
 			</div>
 			<div class="form-group">
-				<label>Writer</label><input class="form-control" name='writer' value='<c:out value="${notice.writer }"/>' readonly="readonly">
+				<label>내용</label><textarea class="form-control" rows="3" name='content' ><c:out value="${notice.content }"/></textarea>
 			</div>
 			
 			<div class="form-group">
@@ -37,9 +37,9 @@
 			<div class="form-group">
 				<label>UpDate Date</label><input class="form-control" name='updateDate' value='<fmt:formatDate value="${notice.updatedate }" pattern="yyyy-mm-dd" />' readonly="readonly">
 			</div>
-			<button type="submit" data-oper='modify' class="btn btn-default">Modify</button>
-			 <button type="submit" data-oper='remove' class="btn btn-danger">Remove</button>
-			<button type="submit" data-oper='list' class="btn btn-info">List</button>
+			<button type="submit" data-oper='modify' class="btn btn-default">수정</button>
+			 <button type="submit" data-oper='remove' class="btn btn-danger">지우기</button>
+			<button type="submit" data-oper='list' class="btn btn-info">공지사항목록</button>
 			</form>
 		</div>
 	</div>

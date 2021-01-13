@@ -14,8 +14,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				공지사항
-				<button id='regBtn' type="button" class="btn btn-xs pull-right">Register
-					New Notice</button>
+				<button id='regBtn' type="button" class="btn btn-xs pull-right">새 공지 쓰기</button>
 <!-- 					관리자만 볼수있게 -->
 			</div>
 			<table class="table eable-striped table-bordered table-hover">
@@ -42,8 +41,8 @@
 					</tr>
 				</c:forEach>
 			</table>
-			<div class="row">
-				<div class="col-lg-12">
+			<div class="pull-left">
+				<div class="col-lg-12" style="padding-top: 25px; padding-left: 0">
 					<form id="searchForm" action="/board/list" method="get">
 						<select name="type">
 							<option value=""
