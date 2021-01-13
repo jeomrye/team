@@ -4,6 +4,43 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.std.mapper.FreeMapper">
+<!-- p.338 :: sql 태그를 이용한 별도 보관 사용(include사용)  -->
+  <sql id="criteria">
+     <trim prefix="(" suffix=") AND " prefixOverrides="OR">
+     	<foreach item='type' collection="typeArr">
+     		<trim prefix="OR">
+     			<choose>	<!-- if ~ else  -->
+     				<when test="type == 'T'.toString()">
+     					title like '%'||#{keyword}||'%'
+     				</when>
+     				<when test="type == 'C'.toString()">
+     					content like '%'||#{keyword}||'%'
+     				</when>
+     				<when test="type == 'W'.toString()">
+     					writer like '%'||#{keyword}||'%'
+     				</when>
+     			</choose>
+     		</trim>
+     	</foreach>
+     </trim>
+  </sql>
+   <select id="getListWithPaging" resultType="com.std.domain.FreeVO">
+  <![CDATA[
+    select fno,title,content,writer,regdate,updatedate from (select /*+INDEX_DESC(free pk_free) */ rownum rn,fno,title,content,writer,regdate,updatedate from free where
+  ]]>   
+ 	<include refid="criteria"></include>
+  <![CDATA[  
+    rownum <= #{pageNum} * #{amount} ) where rn > (#{pageNum} -1)*#{amount}
+  ]]>
+  </select>
+  
+   <!-- p.323 추가 -->
+  <select id="getTotalCount" resultType="int">
+  	select count(*) from free where 
+  	<include refid="criteria"></include> 
+  	fno > 0
+  </select>
+  
 	<select id="getList" resultType="com.std.domain.FreeVO">
 	<![CDATA[
 		select * from free where fno >0 
@@ -11,7 +48,7 @@
 	</select>
 	
 	<insert id="insert">
-		insert into free(fno,title,content,writer,userid) values (free_seq.nextval, #{title}, #{content}, #{writer}, #{userid})
+		insert into free(fno,title,content,writer) values (free_seq.nextval, #{title}, #{content}, #{writer})
 	</insert>
 	
 	<insert id="insertSelectKey">
@@ -19,7 +56,7 @@
 			select free_seq.nextval from dual
 		</selectKey>
 		
-		insert into free(fno,title,content,writer,userid) values (#{fno}, #{title}, #{content}, #{writer}, #{userid})
+		insert into free(fno,title,content,writer) values (#{fno}, #{title}, #{content}, #{writer})
 	</insert>
 	
 	<select id="read" resultType="com.std.domain.FreeVO">
@@ -31,6 +68,6 @@
 	</delete>
 	
 	<update id="update">
-		update free set title=#{title}, content=#{content}, writer=#{writer}, updatedate =sysdate where fno = #{fno}
+		update free set title=#{title}, content=#{content}, writer=#{writer}, updatedate = sysdate where fno = #{fno}
 	</update>
 </mapper>

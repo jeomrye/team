@@ -2,6 +2,8 @@ package com.std.mapper;
 
 import static org.junit.Assert.*;
 
+import javax.websocket.Session;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,7 @@ public class FreeMapperTests {
 		mapper.getList().forEach(free ->log.info(free));
 	}
 	
-	//@Test
+	@Test
 	public void testInsert() {
 		FreeVO free = new FreeVO();
 		free.setTitle("새글");
@@ -37,7 +39,7 @@ public class FreeMapperTests {
 		log.info(free);
 	}
 	
-	//@Test
+	@Test
 	public void testInsertSelectKey() {
 		FreeVO free = new FreeVO();
 		free.setTitle("새글 key");

@@ -24,6 +24,4 @@ public interface FreeMapper {
 	public int update(FreeVO free);
 	
 	public int getTotalCount(Criteria cri);
-	
-	public void updateReplyCnt(@Param("fno") Long fno, @Param("amount") int amount);
 }

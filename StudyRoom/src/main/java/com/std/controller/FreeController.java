@@ -50,7 +50,7 @@ public class FreeController {
 	@GetMapping({"/get","/modify"})		//상세조회
 	public void get(@RequestParam("fno") Long fno,@ModelAttribute("cri") Criteria cri,Model model) {
 		log.info("/get or /modify");
-		model.addAttribute("board",service.get(fno));
+		model.addAttribute("free",service.get(fno));
 	}
 	
 	@PostMapping("/modify")		//수정처리
@@ -63,7 +63,7 @@ public class FreeController {
 		rttr.addAttribute("amount",cri.getAmount());
 		rttr.addAttribute("type",cri.getType());
 		rttr.addAttribute("keyword",cri.getKeyword());
-		return "redirect:/board/list";
+		return "redirect:/free/list";
 	}
 	
 	@PostMapping("/remove")		//삭제처리
@@ -76,6 +76,6 @@ public class FreeController {
 		rttr.addAttribute("amount",cri.getAmount());
 		rttr.addAttribute("type",cri.getType());
 		rttr.addAttribute("keyword",cri.getKeyword());
-		return "redirect:/board/list";
+		return "redirect:/free/list";
 	}
 }
