@@ -6,10 +6,10 @@ import com.std.domain.Criteria;
 import com.std.domain.NoticeVO;
 
 public interface NoticeService {
-	public void regNotice(NoticeVO notice);
-	public NoticeVO	getNotice(Long notNo);
-	public boolean modifyNotice(NoticeVO notice);
-	public boolean deleteNotice(Long notNo);
+	public void regNotice(NoticeVO notice);	//작성
+	public NoticeVO	getNotice(Long notNo);	//상세보기
+	public boolean modifyNotice(NoticeVO notice);	//수정
+	public boolean deleteNotice(Long notNo);	//삭제
 	public List<NoticeVO> getlistNotice(Criteria cri);
 	public int getTotal(Criteria cri);
 

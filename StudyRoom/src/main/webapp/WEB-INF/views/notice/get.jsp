@@ -13,6 +13,8 @@
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">공지사항</div>
+<!-- 			공지사항 상세보기 -->
+<!-- 화면에 보이는 부분 -->
 			<div class="form-group">
 				<label>작성자</label><input class="form-control" name='writer' value='<c:out value="${notice.writer }"/>' readonly="readonly">
 			</div>
