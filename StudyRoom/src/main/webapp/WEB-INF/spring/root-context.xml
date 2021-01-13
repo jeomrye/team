@@ -8,7 +8,7 @@
 	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
-		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
@@ -18,6 +18,49 @@
 	<context:component-scan base-package="com.std.domain"></context:component-scan>
 	<context:component-scan base-package="com.std.service"></context:component-scan>
 
+	
+	<!-- 596 -->
+	<task:annotation-driven/>
+	
+	<context:component-scan base-package="com.std.service"></context:component-scan>
+	
+	<!-- 598 -->
+	<context:component-scan base-package="com.std.task"></context:component-scan>
+	
+	<!-- 455 -->
+	<context:component-scan base-package="com.std.aop"></context:component-scan>
+	
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+	<!-- 469 -->
+	<tx:annotation-driven/>
+	
+	<mybatis-spring:scan base-package="com.std.mapper"/>
+		
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		
+		<!-- <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property> -->
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+		<!-- <property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:orcl"></property> -->
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:orcl"></property>
+		<property name="username" value="studyroom"></property>
+		<property name="password" value="studyroom"></property>
+	</bean>
+	
+	 <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <constructor-arg ref="hikariConfig"/>
+     </bean>
+     
+ <!-- 91p -->
+     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+     </bean>
+	
+<!-- 469 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
 	
 	<!-- 596 -->
 	<task:annotation-driven/>
