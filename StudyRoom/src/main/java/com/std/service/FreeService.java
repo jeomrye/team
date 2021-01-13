@@ -2,11 +2,12 @@ package com.std.service;
 
 import java.util.List;
 
+import com.std.domain.Criteria;
 import com.std.domain.FreeVO;
 
 public interface FreeService {
 
-	public void register(FreeVO free);
+	public void register(FreeVO free);	
 	
 	public FreeVO get(Long fno);
 	
@@ -14,5 +15,7 @@ public interface FreeService {
 	
 	public boolean remove(Long fno);
 	
-	public List<FreeVO> getList();
+	public List<FreeVO> getList(Criteria cri);
+	
+	public int getTotal(Criteria cri);
 }
