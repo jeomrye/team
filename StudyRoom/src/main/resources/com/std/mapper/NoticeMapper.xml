@@ -20,17 +20,17 @@
 			</trim>
 		</sql>
 	<select id="getListWithPaging"
-		resultType="org.zerock.domain.BoardVO">
+		resultType="com.std.domain.NoticeVO">
 		<![CDATA[
 		select
 		notNo,title,content,writer,regdate,updatedate 
 		from
 			(
 			SELECT
-				/*+INDEX_DESC(tbl_notice pk_notice)*/
+				/*+INDEX_DESC(notice pk_notice)*/
 				rownum rn,notNo,title,content,writer,regdate,updatedate 
 			FROM 
-				tbl_notice 
+				notice 
 
 			WHERE
 			]]>
@@ -42,48 +42,48 @@
 		]]>
 	</select>
 	<select id="getTotalCount" resultType="int">
-		select count(*) from tbl_board 
+		select count(*) from notice
 		where
 		<include refid="criteria"></include>
-		bno > 0
+		notNo > 0
 	</select>
-	<select id="getList" resultType="org.zerock.domain.BoardVO">
+	<select id="getlistNotice" resultType="com.std.domain.NoticeVO">
 		<![CDATA[
-		select * from tbl_board where bno > 0
+		select * from notice where notNo > 0
 		]]>
 	</select>
 
 	<insert id="insert">
-		insert into tbl_board(bno,title,content,writer)
-		values(seq_board.nextval,#{title},#{content},#{writer})
+		insert into notice(notNo,title,content,writer)
+		values(seq_notice.nextval,#{title},#{content},#{writer})
 	</insert>
 
 	<insert id="insertSelectKey">
-		<selectKey keyProperty="bno" order="BEFORE"
+		<selectKey keyProperty="notNo" order="BEFORE"
 			resultType="long">
-			select seq_board.nextval from dual
+			select seq_notice.nextval from dual
 		</selectKey>
-		insert into tbl_board(bno,title,content,writer)
-		values(#{bno},#{title},#{content},#{writer})
+		insert into notice(notNo,title,content,writer,regdate,updatedate)
+		values(#{notNo},#{title},#{content},#{writer},sysdate,sysdate)
 	</insert>
 
-	<select id="read" resultType="org.zerock.domain.BoardVO">
-		select * from tbl_board where bno =
-		#{bno}
+	<select id="read" resultType="com.std.domain.NoticeVO">
+		select * from notice where notNo =
+		#{notNo}
 
 	</select>
 
 	<delete id="delete">
-		delete from tbl_board where bno = #{bno}
+		delete from notice where notNo = #{notNo}
 	</delete>
 
 	<update id="update">
-		update tbl_board
+		update notice
 		set title = #{title},
 		content =
 		#{content},
 		writer = #{writer},
 		updateDate =sysdate
-		where bno = #{bno}
+		where notNo = #{notNo}
 	</update>
 </mapper>
