@@ -15,16 +15,16 @@
 			<div class="panel-body">
 				<form action="/notice/register" role="form" method="post">
 					<div class="form-group">
-						<label>Title</label><input class="form-control" name="title">
+						<label>제목</label><input class="form-control" name="title">
 					</div>
 					<div class="form-group">
-						<label>Text area</label><textarea class="form-control" rows="3" name="content"></textarea>
+						<label>작성자</label><input class="form-control" name="writer">
 					</div>
 					<div class="form-group">
-						<label>Writer</label><input class="form-control" name="writer">
+						<label>내용</label><textarea class="form-control" rows="3" name="content"></textarea>
 					</div>
-					<button type="submit" class="btn btn-default">Submit Button</button>
-					<button type="reset" class="btn btn-default">Reset Button</button>
+					<button type="submit" class="btn btn-default">게시하기</button>
+					<button type="reset" class="btn btn-default">다시쓰기</button>
 				</form>
 			</div>
 		</div>

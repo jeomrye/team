@@ -14,16 +14,13 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">공지사항</div>
 			<div class="form-group">
-				<label>notNo</label><input class="form-control" name='notNo' value='<c:out value="${notice.notNo }"/>' readonly="readonly">
+				<label>작성자</label><input class="form-control" name='writer' value='<c:out value="${notice.writer }"/>' readonly="readonly">
 			</div>
 			<div class="form-group">
-				<label>Title</label><input class="form-control" name='title' value='<c:out value="${notice.title }"/>' readonly="readonly">
+				<label>제목</label><input class="form-control" name='title' value='<c:out value="${notice.title }"/>' readonly="readonly">
 			</div>
 			<div class="form-group">
-				<label>Text area</label><textarea class="form-control" rows="3" name='content' readonly="readonly"><c:out value="${notice.content }"/></textarea>
-			</div>
-			<div class="form-group">
-				<label>Writer</label><input class="form-control" name='writer' value='<c:out value="${notice.writer }"/>' readonly="readonly">
+				<label>내용</label><textarea class="form-control" rows="3" name='content' readonly="readonly"><c:out value="${notice.content }"/></textarea>
 			</div>
 			<button data-oper='modify' class="btn bnt-default" onclick="location.href='/notice/modify?notNo=<c:out value="${notice.notNo }"/>'">Modify</button>
 			<button data-oper='list' class="btn bnt-default" onclick="location.href='/notice/list'">List</button>
