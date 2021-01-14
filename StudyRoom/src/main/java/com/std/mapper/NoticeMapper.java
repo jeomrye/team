@@ -8,7 +8,7 @@ import com.std.domain.NoticeVO;
 public interface NoticeMapper {
 
 	public List<NoticeVO> getList();//getlistNotice
-	public List<NoticeVO> getListWithPaging(Criteria cri);
+	public List<NoticeVO> getListWithPaging(Criteria cri);//list페이징처리
 	
 	public void insert(NoticeVO notice);	//insertNotice
 	public void insertSelectKey(NoticeVO notice);	//insertNotice
