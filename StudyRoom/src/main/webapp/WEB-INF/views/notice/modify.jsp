@@ -32,10 +32,10 @@
 			</div>
 			
 			<div class="form-group">
-				<label>RegDate</label><input class="form-control" name='regDate' value='<fmt:formatDate value="${notice.regdate }" pattern="yyyy-mm-dd" />' readonly="readonly">
+				<label>RegDate</label><input class="form-control" name='regDate' value='<fmt:formatDate value="${notice.regdate }" pattern="yyyy-MM-dd" />' readonly="readonly">
 			</div>
 			<div class="form-group">
-				<label>UpDate Date</label><input class="form-control" name='updateDate' value='<fmt:formatDate value="${notice.updatedate }" pattern="yyyy-mm-dd" />' readonly="readonly">
+				<label>UpDate Date</label><input class="form-control" name='updateDate' value='<fmt:formatDate value="${notice.updatedate }" pattern="yyyy-MM-dd" />' readonly="readonly">
 			</div>
 			<button type="submit" data-oper='modify' class="btn btn-default">수정</button>
 			 <button type="submit" data-oper='remove' class="btn btn-danger">지우기</button>

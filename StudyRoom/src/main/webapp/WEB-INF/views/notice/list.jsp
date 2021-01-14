@@ -43,7 +43,7 @@
 			</table>
 			<div class="pull-left">
 				<div class="col-lg-12" style="padding-top: 25px; padding-left: 0">
-					<form id="searchForm" action="/board/list" method="get">
+					<form id="searchForm" action="/notice/list" method="get">
 						<select name="type">
 							<option value=""
 								<c:out value="${pageMaker.cri.type == null ? 'selected' :'' }" />>--</option>
