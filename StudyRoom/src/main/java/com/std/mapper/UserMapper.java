@@ -4,6 +4,11 @@ import com.std.domain.MemVO;
 
 public interface UserMapper {
 	
-	public void insertMem(MemVO vo); 
+	//회원가입
+	public void insertMem(MemVO vo)throws Exception; 
+	
+	//아이디 중복검사
+	public int idCheck(String userid);
+	
 	
 }

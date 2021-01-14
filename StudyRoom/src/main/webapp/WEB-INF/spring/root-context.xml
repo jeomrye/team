@@ -1,77 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<beans xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd" xmlns:task="http://www.springframework.org/schema/task" xmlns:context="http://www.springframework.org/schema/context" xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans">
+<beans
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans">
 
-<!-- 596 -->
+	<!-- 596 -->
 
+	<task:annotation-driven />
+	<context:component-scan
+		base-package="com.std.service" />
+	<!-- 598 -->
+	<context:component-scan
+		base-package="com.std.task" />
+	<!-- 455 -->
+	<context:component-scan
+		base-package="com.std.aop" />
+	<aop:aspectj-autoproxy />
+	<!-- 469 -->
+	<tx:annotation-driven />
+	<mybatis-spring:scan base-package="com.std.mapper" />
 
-<task:annotation-driven/>
+	<bean class="com.zaxxer.hikari.HikariConfig" id="hikariConfig">
 
-<context:component-scan base-package="com.std.service"/>
+		<!-- <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property> -->
+		<property value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"	name="driverClassName" />
 
-<!-- 598 -->
+		<!-- <property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:orcl"></property> -->
 
+		<property value="jdbc:log4jdbc:oracle:thin:@localhost:1521:orcl" name="jdbcUrl" />
 
-<context:component-scan base-package="com.std.task"/>
+		<property value="studyroom" name="username" />
 
-<!-- 455 -->
+		<property value="studyroom" name="password" />
 
+	</bean>
 
-<context:component-scan base-package="com.std.aop"/>
+	<bean class="com.zaxxer.hikari.HikariDataSource" id="dataSource" destroy-method="close">
+		<constructor-arg ref="hikariConfig" />
+	</bean>
 
-<aop:aspectj-autoproxy/>
+	<!-- 91p -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
-<!-- 469 -->
+	<!-- 469 -->
+	<bean
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		id="transactionManager">
 
+		<property name="dataSource" ref="dataSource" />
 
-<tx:annotation-driven/>
-
-<mybatis-spring:scan base-package="com.std.mapper"/>
-
-
-<bean class="com.zaxxer.hikari.HikariConfig" id="hikariConfig">
-
-<!-- <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property> -->
-
-
-<property value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" name="driverClassName"/>
-
-<!-- <property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:orcl"></property> -->
-
-
-<property value="jdbc:log4jdbc:oracle:thin:@localhost:1521:orcl" name="jdbcUrl"/>
-
-<property value="studyroom" name="username"/>
-
-<property value="studyroom" name="password"/>
-
-</bean>
-
-
-<bean class="com.zaxxer.hikari.HikariDataSource" id="dataSource" destroy-method="close">
-
-<constructor-arg ref="hikariConfig"/>
-
-</bean>
-
-<!-- 91p -->
-
-
-
-<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
-
-<property name="dataSource" ref="dataSource"/>
-
-</bean>
-
-<!-- 469 -->
+	</bean>
 
 
-
-<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
-
-<property name="dataSource" ref="dataSource"/>
-
-</bean>
-
+  <!-- navermail설정 -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
+     <property name="host" value="smtp.naver.com"/> <!-- 메일서버 호스트 -->
+     <property name="port" value="465"/> <!-- 메일서버 포트번호 -->
+     <property name="username" value=""/> <!-- 자신의 이메일 아이디 -->
+     <property name="password" value=""/> <!-- 자신의 비밀번호 -->
+       <!-- 보안연결 SSL과 관련된 설정 -->
+     <property name="javaMailProperties">
+      <props>
+      <prop key="mail.smtp.auth">true</prop>
+      <prop key="mail.smtp.starttls.enable">true</prop>
+      <prop key="mail.smtps.checkserveridentity">true</prop>
+      <prop key="mail.smtps.ssl.trust">*</prop>
+      <prop key="mail.debug">true</prop>
+      <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+      </props>
+     </property>
+    </bean>
 </beans>
+
+
+
+

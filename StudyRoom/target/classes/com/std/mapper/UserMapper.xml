@@ -3,8 +3,13 @@
 <mapper namespace="com.std.mapper.UserMapper">
 <!-- 회원가입 -->
 <insert id="insertMem">
-	insert into member(userid,memberno,username, password, email,phone, gender, regdate, updatedate, companynumber) values (#{userid},#{memberno},#{username},#{password},#{email},#{phone},#{gender},sysdate,sysdate,#{companynumber})
+	insert into member(userid,memberno,username, password, email,phone, gender, regdate, updatedate,mileage, companynumber) values (#{userid},#{memberno},#{username},#{password},#{email},#{phone},#{gender},sysdate,sysdate,0,#{companynumber})
 </insert>
+
+<!-- 아이디 중복검사 -->
+<select id="idCheck" resultType="int">
+	select count(*) from member where userid = #{userid}
+</select>
 
 </mapper>
 

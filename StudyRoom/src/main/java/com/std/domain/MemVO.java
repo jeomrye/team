@@ -9,10 +9,11 @@ public class MemVO {
 	private String username; //회원이름
 	private String password; //비밀번호
 	private String email; //이메일
-	private int phone; //전화번호
+	private String phone; //전화번호
 	private String gender; //성별
 	private Date regdate; //회원가입일
 	private Date updatedate; //회원정보 수정일
+	private int mileage;
 	private int companynumber; //사업자번호
 	public String getUserid() {
 		return userid;
@@ -44,10 +45,10 @@ public class MemVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public String getGender() {
@@ -68,12 +69,19 @@ public class MemVO {
 	public void setUpdatedate(Date updatedate) {
 		this.updatedate = updatedate;
 	}
+	public int getMileage() {
+		return mileage;
+	}
+	public void setMileage(int mileage) {
+		this.mileage = mileage;
+	}
 	public int getCompanynumber() {
 		return companynumber;
 	}
 	public void setCompanynumber(int companynumber) {
 		this.companynumber = companynumber;
 	}
+	
 
 	
 	

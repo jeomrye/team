@@ -11,10 +11,18 @@ public class MemServiceImpl implements MemService {
 	@Autowired
 	UserMapper mapper;
 	
+	//회원가입
 	@Override
 	public void register(MemVO vo) throws Exception {
 		mapper.insertMem(vo);
 
+	}
+
+	//아이디 중복검사
+	@Override
+	public int idCheck(String userid) throws Exception {
+		
+		return mapper.idCheck(userid);
 	}
 
 }
