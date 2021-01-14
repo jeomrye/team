@@ -6,7 +6,7 @@ import com.std.domain.CouponVO;
 
 public interface CouponService {
 
-	public void couponResister(CouponVO coupon);
+	public void couponRegister(CouponVO coupon);
 	
 	public CouponVO couponGet(int couponNumber);
 	

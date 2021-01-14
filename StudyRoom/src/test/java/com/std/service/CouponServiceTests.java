@@ -30,13 +30,13 @@ public class CouponServiceTests {
 	
 	//couponInsertSelectKey를 이용해 나중에 생성된 쿠폰의 번호를 확인 가능
 	@Test
-	public void testCouponResister() {
+	public void testCouponRegister() {
 		
 		CouponVO coupon = new CouponVO();
 		coupon.setCouponName("수정하는 쿠폰");
-		coupon.setCouponPrice(20000);
+		coupon.setCouponPrice("20000");
 		
-		service.couponResister(coupon);
+		service.couponRegister(coupon);
 		
 		log.info("생성된 쿠폰의 번호: " + coupon.getCouponNumber());
 	}

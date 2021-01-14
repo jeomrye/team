@@ -9,7 +9,7 @@ public class CouponVO {
 
 	private int couponNumber;
 	private String couponName;
-	private int couponPrice;
+	private String couponPrice;
 	private int couponUse;
 	private Date couponregDate;
 	private Date couponupdateDate;

@@ -21,7 +21,7 @@ public class CouponServiceImpl implements CouponService {
 	private CouponMapper mapper;
 	
 	@Override
-	public void couponResister(CouponVO coupon) {
+	public void couponRegister(CouponVO coupon) {
 
 		log.info("register...." + coupon);
 		

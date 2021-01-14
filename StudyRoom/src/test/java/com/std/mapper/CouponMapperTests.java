@@ -33,7 +33,7 @@ public class CouponMapperTests {
 		
 		CouponVO coupon = new CouponVO();
 		coupon.setCouponName("테스트쿠폰");
-		coupon.setCouponPrice(8000);
+		coupon.setCouponPrice("8000");
 		
 		mapper.couponInsert(coupon);
 		
@@ -46,7 +46,7 @@ public class CouponMapperTests {
 		
 		CouponVO coupon = new CouponVO();
 		coupon.setCouponName("테스트쿠폰 select key");
-		coupon.setCouponPrice(10000);
+		coupon.setCouponPrice("10000");
 		
 		mapper.couponInsertSelectKey(coupon);
 		
@@ -78,7 +78,7 @@ public class CouponMapperTests {
 		//실행전 있는 쿠폰번호인지 확인
 		coupon.setCouponNumber(9);
 		coupon.setCouponName("수정된쿠폰");
-		coupon.setCouponPrice(15000);
+		coupon.setCouponPrice("15000");
 		
 		int count = mapper.couponUpdate(coupon);
 		log.info("UPDATE COUNT: " + count);
