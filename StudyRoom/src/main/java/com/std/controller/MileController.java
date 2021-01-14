@@ -32,10 +32,10 @@ public class MileController {
 	}
 	
 	//쿠폰 등록 처리와 테스트
-	@PostMapping("/couponResister")
+	@PostMapping("/couponRegister")
 	public String couponResister(CouponVO coupon, RedirectAttributes rttr) {
 		
-		log.info("CouponResister : " + coupon);
+		log.info("CouponRegister : " + coupon);
 		
 		service.couponRegister(coupon);
 		
@@ -44,16 +44,16 @@ public class MileController {
 		return "redirect:/coupon/couponList";
 	}
 	
-	//쿠폰 조회 처리와 테스트
-	@GetMapping("/couponGet")
+	//쿠폰 조회 와 수정
+	@GetMapping({"/couponGet", "/couponModify"})
 	public void couponGet(@RequestParam("couponNumber") int couponNumber, Model model) {
 		
-		log.info("/couponGet");
+		log.info("/couponGet or /couponModify");
 		
 		model.addAttribute("coupon", service.couponGet(couponNumber));
 	}
 	
-	//쿠폰 수정 처리와 테스트
+	//쿠폰 수정 
 	@PostMapping("/couponModify")
 	public String couponModify(CouponVO coupon, RedirectAttributes rttr) {
 		log.info("couponModify : " + coupon);
@@ -80,4 +80,6 @@ public class MileController {
 	public void couponRegister() {
 		
 	}
+	
+	
 }
