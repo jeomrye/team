@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="com.std.mapper.PlaceMapper">
  
+<!--  검색 기준 -->
    <sql id="criteria">
   <trim prefix="(" suffix=") AND " prefixOverrides="OR">
     	<foreach item="type" collection="typeArr">
@@ -16,7 +17,7 @@
     				<when test="type == 'C'.toString()">
     					content like '%'||#{keyword}||'%'
     				</when>
-    				<when test="type == 'W'.toString()">
+    				<when test="type == 'R'.toString()">
     					writer like '%'||#{keyword}||'%'
     				</when>
     			</choose>
@@ -41,9 +42,9 @@
     ]]>    	
     	
     <include refid="criteria"></include>
-    	<!-- rownum <= 페이지번호 *1페이당 글의 개수 -->
-    	<!-- rn > (페이지번호-1) *1페이당 글의 개수 -->
-    	<!-- ex 11~20 -->
+    <!-- rownum <= 페이지번호 *1페이당 글의 개수 -->
+    <!-- rn > (페이지번호-1) *1페이당 글의 개수 -->
+    <!-- ex 11~20 -->
     <![CDATA[	
     	rownum<= #{pageNum} * #{amount} 
     	)
@@ -53,9 +54,15 @@
   
     <insert id="insert">
   		insert into place (score, bno, title, offer, extra, content, time, clean, tel, address, page, writer)
-  		values (#{score}, seq_place.nextval, #{title}, #{offer}, #{extra}, #{content}, 
-  		#{time}, #{clean}, #{tel}, #{address}, #{page}, #{writer})
+  		values (#{score}, seq_place.nextval, #{title}, #{offer, jdbcType=NULL}, #{extra, jdbcType=NULL}, #{content}, 
+  		#{time}, #{clean}, #{tel}, #{address}, #{page, jdbcType=NULL}, #{writer})
   </insert>
+  
+<!--     <insert id="insert">
+  		insert into place (score, bno, title, content, time, clean, tel, address, writer)
+  		values (#{score}, seq_place.nextval, #{title}, #{content}, 
+  		#{time}, #{clean}, #{tel}, #{address}, #{writer})
+  </insert> -->
   
   <select id="read" resultType="com.std.domain.PlaceVO">
   		select * from place where bno = #{bno}
