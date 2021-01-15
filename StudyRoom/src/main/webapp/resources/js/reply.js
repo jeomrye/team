@@ -1,6 +1,6 @@
 console.log("Reply Module.........");
 
-var replyService = (function(){
+var FreeReplyService = (function(){
 
 	function add(reply, callback, error){
 		console.log("add reply...............");
@@ -24,10 +24,10 @@ var replyService = (function(){
 	}	
 	
 	function getList(param, callback, error){
-		var bno = param.bno;
+		var fno = param.fno;
 		var page = param.page || 1;
 		
-		$.getJSON("/replies/pages/" + bno + "/" + page + ".json",
+		$.getJSON("/replies/pages/" + fno + "/" + page + ".json",
 			function(data){
 				if(callback){
 				

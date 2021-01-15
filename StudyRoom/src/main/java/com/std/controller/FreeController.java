@@ -1,5 +1,6 @@
 package com.std.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,10 +18,10 @@ import com.std.service.FreeService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-@Controller
 @Log4j
 @RequestMapping("/free/*")
 @AllArgsConstructor
+@Controller
 public class FreeController {
 
 	private FreeService service;
@@ -34,12 +35,14 @@ public class FreeController {
 		model.addAttribute("pageMaker",new PageDTO(cri, total));
 	}
 	
-	@GetMapping("/register")		//등록처리
+	@GetMapping("/register")//등록처리
+	@PreAuthorize("isAuthenticated()")
 	public void register() {
 		
 	}
 	
 	@PostMapping("/register")		//등록처리
+	@PreAuthorize("isAuthenticated()")
 	public String register(FreeVO free,RedirectAttributes rttr) {
 		log.info("register : "+free);
 		service.register(free);
@@ -77,5 +80,5 @@ public class FreeController {
 		rttr.addAttribute("type",cri.getType());
 		rttr.addAttribute("keyword",cri.getKeyword());
 		return "redirect:/free/list";
-	}
+	}	
 }

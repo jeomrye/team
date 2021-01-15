@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+	<bean id="customAccessDenied" class="com.std.security.CustomAccessDeniedHandler"></bean>
+	<!-- 패스워드 암호화 -->
+	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	<bean id="customUserDetailsService" class="com.std.security.CustomUserDetailsService"></bean>
+
+	<security:http>
+		<security:intercept-url pattern="/sample/owner" access="hasRole('ROLE_OWNER')"/>  
+		<security:intercept-url pattern="/sample/member" access="hasRole('ROLE_MEMBER')"/>
+		<security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')"/>
+		<!-- 에러 페이지 -->
+		<security:access-denied-handler ref="customAccessDenied"/> 
+		<!-- login 시 사용자 권한에 따라 다른페이지 호출 -->
+		<security:form-login login-page="/customLogin"/>
+	
+		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/>
+		<security:logout logout-url="/customLogout" invalidate-session="true" delete-cookies="remember-me,JSESSION_ID"/> 
+	</security:http>	
+	
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="customUserDetailsService">
+<!-- 				users-by-username-query="select userid, password, memberNo from member where userid=?" -->
+<!-- 				authorities-by-username-query="select userid, auth from auth where userid =?"/> -->
+			<security:password-encoder ref="bcryptPasswordEncoder"/>
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+</beans>

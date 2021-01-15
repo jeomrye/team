@@ -23,23 +23,7 @@ public class FreeMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private FreeMapper mapper;
 	
-	@Test
-	public void test() {
-		mapper.getList().forEach(free ->log.info(free));
-	}
-	
-	@Test
-	public void testInsert() {
-		FreeVO free = new FreeVO();
-		free.setTitle("새글");
-		free.setContent("새내용");
-		free.setWriter("작성자");
-		mapper.insert(free);
-		
-		log.info(free);
-	}
-	
-	@Test
+	//@Test
 	public void testInsertSelectKey() {
 		FreeVO free = new FreeVO();
 		free.setTitle("새글 key");
