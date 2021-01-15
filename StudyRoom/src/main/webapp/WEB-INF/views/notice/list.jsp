@@ -20,16 +20,15 @@
 			<table class="table eable-striped table-bordered table-hover">
 				<thead>
 					<tr>
-						<th>#번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>수정일</th>
+						<th style="width: 40%;">제목</th>
+						<th style="width: 10%;">작성자</th>
+						<th style="width: 10%;">작성일</th>
+						<th style="width: 10%;">수정일</th>
 					</tr>
 				</thead>
 				<c:forEach items="${list }" var="notice">
 					<tr>
-						<td><c:out value="${notice.notNo }" /></td>
+						
 						<td><a class="move" href='<c:out value="${notice.notNo }" />'>
 								<c:out value="${notice.title }" />
 						</a></td>
@@ -43,6 +42,7 @@
 			</table>
 			<div class="pull-left">
 				<div class="col-lg-12" style="padding-top: 25px; padding-left: 0">
+<!-- 				검색기능 -->
 					<form id="searchForm" action="/notice/list" method="get">
 						<select name="type">
 							<option value=""
