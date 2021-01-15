@@ -25,4 +25,10 @@ public class MemServiceImpl implements MemService {
 		return mapper.idCheck(userid);
 	}
 
+	@Override
+	public int companyNumCheck(String companynumber) throws Exception {
+		
+		return mapper.companyNumCheck(companynumber);
+	}
+
 }

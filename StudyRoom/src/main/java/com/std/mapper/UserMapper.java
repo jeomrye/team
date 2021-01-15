@@ -8,7 +8,8 @@ public interface UserMapper {
 	public void insertMem(MemVO vo)throws Exception; 
 	
 	//아이디 중복검사
-	public int idCheck(String userid);
+	public int idCheck(String userid)throws Exception;
 	
-	
+	//사업자 등록검사
+	public int companyNumCheck(String companynumber)throws Exception;
 }

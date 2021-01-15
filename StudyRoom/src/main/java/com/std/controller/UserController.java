@@ -3,6 +3,7 @@ package com.std.controller;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
+import javax.xml.ws.RequestWrapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -32,14 +33,14 @@ public class UserController {
 	private JavaMailSender mailSender;
 	
 	//회원가입페이지로 가는 메소드
-	@RequestMapping(method = RequestMethod.GET, value = "/insertMem")
+	@RequestMapping(method = RequestMethod.GET, value = "/joinForm")
 	public void insertMem() {
 		log.info("회원가입 페이지로 이동");
 		
 		}
 	
 	//회원가입페이지에서 오는 메소드
-	@RequestMapping(method = RequestMethod.POST, value = "/insertMem")
+	@RequestMapping(method = RequestMethod.POST, value = "/joinForm")
 	public String insertMemSusscess(MemVO vo) throws Exception {
 		log.info("insertMem 진입");
 		service.register(vo);
@@ -50,7 +51,7 @@ public class UserController {
 	//아이디 중복 검사
 	@RequestMapping(method = RequestMethod.POST, value = "/memberIdChk")
 	@ResponseBody
-	public String memberIdChkPOST(String userid) throws Exception{
+	public String memberIdCkPOST(String userid) throws Exception{
 		
 		log.info("memberIdCheck() 진입");
 		int result = service.idCheck(userid);
@@ -61,10 +62,25 @@ public class UserController {
 		}else {
 			return "success";
 		}
+	}	
+	//사업자 등록번호 검사
+	@RequestMapping(method = RequestMethod.POST, value = "/member/companynumCheck")
+	@ResponseBody
+	public String companyNumCheck(String companynumber) throws Exception {
+		log.info("사업자 등록 확인 진입");
+		int result = service.companyNumCheck(companynumber);
+		log.info("사업자 결과값:"+result);
 		
+		if(result == 0) {
+			return "fail";
+		}else {
+			return "success";
+		}
+			
 		
 	}
-	
+		
+		
 	//이메일 인증
     @RequestMapping(value="/emailCheck", method=RequestMethod.GET)
     @ResponseBody
@@ -105,6 +121,9 @@ public class UserController {
         return num;
     }
 	
+    
+    
+    
 	
 	
 	

@@ -8,4 +8,7 @@ public interface MemService {
 	
 	//아이디 중복검사
 	public int idCheck(String userid) throws Exception;
+	
+	//사업자 등록번호 검사
+	public int companyNumCheck(String companynumber)throws Exception;
 }
