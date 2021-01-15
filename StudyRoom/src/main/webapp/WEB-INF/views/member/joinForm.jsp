@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   
+<%@include file="../includes/header.jsp" %>   
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <style>
 	.wrapper{
 		width: 1900px;	
@@ -64,8 +65,7 @@
 }
 .userid_input_box{
 	border: 1px solid black;
-	height:15px;
-	padding: 10px 14px;	
+	
 	
 }
 .userid_input{
@@ -85,8 +85,7 @@
 }
 .memberno_input_box{
 	border: 1px solid black;
-	height: 15px;
-	padding: 10px 14px;
+
 }
 
 /* 이름 영역 */
@@ -100,8 +99,7 @@
 }
 .username_input_box{
 	border: 1px solid black;
-	height:15px;
-	padding: 10px 14px;	
+
 }
 .username_input{
 	width:100%;
@@ -122,8 +120,7 @@
 }
 .password_input_box{
 	border: 1px solid black;
-	height:15px;
-	padding: 10px 14px;	
+
 	
 }
 .password_input{
@@ -144,8 +141,7 @@
 }
 .passwordCk_input_box{
 	border: 1px solid black;
-	height:15px;
-	padding: 10px 14px;	
+
 	
 }
 .passwordCk_input{
@@ -176,8 +172,7 @@
 }
 .email_input_box{
 	border: 1px solid black;
-	height:15px;
-	padding: 10px 14px;	
+
 	
 }
 .email_input{
@@ -191,8 +186,7 @@
 }
 .email_check_input_box{
 	border: 1px solid black;
-    height: 15px;
-    padding: 10px 14px;
+
     width: 61%;
     float: left;
 }
@@ -204,12 +198,11 @@
 }
 .email_check_button{
     border: 1px solid black;
-    height: 35px;
+    height: 25px;
     width: 30%;
     float: right;
-    line-height: 35px;
     text-align: center;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 900;
     background-color: #ececf7;
     cursor: pointer;
@@ -226,8 +219,7 @@
 }
 .phone_input_box{
 	border: 1px solid black;
-	height:15px;
-	padding: 10px 14px;	
+
 }
 .phone_input{
 	width:100%;
@@ -247,8 +239,7 @@
 }
 .gender_input_box{
 	border: 1px solid black;
-	height:15px;
-	padding: 10px 14px;	
+
 }
 
 
@@ -266,8 +257,7 @@
 }
 .companynumber_input_box{
 	border: 1px solid black;
-	height:15px;
-	padding: 10px 14px;
+
 		
 }
 .companynumber_input{
@@ -361,7 +351,7 @@
 <input type="text" class="userid_input" name="userid" placeholder="4~12자의 영문 대소문자와 숫자로만 입력">
 </div>
 	<span class="id_input_re_1">중복된 아이디가 없습니다 사용가능합니다</span>
-	<span class="id_input_re_2">아이디가 이미 존재합니다.</span>
+	<span class="id_input_re_2">중복된 아이디가 이미 존재합니다.</span>
 	
 </div>
 
@@ -532,7 +522,7 @@
 	            return false; 
 	            }
 
-	        }   		
+	        } 
 			
 	       // 비밀번호 유효성 검사
 			if(pw == ""){
@@ -796,6 +786,6 @@
 	
 
 </script>
-
+<%@ include file="../includes/footer.jsp" %>
 </body>
 </html>

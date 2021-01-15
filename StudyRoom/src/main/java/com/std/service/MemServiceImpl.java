@@ -14,6 +14,7 @@ public class MemServiceImpl implements MemService {
 	//회원가입
 	@Override
 	public void register(MemVO vo) throws Exception {
+		
 		mapper.insertMem(vo);
 
 	}
