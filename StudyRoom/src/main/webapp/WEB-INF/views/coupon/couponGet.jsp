@@ -20,7 +20,7 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
 <div class="form-group">
-<label>쿠폰 번호</label><input class="form-control" name='couponNumber' value='<c:out value="${coupon.couponNumber}"/>' readonly="readonly">
+<input type="hidden" class="form-control" name='couponNumber' value='<c:out value="${coupon.couponNumber}"/>' readonly="readonly">
 </div>
 
 <div class="form-group">
@@ -28,12 +28,15 @@
 </div>
 
 <div class="form-group">
-<label>쿠폰 가격</label><input class="form-control" name='couponPrice' value='<c:out value="${coupon.couponPrice}"/>' readonly="readonly">
+<label>쿠폰 가격</label><input class="form-control" name='couponPrice' value='<fmt:formatNumber value="${coupon.couponPrice}" pattern="###,###,###"/>' readonly="readonly">
 </div>
 
 <!-- 쿠폰 상세보기 에서 수정이나 목록페이지로 이동 -->
 <button data-oper='modify' class="btn btn-default">수정</button>
+<button data-oper='sbumit' class="btn btn-primary">구입</button>
 <button data-oper='list' class="btn btn-info">목록</button>
+
+
 
 <form id='operForm' action="/coupon/couponModify" method="get">
 	<input type='hidden' id='couponNumber' name='couponNumber' value='<c:out value="${coupon.couponNumber}"/>'>
@@ -60,6 +63,8 @@ $(document).ready(function(){
 		operForm.attr("action", "/coupon/couponList")
 		operForm.submit();
 	});
+	
+	
 });
 
 </script>

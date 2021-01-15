@@ -34,7 +34,7 @@ public class CouponServiceTests {
 		
 		CouponVO coupon = new CouponVO();
 		coupon.setCouponName("수정하는 쿠폰");
-		coupon.setCouponPrice("20000");
+		coupon.setCouponPrice(20000);
 		
 		service.couponRegister(coupon);
 		

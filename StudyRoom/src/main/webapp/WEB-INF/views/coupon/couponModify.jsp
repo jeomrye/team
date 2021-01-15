@@ -13,7 +13,7 @@
 
 <div class="form-group">
 	<label>쿠폰 번호</label>
-	<input class="form-control" name='couponNumber' value='<c:out value="${coupon.couponNumber}"/>'>
+	<input class="form-control" name='couponNumber' value='<c:out value="${coupon.couponNumber}"/>' readonly='readonly'>
 </div>
 
 <div class="form-group">
@@ -23,7 +23,7 @@
 
 <div class="form-group">
 	<label>쿠폰 가격</label>
-	<input class="form-control" name='couponPrice' value='<c:out value="${coupon.couponPrice}"/>'>
+	<input class="form-control" name='couponPrice' value='<fmt:formatNumber value="${coupon.couponPrice}" pattern="###,###,###"/>'>
 </div>
 
 <div class="form-group">
@@ -33,7 +33,7 @@
 
 <div class="form-group">
 	<label>수정 날짜</label>
-	<input class="form-control" name='couponupdateDate' value='<fmt:formatDate pattern="yyyy/MM/dd" value="${coupon.couponupdateDate}"/>'>
+	<input class="form-control" name='couponupdateDate' value='<fmt:formatDate pattern="yyyy/MM/dd" value=""/>'>
 </div>
 
 <button type="submit" date-oper='modify' class="btn btn-default">수정</button>

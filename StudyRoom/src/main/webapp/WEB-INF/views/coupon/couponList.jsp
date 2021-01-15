@@ -18,7 +18,7 @@
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>#쿠폰 번호</th>
+                                        
                                         <th>쿠폰 이름</th>
                                         <th>쿠폰 가격</th>
                                         <th>쿠폰 등록 일자</th>
@@ -29,17 +29,20 @@
                                 <c:forEach items="${list}" var="coupon">
                                 
                                 	<tr>
-                                		<td><c:out value="${coupon.couponNumber}"/></td>
+                                		
 								<!-- a태그 걸어줘서 쿠폰 상세정보 보기 페이지로 이동 -->
                                 		<td><a href='/coupon/couponGet?couponNumber=<c:out value="${coupon.couponNumber}"/>'>
                                 		<c:out value="${coupon.couponName}"/></a></td>
-                                		<td><c:out value="${coupon.couponPrice}"/></td>
+                                		<td><fmt:formatNumber value="${coupon.couponPrice}" pattern="###,###,###"/></td>
                                 		<td><fmt:formatDate pattern="yyyy-MM-dd" value="${coupon.couponregDate}"/></td>
                                 		<td><fmt:formatDate pattern="yyyy-MM-dd" value="${coupon.couponupdateDate}"/></td>
                                 	</tr>
                                 
                                 </c:forEach>
 </table>
+
+
+
 	<!-- Modal 추가 -->
 	          	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 	          		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -48,7 +51,7 @@
 	          				<div class="modal-header">
 	          					<button type="button" class = "close" data-dismiss="modal" 
 	          						aria-hidden="true">&times;</button>
-	          					<h4 class="modal-title" id="myModalLabel">등록 완료</h4>
+	          					<h4 class="modal-title" id="myModalLabel">완료</h4>
 	          				</div>
 	          				<div class = "modal-body">처리가 완료되었습니다.</div>
 	          				<div class="modal-footer">
