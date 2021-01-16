@@ -22,7 +22,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 		log.warn("Login Success");
 		List<String> roleNames = new ArrayList<>();
-		auth.getAuthorities().forEach(authority -> {
+		auth.getAuthorities().forEach(authority-> {
 			roleNames.add(authority.getAuthority());
 		});
 		
@@ -30,8 +30,8 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 		//로그인시 권한에 따라 다른페이지 호출
 		if(roleNames.contains("ROLE_ADMIN")) {
-			response.sendRedirect("/sample/admin");
-			return;
+			 response.sendRedirect("/sample/admin");
+			return; 
 		}
 		if(roleNames.contains("ROLE_MEMBER")) {
 			response.sendRedirect("/sample/member");

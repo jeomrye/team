@@ -14,8 +14,6 @@ import lombok.Getter;
 @Getter
 public class CustomUser extends User{
 	
-	private static final long serialVersionUID =1L;
-	
 	private MemVO member;
 
 	public CustomUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {

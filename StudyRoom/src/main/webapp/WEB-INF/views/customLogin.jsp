@@ -28,6 +28,10 @@
 </head>
 
 <body>
+<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION }">
+	<p style="color:red; font-weight:bold;"> login Failed : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message }</p>
+	<c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session" />
+</c:if>
 
     <div class="container">
         <div class="row">
@@ -52,7 +56,8 @@
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
                                 <a href="index.html" class="btn btn-lg btn-success btn-block">로그인</a>
-                                <a href="/member/joinForm" class="btn btn-lg btn-success btn-block">회원가입</a>
+                               
+<!--                                 <a href="/member/joinForm" class="btn btn-lg btn-success btn-block">회원가입</a> -->
                             </fieldset>
                             <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
                         </form>
