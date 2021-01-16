@@ -10,8 +10,8 @@ public class PlaceVO {
 	private int score; //점수
 	private long bno; //글번호
 	private String title; //상호명
-	private String[] offer; //구비목록
-	private String[] extra; //추가제공품 목록
+	private String offer; //구비목록
+	private String extra; //추가제공품 목록
 	private String content; //내용
 	private String time; //운영시간
 	private String clean; //청소시간

@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@ include file="../includes/header.jsp" %>
 
@@ -35,12 +36,46 @@
 			
 			<!-- 기본 구비품 -->
 			<div class="form-group">
-			<label>Offer</label><input class="form-control" name='offer' value="<c:out value='${place.offer}'/>" readonly="readonly">
+			<label>Offer</label><br>
+
+			<c:set var="offer" value="${place.offer }"/>
+			
+ 			<c:if test = "${fn:contains(offer, '공기청정기')}">
+        	<input type='image' src="/resources/img/air.png"> <b>공기청정기  </b>
+      		</c:if>
+			<c:if test = "${fn:contains(offer, '개인 사물함')}">
+			<input type='image' src="/resources/img/locker.png"> <b>개인 사물함  </b>
+			</c:if>
+			<c:if test = "${fn:contains(offer, '냉난방기')}">
+			<input type='image' src="/resources/img/air-conditioner.png"> <b>냉난방기  </b>
+			</c:if>
+			<c:if test = "${fn:contains(offer, '개인 콘센트')}">
+			<input type='image' src="/resources/img/plug.png"> <b>개인 콘센트  </b>
+			</c:if>
+			<c:if test = "${fn:contains(offer, '취식공간')}">
+			<input type='image' src="/resources/img/lunchbox.png"> <b>취식공간  </b>
+			</c:if>
+			<c:if test = "${fn:contains(offer, '안마의자')}">
+			<input type='image' src="/resources/img/massage-chair.png"> <b>안마의자  </b>
+			</c:if>
+			<c:if test = "${fn:contains(offer, '엘레베이터')}">
+			<input type='image' src="/resources/img/elevator.png"> <b>엘레베이터  </b>
+			</c:if>			
+			<c:if test = "${fn:contains(offer, '와이파이')}">
+			<input type='image' src="/resources/img/wifi.png"> <b>와이파이  </b>
+			</c:if>			
 			</div>
 			
 			<!-- 추가적인 제공품 -->
 			<div class="form-group">
-			<label>Extra</label><input class="form-control" name='extra' value="<c:out value='${place.extra}'/>" readonly="readonly">
+			<label>Extra</label><br>
+			<c:set var="offer" value="${place.extra }"/>
+			
+ 			<c:if test = "${fn:contains(extra, '인쇄')}">
+ 			<input type='image' src="/resources/img/wifi.png">
+        	<c:out value=""></c:out>
+      		</c:if>
+		<%-- 	<input class="form-control" name='extra' value="<c:out value='${place.extra}'/>" readonly="readonly"> --%>
 			</div>
 			
 			<!-- 내용 -->
@@ -67,11 +102,13 @@
 			<!-- 주소 -->
 			<div class="form-group">
 			<label>Address</label><input class="form-control" name='address' value="<c:out value='${place.address}'/>" readonly="readonly">
+			<div><a href="https://map.kakao.com/link/search/${place.address }">지도로 알아보기(Click)</a></div>
+			<div id="map" style="width:920px;height:200px;"></div>
 			</div>
 			
 			<!-- 홈페이지,SNS계정 -->
 			<div class="form-group">
-			<label>Page</label><input class="form-control" name='page' value="<c:out value='${place.page}'/>" readonly="readonly">
+			<label>Page</label><div><a href="${place.page }">${place.page }</a></div>
 			</div>
 			
 			<!-- 작성자 -->
@@ -160,6 +197,7 @@
 }
 </style>
 
+<!-- 첨부 사진 -->
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
@@ -219,6 +257,10 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 				<h4 class="modal-title" id="myModalLabel">REPLY</h4>
 			</div>
 			<div class='form-group'>
+				<label>Score</label>
+				<input class='form-control' name='score' value='0'>
+			</div>
+			<div class='form-group'>
 				<label>Reply</label>
 				<input class='form-control' name='reply' value='New Reply!'>
 			</div>
@@ -242,44 +284,95 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 
 <script type="text/javascript" src="/resources/js/reply.js"></script>
 
+<!-- 지도 API -->
+ <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=63fb6aced8c696fa4afe90f914194f7a&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=63fb6aced8c696fa4afe90f914194f7a&libraries=services,clusterer,drawing"></script>
+    <script>
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+        mapOption = {
+            center : new daum.maps.LatLng(36.633535, 127.425882), // 지도의 중심좌표
+            level : 4// 지도의 확대 레벨
+        };
+ 
+        // 지도를 생성합니다    
+        var map = new daum.maps.Map(mapContainer, mapOption);
+        
+        // 주소-좌표 변환 객체를 생성합니다
+        var geocoder = new daum.maps.services.Geocoder();
+ 		var address = '<c:out value="${place.address}"/>';
+        var myAddress = [address];
+ 		console.log("address : "+myAddress);
+        function myMarker(number, address) {
+            // 주소로 좌표를 검색합니다
+            geocoder
+                    .addressSearch(
+                            //'주소',
+                            address,
+                            function(result, status) {
+                                // 정상적으로 검색이 완료됐으면 
+                                if (status === daum.maps.services.Status.OK) {
+ 
+                                    var coords = new daum.maps.LatLng(
+                                            result[0].y, result[0].x);
+ 
+                                    // 결과값으로 받은 위치를 마커로 표시합니다   
+                                    var marker = new daum.maps.Marker({
+                                        map : map,
+                                        position : coords
+                                    });
+
+                                    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                                    map.setCenter(coords);
+                                }
+                            });
+        }
+ 
+        for (i = 0; i < myAddress.length; i++) {
+            myMarker(i + 1, myAddress[i]);
+        }
+    </script>
 <script>
 	$(document).ready(function () {
 		
 		var bnoValue = '<c:out value="${place.bno}"/>';
+		var placeReCnt = '<c:out value="${place.placeReCnt}"/>';
 		var replyUL = $(".chat"); //191 댓글 기본 틀
 		
 		showList(1);
 		
 		function showList(page){
-			console.log("show list : "+page); //1페이지																		
+			console.log("show list : "+page); //1페이지	
+			//page가 null 이거나 undefined면 1
 			placeReService.getList({bno:bnoValue, page: page||1}, function(placeReCnt, list){
 
 				console.log("placeReCnt : "+ placeReCnt);
-				console.log("list : "+ list);
+				console.log("list : ", list);
 				
+				//댓글 단 페이지로 이동
 				if(page==-1){
 					pageNum = Math.ceil(placeReCnt/10.0);
 					showList(pageNum);
 					return;
 				}
 				
-				if(list == null || list.lenth == 0){
+				if(list == null || list.length == 0){
 					replyUL.html("");
 					return;
 				}
 				
 				var str="";
-				
+				//댓글
 				for(var i = 0, len = list.length || 0; i<len; i++){
 					str += "<li class='left clearfix' data-rno='"+list[i].rno+"'>";
-					str += "	<div><div class='header'><strong class='primary-font'>["
+					str += "	<div><div>"+list[i].score+"</div><div class='header'><strong class='primary-font'>["
 						+list[i].rno+"]"+list[i].replyer+"</strong>";
 					str += "	<small class='pull-right text-muted'>"
-					+placeReService.displayTime(list[i].replyDate)+"</small></div>";
+					+placeReService.displayTime(list[i].replydate)+"</small></div>";
 					str += "	<p>"+list[i].reply+"</p></div></li>";
 				}
 				replyUL.html(str);
-				showReplyPage(replyCnt);
+				showReplyPage(placeReCnt);
 			});//end function
 		}//end showList
 
@@ -288,37 +381,33 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 		var replyPageFooter = $(".panel-footer"); //204줄
 		
 		function showReplyPage(placeReCnt){
-			//끝번호
-			var endNum = Math.ceil(pageNum/10.0) * 10;
-			var startNum = endNum - 9; //시작번호
+			var endNum = Math.ceil(pageNum / 10.0) * 10;
+			var startNum = endNum - 9;
 			
-			var prev = startNum != 1; //이전 페이지목록
-			var next = false; //다음 페이지 목록
-			
+			var prev = startNum != 1;
+			var next = false;
 			
 			if(endNum * 10 >= placeReCnt){
 				endNum = Math.ceil(placeReCnt/10.0);
 			}
 			
 			if(endNum * 10 < placeReCnt){
-				next = true; //다음페이지 존재
+				next = true;
 			}
 			
 			var str = "<ul class='pagination pull-right'>";
 			
-			//시작페이지 -1로 이동
 			if(prev){
 				str += "<li class='page-item'><a class ='page-link' href='"
 				+(startNum -1)+"'>Previous</a></li> ";
 			}
 			
-			//페이지 목록 출력, 링크 달기
 			for(var i = startNum; i<=endNum; i++){
-				var active = pageNum == i ? "active":"";	
+				var active = pageNum == i ? "active":"";
+				
 				str += "<li class='page-item "+active+" '><a class='page-link' href='"+i+"'>"+i+"</a></li>";
 			}
 			
-			//마지막페이지 +1로 이동
 			if(next){
 				str += "<li class='page-item'><a class='page-link' href='"+(endNum + 1)+"'>Next</a></li> ";
 			}
@@ -330,6 +419,7 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 		}
 
 		var modal = $(".modal");
+		var modalInputScore = modal.find("input[name='score']");
 		var modalInputReply = modal.find("input[name='reply']");
 		var modalInputReplyer = modal.find("input[name='replyer']");
 		var modalInputReplyDate = modal.find("input[name='replyDate']");
@@ -366,6 +456,7 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 		//모달에 있는 등록 버튼 클릭
 		modalRegisterBtn.on("click", function(e){
 			var reply = {
+					score : modalInputScore.val(),
 					reply : modalInputReply.val(),
 					replyer : modalInputReplyer.val(),
 					bno:bnoValue
@@ -389,9 +480,10 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 			 
 			//댓글 내용 상세보기
 			placeReService.get(rno, function(reply){
+				modalInputScore.val(reply.score);
 				modalInputReply.val(reply.reply);
 				modalInputReplyer.val(reply.replyer);
-				modalInputReplyDate.val(placeReService.displayTime(reply.replyDate)).attr("readonly","readonly");
+				modalInputReplyDate.val(placeReService.displayTime(reply.replydate)).attr("readonly","readonly");
 				modal.data("rno",reply.rno);
 				
 				modal.find("button[id != 'modalCloseBtn']").hide();
@@ -405,7 +497,7 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 			modalModBtn.on("click", function(e){
 				var originalReplyer = modalInputReplyer.val(); 
 				
-				var reply = {rno:modal.data("rno"), reply:modalInputReply.val(), replyer: originalReplyer};
+				var reply = {score:modalInputScore.val(), rno:modal.data("rno"), reply:modalInputReply.val(), replyer: originalReplyer};
 				
 				/* if(!replyer){//미로그인시
 					alert("로그인 후 수정이 가능합니다.");
@@ -428,12 +520,12 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 				});
 			});
 
-			//Remove
+			//댓글 삭제
 			modalRemoveBtn.on("click", function(e){
 				var rno = modal.data("rno");
 				
 				console.log("RNO : "+rno);
-				console.log("REPLYER : "+replyer);
+				//console.log("REPLYER : "+replyer);
 				
 				/* if(!replyer){//미로그인시
 					alert("로그인 후 삭제가 가능합니다.");
@@ -513,27 +605,27 @@ $(document).ready(function(){
        var str = "";
        
        $(arr).each(function(i, photo){
-       
-         //image type
-         if(photo.fileType){
-           var fileCallPath =  encodeURIComponent( photo.uploadPath+ "/s_"+photo.uuid +"_"+photo.fileName); 
-           str += "<li data-path='"+photo.uploadPath+"' data-uuid='"+photo.uuid+"' data-filename='"+photo.fileName+"' data-type='"+photo.fileType+"' ><div>";
-           str += "<img src='/display?fileName="+fileCallPath+"'>";
-           str += "</div>";
-           str +="</li>";
-         }else{          
-           str += "<li data-path='"+photo.uploadPath+"' data-uuid='"+photo.uuid+"' data-filename='"+photo.fileName+"' data-type='"+photo.fileType+"' ><div>";
-           str += "<span> "+ photo.fileName+"</span><br/>";
-           str += "<img src='/resources/img/photo.png'></a>";
-           str += "</div>";
-           str +="</li>";
-         }
-       });    
-       $(".uploadResult ul").html(str);         
+           console.log("fileType:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " +photo.fileType);
+           //image type
+           if(photo.fileType){
+        	 var fileCallPath =  encodeURIComponent(photo.uploadPath+ "/s_"+photo.uuid +"_"+photo.fileName); 
+	         str += "<li data-path='"+photo.uploadPath+"' data-uuid='"+photo.uuid+"' data-filename='"+photo.fileName+"' data-type='"+photo.fileType+"' ><div>";
+	         str += "<span> "+photo.fileName+"</span><br/>";
+	         str += "<img src='/display?fileName="+fileCallPath+"'>";
+             str += "</div>";
+             str +="</li>";
+           }else{          
+             str += "<li data-path='"+photo.uploadPath+"' data-uuid='"+photo.uuid+"' data-filename='"+photo.fileName+"' data-type='"+photo.fileType+"' ><div>";
+             str += "<span> "+ photo.fileName+"</span><br/>";
+             str += "<img src='/resources/img/attach.png'>";
+             str += "</div>";
+             str +="</li>";
+           }
+         });    
+         $(".uploadResult ul").html(str);            
      });//end getjson   
   })();//end function
   
-  //575
   $(".uploadResult").on("click","li",function(e){
 	 console.log("view image");
 	 var liObj = $(this);

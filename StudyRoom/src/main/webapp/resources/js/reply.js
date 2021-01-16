@@ -1,13 +1,13 @@
-console.log("Reply Module.........");
+console.log("***** Reply Module *****");
 
 var placeReService = (function(){
-
+	//댓글 등록
 	function add(reply, callback, error){
-		console.log("add reply...............");
+		console.log("+ + + add reply + + +");
 		
 		$.ajax({
 			type : 'post',
-			url : '/replies/new',
+			url : '/placeRe/new',
 			data : JSON.stringify(reply),
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr) { //xhr:객체
@@ -20,18 +20,18 @@ var placeReService = (function(){
 				error(er);
 				}
 			}
-		})
+		});
 	}	
 	
+	//댓글 목록
 	function getList(param, callback, error){
 		var bno = param.bno;
-		var page = param.page || 1;
+		var page = param.page || 1; //댓글 페이지 목록
 		
-		$.getJSON("/replies/pages/" + bno + "/" + page + ".json",
+		$.getJSON("/placeRe/pages/" + bno + "/" + page + ".json",
 			function(data){
 				if(callback){
-				
-					callback(data.replyCnt, data.list);
+					callback(data.placeReCnt, data.list);
 				}
 			}).fail(function(xhr, status, err){
 			if(error) {
@@ -40,12 +40,14 @@ var placeReService = (function(){
 		});
 	}
 	
-	function remove(rno, replyer, callback, error){
+	//댓글 삭제
+	function remove(rno, callback, error){
+		console.log("- - - delete reply - - -");
 		$.ajax({
 			type : 'delete',
-			url : '/replies/' + rno,
-			data : JSON.stringify({rno:rno, replyer:replyer}),
-			contentType : "application/json; charset=utf-8",
+			url : '/placeRe/' + rno,
+			//data : JSON.stringify({rno:rno, replyer:replyer}),
+			//contentType : "application/json; charset=utf-8",
 			success : function(deleteResult, status, xhr) {
 				if(callback){
 					callback(deleteResult);
@@ -59,11 +61,12 @@ var placeReService = (function(){
 		});
 	}
 	
+	//댓글 수정
 	function update(reply, callback, error){	
-	console.log("RNO : "+reply.rno);
+	console.log("update reply : "+reply.rno);
 		$.ajax({
 			type : 'put',
-			url : '/replies/' + reply.rno,
+			url : '/placeRe/' + reply.rno,
 			data : JSON.stringify(reply),
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr) {
@@ -79,8 +82,9 @@ var placeReService = (function(){
 		});
 	}
 	
+	//댓글 상세보기
 	function get(rno, callback, error) {
-		$.get("/replies/" + rno + ".json", function(result){
+		$.get("/placeRe/" + rno + ".json", function(result){
 			if(callback){
 					callback(result);
 				}
@@ -91,6 +95,7 @@ var placeReService = (function(){
 		});
 	}
 	
+	//댓글 시간
 	function displayTime(timeValue){
 		var today = new Date();
 		var gap = today.getTime() - timeValue;
@@ -98,24 +103,21 @@ var placeReService = (function(){
 		var dateObj = new Date(timeValue);
 		var str = "";
 		
+		//하루 이내 댓글
 		if(gap < (1000 * 60 * 60 * 24)){
 		
 		var hh = dateObj.getHours();
 		var mi = dateObj.getMinutes();
 		var ss = dateObj.getSeconds();
-		
-		return [ (hh > 9 ? '' : '0') + hh, ':', (mi > 9 ? '' : '0')+ mi,':',(ss > 9 ? '' : '0') + ss]
-		.join('');
-		} else {
-		
+		//시/분/초
+		return [ (hh > 9 ? '' : '0') + hh, ':', (mi > 9 ? '' : '0')+ mi,':',(ss > 9 ? '' : '0') + ss].join('');
+		} else {//연/월/일	
 		var yy = dateObj.getFullYear();
 		var mm = dateObj.getMonth() + 1;
-		var dd = dateObj.getDate();
-		
+		var dd = dateObj.getDate();		
 		return [ yy, '/', (mm > 9 ? '' : '0') + mm,'/',(dd > 9 ? '' : '0') + dd].join('');
 	}
-}
-;
+};
 	return {
 		add:add,
 		getList:getList,

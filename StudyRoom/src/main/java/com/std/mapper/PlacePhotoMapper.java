@@ -9,5 +9,4 @@ public interface PlacePhotoMapper {
 	public void delete(String uuid); //파일 하나 삭제
 	public List<PlacePhotoVO> findByBno(Long bno); //파일 목록
 	public void deleteAll(Long bno); //글 삭제시 파일 모두 삭제
-	public List<PlacePhotoVO> getOldFiles(); //데이터 베이스 없는 파일 삭제
 }

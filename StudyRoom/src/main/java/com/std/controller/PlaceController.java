@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -85,7 +86,7 @@ public class PlaceController {
 		log.info("place modify : "+place);
 		
 		if(service.modify(place)) {
-			rttr.addFlashAttribute("placeResult","success");
+			rttr.addFlashAttribute("result","success");
 		}
 		
 		//넘기는 페이지에 값 전달
@@ -101,7 +102,7 @@ public class PlaceController {
 	//글 삭제
 	@PostMapping("/remove")
 	public String remove(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri,
-			RedirectAttributes rttr,String writer) {
+			RedirectAttributes rttr) {
 		log.info("place remove : "+bno);
 		
 		List<PlacePhotoVO> photoList = service.getPhotoList(bno);
@@ -109,7 +110,7 @@ public class PlaceController {
 			//delete photo files
 			deleteFiles(photoList);
 			
-			rttr.addFlashAttribute("placeResult","success");
+			rttr.addFlashAttribute("result","success");
 		}
 		
 		//넘기는 페이지에 값 전달
@@ -154,4 +155,13 @@ public class PlaceController {
 			}//end catch			
 		});//end foreach
 	}
+	/*
+	 * @RequestMapping(value = "/test_check", method = RequestMethod.POST)
+	 * 
+	 * @ResponseBody public void testCheck(@RequestParam(value = "valueArrTest[]")
+	 * List<String> valueArr, PlaceVO place) { String[] checkList =
+	 * place.getOffer().split(","); System.out.println(checkList); }
+	 */
+
+
 }

@@ -25,7 +25,7 @@ public class PlaceReServiceImpl implements PlaceReService {
 	@Setter(onMethod_ = @Autowired)
 	private PlaceMapper placeMapper;
 	
-	@Transactional //오류 발생시 rollback
+	//@Transactional //오류 발생시 rollback
 	@Override
 	public int register(PlaceReVO placeRe) { //댓글 등록
 		log.info("register reply : "+placeRe);
@@ -45,7 +45,7 @@ public class PlaceReServiceImpl implements PlaceReService {
 		return mapper.update(placeRe);
 	}
 
-	@Transactional //오류 발생시 rollback
+	//@Transactional //오류 발생시 rollback
 	@Override
 	public int remove(Long rno) { //댓글 삭제
 		log.info("remove reply : "+rno);

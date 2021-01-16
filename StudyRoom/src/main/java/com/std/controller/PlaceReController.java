@@ -61,11 +61,11 @@ public class PlaceReController {
 
 	//댓글 삭제
 	//@PreAuthorize("principal.username == #vo.replyer")
-	@DeleteMapping(value = "/{rno}")
-	public ResponseEntity<String> remove(@RequestBody PlaceReVO placeRe, @PathVariable("rno") Long rno){
+	@DeleteMapping(value = "/{rno}" , produces = {MediaType.TEXT_PLAIN_VALUE})
+	public ResponseEntity<String> remove(/* @RequestBody PlaceReVO placeRe, */ @PathVariable("rno") Long rno){
 		log.info("reply remove : "+rno);
 		
-		log.info("replyer : "+placeRe.getReplyer());
+		//log.info("replyer : "+placeRe.getReplyer());
 		
 		//삼항연산자
 		return service.remove(rno) == 1 
@@ -77,12 +77,12 @@ public class PlaceReController {
 	//@PreAuthorize("principal.username == #vo.replyer")		
 	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH},
 			value="/{rno}", consumes = "application/json")
-	public ResponseEntity<String> modify(@RequestBody PlaceReVO vo, @PathVariable("rno") Long rno){
-		vo.setRno(rno);
+	public ResponseEntity<String> modify(@RequestBody PlaceReVO placeRe, @PathVariable("rno") Long rno){
+		placeRe.setRno(rno);
 		log.info("rno : "+rno);
-		log.info("reply modify : "+vo);
+		log.info("reply modify : "+placeRe);
 		
-		return service.modify(vo)==1 
+		return service.modify(placeRe)==1 
 		? new ResponseEntity<>("success",HttpStatus.OK)
 		: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}

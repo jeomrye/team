@@ -6,8 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <mapper namespace="com.std.mapper.PlaceReMapper">
 
 	<insert id="insert">
-		insert into placereply (rno, reply, replyer, bno)
-		values (seq_placere.nextval, #{reply}, #{replyer}, #{bno})
+		insert into placereply (score, rno, reply, replyer, bno)
+		values (#{score}, seq_placere.nextval, #{reply}, #{replyer}, #{bno})
 	</insert>
 
 	<select id="read" resultType="com.std.domain.PlaceReVO">
@@ -19,16 +19,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 
 	<update id="update">
-		update placereply set reply = #{reply}, updatedate = sysdate where rno = #{rno}
+		update placereply set score = #{score}, reply = #{reply}, updatedate = sysdate where rno = #{rno}
 	</update>
 
 	<select id="getListWithPaging" resultType="com.std.domain.PlaceReVO">
 	<![CDATA[
-		select rno, bno, reply, replyer, replyDate, updatedate
+		select score, rno, bno, reply, replyer, replyDate, updatedate
 		from
 		(
 			select /*+INDEX(placereply idx_placere) */
-				rownum rn, rno, bno, reply, replyer, replydate, updatedate
+				rownum rn, score, rno, bno, reply, replyer, replydate, updatedate
 			from placereply
 			where bno = #{bno}
 			and rno>0

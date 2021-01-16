@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     					content like '%'||#{keyword}||'%'
     				</when>
     				<when test="type == 'R'.toString()">
-    					writer like '%'||#{keyword}||'%'
+    					address like '%'||#{keyword}||'%'
     				</when>
     			</choose>
     		</trim>
@@ -52,10 +52,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     ]]>
   </select>
   
+<!--     <insert id="insert">
+  		insert into place (bno, title, offer, extra, content, time, clean, tel, address, page, writer)
+  		values (seq_place.nextval, #{title}, #{offer, jdbcType=VARCHAR}, #{extra, jdbcType=VARCHAR}, #{content}, 
+  		#{time}, #{clean}, #{tel}, #{address}, #{page, jdbcType=VARCHAR}, #{writer})
+  </insert> -->
+  
     <insert id="insert">
-  		insert into place (score, bno, title, offer, extra, content, time, clean, tel, address, page, writer)
-  		values (#{score}, seq_place.nextval, #{title}, #{offer, jdbcType=NULL}, #{extra, jdbcType=NULL}, #{content}, 
-  		#{time}, #{clean}, #{tel}, #{address}, #{page, jdbcType=NULL}, #{writer})
+  		<selectKey keyProperty="bno" order="BEFORE" resultType="long">
+  		select seq_place.nextval from dual
+  	</selectKey>
+  		insert into place (bno, title, offer, extra, content, time, clean, tel, address, page, writer)
+  		values (seq_place.nextval, #{title}, #{offer, jdbcType=VARCHAR}, #{extra, jdbcType=VARCHAR}, #{content}, 
+  		#{time}, #{clean}, #{tel}, #{address}, #{page, jdbcType=VARCHAR}, #{writer})
   </insert>
   
 <!--     <insert id="insert">

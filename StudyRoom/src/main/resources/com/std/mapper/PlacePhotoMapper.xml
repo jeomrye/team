@@ -6,8 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <mapper namespace="com.std.mapper.PlacePhotoMapper">
  
 	<insert id="insert">
-		insert into placephoto (uuid, uploadpath, filename,filetype, bno) 
-		values (#{uuid},#{uploadPath},#{fileName},#{fileType},#{bno})")
+		insert into placephoto (uuid, uploadpath, filename, filetype, bno) 
+		values (#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{bno})
 	</insert>
 	
 	<delete id="delete">
@@ -21,9 +21,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteAll">
   		delete from placephoto where bno = #{bno}
 	</delete>
-	
-	<select id="getOldFiles" resultType="com.std.domain.PlacePhotoVO">
-  		select * from placephoto where uploadpath = to_char(sysdate-1, 'yyyy/mm/dd')
-	</select>
 	
  </mapper>
