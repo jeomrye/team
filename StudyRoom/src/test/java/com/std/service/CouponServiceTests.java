@@ -28,41 +28,41 @@ public class CouponServiceTests {
 		assertNotNull(service);
 	}
 	
-	//couponInsertSelectKey¸¦ ÀÌ¿ëÇØ ³ªÁß¿¡ »ı¼ºµÈ ÄíÆùÀÇ ¹øÈ£¸¦ È®ÀÎ °¡´É
+	//couponInsertSelectKeyë¥¼ ì´ìš©í•´ ë‚˜ì¤‘ì— ìƒì„±ëœ ì¿ í°ì˜ ë²ˆí˜¸ë¥¼ í™•ì¸ ê°€ëŠ¥
 	@Test
 	public void testCouponRegister() {
 		
 		CouponVO coupon = new CouponVO();
-		coupon.setCouponName("¼öÁ¤ÇÏ´Â ÄíÆù");
+		coupon.setCouponName("ìˆ˜ì •í•˜ëŠ” ì¿ í°");
 		coupon.setCouponPrice(20000);
 		
 		service.couponRegister(coupon);
 		
-		log.info("»ı¼ºµÈ ÄíÆùÀÇ ¹øÈ£: " + coupon.getCouponNumber());
+		log.info("ìƒì„±ëœ ì¿ í°ì˜ ë²ˆí˜¸: " + coupon.getCouponNumber());
 	}
 	
-	//¸ğµç ÄíÆù ¸ñ·Ï ºÒ·¯¿À±â
+	//ëª¨ë“  ì¿ í° ëª©ë¡ ë¶ˆëŸ¬ì˜¤ê¸°
 	@Test
 	public void testCoupongetList() {
 		
 		service.couponGetList().forEach(coupon -> log.info(coupon));
 	}
 
-	//ÄíÆù Á¶È¸
+	//ì¿ í° ì¡°íšŒ
 	@Test
 	public void testCouponGet() {
 		
 		log.info(service.couponGet(15));
 	}
 	
-	//ÄíÆù »èÁ¦
+	//ì¿ í° ì‚­ì œ
 	public void testCouponDelete() {
 		
-		//ÄíÆù ¹øÈ£ÀÇ Á¸Àç¸¦ È®ÀÎÇÏ°í Å×½ºÆ®
+		//ì¿ í° ë²ˆí˜¸ì˜ ì¡´ì¬ë¥¼ í™•ì¸í•˜ê³  í…ŒìŠ¤íŠ¸
 		log.info("REMOVE RESULT : " + service.couponRemove(16));
 	}
 	
-	//ÄíÆù ¼öÁ¤
+	//ì¿ í° ìˆ˜ì •
 	public void testCouponUpdate() {
 		
 		CouponVO coupon = service.couponGet(7);
@@ -71,7 +71,7 @@ public class CouponServiceTests {
 			return;
 		}
 		
-		coupon.setCouponName("µÎ¹øÂ° ¼öÁ¤ ÄíÆù");
+		coupon.setCouponName("ë‘ë²ˆì§¸ ìˆ˜ì • ì¿ í°");
 		log.info("MODIFY RESULT : " + service.couponModify(coupon));
 	}
 }

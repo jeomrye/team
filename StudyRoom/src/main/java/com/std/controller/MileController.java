@@ -22,16 +22,16 @@ public class MileController {
 
 	private CouponService  service;
 	
-	//ÄíÆù ¸ñ·Ï¿¡ ´ëÇÑ Ã³¸®
+	//ì¿ í° ëª©ë¡ì— ëŒ€í•œ ì²˜ë¦¬
 	@GetMapping("/couponList")
 	public void couponList(Model model) {
 		
 		log.info("couponList");
-		
+			
 		model.addAttribute("list", service.couponGetList());
 	}
 	
-	//ÄíÆù µî·Ï Ã³¸®¿Í Å×½ºÆ®
+	//ì¿ í° ë“±ë¡ ì²˜ë¦¬ì™€ í…ŒìŠ¤íŠ¸
 	@PostMapping("/couponRegister")
 	public String couponResister(CouponVO coupon, RedirectAttributes rttr) {
 		
@@ -44,7 +44,7 @@ public class MileController {
 		return "redirect:/coupon/couponList";
 	}
 	
-	//ÄíÆù Á¶È¸ ¿Í ¼öÁ¤
+	//ì¿ í° ì¡°íšŒ ì™€ ìˆ˜ì •
 	@GetMapping({"/couponGet", "/couponModify"})
 	public void couponGet(@RequestParam("couponNumber") int couponNumber, Model model) {
 		
@@ -53,7 +53,7 @@ public class MileController {
 		model.addAttribute("coupon", service.couponGet(couponNumber));
 	}
 	
-	//ÄíÆù ¼öÁ¤ 
+	//ì¿ í° ìˆ˜ì • 
 	@PostMapping("/couponModify")
 	public String couponModify(CouponVO coupon, RedirectAttributes rttr) {
 		log.info("couponModify : " + coupon);
@@ -64,7 +64,7 @@ public class MileController {
 		return "redirect:/coupon/couponList";
 	}
 	
-	//ÄíÆù »èÁ¦ Ã³¸®¿Í Å×½ºÆ®
+	//ì¿ í° ì‚­ì œ ì²˜ë¦¬ì™€ í…ŒìŠ¤íŠ¸
 	@PostMapping("/couponRemove")
 	public String couponRemove(@RequestParam("couponNumber") int couponNumber, RedirectAttributes rttr) {
 		
@@ -75,7 +75,7 @@ public class MileController {
 		return "redirect:/coupon/couponList";
 	}
 	
-	//µî·Ï ÀÔ·Â ÆäÀÌÁö¿Í µî·Ï Ã³¸®
+	//ë“±ë¡ ì…ë ¥ í˜ì´ì§€ì™€ ë“±ë¡ ì²˜ë¦¬
 	@GetMapping("/couponRegister")
 	public void couponRegister() {
 		

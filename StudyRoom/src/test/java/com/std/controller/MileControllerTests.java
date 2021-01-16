@@ -33,7 +33,7 @@ public class MileControllerTests {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
 	}
 	
-	//ÄíÆù ¸ñ·Ï¿¡ ´ëÇÑ Ã³¸®¿Í Å×½ºÆ®
+	//ì¿ í° ëª©ë¡ì— ëŒ€í•œ ì²˜ë¦¬ì™€ í…ŒìŠ¤íŠ¸
 	@Test
 	public void testCouponList() throws Exception {
 		
@@ -43,19 +43,19 @@ public class MileControllerTests {
 				.getModelMap());
 	}
 
-	//ÄíÆù µî·Ï¿¡ ´ëÇÑ Ã³¸®¿Í Å×½ºÆ®
+	//ì¿ í° ë“±ë¡ì— ëŒ€í•œ ì²˜ë¦¬ì™€ í…ŒìŠ¤íŠ¸
 	@Test
 	public void testCouponResister() throws Exception{
 		
 		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/coupon/couponResister")
-											.param("couponName", "¼öÁ¤ ÄíÆù")
-											.param("couponPrice", "6000")
-											).andReturn().getModelAndView().getViewName();
+											.param("couponName", "ìˆ˜ì • ì¿ í°")
+											.param("couponPrice", "6000"))
+											.andReturn().getModelAndView().getViewName();
 		
 		log.info(resultPage);
 	}
 	
-	//ÄíÆù Á¶È¸ Ã³¸®¿Í Å×½ºÆ®
+	//ì¿ í° ì¡°íšŒ ì²˜ë¦¬ì™€ í…ŒìŠ¤íŠ¸
 	@Test
 	public void testCouponGet() throws Exception{
 		
@@ -67,26 +67,26 @@ public class MileControllerTests {
 								.getModelMap());
 	}
 	
-	//ÄíÆù ¼öÁ¤ Ã³¸®¿Í Å×½ºÆ®
+	//ì¿ í° ìˆ˜ì • ì²˜ë¦¬ì™€ í…ŒìŠ¤íŠ¸
 	@Test
 	public void testCouponModify() throws Exception{
 		
 		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/coupon/couponModify")
-											.param("couponNumber", "8")
-											.param("couponName", "µÎ¹øÂ° ¼öÁ¤ ÄíÆù")
+											.param("couponNumber", "231")
+											.param("couponName", "ë‘ë²ˆì§¸ ìˆ˜ì • ì¿ í°")
 											.param("couponPrice", "2000"))
 									.andReturn().getModelAndView().getViewName();
 		
 		log.info(resultPage);
 	}
 	
-	//ÄíÆù »èÁ¦ Ã³¸®¿Í Å×½ºÆ®
+	//ì¿ í° ì‚­ì œ ì²˜ë¦¬ì™€ í…ŒìŠ¤íŠ¸
 	@Test
 	public void testCouponRemove() throws Exception{
 		
-		//»èÁ¦ Å×½ºÆ® Àü¿¡ Á¸ÀçÇÏ´Â °Ô½Ã¹°ÀÎÁö È®ÀÎÇÏ°í ¹øÈ£ ÀÔ·Â
+		//ì‚­ì œ í…ŒìŠ¤íŠ¸ ì „ì— ì¡´ì¬í•˜ëŠ” ê²Œì‹œë¬¼ì¸ì§€ í™•ì¸í•˜ê³  ë²ˆí˜¸ ì…ë ¥
 		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/coupon/couponRemove")
-												.param("couponNumber", "24")
+												.param("couponNumber", "123")
 												).andReturn().getModelAndView().getViewName();
 		
 		log.info(resultPage);

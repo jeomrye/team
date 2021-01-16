@@ -28,7 +28,7 @@ public class CouponServiceImpl implements CouponService {
 		mapper.couponInsertSelectKey(coupon);
 	}
 
-	//ÄíÆù Á¶È¸
+	//ì¿ í° ì¡°íšŒ
 	@Override
 	public CouponVO couponGet(int couponNumber) {
 
@@ -37,7 +37,7 @@ public class CouponServiceImpl implements CouponService {
 		return mapper.couponRead(couponNumber);
 	}
 
-	//ÄíÆù ¼öÁ¤
+	//ì¿ í° ìˆ˜ì •
 	@Override
 	public boolean couponModify(CouponVO coupon) {
 
@@ -45,7 +45,7 @@ public class CouponServiceImpl implements CouponService {
 		return mapper.couponUpdate(coupon) == 1;
 	}
 
-	//ÄíÆù »èÁ¦
+	//ì¿ í° ì‚­ì œ
 	@Override
 	public boolean couponRemove(int couponNumber) {
 
@@ -53,7 +53,7 @@ public class CouponServiceImpl implements CouponService {
 		return mapper.couponDelete(couponNumber) == 1;
 	}
 	
-//ÄíÆù ¸ñ·Ï ÀÛ¾÷
+//ì¿ í° ëª©ë¡ ì‘ì—…
 	@Override
 	public List<CouponVO> couponGetList() {
 

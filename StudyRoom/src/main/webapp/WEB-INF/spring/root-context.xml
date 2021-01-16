@@ -17,6 +17,7 @@
 	<context:component-scan base-package="com.std.domain"></context:component-scan>
 	<context:component-scan base-package="com.std.service"></context:component-scan>
 	
+	
 	<!-- 596 -->
 	<task:annotation-driven/>
 	
