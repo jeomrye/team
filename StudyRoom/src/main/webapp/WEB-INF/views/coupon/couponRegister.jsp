@@ -39,7 +39,7 @@
  </script>
 </div>
                                         <div class="form-group">
-                                            <label>쿠폰 이름.</label>
+                                            <label>쿠폰 이름..</label>
                                             <input class="form-control" name='couponName'>
                                             </div>
                                             <div class="form-group">
