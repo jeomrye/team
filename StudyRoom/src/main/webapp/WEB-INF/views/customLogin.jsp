@@ -56,8 +56,8 @@
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
                                 <a href="index.html" class="btn btn-lg btn-success btn-block">로그인</a>
-                               
-<!--                                 <a href="/member/joinForm" class="btn btn-lg btn-success btn-block">회원가입</a> -->
+                                <!-- 회원가입페이지 이동 -->       
+                                <A HREF="/MEMBER/JOINFORM" CLASS="BTN BTN-LG BTN-SUCCESS BTN-BLOCK">회원가입</A>
                             </fieldset>
                             <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
                         </form>

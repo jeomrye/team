@@ -191,13 +191,27 @@ $(document).ready(function(){
   	var modalRemoveBtn = $("#modalRemoveBtn");
   	var modalRegisterBtn = $("#modalRegisterBtn");
   	
+  	//로그인 사용자가 댓글 등록시 작성자가 됨
+  	var replyer = null;
+  	<sec:authorize access="isAuthenticated()">
+  	replyer = '<sec:authentication property="principal.username"/>';
+  	</sec:authorize>
+  	var csrfHeaderName ="${_csrf.headerName}";
+  	var csrfTokenValue="${_csrf.token}";
+  	
   	$("#addReplyBtn").on("click",function(e){
   		modal.find("input").val("");
+  		modal.find("input[name='replyer']").val(replyer);	//모달창에 고정
   		modalInputReplyDate.closest("div").hide();
   		modal.find("button[id !='modalCloseBtn']").hide();
   		
   		modalRegisterBtn.show();
   		$(".modal").modal("show");
+  	});
+  	
+  	//Ajax spring security header	== ajax 를 이용한 csrf 토큰 전송
+  	$(document).ajaxSend(function(e, xhr, options){
+  		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
   	});
   	
 	//댓글 등록
@@ -247,8 +261,19 @@ $(document).ready(function(){
   	
   	//댓글 수정
   	modalModBtn.on("click", function(e){
-  		var reply = {rno:modal.data("rno"), reply: modalInputReply.val()};
-  		
+  		var originalReplyer = modalInputReplyer.val();
+  		var reply = {rno:modal.data("rno"), reply: modalInputReply.val(), replyer: originalReplyer};
+  		if(!replyer){
+  			alert("로그인하세요.");
+  			modal.modal("hide");
+  			return;
+  		}
+  		console.log("Original Replyer : "+originalReplyer);
+  		if(replyer != originalReplyer){
+  			alert(" 수정불가");
+  			modal.modal("hide");
+  			return;
+  		}
   		FreeReplyService.update(reply, function(result){
   			 alert(result);
   			 modal.modal("hide");
@@ -259,7 +284,21 @@ $(document).ready(function(){
   	// 댓글 삭제
   	modalRemoveBtn.on("click", function(e){
   		var rno = modal.data("rno");
-  		FreeReplyService.remove(rno, function(result){
+  		console.log("rno :"+rno);
+  		console.log("replyer: "+replyer);
+  		if(!replyer){
+  			alert("로그인하세요.");
+  			modal.modal("hide");
+  			return;
+  		}
+  		var originalReplyer = modalInputReplyer.val();
+  		console.log("Original Replyer :" +originalReplyer);	//원래 댓글 작성자
+  		if(replyer != originalReplyer){
+  			alert("자신의 글이 아닙니다. 삭제 불가!");
+  			modal.modal("hide");
+  			return;
+  		}
+  		FreeReplyService.remove(rno, originalReplyer, function(result){
   			alert(result);
   			modal.modal("hide");
   			showList(pageNum);

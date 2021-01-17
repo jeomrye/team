@@ -18,9 +18,7 @@
 		<!-- 에러 페이지 -->
 		<security:access-denied-handler ref="customAccessDenied"/> 
 		<!-- login 시 사용자 권한에 따라 다른페이지 호출 -->
-		<security:form-login login-page="/customLogin" authentication-success-handler-ref="customLoginSuccess"/>
 		
-		<security:logout logout-url="/customLogout" invalidate-session="true"/> 
 		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/>
 		<security:logout logout-url="/customLogout" invalidate-session="true" delete-cookies="remember-me,JSESSION_ID"/>
 		 

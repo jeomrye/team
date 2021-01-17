@@ -2,11 +2,13 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+     <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
     <%@ include file="../includes/header.jsp" %>
 <div class ="panel-heading">Free Modify Page</div>
 <div class="panel-body">
 <form role="form" action="/free/modify" method="post">
-<!-- 추가 페이지 319 -->
+	
+	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>	<!-- csrf토큰 -->
 	<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum }"/>'>
 	<input type="hidden" name="amount" value='<c:out value="${cri.amount }"/>'>
 	<input type="hidden" name="type" value='<c:out value="${cri.type }"/>'>
@@ -35,8 +37,14 @@
 		<label>Update Date</label>
 		<input class="form-control" name="updateDate" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${free.updateDate }"/>' readonly="readonly">
 	</div>
+	<!-- 게시물의 작성자인 경우만 수정 삭제 -->
+	<sec:authentication property="principal" var="pinfo"/>
+	<sec:authorize access="isAuthenticated()">
+	<c:if test="${pinfo.username eq free.writer }">
 	<button type="submit" data-oper="modify" class="btn btn-default">Modify</button>
 	<button type="submit" data-oper="remove" class="btn btn-danger">Remove</button>
+	</c:if>
+	</sec:authorize>
 	<button type="submit" data-oper="list" class="btn btn-info">List</button>
 </form>
 </div>

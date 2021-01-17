@@ -1,5 +1,6 @@
 package com.std.controller;
 
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,8 +57,9 @@ public class FreeController {
 		model.addAttribute("free",service.get(fno));
 	}
 	
+	@PreAuthorize("principal.username == #writer")
 	@PostMapping("/modify")		//수정처리
-	public String modify(FreeVO free,@ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+	public String modify(FreeVO free, Criteria cri, RedirectAttributes rttr) {
 		log.info("modify: "+free);
 		if(service.modify(free)) {
 			rttr.addFlashAttribute("result","success");
@@ -69,10 +71,12 @@ public class FreeController {
 		return "redirect:/free/list";
 	}
 	
+	@PreAuthorize("principal.username == #writer")
 	@PostMapping("/remove")		//삭제처리
-	public String remove(@RequestParam("fno") Long fno,@ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+	public String remove(@RequestParam("fno") Long fno, Criteria cri, RedirectAttributes rttr, String writer) {
 		log.info("remove: " + fno);
-		if(service.remove(fno)) {	
+		
+		if(service.remove(fno)) {
 			rttr.addFlashAttribute("result","success"); //일회성 전달
 		}
 		rttr.addAttribute("pageNum",cri.getPageNum());
