@@ -98,4 +98,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	update place set placerecnt = placerecnt + #{amount} where bno = #{bno}
   </update>
   
+  <select id="getReplyCnt" resultType="long">
+  	select placeReCnt from place where bno = #{bno}
+  </select>
  </mapper>

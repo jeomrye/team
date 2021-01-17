@@ -21,7 +21,29 @@
 			
 			<!-- 점수 -->
 			<div class="form-group">
-			<label>Score</label><input class="form-control" name='score' value="<c:out value='${place.score}'/>" readonly="readonly">
+			<label>Score</label><br>
+			<c:set var="score" value="${score}"/>
+			
+ 			<c:if test = "${fn:contains(score, '0')}">
+        	<input type='image' src="/resources/img/score/0star.png">
+      		</c:if>
+      		<c:if test = "${fn:contains(score, '1')}">
+        	<input type='image' src="/resources/img/score/1star.png">
+      		</c:if>
+      		<c:if test = "${fn:contains(score, '2')}">
+        	<input type='image' src="/resources/img/score/2star.png">
+      		</c:if>
+      		<c:if test = "${fn:contains(score, '3')}">
+        	<input type='image' src="/resources/img/score/3star.png">
+      		</c:if>
+      		<c:if test = "${fn:contains(score, '4')}">
+        	<input type='image' src="/resources/img/score/4star.png">
+      		</c:if>
+      		<c:if test = "${fn:contains(score, '5')}">
+        	<input type='image' src="/resources/img/score/5star.png">
+      		</c:if>
+      		
+			<%-- <input class="form-control" name='score' value="<c:out value='${score}'/>" readonly="readonly"> --%>
 			</div>
 			
 			<!-- 글 번호 -->
@@ -41,28 +63,31 @@
 			<c:set var="offer" value="${place.offer }"/>
 			
  			<c:if test = "${fn:contains(offer, '공기청정기')}">
-        	<input type='image' src="/resources/img/air.png"> <b>공기청정기  </b>
+        	<input type='image' src="/resources/img/offer/air.png"> <b>공기청정기  </b>
       		</c:if>
 			<c:if test = "${fn:contains(offer, '개인 사물함')}">
-			<input type='image' src="/resources/img/locker.png"> <b>개인 사물함  </b>
+			<input type='image' src="/resources/img/offer/locker.png"> <b>개인 사물함  </b>
 			</c:if>
 			<c:if test = "${fn:contains(offer, '냉난방기')}">
-			<input type='image' src="/resources/img/air-conditioner.png"> <b>냉난방기  </b>
+			<input type='image' src="/resources/img/offer/air-conditioner.png"> <b>냉난방기  </b>
 			</c:if>
 			<c:if test = "${fn:contains(offer, '개인 콘센트')}">
-			<input type='image' src="/resources/img/plug.png"> <b>개인 콘센트  </b>
+			<input type='image' src="/resources/img/offer/plug.png"> <b>개인 콘센트  </b>
 			</c:if>
 			<c:if test = "${fn:contains(offer, '취식공간')}">
-			<input type='image' src="/resources/img/lunchbox.png"> <b>취식공간  </b>
+			<input type='image' src="/resources/img/offer/lunchbox.png"> <b>취식공간  </b>
 			</c:if>
 			<c:if test = "${fn:contains(offer, '안마의자')}">
-			<input type='image' src="/resources/img/massage-chair.png"> <b>안마의자  </b>
+			<input type='image' src="/resources/img/offer/massage-chair.png"> <b>안마의자  </b>
 			</c:if>
 			<c:if test = "${fn:contains(offer, '엘레베이터')}">
-			<input type='image' src="/resources/img/elevator.png"> <b>엘레베이터  </b>
+			<input type='image' src="/resources/img/offer/elevator.png"> <b>엘레베이터  </b>
 			</c:if>			
 			<c:if test = "${fn:contains(offer, '와이파이')}">
-			<input type='image' src="/resources/img/wifi.png"> <b>와이파이  </b>
+			<input type='image' src="/resources/img/offer/wifi.png"> <b>와이파이  </b>
+			</c:if>			
+			<c:if test = "${fn:contains(offer, '없음')}">
+			<input type='image' src="/resources/img/offer/x.png"> <b>제공품 없음  </b>
 			</c:if>			
 			</div>
 			
@@ -102,13 +127,13 @@
 			<!-- 주소 -->
 			<div class="form-group">
 			<label>Address</label><input class="form-control" name='address' value="<c:out value='${place.address}'/>" readonly="readonly">
-			<div><a href="https://map.kakao.com/link/search/${place.address }">지도로 알아보기(Click)</a></div>
-			<div id="map" style="width:920px;height:200px;"></div>
+			<div><a href="https://map.kakao.com/link/search/${place.address }" target="_blank">지도로 알아보기(Click)</a></div>
+			<div id="map" style="width:920px;height:300px;"></div>
 			</div>
 			
 			<!-- 홈페이지,SNS계정 -->
 			<div class="form-group">
-			<label>Page</label><div><a href="${place.page }">${place.page }</a></div>
+			<label>Page</label><div><a href="${place.page }" target="_blank">${place.page }</a></div>
 			</div>
 			
 			<!-- 작성자 -->
@@ -257,8 +282,15 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 				<h4 class="modal-title" id="myModalLabel">REPLY</h4>
 			</div>
 			<div class='form-group'>
-				<label>Score</label>
-				<input class='form-control' name='score' value='0'>
+				<label>Score</label><br>
+				<select id="score">
+				<option value="5" selected="selected">5점(매우 만족)</option>
+				<option value="4">4점(만족)</option>
+				<option value="3">3점(보통)</option>
+				<option value="2">2점(불만족)</option>
+				<option value="1">1점(매우 만족)</option>
+				</select>
+				<!-- <input class='form-control' name='score' value='0'> -->
 			</div>
 			<div class='form-group'>
 				<label>Reply</label>
@@ -365,7 +397,20 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 				//댓글
 				for(var i = 0, len = list.length || 0; i<len; i++){
 					str += "<li class='left clearfix' data-rno='"+list[i].rno+"'>";
-					str += "	<div><div>"+list[i].score+"</div><div class='header'><strong class='primary-font'>["
+					str += "	<div><div>";
+					//댓글 점수별 별점 이미지 출력
+					if(list[i].score=="1"){
+						str += "<input type='image' src='/resources/img/red/1red.png'>"
+					}else if(list[i].score=="2"){
+						str += "<input type='image' src='/resources/img/red/2red.png'>"
+					}else if(list[i].score=="3"){
+						str += "<input type='image' src='/resources/img/red/3red.png'>"		
+					}else if(list[i].score=="4"){
+						str += "<input type='image' src='/resources/img/red/4red.png'>"		
+					}else if(list[i].score=="5"){
+						str += "<input type='image' src='/resources/img/red/5red.png'>"
+					}		
+					str += "</div><div class='header'><strong class='primary-font'>["
 						+list[i].rno+"]"+list[i].replyer+"</strong>";
 					str += "	<small class='pull-right text-muted'>"
 					+placeReService.displayTime(list[i].replydate)+"</small></div>";
@@ -419,7 +464,8 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 		}
 
 		var modal = $(".modal");
-		var modalInputScore = modal.find("input[name='score']");
+		//var modalInputScore = modal.find("input[name='score']");
+		var modalInputScore = modal.find("select[id='score']");
 		var modalInputReply = modal.find("input[name='reply']");
 		var modalInputReplyer = modal.find("input[name='replyer']");
 		var modalInputReplyDate = modal.find("input[name='replyDate']");

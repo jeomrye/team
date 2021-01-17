@@ -16,4 +16,6 @@ public interface PlaceReMapper {
 	public List<PlaceReVO> getListWithPaging(@Param("cri") Criteria cri, @Param("bno") Long bno);
 	
 	public int getCountByBno(Long bno); //총 댓글 수
+	
+	public String[] getScore(Long bno);//리뷰 댓글에 달린 점수들의 합
 }

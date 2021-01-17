@@ -88,4 +88,10 @@ public class PlaceServiceImpl implements PlaceService {
 		return photoMapper.findByBno(bno);
 	}
 
+	@Override
+	public long getReplyCnt(Long bno) {// 총 리뷰댓글 수
+		log.info("get reply count");
+		return mapper.getReplyCnt(bno);
+	}
+
 }

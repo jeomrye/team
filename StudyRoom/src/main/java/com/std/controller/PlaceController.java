@@ -23,6 +23,7 @@ import com.std.domain.Criteria;
 import com.std.domain.PageDTO;
 import com.std.domain.PlacePhotoVO;
 import com.std.domain.PlaceVO;
+import com.std.service.PlaceReService;
 import com.std.service.PlaceService;
 
 import lombok.AllArgsConstructor;
@@ -35,6 +36,7 @@ import lombok.extern.log4j.Log4j;
 public class PlaceController {
 	
 	private PlaceService service;
+	private PlaceReService serviceRe;
 	
 	@GetMapping("/list") //글 목록 가져오기
 	public void list(Criteria cri, Model model) {
@@ -78,6 +80,16 @@ public class PlaceController {
 	public void get(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("/get or /modify");
 		model.addAttribute("place",service.get(bno)); //해당 글 가져오기
+		
+		int score = serviceRe.getScore(bno); //리뷰 댓글마다 달린 점수의 총합 구하기
+		int replyCnt = (int)service.getReplyCnt(bno); //리뷰댓글 수 가져오기
+		int result; //평점 내기
+		if(score==0 || replyCnt ==0) {
+			result=0;
+		}else {
+			result = score/replyCnt;
+		}
+		model.addAttribute("score",result);
 	}
 	
 	//글 수정

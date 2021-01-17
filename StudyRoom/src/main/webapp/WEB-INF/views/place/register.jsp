@@ -80,6 +80,7 @@ align-items: center;
 			<input type="checkbox" name='offer' value="안마의자"> 안마의자<br>			
 			<input type="checkbox" name='offer' value="엘레베이터"> 엘리베이터<br>			
 			<input type="checkbox" name='offer' value="와이파이"> 와이파이<br>			
+			<input type="checkbox" name='offer' value="없음"> 없음<br>			
 <!-- 			<input class="form-control" name='offer'> -->
 			</div>
 			

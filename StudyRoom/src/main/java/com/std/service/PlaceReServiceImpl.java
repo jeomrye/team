@@ -67,4 +67,14 @@ public class PlaceReServiceImpl implements PlaceReService {
 		return new ReplyPageDTO(mapper.getCountByBno(bno), mapper.getListWithPaging(cri, bno));
 	}
 
+	@Override
+	public int getScore(Long bno) { //댓글 각각이 가지고 있는 점수 가져와서 총합 구하기
+		String[] score = mapper.getScore(bno);
+		int total = 0;
+		for(int i = 0; i<score.length; i++) {
+			total += Integer.parseInt(score[i]);
+		}
+		return total;
+	}
+
 }

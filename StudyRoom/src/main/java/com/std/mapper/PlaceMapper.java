@@ -20,5 +20,7 @@ public interface PlaceMapper {
 	//bno : 글 번호 , amount : 증가, 감소 의미하는 변수
 	public void updateReplyCnt(@Param("bno") Long bno, @Param("amount") int amount); //댓글 수 업데이트
 	
+	public long getReplyCnt(Long bno);//댓글 수
+	
 	
 }

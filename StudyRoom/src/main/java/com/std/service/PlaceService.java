@@ -16,4 +16,6 @@ public interface PlaceService {
 	public int getTotal(Criteria cri); //총 글 개수
 	
 	public List<PlacePhotoVO> getPhotoList(Long bno); //첨부된 사진 목록
+	
+	public long getReplyCnt(Long bno);//댓글 수
 }
