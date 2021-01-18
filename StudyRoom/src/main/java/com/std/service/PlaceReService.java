@@ -2,6 +2,8 @@ package com.std.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.std.domain.Criteria;
 import com.std.domain.PlaceReVO;
 import com.std.domain.ReplyPageDTO;
@@ -15,4 +17,8 @@ public interface PlaceReService {
 	public ReplyPageDTO getListPage(Criteria cri, Long bno); //댓글 페이지 목록
 	
 	public int getScore(Long bno); //댓글 점수 총합
+	
+	public int getReplyPerDay(PlaceReVO placeRe);//작성자당 하루 댓글 수 가져오기
+
+	public void writeReview(@Param("replyer") String replyer, @Param("userid") String userid);//댓글 작성시 마일리지 증가
 }

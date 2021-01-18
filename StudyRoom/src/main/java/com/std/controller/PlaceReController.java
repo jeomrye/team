@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.std.domain.Criteria;
+import com.std.domain.MemberVO;
 import com.std.domain.PlaceReVO;
 import com.std.domain.ReplyPageDTO;
 import com.std.service.PlaceReService;
@@ -30,17 +31,21 @@ public class PlaceReController {
 	
 	//새로운 댓글 등록
 	@PostMapping(value = "/new", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
-	public ResponseEntity<String> create(@RequestBody PlaceReVO placeRe){
+	public ResponseEntity<String> create(@RequestBody PlaceReVO placeRe, MemberVO member){
 		log.info("PlaceReVO : " +placeRe);
-		
-		int insertCount = service.register(placeRe);//댓글 등록
-		
-		log.info("Reply Insert Count : "+ insertCount);
-		
-		//삼항 연산자
-		return insertCount==1 
-		? new ResponseEntity<>("success",HttpStatus.OK)
-		: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		int countPerDay = service.getReplyPerDay(placeRe);
+		if(countPerDay >= 1) {			
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}else {
+			int insertCount = service.register(placeRe);//댓글 등록
+			service.writeReview(placeRe.getReplyer(), member.getUserid());
+			log.info("Reply Insert Count : "+ insertCount);
+			
+			//삼항 연산자
+			return insertCount==1 
+			? new ResponseEntity<>("success",HttpStatus.OK)
+			: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}	
 	}
 	
 	//댓글 목록

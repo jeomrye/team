@@ -294,7 +294,8 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 			</div>
 			<div class='form-group'>
 				<label>Reply</label>
-				<input class='form-control' name='reply' value='New Reply!'>
+				<textarea rows="5" cols="4" class='form-control' id="content" name='reply' minlenth='150' maxlength="1000" value='New Reply!'></textarea>
+				 <span class='pull-right' id="counter">###</span>
 			</div>
 			<div class='form-group'>
 				<label>Replyer</label>
@@ -320,7 +321,7 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
  <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=63fb6aced8c696fa4afe90f914194f7a&libraries=services"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=63fb6aced8c696fa4afe90f914194f7a&libraries=services,clusterer,drawing"></script>
-    <script>
+    <script>    
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
         mapOption = {
             center : new daum.maps.LatLng(36.633535, 127.425882), // 지도의 중심좌표
@@ -363,6 +364,18 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
         for (i = 0; i < myAddress.length; i++) {
             myMarker(i + 1, myAddress[i]);
         }
+    </script>
+    <script>
+    //reply 글자수 세기
+    $(function() {
+        $('#content').keyup(function (e){
+            var content = $(this).val();
+            $(this).height(((content.split('\n').length + 1) * 1.5) + 'em');
+            	 $('#counter').css("background-color","rgba(255,0,0,0.5)");
+            	 $('#counter').html('글자수 : ' + content.length + '/1000');
+        });
+        $('#content').keyup();
+  });
     </script>
 <script>
 	$(document).ready(function () {
@@ -466,7 +479,7 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 		var modal = $(".modal");
 		//var modalInputScore = modal.find("input[name='score']");
 		var modalInputScore = modal.find("select[id='score']");
-		var modalInputReply = modal.find("input[name='reply']");
+		var modalInputReply = modal.find("textarea[name='reply']");
 		var modalInputReplyer = modal.find("input[name='replyer']");
 		var modalInputReplyDate = modal.find("input[name='replyDate']");
 		
@@ -510,7 +523,7 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 			
 			//실질적 댓글 등록
 			placeReService.add(reply, function(result){
-				alert(result);
+				alert("댓글이 등록되었습니다.");
 			
 				modal.find("input").val("");//input 내부 빈 내용으로 만들기
 				modal.modal("hide");//모달 숨기기

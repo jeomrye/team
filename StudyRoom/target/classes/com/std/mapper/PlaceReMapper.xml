@@ -49,4 +49,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	]]>
 	</select>
 	
+	<select id="getReplyPerDay" resultType="int">
+	<![CDATA[
+	select count(rno) from placereply where replyer=#{replyer} and (replydate>sysdate-1 and replydate<sysdate+1)
+	]]>
+	</select>
+	
+	<update id="writeReview">
+		update member set mileage = mileage+50 where userid = (select replyer from placereply where replyer=#{replyer})
+	</update>
  </mapper>

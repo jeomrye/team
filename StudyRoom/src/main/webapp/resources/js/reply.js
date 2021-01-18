@@ -4,18 +4,17 @@ var placeReService = (function(){
 	//댓글 등록
 	function add(reply, callback, error){
 		console.log("+ + + add reply + + +");
-		
 		$.ajax({
 			type : 'post',
 			url : '/placeRe/new',
 			data : JSON.stringify(reply),
 			contentType : "application/json; charset=utf-8",
-			success : function(result, status, xhr) { //xhr:객체
+			success : function(result, status, xhr) {
 				if(callback){
 					callback(result);
 				}
 			},
-			error : function(xhr, status, er) {
+			error : function(xhr, status, er) {//xhr:객체	
 				if (error) {
 				error(er);
 				}
