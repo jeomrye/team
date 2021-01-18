@@ -25,15 +25,7 @@
 <input type="hidden" class="form-control" name='couponNumber' value='<c:out value="${coupon.couponNumber}"/>' readonly="readonly">
 </div>
 
-<div class="form-group">
-<label for="couponImg">쿠폰 이미지</label>
-<img src="${coupon.couponImg}" class="oriImg">
 
-</div>
-
-<div>
-<img src="../resources/img/ddddd.png" class="img-rounded" alt="쿠폰 이미지" width="400" height="240">
-</div>
 
 <div class="form-group">
 <label>쿠폰 이름</label><input class="form-control" name='couponName' value='<c:out value="${coupon.couponName}"/>' readonly="readonly">

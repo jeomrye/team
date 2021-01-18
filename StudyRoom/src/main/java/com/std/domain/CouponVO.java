@@ -13,6 +13,6 @@ public class CouponVO {
 	private int couponUse;
 	private Date couponregDate;
 	private Date couponupdateDate;
-	private String couponImg;
+	
 	
 }
