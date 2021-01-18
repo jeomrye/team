@@ -20,6 +20,12 @@
 	<context:component-scan base-package="com.spring.biz" />
 	<context:component-scan base-package="com.std.controller" />
 	
+	
+
+	
+<!-- 	일반 파일 업로드 경로 -->
+<resources location="/resources/img/" mapping="/img/**"></resources>
+	
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	<beans:property name="defaultEncoding" value="utf-8"></beans:property>
 	<beans:property name="maxUploadSize" value="104857560"></beans:property>

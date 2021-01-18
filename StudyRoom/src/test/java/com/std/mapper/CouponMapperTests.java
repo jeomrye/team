@@ -21,18 +21,18 @@ public class CouponMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private CouponMapper mapper;
 	
-//	ÄíÆù ¸®½ºÆ® °¡Á®¿À±â
+//	ì¿ í° ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
 	@Test
 	public void testGetList() {
 		mapper.couponGetList().forEach(goods -> log.info(goods));
 	}
 
-//	insert¹®¸¸ Ã³¸®µÇ°í »ı¼ºµÈ PK°ªÀ» ¾Ë ÇÊ¿ä°¡ ¾ø´Â °æ¿ì
+//	insertë¬¸ë§Œ ì²˜ë¦¬ë˜ê³  ìƒì„±ëœ PKê°’ì„ ì•Œ í•„ìš”ê°€ ì—†ëŠ” ê²½ìš°
 	@Test
 	public void testInsert() {
 		
 		CouponVO coupon = new CouponVO();
-		coupon.setCouponName("Å×½ºÆ®ÄíÆù");
+		coupon.setCouponName("í…ŒìŠ¤íŠ¸ì¿ í°");
 		coupon.setCouponPrice(8000);
 		
 		mapper.couponInsert(coupon);
@@ -40,12 +40,12 @@ public class CouponMapperTests {
 		log.info(coupon);
 	}
 	
-//	insert¹®ÀÌ ½ÇÇàµÇ°í »ı¼ºµÈ PK°ªÀ» ¾Ë¾Æ¾ß ÇÏ´Â °æ¿ì
+//	insertë¬¸ì´ ì‹¤í–‰ë˜ê³  ìƒì„±ëœ PKê°’ì„ ì•Œì•„ì•¼ í•˜ëŠ” ê²½ìš°
 	@Test
 	public void testInsertSelectKey() {
 		
 		CouponVO coupon = new CouponVO();
-		coupon.setCouponName("Å×½ºÆ®ÄíÆù select key");
+		coupon.setCouponName("í…ŒìŠ¤íŠ¸ì¿ í° select key");
 		coupon.setCouponPrice(10000);
 		
 		mapper.couponInsertSelectKey(coupon);
@@ -53,31 +53,31 @@ public class CouponMapperTests {
 		log.info(coupon);
 	}
 	
-//	insert°¡ µÈ Å×ÀÌÅÍ¸¦ Á¶È¸ÇÏ´Â °æ¿ì
+//	insertê°€ ëœ í…Œì´í„°ë¥¼ ì¡°íšŒí•˜ëŠ” ê²½ìš°
 	@Test
 	public void testRead() {
-//		Á¸ÀçÇÏ´Â ÄíÆù ¹øÈ£·Î Å×½ºÆ®
-		CouponVO coupon = mapper.couponRead(2);
+//		ì¡´ì¬í•˜ëŠ” ì¿ í° ë²ˆí˜¸ë¡œ í…ŒìŠ¤íŠ¸
+		CouponVO coupon = mapper.couponRead(258);
 		
 		log.info(coupon);
 	}
 	
 	
-	//ÄíÆù »èÁ¦ delete
+	//ì¿ í° ì‚­ì œ delete
 	@Test
 	public void testDelete() {
 		
 		log.info("DELETE COUNT: " + mapper.couponDelete(4));
 	}
 	
-//	ÄíÆù ¼öÁ¤ update
+//	ì¿ í° ìˆ˜ì • update
 	@Test
 	public void testUpdate() {
 		
 		CouponVO coupon = new CouponVO();
-		//½ÇÇàÀü ÀÖ´Â ÄíÆù¹øÈ£ÀÎÁö È®ÀÎ
-		coupon.setCouponNumber(9);
-		coupon.setCouponName("¼öÁ¤µÈÄíÆù");
+		//ì‹¤í–‰ì „ ìˆëŠ” ì¿ í°ë²ˆí˜¸ì¸ì§€ í™•ì¸
+		coupon.setCouponNumber(456);
+		coupon.setCouponName("ìˆ˜ì •ëœì¿ í°");
 		coupon.setCouponPrice(15000);
 		
 		int count = mapper.couponUpdate(coupon);

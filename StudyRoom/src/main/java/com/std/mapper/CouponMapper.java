@@ -8,21 +8,21 @@ import com.std.domain.CouponVO;
 
 public interface CouponMapper {
 
-	//@Select("select * from coupon where couponNumber > 0")  ÄíÆù ¸®½ºÆ® °¡Á®¿À±â
+	//@Select("select * from coupon where couponNumber > 0")  ì¿ í° ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
 	public List<CouponVO> couponGetList();
 	
 	
-	//insert¹®¸¸ Ã³¸®µÇ°í »ı¼ºµÈ PK°ªÀ» ¾Ë ÇÊ¿ä°¡ ¾ø´Â °æ¿ì
+	//insertë¬¸ë§Œ ì²˜ë¦¬ë˜ê³  ìƒì„±ëœ PKê°’ì„ ì•Œ í•„ìš”ê°€ ì—†ëŠ” ê²½ìš°
 	public void couponInsert(CouponVO coupon);
-	//insert¹®ÀÌ ½ÇÇàµÇ°í »ı¼ºµÈ PK°ªÀ» ¾Ë¾Æ¾ß ÇÏ´Â °æ¿ì
+	//insertë¬¸ì´ ì‹¤í–‰ë˜ê³  ìƒì„±ëœ PKê°’ì„ ì•Œì•„ì•¼ í•˜ëŠ” ê²½ìš°
 	public void couponInsertSelectKey(CouponVO coupon);
 	
-	//insert°¡ µÈ Å×ÀÌÅÍ¸¦ Á¶È¸ÇÏ´Â °æ¿ì
+	//insertê°€ ëœ í…Œì´í„°ë¥¼ ì¡°íšŒí•˜ëŠ” ê²½ìš°
 	public CouponVO couponRead(int couponNumber);
 	
-    //ÄíÆù »èÁ¦ delete
+    //ì¿ í° ì‚­ì œ delete
 	public int couponDelete(int couponNumber);
 	
-	//ÄíÆù¼öÁ¤ update
+	//ì¿ í°ìˆ˜ì • update
 	public int couponUpdate(CouponVO coupon);
 }
