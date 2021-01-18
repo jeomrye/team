@@ -26,17 +26,19 @@
 			
 			<!-- 글번호-->
 			<div class="form-group">
-			<label>Bno</label><input class="form-control" name='bno' value="<c:out value='${place.bno}'/>" readonly="readonly">
+			<label>Bno</label>
+			<input class="form-control" name='bno' value="<c:out value='${place.bno}'/>" readonly="readonly">
 			</div>
 			
 			<!-- 상호명 -->
 			<div class="form-group">
-			<label>Title</label><input class="form-control" name='title' value="<c:out value='${place.title}'/>">
+			<label>Title<span>(필수)</span></label>
+			<input class="form-control" name='title' placeholder="서울 광진구 랭스터디카페(카페형/무인)" value="<c:out value='${place.title}'/>">
 			</div>
 			
 			<!-- 기본 구비품 -->
 			<div class="form-group">
-			<label>Offer</label><br>
+			<label>Offer<span>(필수)</span></label><br>
 			<input type="checkbox" name='offer' value="공기청정기"> 공기청정기<br>
 			<input type="checkbox" name='offer' value="개인 사물함"> 개인 사물함<br>
 			<input type="checkbox" name='offer' value="냉난방기"> 냉난방기<br>
@@ -46,52 +48,60 @@
 			<input type="checkbox" name='offer' value="엘레베이터"> 엘리베이터<br>
 			<input type="checkbox" name='offer' value="와이파이"> 와이파이<br>	
 			<input type="checkbox" name='offer' value="없음"> 없음<br>	
-<%-- 			<input class="form-control" name='offer' value="<c:out value='${place.offer}'/>"> --%>
 			</div>
 			
 			<!-- 추가적인 제공품 -->
 			<div class="form-group">
-			<label>Extra</label><input class="form-control" name='extra' value="<c:out value='${place.extra}'/>">
+			<label>Extra</label>
+			<input class="form-control" name='extra' placeholder="카누,맥심,담요,충전기,개인 스탠드,귀마개,인쇄(흑:100/칼:500),팩스" value="<c:out value='${place.extra}'/>">
 			</div>
 			
 			<!-- 내용 -->
 			<div class="form-group">
-			<label>Content</label>
-			<textarea rows="3" class="form-control" name='content'><c:out value="${place.content}"/></textarea>
+			<label>Content<span>(필수)</span></label>
+			<textarea rows="3" class="form-control" name='content' placeholder="테이블형 15석, 독서실형 10석	 1층:카페형/2층:독서실형 분리 	1시간권:1,500원/4시간권:3,500원/8시간권:8,500원/종일권:1만원">
+			<c:out value="${place.content}"/></textarea>
 			</div>
 			
 			<!-- 운영시간 -->
 			<div class="form-group">
-			<label>Time</label><input class="form-control" name='time' value="<c:out value='${place.time}'/>">
+			<label>Time<span>(필수)</span></label>
+			<input class="form-control" name='time' placeholder="새벽4시~다음날 새벽3시(연중무휴)" value="<c:out value='${place.time}'/>">
 			</div>
 			
 			<!-- 청소시간 -->
 			<div class="form-group">
-			<label>Clean</label><input class="form-control" name='clean' value="<c:out value='${place.clean}'/>">
+			<label>Clean<span>(필수)</span></label>
+			<input class="form-control" name='clean' placeholder="새벽3시~새벽4시" value="<c:out value='${place.clean}'/>">
 			</div>
 			
 			<!-- 연락처 -->
 			<div class="form-group">
-			<label>Tel</label><input class="form-control" name='tel' value="<c:out value='${place.tel}'/>">
+			<label>Tel<span>(필수)</span></label>
+			<input class="form-control" name='tel' value="<c:out value='${place.tel}'/>">
 			</div>
 			
 			<!-- 주소 -->
 			<div class="form-group">
-			<label>Address</label><input class="form-control" name='address' value="<c:out value='${place.address}'/>">
+			<label>Address<span>(필수)</span></label>
+			<input class="form-control" name='address' value="<c:out value='${place.address}'/>">
 			</div>
 			
 			<!-- 홈페이지,SNS계정 -->
 			<div class="form-group">
-			<label>Page</label><input class="form-control" name='page' value="<c:out value='${place.page}'/>">
+			<label>Page</label>
+			<input class="form-control" name='page' placeholder="홈페이지/SNS계정" value="<c:out value='${place.page}'/>">
 			</div>
 			
 			<%-- <!-- 작성자 -->
 			<div class="form-group">
 			<label>Writer</label><input class="form-control" name='userid' value="<c:out value='${place.userid}'/>">
 			</div> --%>
+			
 			<!-- 작성자 -->
 			<div class="form-group">
-			<label>Writer</label><input class="form-control" name='writer' value="<c:out value='${place.writer}'/>">
+			<label>Writer<span>(필수)</span></label>
+			<input class="form-control" name='writer' value="<c:out value='${place.writer}'/>">
 			</div>
 			
 			<!-- 작성일 -->
@@ -130,6 +140,9 @@
 </div>
 
 <style>
+span {
+	color: red;
+}
 .uploadResult {
 	width : 100%;
 	background-color: pink;

@@ -11,6 +11,9 @@
 </div>
 
 <style>
+span {
+	color: red;
+}
 .uploadResult {
 width: 100%;
 background-color: gray;
@@ -66,12 +69,13 @@ align-items: center;
 			<c:out value="${placeResult}"></c:out>
 			<!-- 상호명 -->
 			<div class="form-group">
-			<label>Title</label><input class="form-control" name='title'>
+			<label>Title<span>(필수)</span></label>
+			<input class="form-control" name='title' placeholder="서울 광진구 랭스터디카페(카페형/무인)">
 			</div>
 			
 			<!-- 기본 구비품 -->
 			<div class="form-group">
-			<label>Offer</label><br>
+			<label>Offer<span>(필수)</span></label><br>
 			<input type="checkbox" name='offer' value="공기청정기"> 공기청정기<br>
 			<input type="checkbox" name='offer' value="개인 사물함"> 개인 사물함<br>
 			<input type="checkbox" name='offer' value="냉난방기"> 냉난방기<br>
@@ -81,51 +85,55 @@ align-items: center;
 			<input type="checkbox" name='offer' value="엘레베이터"> 엘리베이터<br>			
 			<input type="checkbox" name='offer' value="와이파이"> 와이파이<br>			
 			<input type="checkbox" name='offer' value="없음"> 없음<br>			
-<!-- 			<input class="form-control" name='offer'> -->
 			</div>
 			
 			<!-- 추가적인 제공품 -->
 			<div class="form-group">
 			<label>Extra</label>
-			<input type="checkbox" name='extra' value="인쇄"> 인쇄<br>
-			컬러 : <input type="text" name="color" size="5">, 흑백 : <input type="text" name="black" size="5">
-		<!-- 	<input class="form-control" name='extra'> -->
+			<input class="form-control" name='extra' placeholder="카누,맥심,담요,충전기,개인 스탠드,귀마개,인쇄(흑:100/칼:500),팩스">
 			</div>
 			
 			<!-- 내용 -->
 			<div class="form-group">
-			<label>Content</label>
-			<textarea rows="3" class="form-control" name='content'></textarea>
+			<label>Content<span>(필수)</span></label>
+			<textarea rows="3" class="form-control" name='content' placeholder="테이블형 15석, 독서실형 10석	 1층:카페형/2층:독서실형 분리 	1시간권:1,500원/4시간권:3,500원/8시간권:8,500원/종일권:1만원">
+			</textarea>
 			</div>
 			
 			<!-- 운영시간 -->
 			<div class="form-group">
-			<label>Time</label><input class="form-control" name='time'>
+			<label>Time<span>(필수)</span></label>
+			<input class="form-control" name='time' placeholder="새벽4시~다음날 새벽3시(연중무휴)">
 			</div>
 			
 			<!-- 청소시간 -->
 			<div class="form-group">
-			<label>Clean</label><input class="form-control" name='clean'>
+			<label>Clean<span>(필수)</span></label>
+			<input class="form-control" name='clean' placeholder="새벽3시~새벽4시">
 			</div>
 			
 			<!-- 연락처 -->
 			<div class="form-group">
-			<label>Tel</label><input class="form-control" name='tel'>
+			<label>Tel<span>(필수)</span></label>
+			<input class="form-control" name='tel'>
 			</div>
 			
 			<!-- 주소 -->
 			<div class="form-group">
-			<label>Address</label><input class="form-control" name='address'>
+			<label>Address<span>(필수)</span></label>
+			<input class="form-control" name='address'>
 			</div>
 			
 			<!-- 홈페이지,SNS계정 -->
 			<div class="form-group">
-			<label>Page</label><input class="form-control" name='page'>
+			<label>Page</label>
+			<input class="form-control" name='page' placeholder="홈페이지/SNS계정">
 			</div>
 			
 			<!-- 작성자 -->
 			<div class="form-group">
-			<label>Writer</label><input class="form-control" name='writer'>
+			<label>Writer<span>(필수)</span></label>
+			<input class="form-control" name='writer'>
 			</div>
 			
 			<button type="submit" class="btn btn-primary">Submit Button</button>

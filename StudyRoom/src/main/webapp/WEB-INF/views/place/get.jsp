@@ -90,17 +90,25 @@
 			<input type='image' src="/resources/img/offer/x.png"> <b>제공품 없음  </b>
 			</c:if>			
 			</div>
-			
+
 			<!-- 추가적인 제공품 -->
 			<div class="form-group">
 			<label>Extra</label><br>
-			<c:set var="offer" value="${place.extra }"/>
-			
- 			<c:if test = "${fn:contains(extra, '인쇄')}">
- 			<input type='image' src="/resources/img/wifi.png">
-        	<c:out value=""></c:out>
-      		</c:if>
-		<%-- 	<input class="form-control" name='extra' value="<c:out value='${place.extra}'/>" readonly="readonly"> --%>
+			<div id="extra"></div>
+			<script>		
+			var extra = '<c:out value="${place.extra}"/>';
+			console.log(extra);
+			var extras = extra.split(',');
+			console.log(extras);		
+			var extraList = "";
+			extraList += "<ul>"
+			for(var i = 0; i<extras.length; i++){
+				extraList += "<li>"+extras[i]+"</li>";
+			}
+			extraList += "</ul>"
+			$("#extra").html(extraList);
+			</script>
+
 			</div>
 			
 			<!-- 내용 -->
