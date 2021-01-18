@@ -14,6 +14,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
+	//access 권한 없는 페이지에 접속했을 때 발생
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response,
 			AccessDeniedException accessDeniedException) throws IOException, ServletException {

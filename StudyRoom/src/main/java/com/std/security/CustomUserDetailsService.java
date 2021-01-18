@@ -13,15 +13,16 @@ import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
-public class CustomUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {	//DB에서 유저 정보를 가져오는 역할
 
 	@Setter(onMethod_ = @Autowired)
 	private UserMapper mapper;
 	
+	//UserDetailsService 인터페이스에서 DB에서 유저정보를 불러오는 중요한 메소드는 loadUserByUsername() 메소드이다.
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		log.warn("Load User By UserName : "+username);
-		MemVO vo = mapper.read(username);
+	public UserDetails loadUserByUsername(String userid) throws UsernameNotFoundException {
+		log.warn("Load User By UserName : "+userid);
+		MemVO vo = mapper.read(userid);
 		log.warn("queried by member mapper :"+vo);
 		return vo == null ? null : new CustomUser(vo);
 	}
