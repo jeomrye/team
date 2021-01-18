@@ -4,6 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="../includes/header.jsp" %>
 
+
+  
  <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">쿠폰 정보</h1>
@@ -21,6 +23,16 @@
                         <div class="panel-body">
 <div class="form-group">
 <input type="hidden" class="form-control" name='couponNumber' value='<c:out value="${coupon.couponNumber}"/>' readonly="readonly">
+</div>
+
+<div class="form-group">
+<label for="couponImg">쿠폰 이미지</label>
+<img src="${coupon.couponImg}" class="oriImg">
+
+</div>
+
+<div>
+<img src="../resources/img/ddddd.png" class="img-rounded" alt="쿠폰 이미지" width="400" height="240">
 </div>
 
 <div class="form-group">
@@ -46,7 +58,6 @@
 
 
 <script type="text/javascript">
-
 $(document).ready(function(){
 	
 	var operForm = $("#operForm");
@@ -64,12 +75,8 @@ $(document).ready(function(){
 		operForm.submit();
 	});
 	
-	
 });
-
 </script>
-
-
 
 
 
