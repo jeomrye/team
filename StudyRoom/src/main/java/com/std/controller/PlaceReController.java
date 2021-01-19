@@ -34,7 +34,8 @@ public class PlaceReController {
 	public ResponseEntity<String> create(@RequestBody PlaceReVO placeRe, MemberVO member){
 		log.info("PlaceReVO : " +placeRe);
 		int countPerDay = service.getReplyPerDay(placeRe);
-		if(countPerDay >= 1) {			
+		if(countPerDay >= 1) {	
+			
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}else {
 			int insertCount = service.register(placeRe);//댓글 등록

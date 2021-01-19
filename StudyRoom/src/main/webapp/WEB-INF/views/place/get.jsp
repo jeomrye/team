@@ -13,6 +13,28 @@
 	</div>
 </div>
 
+<!-- 첨부 사진 -->
+<div class='bigPictureWrapper'>
+	<div class='bigPicture'>
+	</div>
+</div>
+
+<!-- 첨부 사진 -->
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">Files <span id='photo'>(사진 클릭시 확대 가능)</span></div>
+			<div class="panel-body">
+				<div class="uploadResult">
+					<ul>
+					
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
@@ -173,16 +195,10 @@
 	</div>
 </div>
 
-<!-- 첨부 사진 -->
-<div class='bigPictureWrapper'>
-	<div class='bigPicture'>
-	</div>
-</div>
-
 <style>
 .uploadResult {
 	width : 100%;
-	background-color: gray;
+	background-color: white;
 }
 
 .uploadResult ul {
@@ -215,7 +231,7 @@
 	top: 0%;
 	width: 100%;
 	height: 100%;
-	background-color: purple;
+	background-color: #ffffff;
 	z-index: 100;
 	background: rgba9255,255,255,0.5;
 }
@@ -228,23 +244,10 @@
 .bigPicture img {
 	width: 600px;
 }
+#photo {
+	background-color: pink;
+}
 </style>
-
-<!-- 첨부 사진 -->
-<div class="row">
-	<div class="col-lg-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">Files</div>
-			<div class="panel-body">
-				<div class="uploadResult">
-					<ul>
-					
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 
 <!-- 리뷰 댓글 등록 -->
 <div class="row">
@@ -272,6 +275,7 @@
 			</ul>
 		</div>
 
+<!-- 댓글 페이지 목록 -->
 	<div class="panel-footer">
 	
 	</div>
@@ -389,7 +393,7 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 	$(document).ready(function () {
 		
 		var bnoValue = '<c:out value="${place.bno}"/>';
-		var placeReCnt = '<c:out value="${place.placeReCnt}"/>';
+		var placeReCnt = ${place.placeReCnt};
 		var replyUL = $(".chat"); //191 댓글 기본 틀
 		
 		showList(1);
@@ -397,7 +401,7 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 		function showList(page){
 			console.log("show list : "+page); //1페이지	
 			//page가 null 이거나 undefined면 1
-			placeReService.getList({bno:bnoValue, page: page||1}, function(placeReCnt, list){
+			placeReService.getList({bno:bnoValue, page: page||1}, function(replyCnt, list){
 
 				console.log("placeReCnt : "+ placeReCnt);
 				console.log("list : ", list);
@@ -418,7 +422,7 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 				//댓글
 				for(var i = 0, len = list.length || 0; i<len; i++){
 					str += "<li class='left clearfix' data-rno='"+list[i].rno+"'>";
-					str += "	<div><div>";
+					str += " <div><div>";
 					//댓글 점수별 별점 이미지 출력
 					if(list[i].score=="1"){
 						str += "<input type='image' src='/resources/img/red/1red.png'>"
@@ -430,12 +434,10 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 						str += "<input type='image' src='/resources/img/red/4red.png'>"		
 					}else if(list[i].score=="5"){
 						str += "<input type='image' src='/resources/img/red/5red.png'>"
-					}		
-					str += "</div><div class='header'><strong class='primary-font'>["
-						+list[i].rno+"]"+list[i].replyer+"</strong>";
-					str += "	<small class='pull-right text-muted'>"
-					+placeReService.displayTime(list[i].replydate)+"</small></div>";
-					str += "	<p>"+list[i].reply+"</p></div></li>";
+					}	
+					str += "</div><div class='header'><strong class='primary-font'>["+list[i].rno+"] "+list[i].replyer+"</strong>";
+					str += " <small class='pull-right text-muted'>"+placeReService.displayTime(list[i].replydate)+"</small></div>";
+					str += " <p>"+list[i].reply+"</p></div></li>";
 				}
 				replyUL.html(str);
 				showReplyPage(placeReCnt);
@@ -464,13 +466,11 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 			var str = "<ul class='pagination pull-right'>";
 			
 			if(prev){
-				str += "<li class='page-item'><a class ='page-link' href='"
-				+(startNum -1)+"'>Previous</a></li> ";
+				str += "<li class='page-item'><a class ='page-link' href='"+(startNum -1)+"'>Previous</a></li> ";
 			}
 			
 			for(var i = startNum; i<=endNum; i++){
-				var active = pageNum == i ? "active":"";
-				
+				var active = pageNum == i ? "active":"";				
 				str += "<li class='page-item "+active+" '><a class='page-link' href='"+i+"'>"+i+"</a></li>";
 			}
 			
@@ -678,13 +678,11 @@ $(document).ready(function(){
            if(type==="true"){
         	 var fileCallPath =  encodeURIComponent(photo.uploadPath+ "/s_"+photo.uuid +"_"+photo.fileName); 
 	         str += "<li data-path='"+photo.uploadPath+"' data-uuid='"+photo.uuid+"' data-filename='"+photo.fileName+"' data-type='"+photo.fileType+"' ><div>";
-	         str += "<span> "+photo.fileName+"</span><br/>";
 	         str += "<img src='/display?fileName="+fileCallPath+"'>";
              str += "</div>";
              str +="</li>";
            }else{          
              str += "<li data-path='"+photo.uploadPath+"' data-uuid='"+photo.uuid+"' data-filename='"+photo.fileName+"' data-type='"+photo.fileType+"' ><div>";
-             str += "<span> "+ photo.fileName+"</span><br/>";
              str += "<img src='/resources/img/attach.png'>";
              str += "</div>";
              str +="</li>";
@@ -709,7 +707,7 @@ $(document).ready(function(){
   });
   
   function showImage(fileCallPath){
-	  alert(fileCallPath);
+	  //alert(fileCallPath);
 	  $(".bigPictureWrapper").css("display","flex").show();
 	  
 	  $(".bigPicture")

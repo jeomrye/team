@@ -154,7 +154,7 @@
 				return;
 			}
 			if(parseInt(placeResult) > 0){
-				$(".modal-body").html("게시글 : "+parseInt(placeResult)+"번이 등록되었습니다.");
+				$(".modal-body").html("새로운 게시글이 등록되었습니다.");
 			}
 			$("#myModal").modal("show");
 		}
