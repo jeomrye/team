@@ -2,6 +2,7 @@ package com.std.service;
 
 import java.util.List;
 
+import com.std.domain.CouponAttachVO;
 import com.std.domain.CouponVO;
 
 public interface CouponService {
@@ -15,4 +16,6 @@ public interface CouponService {
 	public boolean couponRemove(int couponNumber);
 	
 	public List<CouponVO> couponGetList();
+	
+	public List<CouponAttachVO> getAttachList(int couponNumber);
 }

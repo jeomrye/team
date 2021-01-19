@@ -6,7 +6,7 @@
   
 	<insert id="insert">
 		insert into attach (uuid, uploadPath, fileName, fileType, couponNumber)
-		values(#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{couponNumber})
+		values(#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, coupon_seq.currval)
 	</insert>  
 	
 	<delete id="delete">

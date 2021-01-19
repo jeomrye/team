@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.std.domain.CouponAttachVO;
 import com.std.domain.CouponVO;
 import com.std.mapper.CouponAttachMapper;
 import com.std.mapper.CouponMapper;
@@ -39,6 +40,14 @@ public class CouponServiceImpl implements CouponService {
 			attach.setCouponNumber(coupon.getCouponNumber());
 			attachMapper.insert(attach);
 		});
+	}
+	
+	@Override
+	public List<CouponAttachVO> getAttachList(int couponNumber){
+		
+		log.info("get Attach list by couponNumber");
+		
+		return attachMapper.findByCouponNumber(couponNumber);
 	}
 
 	//쿠폰 조회
