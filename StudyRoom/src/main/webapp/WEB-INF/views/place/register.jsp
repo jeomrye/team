@@ -262,7 +262,9 @@ $(document).ready(function(e){
 		var str = "";
 
 		$(uploadResultArr).each(function(i,obj){
-			if(obj.image==true){//이미지 파일일 때
+			var image = obj.image;
+			console.log(obj.image);
+			if(image===true){//이미지 파일일 때
 				var fileCallPath = encodeURIComponent(obj.uploadPath+"/s_"+obj.uuid+"_"+obj.fileName);
 				str += "<li data-path='"+obj.uploadPath+"'";
 				str += " data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"' ><div>";

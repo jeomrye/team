@@ -276,9 +276,11 @@ $(document).ready(function(){
 	       var str = "";
 	       
 	       $(arr).each(function(i, photo){
-	       
+	    	   var type = photo.fileType;
+	           console.log("type : "+type);
+	           
 	         //image type
-	         if(photo.fileType){//이미지 파일
+	         if(type==="true"){//이미지 파일
 	        //섬네일
 	           var fileCallPath =  encodeURIComponent( photo.uploadPath+ "\s_"+photo.uuid +"_"+photo.fileName); 
 	         

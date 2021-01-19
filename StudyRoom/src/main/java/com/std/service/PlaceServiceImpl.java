@@ -24,7 +24,7 @@ public class PlaceServiceImpl implements PlaceService {
 	@Setter(onMethod_ = @Autowired)
 	private PlacePhotoMapper photoMapper;
 	
-	//@Transactional //오류 발생시 rollback
+	@Transactional //오류 발생시 rollback
 	@Override
 	public void register(PlaceVO place) { //글 등록
 		log.info("register : "+place);
@@ -62,7 +62,7 @@ public class PlaceServiceImpl implements PlaceService {
 		return modifyResult;
 	}
 	
-	//@Transactional //오류 발생시 rollback
+	@Transactional //오류 발생시 rollback
 	@Override
 	public boolean remove(Long bno) { //글 삭제
 		log.info("remove : "+bno);

@@ -672,9 +672,10 @@ $(document).ready(function(){
        var str = "";
        
        $(arr).each(function(i, photo){
-           console.log("fileType:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " +photo.fileType);
+           var type = photo.fileType;
+           console.log("type : "+type);
            //image type
-           if(photo.fileType){
+           if(type==="true"){
         	 var fileCallPath =  encodeURIComponent(photo.uploadPath+ "/s_"+photo.uuid +"_"+photo.fileName); 
 	         str += "<li data-path='"+photo.uploadPath+"' data-uuid='"+photo.uuid+"' data-filename='"+photo.fileName+"' data-type='"+photo.fileType+"' ><div>";
 	         str += "<span> "+photo.fileName+"</span><br/>";
