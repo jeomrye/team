@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
@@ -23,6 +24,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -177,7 +179,7 @@ public class UploadController {
 		try {
 			HttpHeaders header = new HttpHeaders();
 			
-			header.add("content-Type", Files.probeContentType(file.toPath()));
+			header.add("Content-Type", Files.probeContentType(file.toPath()));
 			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
 		} catch (IOException e) {
 			
@@ -198,27 +200,33 @@ public class UploadController {
 				
 		String resourceName = resource.getFilename();
 		
+		//remove UUID
+		String resourceOriginalName = resourceName.substring(resourceName.indexOf("_") + 1);
+		
 		HttpHeaders headers = new HttpHeaders();
 		
 		try {
+			
 			String downloadName = null;
 			
 			if(userAgent.contains("Trident")) {
 				log.info("IE browser");
 				
-				downloadName = URLEncoder.encode(resourceName, "UTF-8").replaceAll("\\", " ");
+				downloadName = URLEncoder.encode(resourceOriginalName, "UTF-8").replaceAll("\\", " ");
 			}else if(userAgent.contains("Edge")) {
 				
 				log.info("Edge browser");
 				
-				downloadName = URLEncoder.encode(resourceName, "UTF-8");
+				downloadName = URLEncoder.encode(resourceOriginalName, "UTF-8");
 				
 				log.info("Edge name : " + downloadName);
 			}else {
 				
 				log.info("Chrome browser");
-				downloadName = new String(resourceName.getBytes("UTF-8"), "ISO-8859-1");
+				downloadName = new String(resourceOriginalName.getBytes("UTF-8"), "ISO-8859-1");
 			}
+			
+			log.info("downloadName : " + downloadName);
 			
 			headers.add("Content-Disposition", "attachment; filename=" + downloadName);
 		} catch (UnsupportedEncodingException e) {
@@ -229,9 +237,39 @@ public class UploadController {
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 	}
 
+	
+	@PostMapping("/deleteFile")
+	@ResponseBody
+	public ResponseEntity<String> deleteFile(String fileName, String type){
+		
+		log.info("deleteFile : " + fileName);
+		
+		File file;
+		
+		try {
+			file = new File("c:\\upload\\" + URLDecoder.decode(fileName, "UTF-8"));
+			
+			file.delete();
+			
+			if(type.equals("image")) {
+				
+				String largeFileName = file.getAbsolutePath().replace("s_", "");
+				
+				log.info("largeFileName : " + largeFileName);
+				
+				file = new File(largeFileName);
+				
+				file.delete();
+			}
+			
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<String>("deleted", HttpStatus.OK);
+	}
+	
 }
-
-
 
 
 

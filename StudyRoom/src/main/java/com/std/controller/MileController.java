@@ -35,11 +35,16 @@ public class MileController {
 	@PostMapping("/couponRegister")
 	public String couponResister(CouponVO coupon, RedirectAttributes rttr) {
 		
+		log.info("==============================");
+		
 		log.info("CouponRegister : " + coupon);
-		
-		service.couponRegister(coupon);
-		
-		rttr.addFlashAttribute("result", coupon.getCouponNumber());
+			
+		if(coupon.getAttachList() != null) {
+			coupon.getAttachList().forEach(attach -> log.info(attach));
+		}
+		log.info("================================");
+		//service.couponRegister(coupon);
+		//rttr.addFlashAttribute("result", coupon.getCouponNumber());
 		
 		return "redirect:/coupon/couponList";
 	}

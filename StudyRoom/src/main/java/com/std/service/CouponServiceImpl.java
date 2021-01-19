@@ -4,28 +4,41 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.std.domain.CouponVO;
+import com.std.mapper.CouponAttachMapper;
 import com.std.mapper.CouponMapper;
 
-import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Service
-@AllArgsConstructor
 public class CouponServiceImpl implements CouponService {
 
 	@Setter(onMethod_ = @Autowired)
 	private CouponMapper mapper;
 	
+	@Setter(onMethod_ = @Autowired)
+	private CouponAttachMapper attachMapper;
+	
+	@Transactional
 	@Override
 	public void couponRegister(CouponVO coupon) {
 
 		log.info("register...." + coupon);
 		
 		mapper.couponInsertSelectKey(coupon);
+		
+		if(coupon.getAttachList() == null || coupon.getAttachList().size() <= 0) {
+			return;
+		}
+		
+		coupon.getAttachList().forEach(attach ->{
+			attach.setCouponNumber(coupon.getCouponNumber());
+			attachMapper.insert(attach);
+		});
 	}
 
 	//쿠폰 조회

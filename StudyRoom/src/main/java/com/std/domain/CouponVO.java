@@ -1,6 +1,7 @@
 package com.std.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -14,5 +15,6 @@ public class CouponVO {
 	private Date couponregDate;
 	private Date couponupdateDate;
 	
+	private List<CouponAttachVO> attachList;
 	
 }
