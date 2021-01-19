@@ -50,8 +50,8 @@ public class MileController {
 			coupon.getAttachList().forEach(attach -> log.info(attach));
 		}
 		log.info("================================");
-		//service.couponRegister(coupon);
-		//rttr.addFlashAttribute("result", coupon.getCouponNumber());
+		service.couponRegister(coupon);
+		rttr.addFlashAttribute("result", coupon.getCouponNumber());
 		
 		return "redirect:/coupon/couponList";
 	}

@@ -72,7 +72,7 @@ $(document).ready(function(e){
 	
 	$("button[type='submit']").on("click", function(e){
 		
-		
+		e.preventDefault();
 		
 		console.log("submit clicked");
 		
@@ -149,6 +149,7 @@ $(document).ready(function(e){
 				
 				$(uploadResultArr).each(function(i, obj){
 					//image type
+					console.log(obj.image);
 					if(obj.image){
 						var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
 						

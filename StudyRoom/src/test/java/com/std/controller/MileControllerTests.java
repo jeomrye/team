@@ -49,7 +49,7 @@ public class MileControllerTests {
 		
 		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/coupon/couponResister")
 											.param("couponName", "수정 쿠폰")
-											.param("couponPrice", "6000"))
+											.param("couponPrice", "55555"))
 											.andReturn().getModelAndView().getViewName();
 		
 		log.info(resultPage);
