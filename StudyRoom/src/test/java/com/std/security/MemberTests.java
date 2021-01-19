@@ -36,16 +36,16 @@ public class MemberTests {
 	private  UserMapper mapper;
 
 	
-	@Test
+	//@Test
 	public void testRead() {
-		MemVO vo = mapper.read("abcd");
+		MemVO vo = mapper.read("user0");
 		log.info(vo);
 		vo.getAuthList().forEach(authVO -> log.info(authVO));
 	}
 
 	//@Test
 	public void test() {
-		String sql = "insert into member(userid,password,username) values (?,?,?)";
+		String sql = "insert into member(uno, userid,password,username) values (member_seq.nextval , ?,?,?)";
 		for(int i=0; i<10; i++) {
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -53,16 +53,16 @@ public class MemberTests {
 			try {
 				con = ds.getConnection();
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(2, pwencoder.encode("password"+i));
+				pstmt.setString(3, pwencoder.encode("password"+i));
 				if(i<3) {
-					pstmt.setString(1, "user"+i);
-					pstmt.setString(3, "일반사용자"+i);
+					pstmt.setString(2, "user"+i);
+					pstmt.setString(4, "일반사용자"+i);
 				} else if(i<7) {
-					pstmt.setString(1, "manager"+i);
-					pstmt.setString(3, "운영자"+i);
+					pstmt.setString(2, "manager"+i);
+					pstmt.setString(4, "운영자"+i);
 				} else {
-					pstmt.setString(1, "admin"+i);
-					pstmt.setString(3, "관리자"+i);
+					pstmt.setString(2, "admin"+i);
+					pstmt.setString(4, "관리자"+i);
 				}
 				pstmt.executeUpdate();
 			} catch(Exception e) {
