@@ -35,17 +35,22 @@ public class PlaceReController {
 		log.info("PlaceReVO : " +placeRe);
 		int countPerDay = service.getReplyPerDay(placeRe);
 		if(countPerDay >= 1) {	
-			
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}else {
-			int insertCount = service.register(placeRe);//댓글 등록
-			service.writeReview(placeRe.getReplyer(), member.getUserid());//댓글 등록시 해당 작성자 마일리지 지급
-			log.info("Reply Insert Count : "+ insertCount);
-			
-			//삼항 연산자
-			return insertCount==1 
-			? new ResponseEntity<>("success",HttpStatus.OK)
-			: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			int ange = placeRe.getReply().length();
+			log.info("reply 길이 : "+ange);
+			if(ange < 150) {
+				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}else {
+				int insertCount = service.register(placeRe);//댓글 등록
+				service.writeReview(placeRe.getReplyer(), member.getUserid());//댓글 등록시 해당 작성자 마일리지 지급
+				log.info("Reply Insert Count : "+ insertCount);
+				
+				//삼항 연산자
+				return insertCount==1 
+				? new ResponseEntity<>("success",HttpStatus.OK)
+				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
 		}	
 	}
 	
@@ -68,7 +73,7 @@ public class PlaceReController {
 	//댓글 삭제
 	//@PreAuthorize("principal.username == #vo.replyer")
 	@DeleteMapping(value = "/{rno}" , produces = {MediaType.TEXT_PLAIN_VALUE})
-	public ResponseEntity<String> remove(@RequestBody PlaceReVO placeRe, @PathVariable("rno") Long rno, MemberVO member){
+	public ResponseEntity<String> remove(@PathVariable("rno") Long rno){
 		log.info("reply remove : "+rno);
 		
 		//log.info("replyer : "+placeRe.getReplyer());
