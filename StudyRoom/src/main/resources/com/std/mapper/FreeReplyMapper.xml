@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.std.mapper.FreeReplyMapper">
+ 	
+ 	<insert id="insert">
+ 		insert into freereply (rno,fno,reply,replyer) values (Freereply_seq.nextval, #{fno},#{reply}, #{replyer})
+ 	</insert>
+ 	
+ 	<select id ="read" resultType="com.std.domain.FreeReplyVO">
+ 		select * from freereply where rno =#{rno}
+ 	</select>
+ 	
+ 	<delete id ="delete">
+ 		delete from freereply where rno =#{rno}
+ 	</delete>
+ 	
+ 	<update id="update">
+ 		update freereply set reply = #{reply}, updateDate = sysdate where rno =#{rno}
+ 	</update>
+ 	
+ 	<select id ="getListWithPaging" resultType="com.std.domain.FreeReplyVO">
+ 		<![CDATA[
+ 			select rno,fno,reply,replyer,replyDate,updateDate from (select /*+INDEX(freereply idx_reply) */ rownum rn, rno, fno, reply, replyer, replyDate, updateDate from freereply 
+ 			 where fno = #{fno} and rno >0 and rownum <= #{cri.pageNum} * #{cri.amount}) where rn > (#{cri.pageNum} -1) * #{cri.amount}
+ 		]]>
+ 	</select>
+ 	
+ 	<select id="getCountByFno" resultType="int">
+ 		<![CDATA[
+			select count(rno) from freereply where fno = #{fno} 		
+ 		]]>
+ 	</select>
+</mapper>
