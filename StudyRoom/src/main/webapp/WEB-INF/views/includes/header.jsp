@@ -1,6 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,11 +58,17 @@
             <ul class="nav navbar-top-links navbar-right">
 			<!-- 각 리스트로 -->
                <li><a href="/notice/list"><h4>공지사항</h4></a></li>
-               <li><a href="/notice/list"><h4>자유게시판</h4></a></li>
+               <li><a href="/free/list"><h4>자유게시판</h4></a></li>
                <li><a href="/notice/list"><h4>장소</h4></a></li>
                <li><a href="/notice/list"><h4>Q&A</h4></a></li>
                <li><a href="/notice/list"><h4>마이페이지</h4></a></li>
-               <li><a href="/notice/list"><h4>로그인</h4></a></li>
+               <sec:authorize access="isAuthenticated()">
+               <li><a href="/customLogout"><h4>로그아웃</h4></a></li>
+               </sec:authorize>
+               <sec:authorize access="isAnonymous()">
+               <li><a href="/customLogin"><h4>로그인</h4></a></li>
+               </sec:authorize>
+               	 
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->

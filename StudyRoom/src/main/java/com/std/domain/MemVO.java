@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class MemVO {
 	private String userid; //회원id
-	private boolean memberno; //회원번호
+	private int memberno; //회원번호
 	private String username; //회원이름
 	private String password; //비밀번호
 	private String email; //이메일

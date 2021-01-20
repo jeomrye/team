@@ -3,7 +3,11 @@
 <mapper namespace="com.std.mapper.UserMapper">
 <!-- 회원가입 -->
 <insert id="insertMem">
-	insert into member(userid,memberno,username, password, email,phone, gender, regdate, updatedate,mileage, companynumber) values (#{userid},#{memberno},#{username},#{password},#{email},#{phone},#{gender},sysdate,sysdate,0,#{companynumber})
+   insert into member(uno,userid,memberno,username, password, email,phone, gender, regdate, updatedate,mileage,coupon, companynumber) values ((member_seq.nextval),#{userid},#{memberno},#{username},#{password},#{email},#{phone},#{gender},sysdate,sysdate,0,null,#{companynumber})
+</insert>
+
+<insert id="insertAuth">
+	insert into auth (userid, auth) values (#{userid}, #{auth}) 
 </insert>
 
 <!-- 아이디 중복검사 -->
@@ -34,6 +38,10 @@
 <select id="read" resultMap="memberMap">
 	select mem.userid, password, username, memberno, regdate, updatedate, auth from member mem 
 	 LEFT OUTER JOIN auth auth on mem.userid = auth.userid where mem.userid = #{userid}
+</select>
+
+<select id="findId" parameterType="String" resultType="String">
+	select userid from member where username=#{username} and email=#{email}
 </select>
 </mapper>
 
