@@ -24,8 +24,8 @@
 			<div class="form-group">
 				<label>내용</label><textarea class="form-control" rows="3" name='content' readonly="readonly"><c:out value="${notice.content }"/></textarea>
 			</div>
-			<button data-oper='modify' class="btn bnt-default" onclick="location.href='/notice/modify?notNo=<c:out value="${notice.notNo }"/>'">Modify</button>
-			<button data-oper='list' class="btn bnt-default" onclick="location.href='/notice/list'">List</button>
+			<button data-oper='modify' class="btn btn-danger" onclick="location.href='/notice/modify?notNo=<c:out value="${notice.notNo }"/>'">수정(관리자만)</button>
+			<button data-oper='list' class="btn btn-info" onclick="location.href='/notice/list'">공지사항 목록</button>
 			<form action="/board/modify" id="operForm" method="get">
 				<input type="hidden" id="notNo" name="notNo" value='<c:out value="${notice.notNo }"/>'>
 				<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
