@@ -49,7 +49,7 @@
             <ul class="nav navbar-top-links navbar-right">
                <li><a href="/notice/list"><h4>공지사항</h4></a></li>
                <li><a href="/notice/list"><h4>자유게시판</h4></a></li>
-               <li><a href="/notice/list"><h4>장소</h4></a></li>
+               <li><a href="/place/list"><h4>장소</h4></a></li>
                <li><a href="/notice/list"><h4>Q&A</h4></a></li>
                <li><a href="/notice/list"><h4>마이페이지</h4></a></li>
                <li><a href="/notice/list"><h4>로그인</h4></a></li>

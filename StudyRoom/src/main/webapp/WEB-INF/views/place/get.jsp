@@ -64,8 +64,6 @@
       		<c:if test = "${fn:contains(score, '5')}">
         	<input type='image' src="/resources/img/score/5star.png">
       		</c:if>
-      		
-			<%-- <input class="form-control" name='score' value="<c:out value='${score}'/>" readonly="readonly"> --%>
 			</div>
 			
 			<!-- 글 번호 -->
@@ -171,14 +169,13 @@
 			<label>Writer</label><input class="form-control" name='userid' value="<c:out value='${place.userid}'/>" readonly="readonly">
 			</div>
 
-			<%-- <sec:authentication property="principal" var="pinfo"/>
+			<sec:authentication property="principal" var="pinfo"/>
 				<sec:authorize access="isAuthenticated()">
-					<c:if test="${pinfo.username eq board.writer }">
+					<c:if test="${pinfo.username eq place.writer }">
 						<button data-oper='modify' class="btn btn-default">Modify</button>
 					</c:if>
-				</sec:authorize> --%>
+				</sec:authorize>
 				
-			<button data-oper='modify' class="btn btn-default">Modify</button>
 			<button data-oper='list' class="btn btn-info">List</button>
 			
 			<!-- modify로 넘어가면서 가져가게 되는 값 -->
@@ -255,9 +252,9 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<i class="fa fa-comments fa-fw"></i>Reply				
-				<%-- <sec:authorize access="isAuthenticated()"> --%>
+				<sec:authorize access="isAuthenticated()">
 				<button id="addReplyBtn" class='btn btn-primary btn-xs pull-right'>New Reply</button>
-				<%-- </sec:authorize> --%>
+				</sec:authorize>
 			</div>
 			
 			<!-- 댓글 기본 틀 -->
@@ -495,18 +492,19 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 		var modalRemoveBtn = $("#modalRemoveBtn");
 		var modalRegisterBtn = $("#modalRegisterBtn");
 
-		/* var replyer = null;
+		var replyer = null;
+		
 		<sec:authorize access="isAuthenticated()">
 		replyer = '<sec:authentication property="principal.username" />';
 		</sec:authorize>
 		
 		var csrfHeaderName = "${_csrf.headerName}";
-		var csrfTokenValue = "${_csrf.token}"; */
+		var csrfTokenValue = "${_csrf.token}";
 
 		//댓글 등록 버튼
 		$("#addReplyBtn").on("click",function(e){
 			modal.find("input").val("");//input 내부 빈 내용으로 만들기
-			//modal.find("input[name='replyer']").val(replyer);
+			modal.find("input[name='replyer']").val(replyer);
 			modalInputReplyDate.closest("div").hide(); //날짜 숨기기
 			modal.find("button[id != 'modalCloseBtn']").hide(); //id가 다른 값 숨기기
 			
@@ -516,9 +514,9 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 		});
 
 		//Ajax spring security header...
-		/* $(document).ajaxSend(function(e,xhr, options){
+		$(document).ajaxSend(function(e,xhr, options){
 			xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
-		}); */
+		});
 		
 		//모달에 있는 등록 버튼 클릭
 		modalRegisterBtn.on("click", function(e){
@@ -564,9 +562,12 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 			modalModBtn.on("click", function(e){
 				var originalReplyer = modalInputReplyer.val(); 
 				
-				var reply = {score:modalInputScore.val(), rno:modal.data("rno"), reply:modalInputReply.val(), replyer: originalReplyer};
+				var reply = {score:modalInputScore.val(),
+						rno:modal.data("rno"),
+						reply:modalInputReply.val(),
+						replyer: originalReplyer};
 				
-				/* if(!replyer){//미로그인시
+				if(!replyer){//미로그인시
 					alert("로그인 후 수정이 가능합니다.");
 					modal.modal("hide");
 					return;
@@ -578,7 +579,7 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 					alert("자신이 작성한 댓글만 삭제 가능합니다.");
 					modal.modal("hide");
 					return;
-				} */
+				}
 				
 				placeReService.update(reply,function(result){
 					alert(result);
@@ -592,9 +593,9 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 				var rno = modal.data("rno");
 				
 				console.log("RNO : "+rno);
-				//console.log("REPLYER : "+replyer);
+				console.log("REPLYER : "+replyer);
 				
-				/* if(!replyer){//미로그인시
+				if(!replyer){//미로그인시
 					alert("로그인 후 삭제가 가능합니다.");
 					modal.modal("hide");
 					return;
@@ -608,7 +609,7 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 					alert("자신이 작성한 댓글만 삭제 가능합니다.");
 					modal.modal("hide");
 					return;
-				} */
+				}
 				
 				placeReService.remove(rno,function(result){
 					alert(result);

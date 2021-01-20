@@ -64,7 +64,7 @@ align-items: center;
 			<div class="panel-body">
 			
 			<form role="form" action="/place/register" method="post">
-			<%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> --%>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			
 			<c:out value="${placeResult}"></c:out>
 			<!-- 상호명 -->
@@ -130,10 +130,10 @@ align-items: center;
 			<input class="form-control" name='page' placeholder="홈페이지/SNS계정">
 			</div>
 			
-			<!-- 작성자 -->
+			<!-- 작성자, 로그인한 아이디 읽어옴 -->
 			<div class="form-group">
 			<label>Writer<span>(필수)</span></label>
-			<input class="form-control" name='writer'>
+			<input class="form-control" name='writer' value='<sec:authentication property="principal.username"/>' readonly="readonly">
 			</div>
 			
 			<button type="submit" class="btn btn-primary">Submit Button</button>
@@ -223,8 +223,8 @@ $(document).ready(function(e){
 		return true;
 	}
 
-	//var csrfHeaderName = "${_csrf.headerName}";
-	//var csrfTokenValue = "${_csrf.token}";
+	var csrfHeaderName = "${_csrf.headerName}";
+	var csrfTokenValue = "${_csrf.token}";
 	
 	$("input[type='file']").change(function(e){
 		var formData = new FormData();
@@ -241,9 +241,9 @@ $(document).ready(function(e){
 			url : '/uploadAjaxAction',
 			processData : false,
 			contentType : false,
-			/* beforeSend : function(xhr){
+			beforeSend : function(xhr){
 				xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
-			}, */
+			},
 			data : formData,
 			type : 'POST',
 			dataType : 'json',
@@ -301,9 +301,9 @@ $(document).ready(function(e){
 		$.ajax({
 			url : '/deleteFile',
 			data : {fileName : targetFile, type : type},
-			/* beforeSend : function(xhr){
+			beforeSend : function(xhr){
 				xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
-			}, */
+			},
 			dataType : 'text',
 			type : 'POST',
 			success : function(result){

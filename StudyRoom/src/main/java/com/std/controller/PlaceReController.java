@@ -3,6 +3,7 @@ package com.std.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.std.domain.Criteria;
-import com.std.domain.MemberVO;
+import com.std.domain.MemVO;
 import com.std.domain.PlaceReVO;
 import com.std.domain.ReplyPageDTO;
 import com.std.service.PlaceReService;
@@ -30,8 +31,9 @@ public class PlaceReController {
 	private PlaceReService service;
 	
 	//새로운 댓글 등록
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping(value = "/new", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
-	public ResponseEntity<String> create(@RequestBody PlaceReVO placeRe, MemberVO member){
+	public ResponseEntity<String> create(@RequestBody PlaceReVO placeRe, MemVO member){
 		log.info("PlaceReVO : " +placeRe);
 		int countPerDay = service.getReplyPerDay(placeRe);
 		if(countPerDay >= 1) {//아이디당 하루에 한개의 리뷰만 가능	
@@ -71,23 +73,28 @@ public class PlaceReController {
 	}
 
 	//댓글 삭제
-	//@PreAuthorize("principal.username == #vo.replyer")
-	@DeleteMapping(value = "/{rno}" , produces = {MediaType.TEXT_PLAIN_VALUE})
+	@PreAuthorize("principal.username == #placeRe.replyer")
+	@DeleteMapping(value = "/{rno}", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> remove(
-			/* @PathVariable("rno") Long rno, */@RequestBody PlaceReVO placeRe, MemberVO member){
+			/* @PathVariable("rno") Long rno, */@RequestBody PlaceReVO placeRe, MemVO member){
 		long rno = placeRe.getRno();
 		log.info("reply remove : "+rno);
 		
+		if(member.getMileage() > 0) {
+			service.deleteReview(placeRe.getReplyer(), member.getUserid()); //댓글 삭제시 해당 작성자 마일리지 회수
+		}else {
+			member.setMileage(0);
+		}
 		//log.info("replyer : "+placeRe.getReplyer());
 		
 		//삼항연산자
-		return service.remove(rno) == 1 
+		return service.remove(placeRe) == 1 
 		? new ResponseEntity<>("success",HttpStatus.OK)
 		: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	//댓글 수정
-	//@PreAuthorize("principal.username == #vo.replyer")		
+	@PreAuthorize("principal.username == #placeRe.replyer")		
 	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH},
 			value="/{rno}", consumes = "application/json")
 	public ResponseEntity<String> modify(@RequestBody PlaceReVO placeRe, @PathVariable("rno") Long rno){

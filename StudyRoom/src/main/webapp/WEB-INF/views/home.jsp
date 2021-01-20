@@ -7,6 +7,6 @@
 <body>
 </body>
 <script type="text/javascript">
-	self.location="/free/list";
+	self.location="/place/list";
 </script>
 </html>

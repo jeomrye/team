@@ -45,7 +45,7 @@
 			<div class="panel-body">
 		
 			<form role="form" action="/place/modify" method="post">
-		<%-- 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> --%>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<input type="hidden" name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
 			<input type="hidden" name='amount' value='<c:out value="${cri.amount}"/>'>
 			<input type="hidden" name='keyword' value='<c:out value="${cri.keyword}"/>'>
@@ -120,11 +120,6 @@
 			<input class="form-control" name='page' placeholder="홈페이지/SNS계정" value="<c:out value='${place.page}'/>">
 			</div>
 			
-			<%-- <!-- 작성자 -->
-			<div class="form-group">
-			<label>Writer</label><input class="form-control" name='userid' value="<c:out value='${place.userid}'/>">
-			</div> --%>
-			
 			<!-- 작성자 -->
 			<div class="form-group">
 			<label>Writer<span>(필수)</span></label>
@@ -143,15 +138,14 @@
 			<input class="form-control" name="updateDate" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${place.updateDate }"/>' readonly="readonly">
 			</div>
 			
-<%-- 			<sec:authentication property="principal" var="pinfo"/>
+			<sec:authentication property="principal" var="pinfo"/>
 				<sec:authorize access="isAuthenticated()">
 					<c:if test="${pinfo.username eq board.writer }">
 						<button type="submit" data-oper='modify' class="btn btn-default">Modify</button>
 						<button type="submit" data-oper='remove' class="btn btn-danger">Remove</button>
 					</c:if>
-				</sec:authorize>	 --%>
-				<button type="submit" data-oper='modify' class="btn btn-default">Modify</button>
-						<button type="submit" data-oper='remove' class="btn btn-danger">Remove</button>
+				</sec:authorize>	
+
 			<button type="submit" data-oper='list' class="btn btn-info">List</button>
 			
 			</form>
@@ -332,8 +326,8 @@ $(document).ready(function(){
 			return true;
 		}
 
-		//var csrfHeaderName = "${_csrf.headerName}";
-		//var csrfTokenValue = "${_csrf.token}";
+		var csrfHeaderName = "${_csrf.headerName}";
+		var csrfTokenValue = "${_csrf.token}";
 		
 		//파일 업로드
 		$("input[type='file']").change(function(e){
@@ -353,9 +347,9 @@ $(document).ready(function(){
 				contentType : false,
 				data : formData,
 				type : 'POST',
-				/* beforeSend : function(xhr){
+				beforeSend : function(xhr){
 					xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
-				}, */
+				},
 				dataType : 'json',
 				success : function(result){
 					console.log(result);
