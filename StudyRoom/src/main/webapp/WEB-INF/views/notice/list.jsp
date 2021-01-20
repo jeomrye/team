@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ include file="../includes/header.jsp"%>
 <div class="row">
 	<div class="col-lg-12">
@@ -14,7 +14,10 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				공지사항
+				<sec:authentication property="principal" var="pinfo"/>
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<button id='regBtn' type="button" class="btn btn-xs pull-right">새 공지 쓰기</button>
+				</sec:authorize>
 <!-- 					관리자만 볼수있게 -->
 			</div>
 			<table class="table eable-striped table-bordered table-hover">
