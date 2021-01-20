@@ -1,5 +1,6 @@
 package com.std.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,17 +49,27 @@ public class NoticeController {
 
 	//register를 get방식
 	@GetMapping("/register")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public void register() {
 
 	}
-	//get ,modify를 get방식
-	@GetMapping({ "/get", "/modify" })
+	//get를 get방식
+	@GetMapping( "/get")
 	public void get(@RequestParam("notNo") Long notNo, @ModelAttribute("cri") Criteria cri, Model model) {
-		log.info("/get or modify");
+		log.info("/get");
 		model.addAttribute("notice", service.getNotice(notNo));
 	}
+	//modify를 get방식
+	@GetMapping( "/modify" )
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public void modify(@RequestParam("notNo") Long notNo, @ModelAttribute("cri") Criteria cri, Model model) {
+		log.info("/modify");
+		model.addAttribute("notice", service.getNotice(notNo));
+	}
+	
 	//modify를 post방식
 	@PostMapping("/modify")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String modify(NoticeVO notice, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		log.info("modify : " + notice);
 
