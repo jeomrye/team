@@ -56,7 +56,7 @@ public class PlaceServiceImpl implements PlaceService {
 		if(modifyResult && place.getPhotoList() != null && place.getPhotoList().size() > 0) {
 			place.getPhotoList().forEach(attach -> {
 				attach.setBno(place.getBno());
-				photoMapper.insert(attach);
+				photoMapper.insertP(attach);
 			});
 		}
 		return modifyResult;

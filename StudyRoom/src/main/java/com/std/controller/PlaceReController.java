@@ -34,17 +34,23 @@ public class PlaceReController {
 	public ResponseEntity<String> create(@RequestBody PlaceReVO placeRe, MemberVO member){
 		log.info("PlaceReVO : " +placeRe);
 		int countPerDay = service.getReplyPerDay(placeRe);
-		if(countPerDay >= 1) {			
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		if(countPerDay >= 1) {//아이디당 하루에 한개의 리뷰만 가능	
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); //한개를 넘어가면 에러 발생, 등록 불가
 		}else {
-			int insertCount = service.register(placeRe);//댓글 등록
-			service.writeReview(placeRe.getReplyer(), member.getUserid());//댓글 등록시 해당 작성자 마일리지 지급
-			log.info("Reply Insert Count : "+ insertCount);
-			
-			//삼항 연산자
-			return insertCount==1 
-			? new ResponseEntity<>("success",HttpStatus.OK)
-			: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			int ange = placeRe.getReply().length();//reply 길이
+			log.info("reply 길이 : "+ange);
+			if(ange < 150) { //리뷰 최소 길이 150으로 지정
+				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); //150이 안되면 에러 발생, 등록 불가
+			}else {
+				int insertCount = service.register(placeRe);//댓글 등록
+				service.writeReview(placeRe.getReplyer(), member.getUserid());//댓글 등록시 해당 작성자 마일리지 지급
+				log.info("Reply Insert Count : "+ insertCount);
+				
+				//삼항 연산자
+				return insertCount==1 
+				? new ResponseEntity<>("success",HttpStatus.OK)
+				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
 		}	
 	}
 	
@@ -67,7 +73,9 @@ public class PlaceReController {
 	//댓글 삭제
 	//@PreAuthorize("principal.username == #vo.replyer")
 	@DeleteMapping(value = "/{rno}" , produces = {MediaType.TEXT_PLAIN_VALUE})
-	public ResponseEntity<String> remove(@RequestBody PlaceReVO placeRe, @PathVariable("rno") Long rno, MemberVO member){
+	public ResponseEntity<String> remove(
+			/* @PathVariable("rno") Long rno, */@RequestBody PlaceReVO placeRe, MemberVO member){
+		long rno = placeRe.getRno();
 		log.info("reply remove : "+rno);
 		
 		//log.info("replyer : "+placeRe.getReplyer());

@@ -58,4 +58,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="writeReview">
 		update member set mileage = mileage+50 where userid = (select replyer from placereply where replyer=#{replyer})
 	</update>
+	
+	<update id="deleteReview">
+		update member set mileage = mileage-50 where userid = (select replyer from placereply where replyer=#{replyer})
+	</update>
  </mapper>
