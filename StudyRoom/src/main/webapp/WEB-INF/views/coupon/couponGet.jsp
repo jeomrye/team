@@ -104,11 +104,18 @@ width:600px;
 <button data-oper='sbumit' class="btn btn-primary">구입</button>
 <button data-oper='list' class="btn btn-info">목록</button>
 
+ <form id='operForm' action="/coupon/couponModify" method="get">
+			        <input type='hidden' id='couponNumber' name='couponNumber' value='<c:out value="${coupon.couponNumber}"/>'>
+
+			        <input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
+			        <input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
+			        <input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'>
+			        <input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>
+    
+			      
+			      </form>  
 
 
-<form id='operForm' action="/coupon/couponModify" method="get">
-	<input type='hidden' id='couponNumber' name='couponNumber' value='<c:out value="${coupon.couponNumber}"/>'>
-</form>
 
 <%@include file="../includes/footer.jsp" %>
 
@@ -143,7 +150,7 @@ $(document).ready(function(){
 			$(arr).each(function(i, attach){
 				//image type
 				if(attach.fileType){
-					var fileCallPath = encodeURIComponent(attach.uploadPath+"s_"+attach.uuid+"_"+attach.fileName);
+					var fileCallPath = encodeURIComponent(attach.uploadPath+"/s_"+attach.uuid+"_"+attach.fileName);
 					
 					str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"'><div>";
 					str += "<img src='/display?fileName="+fileCallPath+"'>";
@@ -185,9 +192,11 @@ $(document).ready(function(){
 		$(".bigPictureWrapper").css("display", "flex").show();
 		
 		$(".bigPicture").html("<img src='/display?fileName="+fileCallPath+"'>").animate({width:'100%', height:'100%'}, 1000);
+		
+		
 	}
 	
-	$(".biPictureWrapper").on("click", function(e){
+	$(".bigPictureWrapper").on("click", function(e){
 		$(".bigPicture").animate({width:'0%', height:'0%'}, 1000);
 		setTimeout(function(){
 			$('.bigPictureWrapper').hide();

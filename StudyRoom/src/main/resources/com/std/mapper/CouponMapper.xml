@@ -60,7 +60,46 @@
 
 </update>
 
+<sql id="criteria">
+    <trim prefix="(" suffix=") AND" prefixOverrides="OR">
+    	<foreach item='type' collection="typeArr">
+    		<trim prefix="OR">
+    			<choose>
+    				<when test="type == 'T'.toString()">
+    					couponName like '%'||#{keyword}||'%'
+    				</when>
+    			</choose>
+    		</trim>
+    	</foreach>
+    </trim>
+    </sql>
 
+<select id="getListWithPaging" resultType="com.std.domain.CouponVO">
+  <![CDATA[
+    select 
+    couponNumber,couponName,couponPrice,couponregDate,couponupdateDate 
+    from 
+    (
+    select /*+INDEX_DESC(coupon pk_coupon) */
+    rownum rn,couponNumber,couponName,couponPrice,couponregDate,couponupdateDate 
+    from 
+    coupon 
+    where
+    ]]>
+    <include refid="criteria"></include>
+    <![CDATA[
+     rownum <= #{pageNum} * #{amount}
+     )
+    where rn > (#{pageNum} -1) * #{amount}
+  ]]>   
+ 
+  </select>
+
+<select id="getTotalCount" resultType="int">
+	select count(*) from coupon where 
+	<include refid="criteria"></include>
+	 couponNumber > 0
+</select>
 
 
 

@@ -24,6 +24,7 @@
 							name='couponName'>
 					</div>
 
+<!-- 쿠폰 이미지 들어가는 부분 -->
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="panel panel-default">

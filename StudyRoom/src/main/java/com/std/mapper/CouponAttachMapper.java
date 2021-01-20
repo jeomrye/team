@@ -11,4 +11,6 @@ public interface CouponAttachMapper {
 	public void delete(String uuid);
 	
 	public List<CouponAttachVO> findByCouponNumber(int couponNumber);
+	
+	public void deleteAll(int couponNumber);
 }

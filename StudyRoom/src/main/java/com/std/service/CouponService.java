@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.std.domain.CouponAttachVO;
 import com.std.domain.CouponVO;
+import com.std.domain.Criteria;
 
 public interface CouponService {
 
@@ -15,7 +16,11 @@ public interface CouponService {
 	
 	public boolean couponRemove(int couponNumber);
 	
-	public List<CouponVO> couponGetList();
+	//public List<CouponVO> couponGetList();
+	
+	public List<CouponVO> couponGetList(Criteria cri);
 	
 	public List<CouponAttachVO> getAttachList(int couponNumber);
+	
+	public int getTotal(Criteria cri);
 }

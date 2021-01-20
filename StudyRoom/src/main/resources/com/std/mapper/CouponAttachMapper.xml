@@ -6,7 +6,7 @@
   
 	<insert id="insert">
 		insert into attach (uuid, uploadPath, fileName, fileType, couponNumber)
-		values(#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, coupon_seq.currval)
+		values(#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{couponNumber})
 	</insert>  
 	
 	<delete id="delete">
@@ -16,5 +16,9 @@
   	<select id="findByCouponNumber" resultType="com.std.domain.CouponAttachVO">
   		select * from attach where couponNumber = #{couponNumber}
   	</select>
+  	
+  	<delete id="deleteAll">
+  		delete attach where couponNumber = #{couponNumber}
+  	</delete>
   
 </mapper>

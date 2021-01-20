@@ -2,6 +2,8 @@ package com.std.mapper;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.std.domain.CouponVO;
+import com.std.domain.Criteria;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -84,4 +87,28 @@ public class CouponMapperTests {
 		log.info("UPDATE COUNT: " + count);
 	}
 	
+	@Test
+	public void testPaging() {
+		
+		Criteria cri = new Criteria();
+		
+		cri.setPageNum(3);
+		cri.setAmount(10);
+		
+		List<CouponVO> list = mapper.getListWithPaging(cri);
+		
+		list.forEach(coupon -> log.info(coupon));
+	}
+	
+	@Test
+	public void testSearch() {
+		
+		Criteria cri = new Criteria();
+		cri.setKeyword("새새");
+		cri.setType("T");
+		
+		List<CouponVO> list = mapper.getListWithPaging(cri);
+		
+		list.forEach(coupon -> log.info(coupon));
+	}
 }

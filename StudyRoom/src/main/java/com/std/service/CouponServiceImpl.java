@@ -8,14 +8,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.std.domain.CouponAttachVO;
 import com.std.domain.CouponVO;
+import com.std.domain.Criteria;
 import com.std.mapper.CouponAttachMapper;
 import com.std.mapper.CouponMapper;
 
+import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Service
+@AllArgsConstructor
 public class CouponServiceImpl implements CouponService {
 
 	@Setter(onMethod_ = @Autowired)
@@ -60,28 +63,62 @@ public class CouponServiceImpl implements CouponService {
 	}
 
 	//쿠폰 수정
+	@Transactional
 	@Override
 	public boolean couponModify(CouponVO coupon) {
 
 		log.info("couponModify......" + coupon);
-		return mapper.couponUpdate(coupon) == 1;
+		
+		attachMapper.deleteAll(coupon.getCouponNumber());
+		
+		boolean modifyResult = mapper.couponUpdate(coupon) == 1;
+		
+		if(modifyResult && coupon.getAttachList() != null && coupon.getAttachList().size() > 0) {
+			
+			coupon.getAttachList().forEach(attach -> {
+				
+				attach.setCouponNumber(coupon.getCouponNumber());
+				attachMapper.insert(attach);
+			});
+		}
+		
+		return modifyResult;
 	}
 
 	//쿠폰 삭제
+	@Transactional
 	@Override
 	public boolean couponRemove(int couponNumber) {
 
 		log.info("couponRemove...." + couponNumber);
+		
+		attachMapper.deleteAll(couponNumber);
+		
 		return mapper.couponDelete(couponNumber) == 1;
 	}
 	
 //쿠폰 목록 작업
+//	@Override
+//	public List<CouponVO> couponGetList() {
+//
+//		log.info("couponGetList.....");
+//		
+//		return mapper.couponGetList();
+//	}
 	@Override
-	public List<CouponVO> couponGetList() {
-
-		log.info("couponGetList.....");
+	public List<CouponVO> couponGetList(Criteria cri){
 		
-		return mapper.couponGetList();
+		log.info("get List with criteria: " + cri);
+		
+		return mapper.getListWithPaging(cri);
 	}
 
+	@Override
+	public int getTotal(Criteria cri) {
+		
+		log.info("get total count");
+		
+		return mapper.getTotalCount(cri);
+	}
+	
 }

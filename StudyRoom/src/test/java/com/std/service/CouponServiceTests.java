@@ -42,11 +42,11 @@ public class CouponServiceTests {
 	}
 	
 	//모든 쿠폰 목록 불러오기
-	@Test
-	public void testCoupongetList() {
-		
-		service.couponGetList().forEach(coupon -> log.info(coupon));
-	}
+//	@Test
+//	public void testCoupongetList() {
+//		
+//		service.couponGetList().forEach(coupon -> log.info(coupon));
+//	}
 
 	//쿠폰 조회
 	@Test
