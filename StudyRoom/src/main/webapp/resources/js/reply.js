@@ -41,12 +41,12 @@ var placeReService = (function(){
 	}
 	
 	//댓글 삭제
-	function remove(rno, callback, error){
+	function remove(reply, callback, error){
 		console.log("- - - delete reply - - -");
 		$.ajax({
 			type : 'delete',
-			url : '/placeRe/' + rno,
-			data : JSON.stringify(rno),
+			url : '/placeRe/' + reply.rno,
+			data : JSON.stringify(reply),
 			contentType : "application/json; charset=utf-8",
 			success : function(deleteResult, status, xhr) {
 				if(callback){

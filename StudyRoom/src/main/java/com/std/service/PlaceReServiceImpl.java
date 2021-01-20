@@ -2,6 +2,7 @@ package com.std.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,12 +49,12 @@ public class PlaceReServiceImpl implements PlaceReService {
 
 	@Transactional //오류 발생시 rollback
 	@Override
-	public int remove(Long rno) { //댓글 삭제
-		log.info("remove reply : "+rno);
+	public int remove(PlaceReVO reRemove) { //댓글 삭제
+		log.info("remove reply : "+reRemove.getRno());
 		
-		PlaceReVO placeRe = mapper.read(rno);
+		PlaceReVO placeRe = mapper.read(reRemove.getRno());
 		placeMapper.updateReplyCnt(placeRe.getBno(), -1); //댓글 수 감소
-		return mapper.delete(rno);
+		return mapper.delete(reRemove);
 	}
 
 	@Override
@@ -86,5 +87,10 @@ public class PlaceReServiceImpl implements PlaceReService {
 	@Override
 	public void writeReview(String replyer, String userid) { //댓글 작성시 마일리지 지급
 		mapper.writeReview(replyer, userid);
+	}
+	
+	@Override
+	public void deleteReview(String replyer, String userid) { //댓글 삭제시 마일리지 감소
+		mapper.deleteReview(replyer, userid);
 	}
 }

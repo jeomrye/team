@@ -72,16 +72,21 @@ public class PlaceReController {
 
 	//댓글 삭제
 	//@PreAuthorize("principal.username == #vo.replyer")
-	@DeleteMapping(value = "/{rno}" , produces = {MediaType.TEXT_PLAIN_VALUE})
+	@DeleteMapping(value = "/{rno}", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> remove(
 			/* @PathVariable("rno") Long rno, */@RequestBody PlaceReVO placeRe, MemberVO member){
 		long rno = placeRe.getRno();
 		log.info("reply remove : "+rno);
 		
+		if(member.getMileage() > 0) {
+			service.deleteReview(placeRe.getReplyer(), member.getUserid()); //댓글 삭제시 해당 작성자 마일리지 회수
+		}else {
+			member.setMileage(0);
+		}
 		//log.info("replyer : "+placeRe.getReplyer());
 		
 		//삼항연산자
-		return service.remove(rno) == 1 
+		return service.remove(placeRe) == 1 
 		? new ResponseEntity<>("success",HttpStatus.OK)
 		: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
