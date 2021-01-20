@@ -61,7 +61,7 @@
                <li><a href="/place/list"><h4>장소</h4></a></li>
                <li><a href="/notice/list"><h4>Q&A</h4></a></li>
                <li><a href="/mypage/myinfo"><h4>마이페이지</h4></a></li>
-               <li><a href="/notice/list"><h4>로그인</h4></a></li>
+               <li><a href="/customLogin"><h4>로그인</h4></a></li>
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
