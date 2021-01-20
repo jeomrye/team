@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.std.domain.Criteria;
-import com.std.domain.MemberVO;
+import com.std.domain.MemVO;
 import com.std.domain.PlaceReVO;
 import com.std.domain.ReplyPageDTO;
 import com.std.mapper.PlaceMapper;

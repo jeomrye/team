@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,12 +56,14 @@ public class PlaceController {
 	
 	//get방식으로 들어온 경우의 글 등록
 	@GetMapping("/register")
+	@PreAuthorize("isAuthenticated()")
 	public void register() {
 		
 	}
 	
 	//post방식으로 들어온 경우의 글 등록(register.jsp)
 	@PostMapping("/register")
+	@PreAuthorize("isAuthenticated()")
 	public String register(PlaceVO place, RedirectAttributes rttr) {//redirect : 다른 주소로 이동시키기 위함
 		log.info("----------------------------");
 		log.info("place register : "+place);
@@ -93,6 +96,7 @@ public class PlaceController {
 	}
 	
 	//글 수정
+	@PreAuthorize("principal.username == #place.writer")
 	@PostMapping("/modify")//modify.jsp
 	public String modify(PlaceVO place, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		log.info("place modify : "+place);
@@ -112,6 +116,7 @@ public class PlaceController {
 	}
 	
 	//글 삭제
+	@PreAuthorize("principal.username == #writer")
 	@PostMapping("/remove")
 	public String remove(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri,
 			RedirectAttributes rttr) {

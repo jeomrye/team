@@ -43,7 +43,7 @@ public class MemberTests {
 		vo.getAuthList().forEach(authVO -> log.info(authVO));
 	}
 
-	//@Test
+	@Test
 	public void test() {
 		String sql = "insert into member(userid,password,username) values (?,?,?)";
 		for(int i=0; i<10; i++) {
