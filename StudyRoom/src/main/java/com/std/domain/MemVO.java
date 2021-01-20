@@ -18,10 +18,7 @@ public class MemVO {
 	private Date updatedate; //회원정보 수정일
 	private int mileage;
 	private int companynumber; //사업자번호
-	private List<AuthVO> authList;
 	
-	
-
-	
+	private List<AuthVO> authList;		
 	
 }

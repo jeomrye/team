@@ -1,6 +1,8 @@
 package com.std.mapper;
 
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.std.domain.AuthVO;
 import com.std.domain.MemVO;
 
@@ -22,5 +24,9 @@ public interface UserMapper {
 	public MemVO read(String userid);
 	
 	//아이디 찾기
-	public String findId(String email,String username) throws Exception;
+	public String findId(String email) throws Exception;
+	
+	//비밀번호 찾기(임시비밀번호 업데이트)
+	@Transactional
+	public int updatePw(MemVO vo) throws Exception;
 }

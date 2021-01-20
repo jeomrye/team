@@ -33,25 +33,24 @@
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">아이디 찾기</h3>
+                        <h3 class="panel-title">비밀번호 찾기</h3>
                     </div>
                     <div class="panel-body">
-                        <form method="post" action="/member/findId.do">
-                            <fieldset>
+
                                 <div class="form-group">
-                                    	메일 :<input class="form-control" name="email" type="text" placeholder="이메일주소를 입력하세요"  required>
+                                    	아이디 :<input class="form-control" id="userid" name="userid" type="text" placeholder="아이디를 입력하세요" required>
                                 </div>
-                            	<button type="submit" class="btn btn-lg btn-success btn-block">아이디 찾기</button>
+                                <div class="form-group">
+                                    	메일 :<input class="form-control" id="email" name="email" type="text" placeholder="이메일주소를 입력하세요" required>
+                                </div>
+                            	<button type="button" id="findBtn" class="btn btn-lg btn-success btn-block">비밀번호 찾기</button>
                        			<button type="button" onclick="history.go(-1)" class="btn btn-lg btn-dark btn-block">취소</button>
-                            </fieldset>
-            
-                        </form>
+                
                     </div>
                 </div>
             </div>
         </div>
     </div>
- 
     <!-- jQuery -->
     <script src="/resources/vendor/jquery/jquery.min.js"></script>
 
@@ -63,11 +62,23 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="/resources/dist/js/sb-admin-2.js"></script>
-    
     <script>
-    	$(".btn-success").on("click",function(e){
-    		e.preventDefault();
-    		$("form").submit();
-    	});
-    </script>
+	$(function(){
+		$("#findBtn").click(function(){
+			$.ajax({
+				url : "/member/findPw",
+				type : "POST",
+				data : {
+					id : $("#id").val(),
+					email : $("#email").val()
+				},
+				success : function(result) {
+					alert(result);
+				},
+			})
+
+		});
+	})
+</script>
+
 </html>
