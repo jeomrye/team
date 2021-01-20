@@ -161,24 +161,6 @@ align-items: center;
 		</div>
 	</div>
 </div>
-<!-- 
-<script>
-function checkboxArr() {
-    var checkArr = [];     // 배열 초기화
-    $("input[name='offer':checked]").each(function(i)){
-    	checkArr.push($(this).val());// 체크된 것만 값을 뽑아서 배열에 push
-    }
- 
-    $.ajax({
-        url: 'test_check'
-        , type: 'post'
-        , dataType: 'text'
-        , data: {
-            valueArrTest: checkArr
-        }
-    });
-}
-</script> -->
 
 <script>
 $(document).ready(function(e){
