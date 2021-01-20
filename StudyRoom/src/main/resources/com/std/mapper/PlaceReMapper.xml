@@ -62,4 +62,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="deleteReview">
 		update member set mileage = mileage-50 where userid = (select replyer from placereply where replyer=#{replyer})
 	</update>
+	
+	<select id="forDelete" resultType="com.std.domain.MemVO">
+		select * from member where userid = (select replyer from placereply where replyer=#{replyer})
+	</select>
  </mapper>

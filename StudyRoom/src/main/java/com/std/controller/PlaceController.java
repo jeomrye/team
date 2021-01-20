@@ -78,6 +78,7 @@ public class PlaceController {
 	}
 	
 	//글 상세보기
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping({"/get","/modify"})
 	//@RequestParam : 하나의 값만을 request방식으로 전달, @ModelAttribute : 객체 통으로 값 전달 
 	public void get(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model) {

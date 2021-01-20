@@ -290,6 +290,7 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 						aria-hidden="true">&times;</button>
 				<h4 class="modal-title" id="myModalLabel">REPLY</h4>
 			</div>
+			
 			<div class='form-group'>
 				<label>Score</label><br>
 				<select id="score">
@@ -299,16 +300,16 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 				<option value="2">2점(불만족)</option>
 				<option value="1">1점(매우 만족)</option>
 				</select>
-				<!-- <input class='form-control' name='score' value='0'> -->
 			</div>
+			
 			<div class='form-group'>
 				<label>Reply</label>
-				<textarea rows="5" cols="4" class='form-control' id="content" name='reply' minlenth='150' maxlength="1000" value='New Reply!'></textarea>
+				<textarea rows="5" cols="4" class='form-control' id="content" name='reply' maxlength="1000" value='New Reply!'></textarea>
 				 <span class='pull-right' id="counter">###</span>
 			</div>
 			<div class='form-group'>
 				<label>Replyer</label>
-				<input class='form-control' name='replyer' value='replyer'>
+				<input class='form-control' name='replyer' value='replyer' readonly="readonly">
 			</div>
 			<div class='form-group'>
 				<label>Reply Date</label>
@@ -482,7 +483,6 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 		}
 
 		var modal = $(".modal");
-		//var modalInputScore = modal.find("input[name='score']");
 		var modalInputScore = modal.find("select[id='score']");
 		var modalInputReply = modal.find("textarea[name='reply']");
 		var modalInputReplyer = modal.find("input[name='replyer']");
@@ -611,7 +611,7 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 					return;
 				}
 				
-				placeReService.remove(rno,function(result){
+				placeReService.remove(rno,originalReplyer,function(result){
 					alert(result);
 					modal.modal("hide");
 					showList(pageNum);

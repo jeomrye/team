@@ -37,12 +37,12 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Controller
 @Log4j
 public class PlacePhotoController {
-
+	
 	@GetMapping("/uploadForm")
 	public void uploadForm() {
 		log.info("upload form");
 	}
-	
+
 	@PostMapping("uploadFormAction")
 	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
 		
@@ -66,7 +66,8 @@ public class PlacePhotoController {
 		}//end catch
 		}//end for
 	}
-
+	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/uploadAjax")
 	public void uploadAjax() {
 		log.info("upload ajax");
@@ -93,7 +94,7 @@ public class PlacePhotoController {
 		return str.replace("-", File.separator); //windows : File.seperator(\\)
 	}
 
-	@PreAuthorize("isAuthenricated()")
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<PlaceFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile){
@@ -209,7 +210,7 @@ public class PlacePhotoController {
 	}
 
 	//파일 삭제
-	@PreAuthorize("isAuthenricated()")
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/deleteFile")
 	@ResponseBody
 	public ResponseEntity<String> deleteFile(String fileName, String type){

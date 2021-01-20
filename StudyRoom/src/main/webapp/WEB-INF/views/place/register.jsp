@@ -95,9 +95,8 @@ align-items: center;
 			
 			<!-- 내용 -->
 			<div class="form-group">
-			<label>Content<span>(필수)</span></label>
-			<textarea rows="3" class="form-control" name='content' placeholder="테이블형 15석, 독서실형 10석	 1층:카페형/2층:독서실형 분리 	1시간권:1,500원/4시간권:3,500원/8시간권:8,500원/종일권:1만원">
-			</textarea>
+			<label>Content<span>(필수)</span></label><textarea rows="3" class="form-control" name='content' 
+			placeholder="테이블형 15석, 독서실형 10석	 1층:카페형/2층:독서실형 분리 	1시간권:1,500원/4시간권:3,500원/8시간권:8,500원/종일권:1만원"></textarea>
 			</div>
 			
 			<!-- 운영시간 -->

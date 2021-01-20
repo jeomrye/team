@@ -140,7 +140,7 @@
 			
 			<sec:authentication property="principal" var="pinfo"/>
 				<sec:authorize access="isAuthenticated()">
-					<c:if test="${pinfo.username eq board.writer }">
+					<c:if test="${pinfo.username eq place.writer }">
 						<button type="submit" data-oper='modify' class="btn btn-default">Modify</button>
 						<button type="submit" data-oper='remove' class="btn btn-danger">Remove</button>
 					</c:if>
