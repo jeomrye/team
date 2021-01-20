@@ -26,6 +26,9 @@ public interface UserMapper {
 	//아이디 찾기
 	public String findId(String email) throws Exception;
 	
+	//이메일 찾기
+	public String findEmail(String userid) throws Exception;
+	
 	//비밀번호 찾기(임시비밀번호 업데이트)
 	@Transactional
 	public int updatePw(MemVO vo) throws Exception;

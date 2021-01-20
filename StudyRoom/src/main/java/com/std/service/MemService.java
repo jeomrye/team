@@ -26,6 +26,6 @@ public interface MemService {
 	public void findPw(HttpServletResponse response,MemVO vo) throws Exception;
 	
 	//임시 비밀번호 이메일발송
-	public void sendEmail(MemVO vo, String div) throws Exception;
+	public void sendEmail(MemVO vo,String div) throws Exception;
 	
 }

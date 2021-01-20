@@ -10,6 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <title>SB Admin 2 - Bootstrap Admin Theme</title>
 
@@ -26,6 +27,23 @@
     <link href="/resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 </head>
+   <script>
+	$(function(){
+		$("#findBtn").click(function(){
+			$.ajax({
+				url : "/member/findPw",
+				type : "POST",
+				data : {
+					userid : $("#userid").val(),
+					email : $("#email").val()
+				},
+				success : function(result) {
+					alert(result);
+				},
+			})
+		});
+	});
+</script>
 
 <body>
     <div class="container">
@@ -62,23 +80,6 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="/resources/dist/js/sb-admin-2.js"></script>
-    <script>
-	$(function(){
-		$("#findBtn").click(function(){
-			$.ajax({
-				url : "/member/findPw",
-				type : "POST",
-				data : {
-					id : $("#id").val(),
-					email : $("#email").val()
-				},
-				success : function(result) {
-					alert(result);
-				},
-			})
-
-		});
-	})
-</script>
+ 
 
 </html>

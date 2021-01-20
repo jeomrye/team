@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import com.std.domain.AuthVO;
 import com.std.domain.MemVO;
 import com.std.service.MemService;
@@ -117,7 +118,7 @@ public class UserController {
         log.info("인증번호"+checkNum);
         
         
-        String From = "";	//보낸는 사람메일
+        String From = "clcko30@naver.com";	//보낸는 사람메일
         String toEmail = email;	//받는사람 메일 입력 (입력받은 메일가져와서 변수입력)
         String title = "Study Room Finding Service:SRFS 회원가입 인증 메일입니다.";	//메일 제목입력
         String content = 
@@ -155,7 +156,7 @@ public class UserController {
     	return "/member/findId";
     }
     
-    @RequestMapping(value="/findPw")
+    @RequestMapping(value="/findPw", method = RequestMethod.GET)
     public String findPwGet() throws Exception {
     	log.info("비밀번호 찾기 페이지 이동");
     	return "/member/findPw";
@@ -163,8 +164,8 @@ public class UserController {
 	
     @RequestMapping(value = "/findPw", method = RequestMethod.POST)
     public void findPwPost(@ModelAttribute MemVO vo, HttpServletResponse response) throws Exception{
+    	log.info("비밀번호 변경");
     	service.findPw(response, vo);
     }
-	
-		
+  
 }
