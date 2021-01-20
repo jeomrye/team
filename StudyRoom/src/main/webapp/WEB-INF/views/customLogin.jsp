@@ -1,13 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
 
     <title>SB Admin 2 - Bootstrap Admin Theme</title>
 
@@ -23,16 +25,13 @@
     <!-- Custom Fonts -->
     <link href="/resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
 </head>
 
 <body>
+<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION }">
+	<p style="color:red; font-weight:bold;"> login Failed : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message }</p>
+	<c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session" />
+</c:if>
 
     <div class="container">
         <div class="row">
@@ -42,29 +41,32 @@
                         <h3 class="panel-title">Please Sign In</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form">
+                        <form role="form" method="post" action="/login">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                    <input class="form-control" placeholder="userid" name="username" type="text" autofocus>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Password" name="password" type="password" value="">
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                        <input name="remember-me" type="checkbox">자동 로그인
                                     </label>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a href="index.html" class="btn btn-lg btn-success btn-block">Login</a>
+                                <a href="index.html" class="btn btn-lg btn-success btn-block">로그인</a>
+                                <!-- 회원가입페이지 이동 -->       
+                                <a href="/MEMBER/JOINFORM" class="btn btn-lg btn-info btn-block">회원가입</a>
                             </fieldset>
+                            <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+ 
     <!-- jQuery -->
     <script src="/resources/vendor/jquery/jquery.min.js"></script>
 
@@ -76,7 +78,11 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="/resources/dist/js/sb-admin-2.js"></script>
-
-</body>
-
+    
+    <script>
+    	$(".btn-success").on("click",function(e){
+    		e.preventDefault();
+    		$("form").submit();
+    	});
+    </script>
 </html>
