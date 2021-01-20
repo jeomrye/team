@@ -24,18 +24,18 @@ import lombok.extern.log4j.Log4j;
 public class NoticeController {
 	private NoticeService service;
 
-	//list를 get방식
+
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
-		log.info("list : " + cri);//흐름알기위에 쓴거
-		model.addAttribute("list", service.getlistNotice(cri));	
-		
-		int total = service.getTotal(cri);//페이징처리
+		log.info("list : " + cri);
+		model.addAttribute("list", service.getlistNotice(cri));
+
+		int total = service.getTotal(cri);
 		log.info("total : " + total);
 
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	}
-	//register를 post방식
+
 	@PostMapping("/register")
 	public String register(NoticeVO notice, RedirectAttributes rttr) {
 
@@ -46,18 +46,17 @@ public class NoticeController {
 		return "redirect:/notice/list";
 	}
 
-	//register를 get방식
 	@GetMapping("/register")
 	public void register() {
 
 	}
-	//get ,modify를 get방식
+
 	@GetMapping({ "/get", "/modify" })
 	public void get(@RequestParam("notNo") Long notNo, @ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("/get or modify");
 		model.addAttribute("notice", service.getNotice(notNo));
 	}
-	//modify를 post방식
+
 	@PostMapping("/modify")
 	public String modify(NoticeVO notice, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		log.info("modify : " + notice);
@@ -68,7 +67,7 @@ public class NoticeController {
 
 		return "redirect:/notice/list" + cri.getListLink();
 	}
-	//remove를 post방식
+
 	@PostMapping("/remove")
 	public String remove(@RequestParam("notNo") Long notNo, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		log.info("remove....." + notNo);
