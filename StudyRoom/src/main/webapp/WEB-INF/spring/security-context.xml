@@ -14,11 +14,10 @@
 	<!-- login 시 사용자 권한에 따라 다른페이지 호출 -->
 	<security:http>
 		<security:form-login login-page="/customLogin" />
-		
+
 		<security:intercept-url pattern="/notice/register" access="hasRole('ROLE_ADMIN')"/>
 		<security:intercept-url pattern="/notice/modify/**" access="hasRole('ROLE_ADMIN')"/>
-<!-- 		<security:intercept-url pattern="/sample/member" access="hasRole('ROLE_MEMBER')"/> -->
-<!-- 		<security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')"/> -->
+    
 		<!-- 에러 페이지 -->
 		<security:access-denied-handler ref="customAccessDenied"/> 
 		

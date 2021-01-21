@@ -1,12 +1,15 @@
 package com.std.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import lombok.Data;
 
 @Data
-public class MemVO {
+public class MemVO implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private Long uno;	//회원순번
 	private String userid; //회원id
 	private int memberno; //회원번호

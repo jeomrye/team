@@ -4,7 +4,7 @@
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
      <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
     <%@ include file="../includes/header.jsp" %>
-<div class ="panel-heading">Free Modify Page</div>
+<div class ="panel-heading">글 수정</div>
 <div class="panel-body">
 <form role="form" action="/free/modify" method="post">
 	
@@ -14,38 +14,38 @@
 	<input type="hidden" name="type" value='<c:out value="${cri.type }"/>'>
 	<input type="hidden" name="keyword" value='<c:out value="${cri.keyword }"/>'>
 	<div class="form-group">
-		<label>Fno</label>
+		<label>번호</label>
 		<input class="form-control" name="fno" value='<c:out value="${free.fno }"/>' readonly="readonly">
 	</div>
 	<div class="form-group">
-		<label>Title</label>
+		<label>제목</label>
 		<input class="form-control" name="title" value='<c:out value="${free.title }"/>'>
 	</div>
 	<div class="form-group">
-		<label>Text area</label>
+		<label>내용</label>
 		<textarea class="form-control" rows="3" name="content"><c:out value="${free.content }"></c:out></textarea>
 	</div>
 	<div class="form-group">
-		<label>Writer</label>
+		<label>작성자</label>
 		<input class="form-control" name="writer" value='<c:out value="${free.writer }"/>' readonly="readonly">
 	</div>
 	<div class="form-group">
-		<label>RegDate</label>
+		<label>작성일</label>
 		<input class="form-control" name="regDate" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${free.regdate }"/>' readonly="readonly">
 	</div>
 	<div class="form-group">
-		<label>Update Date</label>
+		<label>수정일</label>
 		<input class="form-control" name="updateDate" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${free.updateDate }"/>' readonly="readonly">
 	</div>
 	<!-- 게시물의 작성자인 경우만 수정 삭제 -->
-	<sec:authentication property="principal" var="pinfo"/>
-	<sec:authorize access="isAuthenticated()">
-	<c:if test="${pinfo.username eq free.writer }">
-	<button type="submit" data-oper="modify" class="btn btn-default">Modify</button>
-	<button type="submit" data-oper="remove" class="btn btn-danger">Remove</button>
+	<sec:authentication property="principal" var="pinfo"/> 	<!-- 조회 화면에서 댓글 추가버튼 -->
+	<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')">
+	<c:if test="${pinfo.username eq free.writer or pinfo.authorities eq '[ROLE_ADMIN]' }"> 
+	<button type="submit" data-oper="modify" class="btn btn-default">수정하기</button>
+	<button type="submit" data-oper="remove" class="btn btn-danger">삭제하기</button>
 	</c:if>
 	</sec:authorize>
-	<button type="submit" data-oper="list" class="btn btn-info">List</button>
+	<button type="submit" data-oper="list" class="btn btn-info">목록</button>
 </form>
 </div>
 <%@ include file="../includes/footer.jsp" %>
