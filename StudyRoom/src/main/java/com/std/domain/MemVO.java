@@ -20,5 +20,6 @@ public class MemVO {
 	private int mileage;	//마일리지
 	private String coupon; //쿠폰번호
 	private int companynumber; //사업자번호
-	private List<AuthVO> authList;
+	private List<AuthVO> authList;		
+
 }

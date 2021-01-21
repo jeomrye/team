@@ -12,10 +12,12 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import com.std.domain.AuthVO;
 import com.std.domain.MemVO;
@@ -148,11 +150,22 @@ public class UserController {
     }
 
     @RequestMapping(value="/findId.do", method=RequestMethod.POST)
-    public String findId(HttpServletResponse response, @RequestParam("email") String email,@RequestParam("username") String username,Model model) throws Exception{
-    	model.addAttribute("id",service.findId(response, email, username));
+    public String findId(HttpServletResponse response, @RequestParam("email") String email,Model model) throws Exception{
+    	log.info("아이디 찾기 결과");
+    	model.addAttribute("id",service.findId(response, email));
     	return "/member/findId";
     }
+    
+    @RequestMapping(value="/findPw", method = RequestMethod.GET)
+    public String findPwGet() throws Exception {
+    	log.info("비밀번호 찾기 페이지 이동");
+    	return "/member/findPw";
+    }
 	
-	
-		
+    @RequestMapping(value = "/findPw", method = RequestMethod.POST)
+    public void findPwPost(@ModelAttribute MemVO vo, HttpServletResponse response) throws Exception{
+    	log.info("비밀번호 변경");
+    	service.findPw(response, vo);
+    }
+  
 }
