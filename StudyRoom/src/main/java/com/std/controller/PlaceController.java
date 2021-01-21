@@ -97,9 +97,9 @@ public class PlaceController {
 	}
 	
 	//글 수정
-	@PreAuthorize("principal.username == #place.writer")
+	@PreAuthorize("(principal.username == #place.writer) or hasRole('ROLE_ADMIN')")
 	@PostMapping("/modify")//modify.jsp
-	public String modify(PlaceVO place, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+	public String modify(PlaceVO place, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr, String writer) {
 		log.info("place modify : "+place);
 		
 		if(service.modify(place)) {
@@ -117,10 +117,10 @@ public class PlaceController {
 	}
 	
 	//글 삭제
-	@PreAuthorize("principal.username == #writer")
+	@PreAuthorize("(principal.username == #writer) or hasRole('ROLE_ADMIN')")
 	@PostMapping("/remove")
 	public String remove(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri,
-			RedirectAttributes rttr) {
+			RedirectAttributes rttr, String writer) {
 		log.info("place remove : "+bno);
 		
 		List<PlacePhotoVO> photoList = service.getPhotoList(bno);

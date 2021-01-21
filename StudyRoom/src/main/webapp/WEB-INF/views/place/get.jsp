@@ -492,9 +492,10 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 		var modalRegisterBtn = $("#modalRegisterBtn");
 
 		var replyer = null;
-		
+		var ROLE_ADMIN = null; 
 		<sec:authorize access="isAuthenticated()">
 		replyer = '<sec:authentication property="principal.username" />';
+		ROLE_ADMIN = '<sec:authentication property="principal.authorities"/>';
 		</sec:authorize>
 		
 		var csrfHeaderName = "${_csrf.headerName}";
@@ -573,13 +574,14 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 				}
 				
 				console.log("Original Replyer : "+originalReplyer);
-				
-				if(replyer != originalReplyer){//로그인한 사람과 작성자가 다를시
-					alert("자신이 작성한 댓글만 삭제 가능합니다.");
-					modal.modal("hide");
-					return;
-				}
-				
+				if(ROLE_ADMIN != '&#91;ROLE&#95;ADMIN&#93;'){//관리자가 아닌사람
+					if(replyer != originalReplyer){//로그인한 사람과 작성자가 다를시
+						alert("자신이 작성한 댓글만 수정 가능합니다.");
+						modal.modal("hide");
+						return;
+					}
+				}	
+	
 				placeReService.update(reply,function(result){
 					alert(result);
 					modal.modal("hide");
@@ -601,15 +603,17 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 				}
 				
 				var originalReplyer = modalInputReplyer.val();
-				
+
 				console.log("Original Replyer : "+originalReplyer);
 				
-				if(replyer != originalReplyer){//로그인한 사람과 작성자가 다를시
-					alert("자신이 작성한 댓글만 삭제 가능합니다.");
-					modal.modal("hide");
-					return;
-				}
-				
+				if(ROLE_ADMIN != '&#91;ROLE&#95;ADMIN&#93;'){//관리자가 아닌사람
+			        if(replyer != originalReplyer){
+			           alert("자신의 글이 아닙니다. 삭제 불가!");
+			           modal.modal("hide");
+			           return;
+					}
+				}			
+
 				placeReService.remove(rno,originalReplyer,function(result){
 					alert(result);
 					modal.modal("hide");

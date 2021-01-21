@@ -50,7 +50,7 @@ public class PlaceReController {
 				
 				//삼항 연산자
 				return insertCount==1 
-				? new ResponseEntity<>("리뷰가 등록되었습니다.",HttpStatus.OK)
+				? new ResponseEntity<>("register review",HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}	
@@ -73,7 +73,7 @@ public class PlaceReController {
 	}
 
 	//댓글 삭제
-	@PreAuthorize("principal.username == #placeRe.replyer")
+	@PreAuthorize("(principal.username == #placeRe.replyer) or hasRole('ROLE_ADMIN')")
 	@DeleteMapping(value = "/{rno}", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> remove(@RequestBody PlaceReVO placeRe, MemVO member){
 		long rno = placeRe.getRno();
@@ -90,12 +90,12 @@ public class PlaceReController {
 		
 		//삼항연산자
 		return service.remove(placeRe) == 1 
-		? new ResponseEntity<>("마일리지가 회수됩니다.",HttpStatus.OK)
+		? new ResponseEntity<>("delete review, mileage back",HttpStatus.OK)
 		: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	//댓글 수정
-	@PreAuthorize("principal.username == #placeRe.replyer")		
+	@PreAuthorize("(principal.username == #placeRe.replyer) or hasRole('ROLE_ADMIN')")		
 	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH},
 			value="/{rno}", consumes = "application/json")
 	public ResponseEntity<String> modify(@RequestBody PlaceReVO placeRe, @PathVariable("rno") Long rno){
@@ -104,7 +104,7 @@ public class PlaceReController {
 		log.info("reply modify : "+placeRe);
 		
 		return service.modify(placeRe)==1 
-		? new ResponseEntity<>("리뷰가 수정되었습니다.",HttpStatus.OK)
+		? new ResponseEntity<>("modify review",HttpStatus.OK)
 		: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }
