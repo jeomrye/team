@@ -9,16 +9,14 @@
 
 <%@ include file="../includes/header.jsp"%>
 <div class="row" style="width:100%; height:100%;background-size:100% 100%; background-repeat:no-repeat;  background-position:inherit;  background-image:url('/resources/main/srfsback.PNG'); ">
-
-
-
-
 <!-- <img alt="/resources/main/srfsback.png" src="/resources/main/srfsback.png" style=" width: 100%;"> -->
 
 	<a href="/main/mainpage" style="color: black; text-decoration: none; ">
 		<img alt="/main/mainpage" src="/resources/main/srfs.PNG"
-		style=" padding-left: 600px; padding-top:200px; width:auto; height:550px;" >
+		style=" padding-left: 500px; padding-top:200px; width:auto; height:550px;" >
 	</a> <br> <br>
+	
+	
 	<form id="searchForm" action="/notice/list" method="get">
 		<!-- <select name="type"> -->
 		<!-- 			<option value="" -->
