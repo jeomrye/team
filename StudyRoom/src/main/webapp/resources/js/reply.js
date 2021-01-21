@@ -24,10 +24,10 @@ var replyService = (function(){
 	}	
 	
 	function getList(param, callback, error){
-		var bno = param.bno;
+		var questionNo = param.questionNo;
 		var page = param.page || 1;
 		
-		$.getJSON("/replies/pages/" + bno + "/" + page + ".json",
+		$.getJSON("/replies/pages/" + questionNo + "/" + page + ".json",
 			function(data){
 				if(callback){
 				
