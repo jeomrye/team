@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,8 +53,8 @@ public class FreeReplyController {
 		log.info("get : "+rno);
 		return new ResponseEntity<>(replyservice.get(rno),HttpStatus.OK);
 	}
-	
-	@PreAuthorize("principal.username ==#vo.replyer")
+
+	@PreAuthorize("(principal.username ==#vo.replyer) or hasRole('ROLE_ADMIN')")
 	@DeleteMapping(value="/{rno}")
 	public ResponseEntity<String> remove(@RequestBody FreeReplyVO vo, @PathVariable("rno") Long rno){
 		log.info("remove: "+rno);
@@ -62,7 +63,7 @@ public class FreeReplyController {
 			new ResponseEntity<>("success",HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@PreAuthorize("principal.username ==#vo.replyer")
+	@PreAuthorize("(principal.username ==#vo.replyer) or hasRole('ROLE_ADMIN')")
 	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH},value= "/{rno}",consumes = "application/json")
 	public ResponseEntity<String> modify(@RequestBody FreeReplyVO vo, @PathVariable("rno") Long rno){
 		
