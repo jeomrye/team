@@ -8,7 +8,6 @@
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
 		<config>src/main/resources/com/std/mapper/PlaceMapper.xml</config>
-		<config>src/main/resources/com/std/mapper/PlaceReMapper.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>

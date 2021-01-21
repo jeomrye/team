@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ include file="../includes/header.jsp"%>
 <div class="row">
 	<div class="col-lg-12">
@@ -14,22 +14,24 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				공지사항
+				<sec:authentication property="principal" var="pinfo"/>
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<button id='regBtn' type="button" class="btn btn-xs pull-right">새 공지 쓰기</button>
+				</sec:authorize>
 <!-- 					관리자만 볼수있게 -->
 			</div>
 			<table class="table eable-striped table-bordered table-hover">
 				<thead>
 					<tr>
-						<th>#번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>수정일</th>
+						<th style="width: 40%;">제목</th>
+						<th style="width: 10%;">작성자</th>
+						<th style="width: 10%;">작성일</th>
+						<th style="width: 10%;">수정일</th>
 					</tr>
 				</thead>
 				<c:forEach items="${list }" var="notice">
 					<tr>
-						<td><c:out value="${notice.notNo }" /></td>
+						
 						<td><a class="move" href='<c:out value="${notice.notNo }" />'>
 								<c:out value="${notice.title }" />
 						</a></td>
@@ -43,6 +45,7 @@
 			</table>
 			<div class="pull-left">
 				<div class="col-lg-12" style="padding-top: 25px; padding-left: 0">
+<!-- 				검색기능 -->
 					<form id="searchForm" action="/notice/list" method="get">
 						<select name="type">
 							<option value=""
@@ -66,7 +69,7 @@
 				<ul class="pagination">
 					<c:if test="${pageMaker.prev }">
 						<li class="paginate_button previous"><a
-							href="${pageMaker.startPage -1 }">Previous</a></li>
+							href="${pageMaker.startPage -1 }">이전</a></li>
 					</c:if>
 					<c:forEach var="num" begin="${pageMaker.startPage }"
 						end="${pageMaker.endPage}">
@@ -76,7 +79,7 @@
 					</c:forEach>
 					<c:if test="${pageMaker.next }">
 						<li class="paginate_button next"><a
-							href="${pageMaker.endPage +1 }">Next</a></li>
+							href="${pageMaker.endPage +1 }">다음</a></li>
 					</c:if>
 
 				</ul>

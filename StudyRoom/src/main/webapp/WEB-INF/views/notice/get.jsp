@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ include file="../includes/header.jsp"%>
 <div class="row">
 	<div class="col-lg-12">
@@ -24,8 +24,13 @@
 			<div class="form-group">
 				<label>내용</label><textarea class="form-control" rows="3" name='content' readonly="readonly"><c:out value="${notice.content }"/></textarea>
 			</div>
-			<button data-oper='modify' class="btn bnt-default" onclick="location.href='/notice/modify?notNo=<c:out value="${notice.notNo }"/>'">Modify</button>
-			<button data-oper='list' class="btn bnt-default" onclick="location.href='/notice/list'">List</button>
+<!-- 			시큐리티를 이용해서 관리자만 수정 볼수있음 -->
+			<sec:authentication property="principal" var="pinfo"/>
+			<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<button data-oper='modify' class="btn btn-danger" onclick="location.href='/notice/modify?notNo=<c:out value="${notice.notNo }"/>'">수정(관리자만)</button>
+			</sec:authorize>
+<!-- 			시큐리티를 이용해서 관리자만 수정 볼수있음 -->
+			<button data-oper='list' class="btn btn-info" onclick="location.href='/notice/list'">공지사항 목록</button>
 			<form action="/board/modify" id="operForm" method="get">
 				<input type="hidden" id="notNo" name="notNo" value='<c:out value="${notice.notNo }"/>'>
 				<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
