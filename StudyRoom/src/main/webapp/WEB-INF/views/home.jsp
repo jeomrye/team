@@ -2,14 +2,11 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
+	<title>==></title>
 </head>
 <body>
-<h1>
-
-	Hello world!  ㅎㅎㅎㅎ
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
 </body>
+<script type="text/javascript">
+	self.location="/main/mainpage";
+</script>
 </html>
