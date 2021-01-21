@@ -12,16 +12,24 @@
 	<annotation-driven />
 
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources location="/resources/img/" mapping="/img/**"></resources>
 
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<context:component-scan base-package="com.spring.biz" />
 	<context:component-scan base-package="com.std.controller" />
 	
+
 	<security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled"/>
 		
+	
+<!-- 	일반 파일 업로드 경로 -->
+<resources location="/resources/img/" mapping="/img/**"></resources>
+	
+
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 <!-- <beans:bean id="multipartResolver"  -->
 <!-- 		class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></beans:bean> -->
