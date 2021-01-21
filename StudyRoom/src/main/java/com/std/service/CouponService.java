@@ -24,8 +24,11 @@ public interface CouponService {
 	public List<CouponAttachVO> getAttachList(int couponNumber);
 	
 	public int getTotal(Criteria cri);
-	
+	//내가 산 쿠폰확인
 	public List<CouponDetailVO> couponGetDetail(String userId);
+	
+	//쿠폰 구매하기
+	public void couponDetailRegister(CouponDetailVO vo);
 //	
 //	public void couponRegDetail(CouponDetailVO couponDetail);
 	

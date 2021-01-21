@@ -28,13 +28,7 @@ public class CouponServiceImpl implements CouponService {
 	@Setter(onMethod_ = @Autowired)
 	private CouponAttachMapper attachMapper;
 	
-	@Override
-	public List<CouponDetailVO> couponGetDetail(String userId) {
-		
-		log.info("couponGetDetail....." + userId);
-		mapper.couponGetDetail(userId);	
-		return mapper.couponGetDetail(userId);
-	}
+	
 //	
 //	@Override
 //	public void couponRegDetail(CouponDetailVO couponDetail) {
@@ -136,6 +130,20 @@ public class CouponServiceImpl implements CouponService {
 		log.info("get total count");
 		
 		return mapper.getTotalCount(cri);
+	}
+	//내가 산 쿠폰확인
+	@Override
+	public List<CouponDetailVO> couponGetDetail(String userId) {
+		
+		log.info("couponGetDetail....." + userId);
+		mapper.couponGetDetail(userId);	
+		return mapper.couponGetDetail(userId);
+	}
+	//쿠폰 구매하기
+	@Override
+	public void couponDetailRegister(CouponDetailVO vo) {
+		log.info("couponBuy: "+vo);
+		mapper.couponDetailInsert(vo);
 	}
 	
 }

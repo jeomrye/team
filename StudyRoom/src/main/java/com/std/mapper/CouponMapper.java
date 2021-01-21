@@ -34,6 +34,8 @@ public interface CouponMapper {
 	
 	//내가 산 쿠폰확인
 	public List<CouponDetailVO> couponGetDetail(String userId);
+	//쿠폰구매
+	public void couponDetailInsert(CouponDetailVO vo);
 	
 //	public void couponRegDetail(CouponDetailVO couponDetail);
 }

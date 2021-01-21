@@ -109,7 +109,10 @@ width:600px;
 
  <form id='operForm' action="/coupon/couponModify" method="get">
 			        <input type='hidden' id='couponNumber' name='couponNumber' value='<c:out value="${coupon.couponNumber}"/>'>
-
+			        <input type='hidden' id='couponName' name='couponName' value='<c:out value="${coupon.couponName}"/>'>
+			        <input type='hidden' id='couponPrice' name='couponPrice' value='<c:out value="${coupon.couponPrice}"/>'>
+			       
+					
 			        <input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
 			        <input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
 			        <input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'>
@@ -127,46 +130,15 @@ $(document).ready(function(){
 
 var formObj = $("form");
 	
-	$('button').on("click", function(e){
-		
-		e.preventDefault();
-		
-		var operation = $(this).data("oper");
-		
-		console.log(operation);
-		
-		if(operation === 'submit'){
-			//리스트로 이동
-		
-			
-			var finMileage = "";
-			var couponPrice = $('.s').val();
-			var mileage = $('.m').val();
-			
-// 			finMileage = mileage - couponPrice;
-			
-			
-				if(mileage - couponPrice < 0){
-					alert("구매 실패 마일리지 부족");
-				}else if(mileage - couponPrice >= 0){
-				finMile = mileage - couponPrice;
-				alert("구매 완료");
-				console.log(finMile);
-				return finMile;
-			}
-			
-			formObj.attr("action", "/coupon/couponList").attr("method", "get");
-			
-		}
-		
-		
-		
-		
-		
-		formObj.submit();
-	});
+	
 	
 	var operForm = $("#operForm");
+	
+	$("button[data-oper='submit']").on("click", function(e){
+		
+		operForm.attr("action", "/coupon/couponBuy").submit();
+		
+	});
 	
 	$("button[data-oper='modify']").on("click", function(e){
 		

@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.std.domain.CouponAttachVO;
+import com.std.domain.CouponDetailVO;
 import com.std.domain.CouponVO;
 import com.std.domain.Criteria;
 import com.std.domain.PageDTO;
@@ -58,52 +60,24 @@ public class MileController {
 	}
 	
 	
-	@GetMapping("/couponDetail")
-	public void couponDetailList(String userId, Model model) {
-		
-		log.info("couponDetailList : " + userId);
-		model.addAttribute("dl", service.couponGetDetail(userId));
-		
-		
-		
-	}
-	
-//	@PostMapping("/couponRegister")
-//	public String couponDetailResister(int , RedirectAttributes rttr) {
-//		
-//		log.info("==============================");
-//		
-//		log.info("CouponRegister : " + coupon);
-//			
-//		if(coupon.getAttachList() != null) {
-//			coupon.getAttachList().forEach(attach -> log.info(attach));
-//		}
-//		log.info("================================");
-//		service.couponRegister(coupon);
-//		rttr.addFlashAttribute("result", coupon.getCouponNumber());
-//		
-//		return "redirect:/coupon/couponList";
-//	}
-	
-	
-	
 	//쿠폰 등록 처리와 테스트
-	@PostMapping("/couponRegister")
-	public String couponResister(CouponVO coupon, RedirectAttributes rttr) {
-		
-		log.info("==============================");
-		
-		log.info("CouponRegister : " + coupon);
+		@PostMapping("/couponRegister")
+		public String couponResister(CouponVO coupon, RedirectAttributes rttr) {
 			
-		if(coupon.getAttachList() != null) {
-			coupon.getAttachList().forEach(attach -> log.info(attach));
+			log.info("==============================");
+			
+			log.info("CouponRegister : " + coupon);
+				
+			if(coupon.getAttachList() != null) {
+				coupon.getAttachList().forEach(attach -> log.info(attach));
+			}
+			log.info("================================");
+			service.couponRegister(coupon);
+			rttr.addFlashAttribute("result", coupon.getCouponNumber());
+			
+			return "redirect:/coupon/couponList";
 		}
-		log.info("================================");
-		service.couponRegister(coupon);
-		rttr.addFlashAttribute("result", coupon.getCouponNumber());
 		
-		return "redirect:/coupon/couponList";
-	}
 	
 	//쿠폰 조회 와 수정
 	@GetMapping({"/couponGet", "/couponModify"})
@@ -186,5 +160,67 @@ public class MileController {
 		});
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//내가 산 쿠폰 보기
+	@GetMapping("/couponDetail")
+	public void couponDetailList(String userId, Model model) {
+		
+		log.info("couponDetailList : " + userId);
+		model.addAttribute("dl", service.couponGetDetail(userId));
+		
+		
+		
+	}
+	
+	//쿠폰 구매 확정 페이지로 이동
+	@GetMapping("/couponBuy")
+	public void couponDetailRegister() {
+		log.info("쿠폰 구매 확정 페이지로 이동");
+	}
+	
+	
+	
+	//쿠폰 구매 확정 페이지에서 서비스로 가는것
+	@PostMapping("/couponBuy")
+	public String couponDetailResister(CouponDetailVO vo) {
+		
+		log.info("==============================");
+		
+		log.info("CouponRegister : " + vo);
+			
+		
+		service.couponDetailRegister(vo);
+		log.info("insert Service 성공");
+		
+		return "redirect:/coupon/couponList";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

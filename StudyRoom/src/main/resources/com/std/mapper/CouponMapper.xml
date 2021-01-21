@@ -118,5 +118,11 @@
 	select * from coupon_detail where userid = #{userid , jdbcType=VARCHAR}
 </select>
 
+<insert id="couponBuy">
+	insert into coupon_detail(userid, couponnumber, couponname, couponprice, couponuse, couponbuydate) values(#{userid}, #{couponnumber},#{couponname},#{couponprice},0,sysdate)
+</insert>
+
+
+
 
 </mapper>
