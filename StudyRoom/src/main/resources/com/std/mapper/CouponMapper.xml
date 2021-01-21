@@ -101,6 +101,13 @@
 	 couponNumber > 0
 </select>
 
+<select id="finMile">
+	select mileage from member where userid = #{userid} 
+</select>
+
+<select id="couponPrice">
+	select couponPrice from coupon where couponNumber = #{couponNUmber}
+</select>
 
 
 </mapper>

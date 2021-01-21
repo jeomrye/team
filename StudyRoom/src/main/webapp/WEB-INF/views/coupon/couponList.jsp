@@ -49,22 +49,7 @@
                                 </c:forEach>
 </table>
 
-<div class='row'>
-<div class="col-lg-12">
 
-<form id='searchForm' action="/coupon/couponList" method='get'>
-	<select name='type'>
-		<option value="" <c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
-			<option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>쿠폰이름</option>
-	</select>
-	<input type='text' name='keyword' value='<c:out value="${pageMaker.cri.keyword}"/>'/>
-	<input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum}"/>'/>
-	<input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount}"/>'/>
-	<button class='btn btn-default'>검색</button>
-</form>
-
-</div>
-</div>
 
 <div class='pull-right'>
 <ul class="pagination">
@@ -89,6 +74,24 @@
 
 </ul>
 </div>
+
+<div class='row'>
+<div class="col-lg-12">
+
+<form id='searchForm' action="/coupon/couponList" method='get'>
+	<select name='type'>
+		<option value="" <c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
+			<option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>쿠폰이름</option>
+	</select>
+	<input type='text' name='keyword' value='<c:out value="${pageMaker.cri.keyword}"/>'/>
+	<input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum}"/>'/>
+	<input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount}"/>'/>
+	<button class='btn btn-default'>검색</button>
+</form>
+
+</div>
+</div>
+
 <form id='actionForm' action="/coupon/couponList" method='get'>
 	<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum }'>
 	<input type='hidden' name='amount' value='${pageMaker.cri.amount }'>

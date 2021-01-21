@@ -141,15 +141,7 @@ $(document).ready(function(){
 		}else if(operation === 'list'){
 			//리스트로 이동
 			formObj.attr("action", "/coupon/couponList").attr("method", "get")
-			var pageNumTag = $("input=[name='pageNum']").clone();
-			var amountTag = $("input=[name='amount']").clone();
-			var keywordTag = $("input=[name='keyword']").clone();
-			var typeTag = $("input=[name='type']").clone();
-			formObj.empty();
-			formObj.append(pageNumTag);
-			formObj.append(amountTag);
-			formObj.append(keywordTag);
-			formObj.append(typeTag);
+			
 			
 		}else if(operation === 'modify'){
 			console.log("submit clicked");
