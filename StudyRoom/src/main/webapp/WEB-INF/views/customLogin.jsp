@@ -55,7 +55,7 @@
                                     </label>
                                     <span style="padding-left: 70px">
                                     	<a href="/member/findId_form">아이디찾기</a>
-                                    	<a href="/member/findPw_form">비밀번호찾기</a>
+                                    	<a href="/member/findPw">비밀번호찾기</a>
                                     </span>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
