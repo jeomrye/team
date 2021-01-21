@@ -38,6 +38,7 @@ public class NoticeController {
 	}
 	//register를 post방식
 	@PostMapping("/register")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String register(NoticeVO notice, RedirectAttributes rttr) {
 
 		log.info("register : " + notice);
