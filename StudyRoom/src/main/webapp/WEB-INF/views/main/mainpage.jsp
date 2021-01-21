@@ -8,12 +8,16 @@
 	rel="stylesheet">
 
 <%@ include file="../includes/header.jsp"%>
+<div class="row" style="width:100%; height:100%;background-size:100% 100%; background-repeat:no-repeat;  background-position:inherit;  background-image:url('/resources/main/srfsback.PNG'); ">
 
-<div class="col-md-6">
 
-	<a href="/main/mainpage" style="color: black; text-decoration: none;">
+
+
+<!-- <img alt="/resources/main/srfsback.png" src="/resources/main/srfsback.png" style=" width: 100%;"> -->
+
+	<a href="/main/mainpage" style="color: black; text-decoration: none; ">
 		<img alt="/main/mainpage" src="/resources/main/srfs.PNG"
-		style="padding-left: 25%; padding-top: 100px;">
+		style=" padding-left: 600px; padding-top:200px; width:auto; height:550px;" >
 	</a> <br> <br>
 	<form id="searchForm" action="/notice/list" method="get">
 		<!-- <select name="type"> -->
@@ -42,9 +46,9 @@
 	</form>
 </div>
 
-<div class="col-md-6" style="background-color: silver; height: 100%;">
-	<img alt="" src="/resources/main/srfs_main_side.PNG">
-</div>
+<!-- <div class="col-md-6" style="background-color: silver; height: 100%;"> -->
+<!-- 	<img alt="" src="/resources/main/srfs_main_side.PNG"> -->
+<!-- </div> -->
 
 <script>
 	function searchToggle(obj, evt) {
@@ -64,9 +68,8 @@
 .search-wrapper {
 	position: absolute;
 	transform: translate(-50%, -50%);
-	top: 100%;
-	padding-left: 75%;
-	padding-top: 100px;
+	top: 75%;
+	padding-left: 105%;
 }
 
 .search-wrapper.active {
@@ -188,7 +191,6 @@
 	transform: rotate(-180deg);
 	transition: all .3s cubic-bezier(0.285, -0.450, 0.935, 0.110);
 	transition-delay: 0.2s;
-	padding-top: 100px;
 }
 
 .search-wrapper.active .close {
