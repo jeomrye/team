@@ -100,7 +100,7 @@ width:600px;
 </div>
 <input type="number" class="s" value='<c:out value="${coupon.couponPrice}"/>'>
 <input type="number" class="m" value='<c:out value="${member.mileage}"/>'>
-<input type="number" class="m" value='<c:out value="${member.mileage}"/>'>
+
 
 <!-- 쿠폰 상세보기 에서 수정이나 목록페이지로 이동 -->
 <button data-oper='modify' class="btn btn-default">수정</button>
