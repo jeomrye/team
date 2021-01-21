@@ -58,7 +58,7 @@
 					<button id="addReplyBtn" class="btn btn-primary btn-xs pull-right">새 댓글 작성</button>
 					</c:if>
 					</sec:authorize>
-			</div> 
+			</div>  
 			
 			<div class="panel-body">
 				<ul class="chat">
