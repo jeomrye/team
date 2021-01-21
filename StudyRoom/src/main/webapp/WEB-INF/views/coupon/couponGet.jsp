@@ -158,6 +158,11 @@ var formObj = $("form");
 			formObj.attr("action", "/coupon/couponList").attr("method", "get");
 			
 		}
+		
+		
+		
+		
+		
 		formObj.submit();
 	});
 	

@@ -128,7 +128,7 @@ $(document).ready(function(e){
 			}
 			
 			$.ajax({
-				url : '/uploadAjaxAction',
+				url : '/coupon/uploadAjaxAction',
 				processData : false,
 				contentType : false,
 				data : formData,
@@ -189,7 +189,7 @@ $(document).ready(function(e){
 				var targetLi = $(this).closet("li");
 				
 				$.ajax({
-					url:'/deleteFile',
+					url:'/coupon/deleteFile',
 					data:{fileName:targetFile, type:type},
 					dataType:'text',
 					type:'POST',

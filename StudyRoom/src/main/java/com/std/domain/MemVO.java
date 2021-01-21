@@ -1,6 +1,7 @@
 package com.std.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -19,5 +20,5 @@ public class MemVO {
 	private int mileage;	//마일리지
 	private int coupon; //쿠폰번호
 	private int companynumber; //사업자번호
-	
+	private List<AuthVO> authList;
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
 
+import com.std.domain.CouponDetailVO;
 import com.std.domain.CouponVO;
 import com.std.domain.Criteria;
 
@@ -30,4 +31,9 @@ public interface CouponMapper {
 	public int couponUpdate(CouponVO coupon);
 	
 	public int getTotalCount(Criteria cri);
+	
+	//내가 산 쿠폰확인
+	public List<CouponDetailVO> couponGetDetail(String userId);
+	
+//	public void couponRegDetail(CouponDetailVO couponDetail);
 }

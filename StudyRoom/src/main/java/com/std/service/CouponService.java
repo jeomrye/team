@@ -3,6 +3,7 @@ package com.std.service;
 import java.util.List;
 
 import com.std.domain.CouponAttachVO;
+import com.std.domain.CouponDetailVO;
 import com.std.domain.CouponVO;
 import com.std.domain.Criteria;
 
@@ -23,4 +24,10 @@ public interface CouponService {
 	public List<CouponAttachVO> getAttachList(int couponNumber);
 	
 	public int getTotal(Criteria cri);
+	
+	public List<CouponDetailVO> couponGetDetail(String userId);
+//	
+//	public void couponRegDetail(CouponDetailVO couponDetail);
+	
+	
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.std.domain.CouponAttachVO;
+import com.std.domain.CouponDetailVO;
 import com.std.domain.CouponVO;
 import com.std.domain.Criteria;
 import com.std.mapper.CouponAttachMapper;
@@ -26,6 +27,22 @@ public class CouponServiceImpl implements CouponService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private CouponAttachMapper attachMapper;
+	
+	@Override
+	public List<CouponDetailVO> couponGetDetail(String userId) {
+		
+		log.info("couponGetDetail....." + userId);
+		mapper.couponGetDetail(userId);	
+		return mapper.couponGetDetail(userId);
+	}
+//	
+//	@Override
+//	public void couponRegDetail(CouponDetailVO couponDetail) {
+//
+//		log.info("couponRegDetail...." + couponDetail);
+//		mapper.couponRegDetail(couponDetail);
+//		
+//	}
 	
 	@Transactional
 	@Override

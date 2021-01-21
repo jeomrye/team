@@ -6,13 +6,13 @@
 <mapper namespace="com.std.mapper.CouponMapper">
 
 <!-- 쿠폰 리스트 가져오기 -->
-<select id="couponGetList" resultType="com.std.domain.CouponVO">
+ <select id="couponGetList" resultType="com.std.domain.CouponVO">
 	
 	<![CDATA[
 	select * from coupon where couponNumber > 0
 	]]>
 	
-</select>
+ </select>
 
 <!-- insert문만 처리되고 생성된 PK값을 알 필요가 없는 경우 -->
 <insert id="couponInsert">
@@ -107,6 +107,15 @@
 
 <select id="couponPrice">
 	select couponPrice from coupon where couponNumber = #{couponNUmber}
+</select>
+
+<!-- <insert id="couponGetDetail"> -->
+<!-- 	insert into coupon_detail (userId, couponNumber, couponName, couponPrice, couponUse, couponBuyDate)  -->
+<!-- 	values(#{userId}, #{couponNumber}, #{couponName}, #{couponPrice}, #{couponUse}, sysdate) -->
+<!-- </insert> -->
+
+<select id="couponGetDetail" resultType="com.std.domain.CouponDetailVO">
+	select * from coupon_detail where userid = #{userid , jdbcType=VARCHAR}
 </select>
 
 

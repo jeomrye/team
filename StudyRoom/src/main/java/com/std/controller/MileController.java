@@ -57,6 +57,36 @@ public class MileController {
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	}
 	
+	
+	@GetMapping("/couponDetail")
+	public void couponDetailList(String userId, Model model) {
+		
+		log.info("couponDetailList : " + userId);
+		model.addAttribute("dl", service.couponGetDetail(userId));
+		
+		
+		
+	}
+	
+//	@PostMapping("/couponRegister")
+//	public String couponDetailResister(int , RedirectAttributes rttr) {
+//		
+//		log.info("==============================");
+//		
+//		log.info("CouponRegister : " + coupon);
+//			
+//		if(coupon.getAttachList() != null) {
+//			coupon.getAttachList().forEach(attach -> log.info(attach));
+//		}
+//		log.info("================================");
+//		service.couponRegister(coupon);
+//		rttr.addFlashAttribute("result", coupon.getCouponNumber());
+//		
+//		return "redirect:/coupon/couponList";
+//	}
+	
+	
+	
 	//쿠폰 등록 처리와 테스트
 	@PostMapping("/couponRegister")
 	public String couponResister(CouponVO coupon, RedirectAttributes rttr) {
