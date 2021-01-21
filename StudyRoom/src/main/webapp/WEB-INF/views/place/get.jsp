@@ -9,7 +9,7 @@
 
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header">Study Place</h1>
+		<h1 class="page-header"><c:out value="[ ${place.title } ]"></c:out></h1>
 	</div>
 </div>
 
@@ -23,7 +23,7 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-			<div class="panel-heading">Files <span id='photo'>(사진 클릭시 확대 가능)</span></div>
+			<div class="panel-heading">첨부파일 <span id='photo'>(사진 클릭시 확대 가능)</span></div>
 			<div class="panel-body">
 				<div class="uploadResult">
 					<ul>
@@ -43,7 +43,7 @@
 			
 			<!-- 점수 -->
 			<div class="form-group">
-			<label>Score</label><br>
+			<label>평점</label><br>
 			<c:set var="score" value="${score}"/>
 			
  			<c:if test = "${fn:contains(score, '0')}">
@@ -68,17 +68,17 @@
 			
 			<!-- 글 번호 -->
 			<div class="form-group">
-			<label>Bno</label><input class="form-control" name='bno' value="<c:out value='${place.bno}'/>" readonly="readonly">
+			<label>번호</label><input class="form-control" name='bno' value="<c:out value='${place.bno}'/>" readonly="readonly">
 			</div>
 			
 			<!-- 상호명 -->
 			<div class="form-group">
-			<label>Title</label><input class="form-control" name='title' value="<c:out value='${place.title}'/>" readonly="readonly">
+			<label>상호명</label><input class="form-control" name='title' value="<c:out value='${place.title}'/>" readonly="readonly">
 			</div>
 			
 			<!-- 기본 구비품 -->
 			<div class="form-group">
-			<label>Offer</label><br>
+			<label>기본 구비품</label><br>
 
 			<c:set var="offer" value="${place.offer }"/>
 			
@@ -113,7 +113,7 @@
 
 			<!-- 추가적인 제공품 -->
 			<div class="form-group">
-			<label>Extra</label><br>
+			<label>추가 제공품</label><br>
 			<div id="extra"></div>
 			<script>		
 			var extra = '<c:out value="${place.extra}"/>';
@@ -133,50 +133,49 @@
 			
 			<!-- 내용 -->
 			<div class="form-group">
-			<label>Content</label>
-			<textarea rows="3" class="form-control" name='content' readonly="readonly"><c:out value="${place.content}"/></textarea>
+			<label>내용</label><textarea rows="3" class="form-control" name='content' readonly="readonly"><c:out value="${place.content}"/></textarea>
 			</div>
 			
 			<!-- 운영시간 -->
 			<div class="form-group">
-			<label>Time</label><input class="form-control" name='time' value="<c:out value='${place.time}'/>" readonly="readonly">
+			<label>운영시간</label><input class="form-control" name='time' value="<c:out value='${place.time}'/>" readonly="readonly">
 			</div>
 			
 			<!-- 청소시간 -->
 			<div class="form-group">
-			<label>Clean</label><input class="form-control" name='clean' value="<c:out value='${place.clean}'/>" readonly="readonly">
+			<label>청소시간</label><input class="form-control" name='clean' value="<c:out value='${place.clean}'/>" readonly="readonly">
 			</div>
 			
 			<!-- 연락처 -->
 			<div class="form-group">
-			<label>Tel</label><input class="form-control" name='tel' value="<c:out value='${place.tel}'/>" readonly="readonly">
+			<label>연락처</label><input class="form-control" name='tel' value="<c:out value='${place.tel}'/>" readonly="readonly">
 			</div>
 			
 			<!-- 주소 -->
 			<div class="form-group">
-			<label>Address</label><input class="form-control" name='address' value="<c:out value='${place.address}'/>" readonly="readonly">
+			<label>주소</label><input class="form-control" name='address' value="<c:out value='${place.address}'/>" readonly="readonly">
 			<div><a href="https://map.kakao.com/link/search/${place.address }" target="_blank">지도로 알아보기(Click)</a></div>
 			<div id="map" style="width:1230px;height:300px;"></div>
 			</div>
 			
 			<!-- 홈페이지,SNS계정 -->
 			<div class="form-group">
-			<label>Page</label><div><a href="${place.page }" target="_blank">${place.page }</a></div>
+			<label>홈페이지/SNS계정</label><div><a href="${place.page }" target="_blank">${place.page }</a></div>
 			</div>
 			
 			<!-- 작성자 -->
 			<div class="form-group">
-			<label>Writer</label><input class="form-control" name='userid' value="<c:out value='${place.userid}'/>" readonly="readonly">
+			<label>작성자</label><input class="form-control" name='userid' value="<c:out value='${place.writer}'/>" readonly="readonly">
 			</div>
 
 			<sec:authentication property="principal" var="pinfo"/>
-				<sec:authorize access="isAuthenticated()">
-					<c:if test="${pinfo.username eq place.writer }">
-						<button data-oper='modify' class="btn btn-default">Modify</button>
+				<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')">
+					<c:if test="${pinfo.username eq place.writer or pinfo.authorities eq '[ROLE_ADMIN]' }">
+						<button data-oper='modify' class="btn btn-default">수정</button>
 					</c:if>
 				</sec:authorize>
 				
-			<button data-oper='list' class="btn btn-info">List</button>
+			<button data-oper='list' class="btn btn-info">목록</button>
 			
 			<!-- modify로 넘어가면서 가져가게 되는 값 -->
 			<form id='openForm' action="/place/modify" method="get">
@@ -251,9 +250,9 @@
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<i class="fa fa-comments fa-fw"></i>Reply				
-				<sec:authorize access="isAuthenticated()">
-				<button id="addReplyBtn" class='btn btn-primary btn-xs pull-right'>New Reply</button>
+				<i class="fa fa-comments fa-fw"></i>리뷰 댓글				
+				<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
+				<button id="addReplyBtn" class='btn btn-primary btn-xs pull-right'>새로운 리뷰</button>
 				</sec:authorize>
 			</div>
 			
@@ -266,7 +265,7 @@
 							<strong class="primary-font">user00</strong>
 							<small class="pull-right text-muted">2018-01-01 13:13</small>
 						</div>
-						<p>Good job!</p>
+						<p>Good place!</p>
 					</div>
 				</li>
 			</ul>
@@ -288,11 +287,11 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 			<div class='modal-header'>
 				<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">REPLY</h4>
+				<h4 class="modal-title" id="myModalLabel">리뷰</h4>
 			</div>
 			
 			<div class='form-group'>
-				<label>Score</label><br>
+				<label>점수</label><br>
 				<select id="score">
 				<option value="5" selected="selected">5점(매우 만족)</option>
 				<option value="4">4점(만족)</option>
@@ -303,23 +302,23 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 			</div>
 			
 			<div class='form-group'>
-				<label>Reply</label>
+				<label>내용<span>(150자 이상 입력해야 등록가능)</span></label>
 				<textarea rows="5" cols="4" class='form-control' id="content" name='reply' maxlength="1000" value='New Reply!'></textarea>
 				 <span class='pull-right' id="counter">###</span>
 			</div>
 			<div class='form-group'>
-				<label>Replyer</label>
+				<label>작성자<span>(1인 하루 1회 리뷰 제한)</span></label>
 				<input class='form-control' name='replyer' value='replyer' readonly="readonly">
 			</div>
 			<div class='form-group'>
-				<label>Reply Date</label>
+				<label>작성일</label>
 				<input class='form-control' name='replyDate' value="">
 			</div>
 		<div class="modal-footer">
-			<button type="button" id='modalModBtn' class="btn btn-warning">Modify</button>
-			<button type="button" id='modalRemoveBtn' class="btn btn-danger">Remove</button>
-			<button type="button" id='modalRegisterBtn' class="btn btn-primary">Register</button>
-			<button type="button" id='modalCloseBtn' class="btn btn-default" data-dismiss="modal">Close</button>
+			<button type="button" id='modalModBtn' class="btn btn-warning">수정</button>
+			<button type="button" id='modalRemoveBtn' class="btn btn-danger">삭제</button>
+			<button type="button" id='modalRegisterBtn' class="btn btn-primary">등록</button>
+			<button type="button" id='modalCloseBtn' class="btn btn-default" data-dismiss="modal">닫기</button>
 		</div>
 		</div> <!-- modal-content -->
 	</div> <!-- modal-dialog -->
@@ -529,7 +528,7 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 			
 			//실질적 댓글 등록
 			placeReService.add(reply, function(result){
-				alert("댓글이 등록되었습니다.");
+				alert("!!! 주의 !!!     ※리뷰 삭제시 적립된 마일리지가 회수됩니다※");
 			
 				modal.find("input").val("");//input 내부 빈 내용으로 만들기
 				modal.modal("hide");//모달 숨기기

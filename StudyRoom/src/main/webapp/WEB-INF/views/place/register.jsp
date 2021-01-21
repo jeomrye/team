@@ -6,7 +6,7 @@
 <%@ include file="../includes/header.jsp" %>
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header">Study Place</h1>
+		<h1 class="page-header">새로운 장소 등록</h1>
 	</div>
 </div>
 
@@ -60,7 +60,7 @@ align-items: center;
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-			<div class="panel-heading">장소 등록</div>
+			<div class="panel-heading">새로운 장소 등록</div>
 			<div class="panel-body">
 			
 			<form role="form" action="/place/register" method="post">
@@ -69,13 +69,13 @@ align-items: center;
 			<c:out value="${placeResult}"></c:out>
 			<!-- 상호명 -->
 			<div class="form-group">
-			<label>Title<span>(필수)</span></label>
+			<label>상호명<span>(필수)</span></label>
 			<input class="form-control" name='title' placeholder="서울 광진구 랭스터디카페(카페형/무인)">
 			</div>
 			
 			<!-- 기본 구비품 -->
 			<div class="form-group">
-			<label>Offer<span>(필수)</span></label><br>
+			<label>기본 구비품<span>(필수)</span></label><br>
 			<input type="checkbox" name='offer' value="공기청정기"> 공기청정기<br>
 			<input type="checkbox" name='offer' value="개인 사물함"> 개인 사물함<br>
 			<input type="checkbox" name='offer' value="냉난방기"> 냉난방기<br>
@@ -89,54 +89,54 @@ align-items: center;
 			
 			<!-- 추가적인 제공품 -->
 			<div class="form-group">
-			<label>Extra</label>
+			<label>추가 제공품</label>
 			<input class="form-control" name='extra' placeholder="카누,맥심,담요,충전기,개인 스탠드,귀마개,인쇄(흑:100/칼:500),팩스">
 			</div>
 			
 			<!-- 내용 -->
 			<div class="form-group">
-			<label>Content<span>(필수)</span></label><textarea rows="3" class="form-control" name='content' 
+			<label>내용<span>(필수)</span></label><textarea rows="3" class="form-control" name='content' 
 			placeholder="테이블형 15석, 독서실형 10석	 1층:카페형/2층:독서실형 분리 	1시간권:1,500원/4시간권:3,500원/8시간권:8,500원/종일권:1만원"></textarea>
 			</div>
 			
 			<!-- 운영시간 -->
 			<div class="form-group">
-			<label>Time<span>(필수)</span></label>
+			<label>운영시간<span>(필수)</span></label>
 			<input class="form-control" name='time' placeholder="새벽4시~다음날 새벽3시(연중무휴)">
 			</div>
 			
 			<!-- 청소시간 -->
 			<div class="form-group">
-			<label>Clean<span>(필수)</span></label>
+			<label>청소시간<span>(필수)</span></label>
 			<input class="form-control" name='clean' placeholder="새벽3시~새벽4시">
 			</div>
 			
 			<!-- 연락처 -->
 			<div class="form-group">
-			<label>Tel<span>(필수)</span></label>
+			<label>연락처<span>(필수)</span></label>
 			<input class="form-control" name='tel'>
 			</div>
 			
 			<!-- 주소 -->
 			<div class="form-group">
-			<label>Address<span>(필수)</span></label>
+			<label>주소<span>(필수)</span></label>
 			<input class="form-control" name='address'>
 			</div>
 			
 			<!-- 홈페이지,SNS계정 -->
 			<div class="form-group">
-			<label>Page</label>
+			<label>홈페이지/SNS계정</label>
 			<input class="form-control" name='page' placeholder="홈페이지/SNS계정">
 			</div>
 			
 			<!-- 작성자, 로그인한 아이디 읽어옴 -->
 			<div class="form-group">
-			<label>Writer<span>(필수)</span></label>
+			<label>작성자</label>
 			<input class="form-control" name='writer' value='<sec:authentication property="principal.username"/>' readonly="readonly">
 			</div>
 			
-			<button type="submit" class="btn btn-primary">Submit Button</button>
-			<button type="reset" class="btn btn-default">Reset Button</button>
+			<button type="submit" class="btn btn-primary">등록</button>
+			<button type="reset" class="btn btn-default">초기화</button>
 			</form>
 			
 			</div>
@@ -147,7 +147,7 @@ align-items: center;
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-			<div class="panel-heading">File Attach</div>
+			<div class="panel-heading">첨부파일</div>
 			<div class="panel-body">
 				<div class="form-group uploadDiv"><!--  class 이름 2개 -->
 					<input type="file" name="uploadFile" multiple>

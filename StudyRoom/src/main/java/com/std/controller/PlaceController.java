@@ -103,7 +103,7 @@ public class PlaceController {
 		log.info("place modify : "+place);
 		
 		if(service.modify(place)) {
-			rttr.addFlashAttribute("result","success");
+			rttr.addFlashAttribute("result","글이 수정되었습니다.");
 		}
 		
 		//넘기는 페이지에 값 전달
@@ -128,7 +128,7 @@ public class PlaceController {
 			//delete photo files
 			deleteFiles(photoList);
 			
-			rttr.addFlashAttribute("result","success");
+			rttr.addFlashAttribute("result","글이 삭제되었습니다.");
 		}
 		
 		//넘기는 페이지에 값 전달
@@ -173,13 +173,4 @@ public class PlaceController {
 			}//end catch			
 		});//end foreach
 	}
-	/*
-	 * @RequestMapping(value = "/test_check", method = RequestMethod.POST)
-	 * 
-	 * @ResponseBody public void testCheck(@RequestParam(value = "valueArrTest[]")
-	 * List<String> valueArr, PlaceVO place) { String[] checkList =
-	 * place.getOffer().split(","); System.out.println(checkList); }
-	 */
-
-
 }

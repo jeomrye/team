@@ -50,7 +50,7 @@ public class PlaceReController {
 				
 				//삼항 연산자
 				return insertCount==1 
-				? new ResponseEntity<>("success",HttpStatus.OK)
+				? new ResponseEntity<>("리뷰가 등록되었습니다.",HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}	
@@ -90,7 +90,7 @@ public class PlaceReController {
 		
 		//삼항연산자
 		return service.remove(placeRe) == 1 
-		? new ResponseEntity<>("success",HttpStatus.OK)
+		? new ResponseEntity<>("마일리지가 회수됩니다.",HttpStatus.OK)
 		: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
@@ -104,7 +104,7 @@ public class PlaceReController {
 		log.info("reply modify : "+placeRe);
 		
 		return service.modify(placeRe)==1 
-		? new ResponseEntity<>("success",HttpStatus.OK)
+		? new ResponseEntity<>("리뷰가 수정되었습니다.",HttpStatus.OK)
 		: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

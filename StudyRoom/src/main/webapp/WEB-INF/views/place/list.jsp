@@ -7,31 +7,33 @@
 
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header">Study Place</h1>
+		<h1 class="page-header">장소게시판</h1>
 	</div>
 </div>
 
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-			<div class="panel-heading">스터디 장소 목록
-			<button type="button" id='regBtn' class="btn btn-xs pull-right">새로운 장소 등록하기</button>
+			<div class="panel-heading">장소게시판
+			<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')">
+			<button type="button" id='regBtn' class="btn btn-xs pull-right">새 장소 등록</button>
+			</sec:authorize>
 			</div>
 			<div class="panel-body">
-				<table class="table table-striped table-bordered table-hover">
+				<table class="table eable-striped table-bordered table-hover">
 					<thead>
 					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>수정일</th>
+						<th style="width: 10%">번호</th>
+						<th style="width: 40%">제목</th>
+						<th style="width: 10%">작성자</th>
+						<th style="width: 10%">작성일</th>
+						<th style="width: 10%">수정일</th>
 					</tr>
 					</thead>
 					
 					<c:forEach items="${placeList}" var="place"> <!-- place list 값 모두 가져와서 반복문 -->
 					<tr>
-						<td><c:out value="${place.bno }" /></td> <!-- 글 번호 -->
+						<td><c:out value="${place.bno }" /></td> <!--  글 번호 -->
 
 						<td><a class='move' href='<c:out value="${place.bno }"/>'> <!-- 글 상세보기 링크 -->
 						<c:out value="${place.title }"/> <!-- 글 제목  -->
@@ -47,9 +49,36 @@
 					</c:forEach>	
 				</table>
 				
-				<!-- 검색부분 -->
-				<div class="row">
-					<div class="col-lg-12">
+				
+
+				<!-- list로 넘어갈 때 가져가는 값 -->
+				<form id="actionForm" action="/place/list" method="get">
+					<input type="hidden" name='pageNum' value="${placePage.cri.pageNum}">
+					<input type='hidden' name='amount' value='${placePage.cri.amount}'>
+					<!-- 검색을 했다면, list로 돌아갈시 전체 목록이 아닌 검색했던 내용 목록이 다시 뜰 수 있도록 -->
+					<input type="hidden" name='type' value='<c:out value="${placePage.cri.type}"/>'>
+					<input type="hidden" name='keyword' value='<c:out value="${placePage.cri.keyword}"/>'>
+				</form>
+
+				<!-- 글 등록시 뜨는 modal -->
+			 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">새로운 장소 등록!</h4>
+						</div>
+						<div class="modal-body">처리가 완료되었습니다.</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+						</div>
+						</div>
+					</div>
+				</div>			
+			</div>
+			<!-- 검색부분 -->
+				<div class="pull-left">
+					<div class="col-lg-12" style="padding-top: 25px; padding-left:0">
 					
 					<form id='searchForm' action="/place/list" method="get">
 					<select name='type'>
@@ -83,7 +112,7 @@
 					<input type="hidden" name="pageNum" value='<c:out value="${placePage.cri.pageNum}"/>'>
 					<!-- 한 페이지당 게시물 수 hidden 처리 -->
 					<input type="hidden" name="amount" value='<c:out value="${placePage.cri.amount}"/>'>
-					<button class='btn btn-default'>Search</button>
+					<button class='btn btn-default'>검색</button>
 					</form>	
 					</div>
 				</div>
@@ -94,7 +123,7 @@
 					<!-- 이전 영역이 있는 경우 -->
 						<c:if test="${placePage.prev }">
 							<li class="paginate_button previous">
-							<a href="${placePage.startPage -1}">Previous</a></li> <!-- 클릭시 현재 시작 페이지 -1 -->
+							<a href="${placePage.startPage -1}">이전</a></li> <!-- 클릭시 현재 시작 페이지 -1 -->
 						</c:if>
 					
 					<!-- 페이지 번호 목록 출력 -->
@@ -106,40 +135,14 @@
 					<!-- 다음 영역이 있는 경우 -->
 						<c:if test="${placePage.next }">
 							<li class="paginate_button next">
-							<a href="${placePage.endPage +1 }">Next</a></li> <!-- 클릭시 현재 마지막 페이지 +1 -->
+							<a href="${placePage.endPage +1 }">다음</a></li> <!-- 클릭시 현재 마지막 페이지 +1 -->
 						</c:if>
 						
 					</ul>
 				</div>
-
-				<!-- list로 넘어갈 때 가져가는 값 -->
-				<form id="actionForm" action="/place/list" method="get">
-					<input type="hidden" name='pageNum' value="${placePage.cri.pageNum}">
-					<input type='hidden' name='amount' value='${placePage.cri.amount}'>
-					<!-- 검색을 했다면, list로 돌아갈시 전체 목록이 아닌 검색했던 내용 목록이 다시 뜰 수 있도록 -->
-					<input type="hidden" name='type' value='<c:out value="${placePage.cri.type}"/>'>
-					<input type="hidden" name='keyword' value='<c:out value="${placePage.cri.keyword}"/>'>
-				</form>
-
-				<!-- 글 등록시 뜨는 modal -->
-			 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">New Place!</h4>
-						</div>
-						<div class="modal-body">처리가 완료되었습니다.</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save changes</button>
-						</div>
-						</div>
-					</div>
-				</div>			
-			</div>
 		</div>
 	</div>
+	
 </div>
 
 <script type="text/javascript">
