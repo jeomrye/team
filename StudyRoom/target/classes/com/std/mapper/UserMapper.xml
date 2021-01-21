@@ -3,16 +3,13 @@
 <mapper namespace="com.std.mapper.UserMapper">
 <!-- 회원가입 -->
 <insert id="insertMem">
-   insert into member(uno,userid,memberno,username, password, email,phone, gender, regdate, updatedate,mileage,coupon, companynumber) values ((member_seq.nextval),#{userid},#{memberno},#{username},#{password},#{email},#{phone},#{gender},sysdate,sysdate,0,null,#{companynumber})
-</insert>
-
-<insert id="insertAuth">
-	insert into auth (userid, auth) values (#{userid}, #{auth}) 
+	insert into member (uno,userid,memberno,username, password, email,phone, gender, regdate, updatedate,mileage,coupon, companynumber) 
+	values ((uno_seq.nextval),#{userid},#{memberno},#{username},#{password},#{email},#{phone},#{gender},sysdate,sysdate,0,null,#{companynumber}) 
 </insert>
 
 <!-- 아이디 중복검사 -->
 <select id="idCheck" resultType="int">
-	select count(*) from member where userid = #{userid}
+	select count(*) from member where userid = #{userid} 
 </select>
 
 <!-- 사업자등록번호 검사 -->
