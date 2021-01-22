@@ -1,4 +1,4 @@
-package com.std.service;
+package com.std.Service;
 
 import static org.junit.Assert.*;
 
@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.std.domain.CouponVO;
+import com.std.service.CouponService;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;

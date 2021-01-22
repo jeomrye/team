@@ -55,10 +55,10 @@
 
 <script type="text/javaScript">
 function movemember(){
-     location.href = "/member/insertMem";
+     location.href = "/member/joinForm1";
 }
 function movecom(){
-     location.href = "/member/joinForm";
+     location.href = "/member/joinForm2";
 }
 </script>
 

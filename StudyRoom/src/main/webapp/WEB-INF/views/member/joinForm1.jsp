@@ -580,13 +580,17 @@
 			
 			
 		});
-		
-				
-		
-		
-		
-		
+	
+		$(".return_button").click(function() {
+			$("#insert").attr("action","/main/mainpage");
+			$("#insert").submit();
+		});
 	});
+	
+	
+	
+	
+	
 	//아이디 중복검사
 	$(".userid_input").on("propertychange change keyup paste input", function() {
 		var userid = $('.userid_input').val();
