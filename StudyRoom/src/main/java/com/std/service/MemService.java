@@ -1,8 +1,16 @@
 package com.std.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.std.domain.Criteria;
 import com.std.domain.MemVO;
 
+@Service
 public interface MemService {
+	
+	
 	//회원가입
 	public void register(MemVO vo)throws Exception;
 	

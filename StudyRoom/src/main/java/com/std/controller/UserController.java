@@ -32,15 +32,31 @@ public class UserController {
 	@Autowired
 	private JavaMailSender mailSender;
 	
-	//회원가입페이지로 가는 메소드
-	@RequestMapping(method = RequestMethod.GET, value = "/joinForm")
-	public void insertMem() {
+	//회원가입페이지로 가는 메소드--일반회원
+	@RequestMapping(method = RequestMethod.GET, value = "/joinForm1")
+	public void insertMember() {
 		log.info("회원가입 페이지로 이동");
 		
 		}
 	
+	//회원가입페이지에서 오는 메소드 --일반회원
+	@RequestMapping(method = RequestMethod.POST, value = "/joinForm1")
+	public String insertMemberSusscess(MemVO vo) throws Exception {
+		log.info("insertMem 진입");
+		service.register(vo);
+		log.info("insert Service 성공");
+		
+		return "redirect:/main";
+	}
+	//회원가입페이지로 가는 메소드
+	@RequestMapping(method = RequestMethod.GET, value = "/joinForm2")
+	public void insertMem() {
+		log.info("회원가입 페이지로 이동");
+		
+	}
+	
 	//회원가입페이지에서 오는 메소드
-	@RequestMapping(method = RequestMethod.POST, value = "/joinForm")
+	@RequestMapping(method = RequestMethod.POST, value = "/joinForm2")
 	public String insertMemSusscess(MemVO vo) throws Exception {
 		log.info("insertMem 진입");
 		service.register(vo);
@@ -48,6 +64,14 @@ public class UserController {
 		
 		return "redirect:/main";
 	}
+	
+	//회원가입 선택페이지로 가는 메소드
+	@RequestMapping(method = RequestMethod.GET, value = "/insertMem")
+	public void insert() {
+		log.info("회원가입 페이지로 이동");
+		
+	}
+
 	//아이디 중복 검사
 	@RequestMapping(method = RequestMethod.POST, value = "/memberIdChk")
 	@ResponseBody
@@ -86,7 +110,7 @@ public class UserController {
     @ResponseBody
     public String mailCheckGET(String email) throws Exception{
         
-        //insertMem.jsp로 부터 넘어온 email데이터
+    	 //insertMem.jsp로 부터 넘어온 email데이터
         log.info("이메일 데이터 전송 확인");
         log.info("인증번호 : " + email);
         
