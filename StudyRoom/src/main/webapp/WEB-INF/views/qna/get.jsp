@@ -121,6 +121,8 @@
 			console.log("=================");
 			console.log("JS TEST");
 			
+			$(document).ready(function(){
+			
 			var questionNoValue = '<c:out value= "${qna.questionNo}"/>';
 			var replyUL = $(".chat");
 			
@@ -142,7 +144,6 @@
 					
 					var str = "";
 					if(list == null || list.length == 0){
-						replyUL.html("");
 						
 						return;
 					}
@@ -291,6 +292,8 @@
 		
 		showList(pageNum);
 	});
+	});
+	
 	</script>
 
 <script type="text/javascript">
