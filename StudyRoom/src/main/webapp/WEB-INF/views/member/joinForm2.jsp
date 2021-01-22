@@ -355,13 +355,11 @@
 	
 </div>
 
-<div class="memberno_wrap">
-<div class="memberno_name">사용자 설정</div>
-<div class="memberno_input_box">
-일반사용자용<input type="radio" class="memberno_input" name="memberno" value="1" checked="checked">
-사업자용<input type="radio" class="memberno_input" name="memberno" value="2"></div>
 
-</div>
+
+<input type="hidden" class="memberno_input" name="memberno" value="2">
+
+
 
 <div class="username_wrap">
 <div class="username_name">이름</div>
@@ -410,7 +408,7 @@
 
 <div class="phone_wrap">
 <div class="phone_name">핸드폰번호</div>
-<div class="phone_input_box"><input type="text" class="phone_input" name="phone" placeholder="'-'를 빼고 입력해주세요"></div>
+<div class="phone_input_box"><input type="text" class="phone_input" name="phone" placeholder="'-'없이 입력해주세요"></div>
 </div>
 
 <div class="gender_wrap">
@@ -424,10 +422,11 @@
 
 <div class="companynumber_wrap" >
 <div class="companynumber_name">사업자 등록번호</div>
-<div class="companynumber_input_box"><input type="text" class="companynumber_input" name="companynumber" placeholder="사업자만 입력하세요" value="" disabled="disabled"></div>
+<div class="companynumber_input_box"><input type="text" class="companynumber_input" name="companynumber" placeholder="사업자만 입력하세요" value=""></div>
 <span class="companynumber_ck">사업자 등록번호를 입력해주세요</span>
 <span class="companynumber_input_re_1">사업자 등록번호가 일치합니다.</span>
 	<span class="companynumber_input_re_2">없는 사업자 등록번호입니다</span>
+	
 </div>
 
 <div>
@@ -440,6 +439,7 @@
 
 
 </div>
+
 </form>
 
 </div>
@@ -482,8 +482,8 @@
 			
 			
 			var getCheck= RegExp(/^[a-zA-Z0-9]{4,12}$/); 
-			var getName= RegExp(/^[가-힣]+$/);
-			var phoneCheck = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
+			var getName= RegExp(/^[가-힣]{1,5}$/);
+			var getPhone = /^(01[0|1|6|7|8|9]?)(\d{4}|\d{3})\d{4}$/g;
 			
 			
 			
@@ -517,7 +517,7 @@
 	            usernameCheck = false;
 	        }else{
 	            usernameCheck = true;
-	            if(!getCheck.test(name)){
+	            if(!getName.test(name)){
 	            alert("이름형식에 맞게 입력해주세요");
 	            return false; 
 	            }
@@ -552,12 +552,15 @@
 	            phoneCheck = false;
 	        }else{
 	            phoneCheck = true;
-	            if(!phoneCheck.test(phone)){
-	         		alert("핸드폰번호 양식에 맞춰서 입력해주세요")   	
+	            if(!getPhone.test(phone)){
+	         		alert("핸드폰번호 양식에 맞춰서 입력해주세요");  
+	         		phoneCheck = false;
 	            }
 	         
 	        }
-	        	        
+	        	       
+	        
+	        
 	        //사업자 등록번호 유효성검사
 	        if(companynumber == ""){
 	   		 $('.companynumber_ck').css('display','block');
@@ -565,9 +568,7 @@
 	   		}else if(companynumber != ""){
 	   		$('.companynumber_ck').css('display', 'none');
 	   		
-	   		}else if(memberno == 1){
-	   			companynumberCheck = true;
-	   		}	
+	   		}
 	        console.log(memberno);
 	        console.log(useridCheck);
 	        console.log(useridCkCheck);
@@ -581,46 +582,28 @@
 	        console.log(phoneCheck);
 	        console.log(genderCheck);
 	        console.log(companynumberCheck);
+	        console.log(companynumber);
 	        
+	        
+	        //최종가입 확인
 	        if(useridCheck&&useridCkCheck&&membernoCheck&&usernameCheck&&passwordCheck&&passwordCkCheck&&passwordDCkCheck&&emailCheck&&emailnumCheck&&phoneCheck&&genderCheck&&companynumberCheck ){
 	        	
-	        	$("#insert").attr("action","/member/insertMem");
+	        		
+	        	
+	        	$("#insert").attr("action","/member/joinForm");
 				$("#insert").submit();
-	        }    
+	        }
 	        
 	        
 			return false;
-			
-			
+					
 		});
-		
-		//권한부분에서 일반사용자면 사업자영역 비활성화/사업자면 활성화
-		$("input:radio[name=memberno]").click(function(){
-			 
-			// radio 버튼의 value 값이 1(일반사용자)이라면 사업자 등록번호 비활성화
-	        if($("input[name=memberno]:checked").val() == "1"){
-	        	
-	        	 $('.companynumber_input').attr('disabled', true);
-	          
-	            
-		         // radio 버튼의 value 값이 2(사업자용)이라면 사업자 등록번호 활성화
-	        }else if($("input[name=memberno]:checked").val() == "2"){
-	        	$('.companynumber_input').attr('disabled', false);
-		         
-		       
-	        	
-	              	              
-	           
-	        }
-	        
-	        	        
+			        
 	    });
+				
 		
 		
-		
-		
-		
-	});
+	
 	//아이디 중복검사
 	$(".userid_input").on("propertychange change keyup paste input", function() {
 		var userid = $('.userid_input').val();
@@ -737,13 +720,8 @@
 	
 	
 	//사업자 등록번호 확인
-	$("input:radio[name=memberno]").click(function(){
-		 if($("input[name=memberno]:checked").val() == "1"){
-        	 $('.companynumber_input').attr('disabled', true);
-        	 companynumberCheck = true;          
-            
-	         // radio 버튼의 value 값이 2(사업자용)이라면 사업자 등록번호 활성화
-        }else if($("input[name=memberno]:checked").val() == "2"){
+	$(document).ready(function(){
+		if($("input[name=memberno]").val() == "2"){
         	$('.companynumber_input').attr('disabled', false);
         	$(".companynumber_input").on("propertychange change keyup paste input", function() {
     			var companynumber = $('.companynumber_input').val();
@@ -763,6 +741,7 @@
     						$('.companynumber_input_re_2').css("display","inline-block");
     						$('.companynumber_input_re_1').css("display","none");
     						companynumberCheck = false;
+    						
     						
     					}
     				}
