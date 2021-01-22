@@ -64,8 +64,10 @@ public class QaReplyController {
 	@DeleteMapping(value = "/{rno}" , produces = { MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> remove(@PathVariable("rno") Long rno) {
 		log.info("remove: " + rno);
-		return replyservice.remove(rno) == 1 ? new ResponseEntity<String>("success", HttpStatus.OK)
-				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		int returnValue = replyservice.remove(rno);
+		System.out.println("삭제확인");
+		return returnValue == 1 ? new ResponseEntity<String>("success", HttpStatus.OK)
+				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR); 
 	}
 	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH },
 			value = "/{rno}",

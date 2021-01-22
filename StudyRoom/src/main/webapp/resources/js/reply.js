@@ -26,6 +26,7 @@ var QaReplyService = (function(){
 	function getList(param, callback, error){
 		var questionNo = param.questionNo;
 		var page = param.page || 1;
+		console.log(questionNo);
 		
 		$.getJSON("/replies/pages/" + questionNo + "/" + page + ".json",
 			function(data){
@@ -40,18 +41,26 @@ var QaReplyService = (function(){
 		});
 	}
 	
-	function remove(rno, replyer, callback, error){
+	function remove(rno , callback, error){ // 3개인데 지금 콜백으로
 		$.ajax({
 			type : 'delete',
 			url : '/replies/' + rno,
-			data : JSON.stringify({rno:rno, replyer:replyer}),
+			data : JSON.stringify({rno:rno}),
 			contentType : "application/json; charset=utf-8",
 			success : function(deleteResult, status, xhr) {
+				console.log("성공 접근");
+				console.log(deleteResult);
+				console.log(status);
+				console.log(xhr);
+				console.log("성공 접근");
+				
 				if(callback){
+					// 콜백으로 데이터를 보내줘야
 					callback(deleteResult);
 				}
 			},
 			error : function(xhr, status, er) {
+				console.log("실패 접근");
 				if (error) {
 				error(er);
 				}

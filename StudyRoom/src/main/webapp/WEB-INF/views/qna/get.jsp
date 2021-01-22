@@ -84,20 +84,20 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">REPLY MODAL</h4>
+						<h4 class="modal-title" id="myModalLabel">댓글창</h4>
 					</div>
 					
 					<div class="modal-body">
 						<div class="form-group">
-						<label>Reply</label>
+						<label>댓글</label>
 						<input class="form-control" name='reply' value='New Reply!!!!'>
 						</div>
 						<div class="form-group">
-						<label>Replyer</label>
+						<label>댓글 작성자</label>
 						<input class="form-control" name='replyer' value='replyer'>
 						</div>
 						<div class="form-group">
-						<label>Reply Date</label>
+						<label>댓글 작성일</label>
 						<input class="form-control" name='replyDate' value=''>
 						</div>
 					</div>
@@ -120,8 +120,6 @@
 			<script type="text/javascript">
 			console.log("=================");
 			console.log("JS TEST");
-			
-			$(document).ready(function(){
 			
 			var questionNoValue = '<c:out value= "${qna.questionNo}"/>';
 			var replyUL = $(".chat");
@@ -232,7 +230,7 @@
 			alert(result);
 			
 			modal.find("input").val("");
-			modal.modal("hide");
+			$(".modal").modal("hide");
 			
 			//showList(1) //수정 후 댓글목록 갱신
 			showList(-1) // page번호가 -1로 전달되면 마지막페이지를 다시 찾아서 호출 >> 전체댓글 숫자 파악 >> 마지막페이지 호출
@@ -245,7 +243,7 @@
 		QaReplyService.get(rno, function(reply){
 			modalInputReply.val(reply.reply);
 			modalInputReplyer.val(reply.replyer);
-			modalInputReplyDate.val(QaReplyService.displayTime(reply.replyDate)).attr("readonly","readeonly");
+			modalInputReplyDate.val(QaReplyService.displayTime(reply.replyDate)).attr("readonly","readonly");
 			modal.data("rno", reply.rno);
 			
 			modal.find("button[id != 'modalCloseBtn']").hide();
@@ -261,9 +259,8 @@
 	modalModBtn.on("click", function(e){
 		var reply = {rno:modal.data("rno"), reply: modalInputReply.val()};
 		QaReplyService.update(reply, function(result){
-			
 			alert(result);
-			modal.modal("hide");
+			$(".modal").modal("hide");
 			showList(pageNum);
 		});	
 	});
@@ -271,11 +268,14 @@
 	
 	//댓글 삭제
 	modalRemoveBtn.on("click", function(e){
+			console.log("클릭접근")
 		var rno = modal.data("rno");
+			// 여기 보면 , function 자리가 콜백인데
 		QaReplyService.remove(rno, function(result){
 			
+			console.log("결과접근")
 			alert(result);
-			modal.modal("hide");
+			$(".modal").modal("hide");
 			showList(pageNum);
 		});
 	});
@@ -291,7 +291,6 @@
 		pageNum = targetPageNum;
 		
 		showList(pageNum);
-	});
 	});
 	
 	</script>
