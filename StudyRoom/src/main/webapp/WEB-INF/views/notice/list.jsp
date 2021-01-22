@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ include file="../includes/header.jsp"%>
 <div class="row">
 	<div class="col-lg-12">
@@ -14,7 +14,10 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				공지사항
+				<sec:authentication property="principal" var="pinfo"/>
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<button id='regBtn' type="button" class="btn btn-xs pull-right">새 공지 쓰기</button>
+				</sec:authorize>
 <!-- 					관리자만 볼수있게 -->
 			</div>
 			<table class="table eable-striped table-bordered table-hover">
@@ -57,7 +60,7 @@
 						<input type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword }"/>'> 
 						<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"/>'> 
 						<input type="hidden" name="amount" value='<c:out value="${pageMaker.cri.amount }"/>'>
-						<button class="btn btn-default">Search</button>
+						<button class="btn btn-default">검색</button>
 					</form>
 				
 				</div>
@@ -66,7 +69,7 @@
 				<ul class="pagination">
 					<c:if test="${pageMaker.prev }">
 						<li class="paginate_button previous"><a
-							href="${pageMaker.startPage -1 }">Previous</a></li>
+							href="${pageMaker.startPage -1 }">이전</a></li>
 					</c:if>
 					<c:forEach var="num" begin="${pageMaker.startPage }"
 						end="${pageMaker.endPage}">
@@ -76,7 +79,7 @@
 					</c:forEach>
 					<c:if test="${pageMaker.next }">
 						<li class="paginate_button next"><a
-							href="${pageMaker.endPage +1 }">Next</a></li>
+							href="${pageMaker.endPage +1 }">다음</a></li>
 					</c:if>
 
 				</ul>
