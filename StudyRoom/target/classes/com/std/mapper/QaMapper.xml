@@ -24,13 +24,13 @@
 		<![CDATA[
 		select
 		questionNo,title,content,writer,writedate,updatedate,qnacnt,
-    	replywritedate,replyupdatedate,status,pub,password,userid 
+    	status,pub,password,userid 
 		from
 			(
 			SELECT
 				/*+INDEX_DESC(QuestionAndAnswer pk_question)*/
 				rownum rn,questionNo,title,content,writer,writedate,updatedate,qnacnt,
-    	replywritedate,replyupdatedate,status,pub,password,userid 
+    	status,pub,password,userid 
 			FROM 
 				QuestionAndAnswer 
 			WHERE
@@ -58,7 +58,7 @@
 
 	<insert id="insert">
 		insert into QuestionAndAnswer(questionNo,title,content,writer,writedate,updatedate,qnacnt,
-    	replywritedate,replyupdatedate,status,pub,password,userid)
+    	status,pub,password,userid)
 		values(seq_QuestionAndAnswer.nextval,#{title},#{content},#{writer})
 	</insert>
 

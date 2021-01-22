@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%@ include file="../includes/header.jsp"%>
 <div class="row">
@@ -24,8 +25,14 @@
 			<div class="form-group">
 				<label>내용</label><textarea class="form-control" rows="3" name='content' readonly="readonly"><c:out value="${faq.content }"/></textarea>
 			</div>
-			<button data-oper='modify' class="btn bnt-default" onclick="location.href='/faq/modify?faqNo=<c:out value="${faq.faqNo }"/>'">Modify</button>
-			<button data-oper='list' class="btn bnt-default" onclick="location.href='/faq/list'">List</button>
+			<!-- 로그인 사용자만 수정/삭제 가능 -->
+			<sec:authentication property="principal" var="pinfo"/>
+			<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')">
+			<c:if test="${pinfo.username eq faq.writer or pinfo.authorities eq '[ROLE_ADMIN]' }">
+			<button data-oper='modify' class="btn bnt-default" onclick="location.href='/faq/modify?faqNo=<c:out value="${faq.faqNo }"/>'">수정</button>
+			</c:if>
+			</sec:authorize>
+			<button data-oper='list' class="btn bnt-default" onclick="location.href='/faq/list'">목록</button>
 			<form action="/faq/modify" id="operForm" method="get">
 				<input type="hidden" id="faqNo" name="faqNo" value='<c:out value="${faq.faqNo }"/>'>
 				<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>

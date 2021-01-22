@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.std.mapper.CouponMapper">
+
+<!-- 쿠폰 리스트 가져오기 -->
+<select id="couponGetList" resultType="com.std.domain.CouponVO">
+	
+	<![CDATA[
+	select * from coupon where couponNumber > 0
+	]]>
+	
+</select>
+
+<!-- insert문만 처리되고 생성된 PK값을 알 필요가 없는 경우 -->
+<insert id="couponInsert">
+
+	insert into coupon (couponNumber, couponName, couponPrice) 
+	values(coupon_seq.nextval, #{couponName}, #{couponPrice})
+
+</insert>
+
+<!-- insert문이 실행되고 생성된 PK값을 알아야 하는 경우 -->
+<insert id="couponInsertSelectKey">
+
+	<selectKey keyProperty="couponNumber" order="BEFORE" resultType="int">
+
+		select coupon_seq.nextval from dual
+
+	</selectKey>
+
+	insert into coupon (couponNumber, couponName, couponPrice) 
+	values(#{couponNumber}, #{couponName}, #{couponPrice})
+
+</insert>
+
+<!-- insert가 된 테이터를 조회하는 경우 -->
+<select id="couponRead" resultType="com.std.domain.CouponVO">
+
+	select * from coupon where couponNumber = #{couponNumber}
+
+</select>
+
+<!--  쿠폰 삭제 delete -->
+<delete id="couponDelete">
+
+	delete from coupon where couponNumber = #{couponNumber}
+
+</delete>
+
+<!-- 쿠폰수정 update -->
+<update id="couponUpdate">
+
+	update coupon set couponName = #{couponName},
+					  couponPrice = #{couponPrice},
+					  couponupdateDate = sysdate
+					  where couponNumber = #{couponNumber}
+
+</update>
+
+<sql id="criteria">
+    <trim prefix="(" suffix=") AND" prefixOverrides="OR">
+    	<foreach item='type' collection="typeArr">
+    		<trim prefix="OR">
+    			<choose>
+    				<when test="type == 'T'.toString()">
+    					couponName like '%'||#{keyword}||'%'
+    				</when>
+    			</choose>
+    		</trim>
+    	</foreach>
+    </trim>
+    </sql>
+
+<select id="getListWithPaging" resultType="com.std.domain.CouponVO">
+  <![CDATA[
+    select 
+    couponNumber,couponName,couponPrice,couponregDate,couponupdateDate 
+    from 
+    (
+    select /*+INDEX_DESC(coupon pk_coupon) */
+    rownum rn,couponNumber,couponName,couponPrice,couponregDate,couponupdateDate 
+    from 
+    coupon 
+    where
+    ]]>
+    <include refid="criteria"></include>
+    <![CDATA[
+     rownum <= #{pageNum} * #{amount}
+     )
+    where rn > (#{pageNum} -1) * #{amount}
+  ]]>   
+ 
+  </select>
+
+<select id="getTotalCount" resultType="int">
+	select count(*) from coupon where 
+	<include refid="criteria"></include>
+	 couponNumber > 0
+</select>
+
+<select id="finMile">
+	select mileage from member where userid = #{userid} 
+</select>
+
+<select id="couponPrice">
+	select couponPrice from coupon where couponNumber = #{couponNUmber}
+</select>
+
+
+</mapper>

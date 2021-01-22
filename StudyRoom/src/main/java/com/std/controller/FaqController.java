@@ -1,5 +1,6 @@
 package com.std.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +37,7 @@ public class FaqController {
 	}
 	
 	@PostMapping("/register")
+	@PreAuthorize("isAuthenticated()")
 	public String register(FaqVO faq, RedirectAttributes rttr) {
 		log.info("register: " + faq);
 		service.register(faq);
@@ -54,8 +56,9 @@ public class FaqController {
 		model.addAttribute("faq", service.get(faqNo));
 	}
 
+	@PreAuthorize("(principal.username == #writer) or hasRole('ROLE_ADMIN')")
 	@PostMapping("/modify")
-	public String modify(FaqVO faq,@ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+	public String modify(FaqVO faq,@ModelAttribute("cri") Criteria cri, RedirectAttributes rttr,String writer) {
 		
 		log.info("modify : " + faq);
 
@@ -67,8 +70,9 @@ public class FaqController {
 		
 	}
 	
+	@PreAuthorize("(principal.username == #writer) or hasRole('ROLE_ADMIN')")
 	@PostMapping("/remove")
-	public String remove(@RequestParam(value = "faqNo", required = false) Long faqNo, Criteria cri, RedirectAttributes rttr) {
+	public String remove(@RequestParam(value = "faqNo", required = false) Long faqNo, Criteria cri, RedirectAttributes rttr,String writer) {
 		log.info("remove..." + faqNo);
 		if (service.delete(faqNo)) {
 			rttr.addFlashAttribute("result", "success");

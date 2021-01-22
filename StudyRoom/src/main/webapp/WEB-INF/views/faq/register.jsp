@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+       <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%@ include file="../includes/header.jsp"%>
 
@@ -14,11 +15,12 @@
 			<div class="panel-heading">FAQ 작성</div>
 			<div class="panel-body">
 				<form action="/faq/register" role="form" method="post">
+				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 					<div class="form-group">
 						<label>제목</label><input class="form-control" name="title">
 					</div>
 					<div class="form-group">
-						<label>작성자</label><input class="form-control" name="writer">
+						<label>작성자</label><input class="form-control" name="writer" value='<sec:authentication property="principal.username"/>' readonly="readonly">
 					</div>
 					<div class="form-group">
 						<label>내용</label><textarea class="form-control" rows="3" name="content"></textarea>
