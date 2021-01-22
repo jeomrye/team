@@ -1,17 +1,20 @@
 package com.std.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
 @Data
 public class CouponDetailVO {
 
-	 private String userId;
-	 private int couponNumber;
+	 private String userid;
+	 private int couponnumber;
 	 private String couponName;
-	 private int couponPrice;
-	 private int couponUse;
-	 private Date couponBuyDate;
+	 private int couponprice;
+	 private int couponuse;
+	 private Date couponbuydate;
+	 
+	 private List<AuthVO> authList;
 	 
 }

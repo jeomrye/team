@@ -50,5 +50,9 @@
 <update id="updatePw">
 	update member set password = #{password} where userid = #{userid}
 </update>
+
+<insert id="insertAuth">
+   insert into auth (userid,auth) values (#{userid},#{auth})
+</insert>
 </mapper>
 

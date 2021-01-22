@@ -19,7 +19,9 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             쿠폰 목록
+                            <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')">
                             <button id='regBtn' type="button" class="btn btn-xs pull-right">쿠폰 등록</button>
+                        </sec:authorize>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">

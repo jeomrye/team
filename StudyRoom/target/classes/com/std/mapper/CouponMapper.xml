@@ -102,7 +102,7 @@
 </select>
 
 <select id="finMile">
-	select mileage from member where userid = #{userid} 
+	select mileage from member where userId = #{userId} 
 </select>
 
 <select id="couponPrice">
@@ -113,15 +113,46 @@
 <!-- 	insert into coupon_detail (userId, couponNumber, couponName, couponPrice, couponUse, couponBuyDate)  -->
 <!-- 	values(#{userId}, #{couponNumber}, #{couponName}, #{couponPrice}, #{couponUse}, sysdate) -->
 <!-- </insert> -->
+<!-- 인증/ 권한 -->
+<resultMap type="com.std.domain.CouponDetailVO" id="couponMap">
+	<id property="userId" column="userId"/>
+	<result property="userId" column="userId"/>
+	<result property="couponNumber" column="couponNumber"/>
+	<result property="couponName" column="couponName"/>
+	<result property="couponPrice" column="couponPrice"/>
+	<result property="couponUse" column="couponUse"/>
+	<result property="couponBuyDate" column="couponBuyDate"/>
+	<collection property="authList" resultMap="authMap"></collection>
+</resultMap>
+<resultMap type="com.std.domain.AuthVO" id="authMap">
+	<result property="userid" column="userid"/>
+	<result property="auth" column="auth"/>
+</resultMap>
 
-<select id="couponGetDetail" resultType="com.std.domain.CouponDetailVO">
-	select * from coupon_detail where userid = #{userid , jdbcType=VARCHAR}
+<select id="read" resultMap="couponMap">
+	select cou.userid, couponNumber, couponName, couponPrice, couponUse, couponBuyDate, auth from coupon_detail cou 
+	 LEFT OUTER JOIN auth auth on cou.userid = auth.userid where cou.userid = #{userid}
 </select>
 
-<insert id="couponBuy">
-	insert into coupon_detail(userid, couponnumber, couponname, couponprice, couponuse, couponbuydate) values(#{userid}, #{couponnumber},#{couponname},#{couponprice},0,sysdate)
+<select id="couponGetDetail" resultType="com.std.domain.CouponDetailVO">
+	select * from coupon_detail where userId = #{userId , jdbcType=VARCHAR}
+</select>
+
+<insert id="couponDetailInsert">
+	insert into coupon_detail(userid, couponnumber, couponName, couponPrice, couponuse, couponbuydate) values(#{userid}, #{couponnumber},#{couponName},#{couponPrice},0,sysdate)
 </insert>
 
+<select id="mileGet" resultType="com.std.domain.MemVO">
+	select * from member where userId = #{userId , jdbcType=VARCHAR}
+</select>
+
+<select id="authGet" resultType="com.std.domain.AuthVO">
+	select * from auth where userid = #{userid, jdbcType = VARCHAR}
+</select>
+
+<select id="Getcoupon" resultType="com.std.domain.CouponVO">
+	select * from coupon where couponNumber = #{couponNumber}
+</select>
 
 
 

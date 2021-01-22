@@ -2,10 +2,12 @@ package com.std.service;
 
 import java.util.List;
 
+import com.std.domain.AuthVO;
 import com.std.domain.CouponAttachVO;
 import com.std.domain.CouponDetailVO;
 import com.std.domain.CouponVO;
 import com.std.domain.Criteria;
+import com.std.domain.MemVO;
 
 public interface CouponService {
 
@@ -32,5 +34,11 @@ public interface CouponService {
 //	
 //	public void couponRegDetail(CouponDetailVO couponDetail);
 	
+	//맴버테이블에서 마일리지 가져오기
+	public MemVO mileGet(String userid);
+	//맴버테이블에서 권한 가져오기
+	public AuthVO authGet(String userid);
 	
+	//쿠폰테이블에서 쿠폰 가져오기
+	public CouponVO Getcoupon(int couponNumber);
 }

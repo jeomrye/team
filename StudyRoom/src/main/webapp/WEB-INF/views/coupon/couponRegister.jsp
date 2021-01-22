@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <%@include file="../includes/header.jsp"%>
 
 <div class="row">
@@ -18,7 +19,6 @@
 			<!-- /.panel-heading -->
 			<div class="panel-body">
 				<form role="form" action="/coupon/couponRegister" method="post">
-
 					<div class="form-group">
 						<label>쿠폰 이름</label> <input class="form-control"
 							name='couponName'>
@@ -111,6 +111,45 @@ $(document).ready(function(e){
 			return true;
 		}
 		
+		function showUploadResult(uploadResultArr){
+			
+			if(!uploadResultArr || uploadResultArr.length == 0){return;}
+			
+			var uploadUL = $(".uploadResult ul");
+			
+			var str = "";
+			
+			$(uploadResultArr).each(function(i, obj){
+				//image type
+				console.log(obj.image);
+				if(obj.image){
+					var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
+					
+					str += "<li data-path='"+obj.uploadPath+"'";
+					str += " data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'";
+					str += " ><div>";
+					str += "<span>" + obj.fileName + "</span>";
+					str += "<button type='button' data-file=\'"+fileCallPath+"\' ";
+					str += "data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+					str += "<img src='/display?fileName="+fileCallPath+"'>";
+					str += "</div>";
+					str += "</li>";
+				}else{
+					var fileCallPath = encodeURIComponent(obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
+					var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
+					str += "<li ";
+					str += "data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"' ><div>";
+					str += "<span>" + obj.fileName + "</span>";
+					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' ";
+					str += "class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+					str += "<img src='/resources/img/44438480.png'></a>";
+					str += "</div>";
+					str += "</li>";
+				}
+			});
+			uploadUL.append(str);
+		}
+		
 		$("input[type='file']").change(function(e){
 			
 			var formData = new FormData();
@@ -128,7 +167,7 @@ $(document).ready(function(e){
 			}
 			
 			$.ajax({
-				url : '/coupon/uploadAjaxAction',
+				url : '/uploadAjaxAction',
 				processData : false,
 				contentType : false,
 				data : formData,
@@ -140,44 +179,7 @@ $(document).ready(function(e){
 				}
 			});//ajax 끝
 		});
-			function showUploadResult(uploadResultArr){
-				
-				if(!uploadResultArr || uploadResultArr.length == 0){return;}
-				
-				var uploadUL = $(".uploadResult ul");
-				
-				var str = "";
-				
-				$(uploadResultArr).each(function(i, obj){
-					//image type
-					console.log(obj.image);
-					if(obj.image){
-						var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
-						
-						str += "<li data-path='"+obj.uploadPath+"'";
-						str += " data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'";
-						str += " ><div>";
-						str += "<span>" + obj.fileName + "</span>";
-						str += "<button type='button' data-file=\'"+fileCallPath+"\' ";
-						str += "data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-						str += "<img src='/display?fileName="+fileCallPath+"'>";
-						str += "</div>";
-						str += "</li>";
-					}else{
-						var fileCallPath = encodeURIComponent(obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
-						var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
-						str += "<li ";
-						str += "data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"' ><div>";
-						str += "<span>" + obj.fileName + "</span>";
-						str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' ";
-						str += "class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-						str += "<img src='/resources/img/44438480.png'></a>";
-						str += "</div>";
-						str += "</li>";
-					}
-				});
-				uploadUL.append(str);
-			}
+			
 			
 			$(".uploadResult").on("click", "button", function(e){
 				
@@ -189,7 +191,7 @@ $(document).ready(function(e){
 				var targetLi = $(this).closet("li");
 				
 				$.ajax({
-					url:'/coupon/deleteFile',
+					url:'/deleteFile',
 					data:{fileName:targetFile, type:type},
 					dataType:'text',
 					type:'POST',

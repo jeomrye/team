@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
 
+import com.std.domain.AuthVO;
 import com.std.domain.CouponDetailVO;
 import com.std.domain.CouponVO;
 import com.std.domain.Criteria;
+import com.std.domain.MemVO;
 
 public interface CouponMapper {
 
@@ -38,4 +40,16 @@ public interface CouponMapper {
 	public void couponDetailInsert(CouponDetailVO vo);
 	
 //	public void couponRegDetail(CouponDetailVO couponDetail);
+	//userid 불러오기
+	public CouponDetailVO read(String userId); 
+	
+	//마일리지 가져오기
+	public MemVO mileGet(String userid);
+	//마일리지 가져오기
+	public AuthVO authGet(String userid);
+	
+	//쿠폰 가져오기
+	public CouponVO Getcoupon(int couponNumber);
+	
+	
 }

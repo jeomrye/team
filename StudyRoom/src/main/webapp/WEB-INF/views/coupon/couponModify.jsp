@@ -243,7 +243,7 @@ $(document).ready(function(){
 		}
 		
 		$.ajax({
-			url : '/coupon/uploadAjaxAction',
+			url : '/uploadAjaxAction',
 			processData : false,
 			contentType : false,
 			data : formData,

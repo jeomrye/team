@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.std.domain.AuthVO;
 import com.std.domain.CouponAttachVO;
 import com.std.domain.CouponDetailVO;
 import com.std.domain.CouponVO;
 import com.std.domain.Criteria;
+import com.std.domain.MemVO;
 import com.std.mapper.CouponAttachMapper;
 import com.std.mapper.CouponMapper;
 
@@ -144,6 +146,25 @@ public class CouponServiceImpl implements CouponService {
 	public void couponDetailRegister(CouponDetailVO vo) {
 		log.info("couponBuy: "+vo);
 		mapper.couponDetailInsert(vo);
+	}
+
+	@Override
+	public MemVO mileGet(String userid) {
+		log.info("mileGet: "+userid);
+		
+		return mapper.mileGet(userid);
+	}
+
+	@Override
+	public AuthVO authGet(String userid) {
+		log.info("authGet: "+userid);
+		return mapper.authGet(userid);
+	}
+
+	@Override
+	public CouponVO Getcoupon(int couponNumber) {
+		log.info("Getcoupon"+couponNumber);
+		return mapper.Getcoupon(couponNumber);
 	}
 	
 }

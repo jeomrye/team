@@ -2,7 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@include file="../includes/header.jsp" %>
+<sec:authentication property="principal" var="pinfo"/>
+
 
 
   
@@ -98,12 +101,14 @@ width:600px;
 <div class="form-group">
 <label>쿠폰 가격</label><input class="form-control" name='couponPrice' value='<fmt:formatNumber value="${coupon.couponPrice}" pattern="###,###,###"/>' readonly="readonly">
 </div>
-<input type="number" class="s" value='<c:out value="${coupon.couponPrice}"/>'>
-<input type="number" class="m" value='<c:out value="${member.mileage}"/>'>
+
 
 
 <!-- 쿠폰 상세보기 에서 수정이나 목록페이지로 이동 -->
+
+<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')">
 <button data-oper='modify' class="btn btn-default">수정</button>
+</sec:authorize>
 <button data-oper='submit' class="btn btn-primary">구입</button>
 <button data-oper='list' class="btn btn-info">목록</button>
 
@@ -111,6 +116,8 @@ width:600px;
 			        <input type='hidden' id='couponNumber' name='couponNumber' value='<c:out value="${coupon.couponNumber}"/>'>
 			        <input type='hidden' id='couponName' name='couponName' value='<c:out value="${coupon.couponName}"/>'>
 			        <input type='hidden' id='couponPrice' name='couponPrice' value='<c:out value="${coupon.couponPrice}"/>'>
+			        <input type="hidden" id="userid" name="userid" value="${member.userid }">
+    				<input type="hidden" id="auth" name="auth" value="${auth.auth }">
 			       
 					
 			        <input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
@@ -133,10 +140,49 @@ var formObj = $("form");
 	
 	
 	var operForm = $("#operForm");
+	var csrfHeaderName ="${_csrf.headerName}";
+  	var csrfTokenValue="${_csrf.token}";
+ 	//Ajax spring security header	== ajax 를 이용한 csrf 토큰 전송
+  	$(document).ajaxSend(function(e, xhr, options){
+  		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+  	});
 	
 	$("button[data-oper='submit']").on("click", function(e){
+		e.preventDefault();
+		var couponNumber = $("#couponNumber").val();
+		var couponName = $("#couponName").val();
+		var couponPrice = $("#couponPrice").val();
+		var userid = $("#userid").val();
+		var auth = $("#auth").val();
 		
-		operForm.attr("action", "/coupon/couponBuy").submit();
+		var data1 = {couponNumber : couponNumber}
+		var data2 = {couponName : couponName}
+		var data3 = {couponPrice : couponPrice}
+		var data4 = {userid :userid}
+		var data5 = {auth:auth}
+		
+		operForm.attr("action", "/coupon/couponBuy").attr("method", "get").submit();
+		
+		$.ajax({
+			url : '/coupon/couponBuy',
+			data : {data1,data2,data3,data4,data5},
+			type : 'GET',
+			success : function(result){
+				console.log(result);
+				
+			}
+		});//ajax 끝
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	});
 	
