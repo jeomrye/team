@@ -156,6 +156,10 @@
 			<label>주소</label><input class="form-control" name='address' value="<c:out value='${place.address}'/>" readonly="readonly">
 			<div><a href="https://map.kakao.com/link/search/${place.address }" target="_blank">지도로 알아보기(Click)</a></div>
 			<div id="map" style="width:1230px;height:300px;"></div>
+			<div style="text-align: center;"><br>
+			<button id="mapbtn" onclick="setZoomable(false)">지도 확대/축소 끄기</button>
+			<button id="mapbtn" onclick="setZoomable(true)">지도 확대/축소 켜기</button>
+			</div>
 			</div>
 			
 			<!-- 홈페이지,SNS계정 -->
@@ -192,6 +196,13 @@
 </div>
 
 <style>
+#mapbtn {
+	background: salmon;
+	border: none;
+}
+#mapbtn:hover {
+  background: lightsalmon;
+}
 .uploadResult {
 	width : 100%;
 	background-color: white;
@@ -243,6 +254,9 @@
 #photo {
 	background-color: pink;
 }
+.warn{
+	color: salmon;
+}
 </style>
 
 <!-- 리뷰 댓글 등록 -->
@@ -262,10 +276,9 @@
 				<li class="left clearfix" data-rno='12'>
 					<div>
 						<div class="header">
-							<strong class="primary-font">user00</strong>
-							<small class="pull-right text-muted">2018-01-01 13:13</small>
+
 						</div>
-						<p>Good place!</p>
+
 					</div>
 				</li>
 			</ul>
@@ -302,12 +315,12 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 			</div>
 			
 			<div class='form-group'>
-				<label>내용<span>(150자 이상 입력해야 등록가능)</span></label>
+				<label>내용<span class="warn">(150자 이상 입력해야 등록가능)</span></label>
 				<textarea rows="5" cols="4" class='form-control' id="content" name='reply' maxlength="1000" value='New Reply!'></textarea>
 				 <span class='pull-right' id="counter">###</span>
 			</div>
 			<div class='form-group'>
-				<label>작성자<span>(1인 하루 1회 리뷰 제한)</span></label>
+				<label>작성자<span class="warn">(하루 1인 1회 리뷰 제한)</span></label>
 				<input class='form-control' name='replyer' value='replyer' readonly="readonly">
 			</div>
 			<div class='form-group'>
@@ -340,6 +353,12 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
         // 지도를 생성합니다    
         var map = new daum.maps.Map(mapContainer, mapOption);
         
+    	 // 버튼 클릭에 따라 지도 확대, 축소 기능을 막거나 풀고 싶은 경우에는 map.setZoomable 함수를 사용합니다
+        function setZoomable(zoomable) {
+            // 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
+            map.setZoomable(zoomable);    
+        }
+     
         // 주소-좌표 변환 객체를 생성합니다
         var geocoder = new daum.maps.services.Geocoder();
  		var address = '<c:out value="${place.address}"/>';
@@ -503,6 +522,7 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 
 		//댓글 등록 버튼
 		$("#addReplyBtn").on("click",function(e){
+			alert("<주의사항>\n1. 150자 이상 입력시 등록이 가능합니다.\n2. 리뷰는 하루 1인 1회로 제한됩니다.")
 			modal.find("input").val("");//input 내부 빈 내용으로 만들기
 			modal.find("input[name='replyer']").val(replyer);
 			modalInputReplyDate.closest("div").hide(); //날짜 숨기기
@@ -529,7 +549,7 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 			
 			//실질적 댓글 등록
 			placeReService.add(reply, function(result){
-				alert("!!! 주의 !!!     ※리뷰 삭제시 적립된 마일리지가 회수됩니다※");
+				alert("<경고>\n※리뷰 삭제시 적립된 마일리지가 회수됩니다※");
 			
 				modal.find("input").val("");//input 내부 빈 내용으로 만들기
 				modal.modal("hide");//모달 숨기기
@@ -682,11 +702,12 @@ $(document).ready(function(){
            if(type==="true"){
         	 var fileCallPath =  encodeURIComponent(photo.uploadPath+ "/s_"+photo.uuid +"_"+photo.fileName); 
 	         str += "<li data-path='"+photo.uploadPath+"' data-uuid='"+photo.uuid+"' data-filename='"+photo.fileName+"' data-type='"+photo.fileType+"' ><div>";
-	         str += "<img src='/display?fileName="+fileCallPath+"'>";
+	         str += "<img src='/placePho/display?fileName="+fileCallPath+"'>";
              str += "</div>";
              str +="</li>";
            }else{          
              str += "<li data-path='"+photo.uploadPath+"' data-uuid='"+photo.uuid+"' data-filename='"+photo.fileName+"' data-type='"+photo.fileType+"' ><div>";
+             str += "<span style='color:black;'> "+ photo.fileName+"</span><br/>";
              str += "<img src='/resources/img/attach.png'>";
              str += "</div>";
              str +="</li>";
@@ -706,7 +727,7 @@ $(document).ready(function(){
 		 showImage(path.replace(new RegExp(/\\/g),"/"));
 	 } else {
 		 //download
-		 self.location = "/download?fileName="+path;
+		 self.location = "/placePho/download?fileName="+path;
 	 }
   });
   
@@ -715,7 +736,7 @@ $(document).ready(function(){
 	  $(".bigPictureWrapper").css("display","flex").show();
 	  
 	  $(".bigPicture")
-	  .html("<img src = '/display?fileName="+fileCallPath+"'>")
+	  .html("<img src = '/placePho/display?fileName="+fileCallPath+"'>")
 	  .animate({width:'100%', height:'100%'},1000);
   }
   

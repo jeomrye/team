@@ -47,7 +47,7 @@
     <div id="wrapper">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="color:white; background: rgba(0,0,0,0.7); margin-bottom: 0">
             
 
                 <a class="navbar-brand" href="/main/mainpage"><h4>SRFS</h4></a>

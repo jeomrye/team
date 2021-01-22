@@ -219,7 +219,7 @@ $(document).ready(function(e){
 		}
 		
 		$.ajax({
-			url : '/uploadAjaxAction',
+			url : '/placePho/uploadAjaxAction',
 			processData : false,
 			contentType : false,
 			beforeSend : function(xhr){
@@ -252,7 +252,7 @@ $(document).ready(function(e){
 				str += "<span> "+obj.fileName+"</span>";
 				str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' class='btn btn-warning btn-circle'>";
 				str += "<i class='fa fa-times'></i></button><br>";
-				str += "<img src='/display?fileName="+fileCallPath+"'>";
+				str += "<img src='/placePho/display?fileName="+fileCallPath+"'>";
 				str += "</div></li>";
 			} else{//일반 파일일 때
 				var fileCallPath = encodeURIComponent(obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
@@ -280,7 +280,7 @@ $(document).ready(function(e){
 		var targetLi = $(this).closest("li");
 		
 		$.ajax({
-			url : '/deleteFile',
+			url : '/placePho/deleteFile',
 			data : {fileName : targetFile, type : type},
 			beforeSend : function(xhr){
 				xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);

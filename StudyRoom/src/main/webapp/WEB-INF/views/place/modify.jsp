@@ -281,7 +281,7 @@ $(document).ready(function(){
 	           str += "<span> "+photo.fileName+"</span><br/>";//상단에 파일 이름
 	           str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' ";
 	           str += "class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>" 
-	           str += "<img src='/display?fileName="+fileCallPath+"'>";
+	           str += "<img src='/placePho/display?fileName="+fileCallPath+"'>";
 	           str += "</div>";
 	           str +="</li>";
 	         }else{//이미지 아닌 파일
@@ -341,7 +341,7 @@ $(document).ready(function(){
 			}
 			
 			$.ajax({
-				url : '/uploadAjaxAction',
+				url : '/placePho/uploadAjaxAction',
 				processData : false,
 				contentType : false,
 				data : formData,
@@ -372,7 +372,7 @@ $(document).ready(function(){
 					str += "<span> "+obj.fileName+"</span>";
 					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' class='btn btn-warning btn-circle'>";
 					str += "<i class='fa fa-times'></i></button><br>";
-					str += "<img src='/display?fileName="+fileCallPath+"'>";
+					str += "<img src='/placePho/display?fileName="+fileCallPath+"'>";
 					str += "</div></li>";
 				} else{
 					var fileCallPath = encodeURIComponent(obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);

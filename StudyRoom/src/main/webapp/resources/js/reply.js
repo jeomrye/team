@@ -27,7 +27,7 @@ var placeReService = (function(){
 	function getList(param, callback, error){
 		var bno = param.bno;
 		var page = param.page || 1; //댓글 페이지 목록
-		
+		console.log("bno"+param.bno);
 		$.getJSON("/placeRe/pages/" + bno + "/" + page + ".json",
 			function(data){
 				if(callback){
