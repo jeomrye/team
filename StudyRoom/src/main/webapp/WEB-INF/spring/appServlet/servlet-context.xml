@@ -3,27 +3,36 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 	<annotation-driven />
 
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources location="/resources/img/" mapping="/img/**"></resources>
 
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<context:component-scan base-package="com.spring.biz" />
 	<context:component-scan base-package="com.std.controller" />
 	
+
+	<security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled"/>
+		
+	
+<!-- 	일반 파일 업로드 경로 -->
+<resources location="/resources/img/" mapping="/img/**"></resources>
+	
+
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-	<beans:property name="defaultEncoding" value="utf-8"></beans:property>
-	<beans:property name="maxUploadSize" value="104857560"></beans:property>
-	<beans:property name="maxUploadSizePerFile" value="5242880"></beans:property>
-	<beans:property name="uploadTempDir" value="file:/C:/upload/tmp"></beans:property>
-	<beans:property name="maxInMemorySize" value="10485756"></beans:property>
+<!-- <beans:bean id="multipartResolver"  -->
+<!-- 		class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></beans:bean> -->
 	
 	</beans:bean>
 </beans:beans>

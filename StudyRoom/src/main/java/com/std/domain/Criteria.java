@@ -10,9 +10,8 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Criteria {
-
-	private int pageNum;//페이지 번호: 1번
-	private int amount;//한 페이지당 글의 개수: 10개
+	private int pageNum; //페이지 번호
+	private int amount; //한 페이지당 글의 개수
 	
 	private String type; //검색 조건
 	private String keyword; //검색 키워드(검색 분류)
@@ -42,4 +41,3 @@ public class Criteria {
 		return builder.toUriString();
 	}
 }
-
