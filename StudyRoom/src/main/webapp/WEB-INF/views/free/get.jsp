@@ -54,9 +54,7 @@
 					<i class="fa fa-comments fa-fw"></i> 댓글
 					<sec:authentication property="principal" var="pinfo"/> 	<!-- 조회 화면에서 댓글 추가버튼 -->
 					<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')">
-					<c:if test="${pinfo.username eq free.writer or pinfo.authorities eq '[ROLE_ADMIN]' }"> 
 					<button id="addReplyBtn" class="btn btn-primary btn-xs pull-right">새 댓글 작성</button>
-					</c:if>
 					</sec:authorize>
 			</div>   
 			
