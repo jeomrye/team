@@ -25,12 +25,6 @@ public class QaVO {
 	
 	private int qnacnt; //조회수
 	
-	private String replycontent; //답변내용
-	
-	private Date replywritedate; //답변 작성일
-	
-	private Date replyupdatedate; //답변 수정일
-	
 	private String status; //상태
 	
 	private String pub; //글 공개여부

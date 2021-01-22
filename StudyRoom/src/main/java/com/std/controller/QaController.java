@@ -73,7 +73,7 @@ public class QaController {
 //		return mv;
 //	}
 	
-	@PostMapping({"/qRemove","/aRemove"})
+	@PostMapping("/qRemove")
 	public String remove(@RequestParam("questionNo") Long questionNo, Criteria cri,  RedirectAttributes rttr) {
 		log.info("remove..." + questionNo);
 		if (service.questionDel(questionNo)) {
