@@ -596,14 +596,14 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 				console.log("Original Replyer : "+originalReplyer);
 				if(ROLE_ADMIN != '&#91;ROLE&#95;ADMIN&#93;'){//관리자가 아닌사람
 					if(replyer != originalReplyer){//로그인한 사람과 작성자가 다를시
-						alert("자신이 작성한 댓글만 수정 가능합니다.");
+						alert("자신이 작성한 리뷰만 수정 가능합니다.");
 						modal.modal("hide");
 						return;
 					}
 				}	
 	
 				placeReService.update(reply,function(result){
-					alert(result);
+					alert("리뷰가 수정되었습니다.");
 					modal.modal("hide");
 					showList(pageNum);
 				});
@@ -628,14 +628,14 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 				
 				if(ROLE_ADMIN != '&#91;ROLE&#95;ADMIN&#93;'){//관리자가 아닌사람
 			        if(replyer != originalReplyer){
-			           alert("자신의 글이 아닙니다. 삭제 불가!");
+			           alert("자신의 글이 아닙니다. 삭제 할 수 없습니다.");
 			           modal.modal("hide");
 			           return;
 					}
 				}			
 
 				placeReService.remove(rno,originalReplyer,function(result){
-					alert(result);
+					alert("리뷰가 삭제되었습니다.\n적립된 마일리지가 회수됩니다.");
 					modal.modal("hide");
 					showList(pageNum);
 				});
