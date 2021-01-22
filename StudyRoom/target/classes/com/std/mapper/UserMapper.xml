@@ -16,4 +16,3 @@
 	select count(*) from company where companynumber = #{companynumber}
 </select>
 </mapper>
-
