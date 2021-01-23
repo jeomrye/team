@@ -11,7 +11,7 @@ public class CouponDetailVO {
 	 private String userid;
 	 private int couponnumber;
 	 private String couponName;
-	 private int couponprice;
+	 private int couponPrice;
 	 private int couponuse;
 	 private Date couponbuydate;
 	 

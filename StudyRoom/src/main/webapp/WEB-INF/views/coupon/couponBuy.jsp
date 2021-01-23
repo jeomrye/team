@@ -2,18 +2,22 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@include file="../includes/header.jsp" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
+<%@include file="../includes/header.jsp" %>
+
 
 
 <form action="/coupon/couponBuy" method="post" role="form">
-	<input type="hidden" class="q" value='<c:out value="${coupon1.couponNumber}"/>'>
-<input type="hidden" class="w" value='<c:out value="${coupon1.couponName}"/>'>
+	
+	<input type="hidden" class="q" name="couponnumber" value='<c:out value="${coupon1.couponNumber}"/>'>
+	<input type="hidden" class="w" name="couponname" value='<c:out value="${coupon1.couponName}"/>'>
     <input type='hidden' id='e' name='couponprice' value='<c:out value="${coupon1.couponPrice}"/>'>
-    <input type='text' id='r' name='mileage' value='<c:out value="${member.mileage}"/>'>
+    <input type='hidden' id='r' name='mileage' value='<c:out value="${member.mileage}"/>'>
     <%-- <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/> --%>
     <input type="hidden" class="userid" name="userid" value="${member.userid }">
     <input type="hidden" class="auth" name="auth" value="${auth.auth }">
+
 </form>
 
 <h1>쿠폰을 구매하시겠습니까?</h1>
@@ -25,6 +29,7 @@
 
 
 <%@include file="../includes/footer.jsp" %>
+
 <script type="text/javascript">
 $(document).ready(function(e){
 	
@@ -63,7 +68,7 @@ $(document).ready(function(e){
 		console.log(mile);
 		console.log(userid);
 		console.log(auth);
-		
+
 		
 		if(operation === 'return'){
 			formObj.attr("action", "/coupon/couponList").attr("method", "get")
@@ -96,12 +101,10 @@ $('button').on("click", function(e){
 				}else if(mileage - couponPrice >= 0){
 				finMile = mileage - couponPrice;
 				alert("구매 완료");
-				console.log(finMile);
-				return finMile;
+				console.log(finMileage);
+				return finMileage;
 			}
-			
 			formObj.attr("action", "/coupon/couponList").attr("method", "get");
-	
 		}
 		
 		formObj.submit();

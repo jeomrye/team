@@ -106,7 +106,7 @@
 </select>
 
 <select id="couponPrice">
-	select couponPrice from coupon where couponNumber = #{couponNUmber}
+	select couponPrice from coupon where couponNumber = #{couponNumber}
 </select>
 
 <!-- <insert id="couponGetDetail"> -->
@@ -139,7 +139,7 @@
 </select>
 
 <insert id="couponDetailInsert">
-	insert into coupon_detail(userid, couponnumber, couponName, couponPrice, couponuse, couponbuydate) values(#{userid}, #{couponnumber},#{couponName},#{couponPrice},0,sysdate)
+	insert into coupon_detail(userid, couponnumber, couponName, couponPrice, couponuse, couponbuydate) values(#{userid}, #{couponnumber},#{couponName, jdbcType=VARCHAR},#{couponPrice},0,sysdate)
 </insert>
 
 <select id="mileGet" resultType="com.std.domain.MemVO">
@@ -154,6 +154,11 @@
 	select * from coupon where couponNumber = #{couponNumber}
 </select>
 
+
+
+<!-- <update id="finMileage"> -->
+<!-- update member set mileage = (mileage - coupon.couponprice) where userid = #{userid} -->
+<!-- </update> -->
 
 
 </mapper>

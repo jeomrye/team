@@ -66,7 +66,7 @@ public class MileController {
 	}
 	
 	
-	//쿠폰 등록 처리와 테스트
+	//쿠폰 등록 처리
 	 @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
 		@PostMapping("/couponRegister")
 		public String couponResister(CouponVO coupon, RedirectAttributes rttr) {
@@ -109,7 +109,7 @@ public class MileController {
 		return "redirect:/coupon/couponList" + cri.getListLink();
 	}
 	
-	//쿠폰 삭제 처리와 테스트
+	//쿠폰 삭제 처리
 	@PostMapping("/couponRemove")
 	public String couponRemove(@RequestParam("couponNumber") int couponNumber, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		
@@ -197,7 +197,10 @@ public class MileController {
 	
 	//쿠폰 구매 확정 페이지로 이동
 	@GetMapping("/couponBuy")
-	public void couponDetailRegister(AuthVO auth,@RequestParam("couponNumber")int couponNumber,MemVO member, Model model) {
+	public void couponDetailRegister(AuthVO auth,
+			@RequestParam("couponNumber")int couponNumber, 
+			MemVO member, 
+			Model model) {
 		model.addAttribute("coupon1", service.Getcoupon(couponNumber));
 		model.addAttribute("member", service.mileGet(member.getUserid()));
 		model.addAttribute("auth", service.authGet(member.getUserid()));
@@ -210,21 +213,25 @@ public class MileController {
 	
 	//쿠폰 구매 확정 페이지에서 서비스로 가는것
 	@PostMapping("/couponBuy")
-	public String couponDetailResister(AuthVO auth,CouponDetailVO vo, @RequestParam("userid")String userid) {
+	public String couponDetailResister(AuthVO auth,
+			CouponDetailVO vo, 
+			@RequestParam("userid")String userid,
+			@RequestParam("couponnumber")int couponnumber,
+			@RequestParam("couponname")String couponName, 
+			@RequestParam("couponprice")int couponPrice) {
 		
 		log.info("==============================");
 		
 		log.info("CouponRegister : " + vo);
 		log.info("auth : "+auth);
-			
+		
 		
 		service.couponDetailRegister(vo);
+		
 		log.info("insert Service 성공");
 		
-		return "redirect:/main/mainpage";
+		return "redirect:/coupon/couponList";
 	}
-	
-	
 	
 	
 	

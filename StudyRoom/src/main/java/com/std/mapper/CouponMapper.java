@@ -52,4 +52,6 @@ public interface CouponMapper {
 	public CouponVO Getcoupon(int couponNumber);
 	
 	
+	
+	
 }
