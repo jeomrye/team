@@ -36,7 +36,7 @@ public class MemServiceImpl implements MemService {
 		
 		return mapper.idCheck(userid);
 	}
-
+	//사업자 등록번호 체크
 	@Override
 	public int companyNumCheck(String companynumber) throws Exception {
 		

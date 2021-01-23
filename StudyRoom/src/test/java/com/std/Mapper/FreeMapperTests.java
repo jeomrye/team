@@ -1,4 +1,4 @@
-package com.std.mapper;
+package com.std.Mapper;
 
 import static org.junit.Assert.*;
 
@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.std.domain.FreeVO;
+import com.std.mapper.FreeMapper;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
