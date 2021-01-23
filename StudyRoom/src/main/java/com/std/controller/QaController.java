@@ -45,6 +45,7 @@ public class QaController {
 		
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
 	public void register() {
 		

@@ -15,7 +15,6 @@
 			<div class="panel-heading">
 				Q&A
 				<button id='regBtn' type="button" class="btn btn-xs pull-right">Q&A 작성</button>
-
 			</div>
 			<table class="table eable-striped table-bordered table-hover">
 				<thead>

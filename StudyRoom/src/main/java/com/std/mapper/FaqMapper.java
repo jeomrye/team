@@ -11,7 +11,7 @@ public interface FaqMapper {
 	
 	public List<FaqVO> getListWithPaging(Criteria cri);
 
-	public void insert(FaqVO faq);
+	//public void insert(FaqVO faq);
 	
 	public void insertSelectKey(FaqVO faq);
 

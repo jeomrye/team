@@ -106,7 +106,7 @@
 						</div>
 						<div class="form-group">
 						<label>댓글 작성자</label>
-						<input class="form-control" name='replyer' value='replyer'>
+						<input class="form-control" name='replyer' value='replyer' readonly="readonly">
 						</div>
 						<div class="form-group">
 						<label>댓글 작성일</label>
@@ -119,9 +119,10 @@
 				<c:if test="${pinfo.username eq qna.writer or pinfo.authorities eq '[ROLE_ADMIN]' }"> 
 					<button id='modalModBtn' type="button" class="btn btn-warning">수정</button>
 					<button id='modalRemoveBtn' type="button" class="btn btn-danger">삭제</button>
-					<button id='modalRegisterBtn' type="button" class="btn btn-success" data-dismiss='modal'>등록</button>
-					</c:if>
+						</c:if>
 				</sec:authorize>
+					<button id='modalRegisterBtn' type="button" class="btn btn-success" data-dismiss='modal'>등록</button>
+				
 					<button id='modalCloseBtn' type="button" class="btn btn-default" data-dismiss='modal'>닫기</button>
 				</div>
 				

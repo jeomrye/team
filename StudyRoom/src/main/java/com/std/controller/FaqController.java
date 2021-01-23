@@ -41,10 +41,12 @@ public class FaqController {
 	public String register(FaqVO faq, RedirectAttributes rttr) {
 		log.info("register: " + faq);
 		service.register(faq);
+		rttr.addFlashAttribute("result",faq.getFaqNo());
 		return "redirect:/faq/list";
 		
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
 	public void register() {
 		

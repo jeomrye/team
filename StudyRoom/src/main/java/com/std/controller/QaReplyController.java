@@ -37,8 +37,8 @@ public class QaReplyController {
 		log.info("QaReplyVO: " + vo);
 		int insertCount = replyservice.register(vo);
 		log.info("Reply INSERT COUNT: " + insertCount);
-		return insertCount == 1 ? new ResponseEntity<String>("success", HttpStatus.OK)//200
-			: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);//500
+		return insertCount == 1 ? new ResponseEntity<>("success", HttpStatus.OK)//200
+			: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);//500
 		//삼항 연산자 처리
 	}
 	

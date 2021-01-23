@@ -27,10 +27,8 @@
 			</div>
 			<!-- 로그인 사용자만 수정/삭제 가능 -->
 			<sec:authentication property="principal" var="pinfo"/>
-			<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')">
-			<c:if test="${pinfo.username eq faq.writer or pinfo.authorities eq '[ROLE_ADMIN]' }">
+			<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 			<button data-oper='modify' class="btn bnt-default" onclick="location.href='/faq/modify?faqNo=<c:out value="${faq.faqNo }"/>'">수정</button>
-			</c:if>
 			</sec:authorize>
 			<button data-oper='list' class="btn bnt-default" onclick="location.href='/faq/list'">목록</button>
 			<form action="/faq/modify" id="operForm" method="get">
@@ -46,6 +44,19 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	
+	//로그인 사용자가 댓글 등록시 작성자가 됨
+  	var replyer = null;
+  	var ROLE_ADMIN = null;
+  
+  	var csrfHeaderName ="${_csrf.headerName}";
+  	var csrfTokenValue="${_csrf.token}";
+  	
+  //Ajax spring security header	== ajax 를 이용한 csrf 토큰 전송
+  	$(document).ajaxSend(function(e, xhr, options){
+  		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+  	});
+	
 	
 	var operForm = $("#operForm");
 	

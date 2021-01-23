@@ -67,7 +67,7 @@
 			select seq_QuestionAndAnswer.nextval from dual
 		</selectKey>
 		insert into QuestionAndAnswer(questionNo,title,content,writer,writedate,updatedate)
-		values(seq_questionandanswer.nextval,#{title},#{content},#{writer},sysdate,sysdate)
+		values(#{questionNo},#{title},#{content},#{writer},sysdate,sysdate)
 	</insert>
 
 	<select id="read" resultType="com.std.domain.QaVO">
