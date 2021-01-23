@@ -372,14 +372,14 @@
 
 <div class="password_wrap">
 <div class="password_name">비밀번호</div>
-<div class="password_input_box"><input type="password" class="password_input" name="password">
+<div class="password_input_box"><input type="text" class="password_input" name="password">
 </div>
 <span class="pw_ck">비밀번호를 입력해주세요</span>
 </div>
 <div class="passwordCk_wrap">
 <div class="passwordCk_name">비밀번호 확인</div>
 <div class="passwordCk_input_box">
-<input type="password" class="passwordCk_input">
+<input class="passwordCk_input">
 </div>
 	<span class="pwCk_ck">비밀번호 확인을 입력해주세요</span>
 	<span class="passwordCk_input_re_1">비밀번호가 일치합니다.</span>
@@ -410,7 +410,7 @@
 
 <div class="phone_wrap">
 <div class="phone_name">핸드폰번호</div>
-<div class="phone_input_box"><input type="text" class="phone_input" name="phone" placeholder="'-'를 포함하여 입력해주세요"></div>
+<div class="phone_input_box"><input type="text" class="phone_input" name="phone" placeholder="'-'를 빼고 입력해주세요"></div>
 </div>
 
 <div class="gender_wrap">
@@ -482,8 +482,8 @@
 			
 			
 			var getCheck= RegExp(/^[a-zA-Z0-9]{4,12}$/); 
-			var getName= RegExp(/^[가-힣]{1,5}$/);
-			var getPhone = /^(01[0|1|6|7|8|9]?)(\d{4}|\d{3})\d{4}$/g;
+			var getName= RegExp(/^[가-힣]+$/);
+			var phoneCheck = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 			
 			
 			
@@ -517,7 +517,7 @@
 	            usernameCheck = false;
 	        }else{
 	            usernameCheck = true;
-	            if(!getName.test(name)){
+	            if(!getCheck.test(name)){
 	            alert("이름형식에 맞게 입력해주세요");
 	            return false; 
 	            }
@@ -552,15 +552,12 @@
 	            phoneCheck = false;
 	        }else{
 	            phoneCheck = true;
-	            if(!getPhone.test(phone)){
-	         		alert("핸드폰번호 양식에 맞춰서 입력해주세요");  
-	         		phoneCheck = false;
+	            if(!phoneCheck.test(phone)){
+	         		alert("핸드폰번호 양식에 맞춰서 입력해주세요")   	
 	            }
 	         
 	        }
-	        	       
-	        
-	        
+	        	        
 	        //사업자 등록번호 유효성검사
 	        if(companynumber == ""){
 	   		 $('.companynumber_ck').css('display','block');
@@ -584,11 +581,10 @@
 	        console.log(phoneCheck);
 	        console.log(genderCheck);
 	        console.log(companynumberCheck);
-	        console.log(companynumber);
 	        
 	        if(useridCheck&&useridCkCheck&&membernoCheck&&usernameCheck&&passwordCheck&&passwordCkCheck&&passwordDCkCheck&&emailCheck&&emailnumCheck&&phoneCheck&&genderCheck&&companynumberCheck ){
 	        	
-	        	$("#insert").attr("action","/member/joinForm");
+	        	$("#insert").attr("action","/member/insertMem");
 				$("#insert").submit();
 	        }    
 	        
