@@ -51,6 +51,7 @@ public class FreeController {
 		return "redirect:/free/list";		//url 경로
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping({"/get","/modify"})		//상세조회
 	public void get(@RequestParam("fno") Long fno,@ModelAttribute("cri") Criteria cri,Model model) {
 		log.info("/get or /modify");

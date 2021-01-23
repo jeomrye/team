@@ -55,4 +55,3 @@
    insert into auth (userid,auth) values (#{userid, jdbcType=VARCHAR},#{auth,jdbcType=VARCHAR})
 </insert>
 </mapper>
-
