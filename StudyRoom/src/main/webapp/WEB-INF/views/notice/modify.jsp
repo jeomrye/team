@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ include file="../includes/header.jsp"%>
 <div class="row">
 	<div class="col-lg-12">
@@ -14,6 +14,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">공지사항 수정</div>
 			<form role="form" action="/notice/modify" method="post">
+				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 				<input type="hidden" name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
 				<input type="hidden" name='amount' value='<c:out value="${cri.amount }"/>'>
 				<input type="hidden" name='type' value='<c:out value="${cri.type }"/>'>

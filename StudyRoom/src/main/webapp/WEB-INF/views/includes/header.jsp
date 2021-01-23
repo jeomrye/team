@@ -47,7 +47,7 @@
     <div id="wrapper">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="color:white; background: rgba(0,0,0,0.7); margin-bottom: 0">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             
 
                 <a class="navbar-brand" href="/main/mainpage"><h4>SRFS</h4></a>
@@ -60,8 +60,9 @@
                <li><a href="/notice/list"><h4>공지사항</h4></a></li>
                <li><a href="/free/list"><h4>자유게시판</h4></a></li>
                <li><a href="/place/list"><h4>장소</h4></a></li>
+               <li><a href="/notice/list"><h4>쿠폰구매하기</h4></a></li>
                <li><a href="/notice/list"><h4>Q&A</h4></a></li>
-               <li><a href="/notice/list"><h4>마이페이지</h4></a></li>
+               <li><a href="/mypage/myinfo"><h4>마이페이지</h4></a></li>
                <sec:authorize access="isAuthenticated()">
                <li><a href="/customLogout"><h4>로그아웃</h4></a></li>
                </sec:authorize>

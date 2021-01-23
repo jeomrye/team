@@ -51,15 +51,16 @@ public class FreeController {
 		return "redirect:/free/list";		//url 경로
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping({"/get","/modify"})		//상세조회
 	public void get(@RequestParam("fno") Long fno,@ModelAttribute("cri") Criteria cri,Model model) {
 		log.info("/get or /modify");
 		model.addAttribute("free",service.get(fno));
 	}
 	
-	@PreAuthorize("principal.username == #writer")
+	@PreAuthorize("(principal.username == #writer) or hasRole('ROLE_ADMIN')")
 	@PostMapping("/modify")		//수정처리
-	public String modify(FreeVO free, Criteria cri, RedirectAttributes rttr) {
+	public String modify(FreeVO free, Criteria cri, RedirectAttributes rttr, String writer) {
 		log.info("modify: "+free);
 		if(service.modify(free)) {
 			rttr.addFlashAttribute("result","success");
@@ -71,7 +72,7 @@ public class FreeController {
 		return "redirect:/free/list";
 	}
 	
-	@PreAuthorize("principal.username == #writer")
+	@PreAuthorize("(principal.username == #writer) or hasRole('ROLE_ADMIN')")
 	@PostMapping("/remove")		//삭제처리
 	public String remove(@RequestParam("fno") Long fno, Criteria cri, RedirectAttributes rttr, String writer) {
 		log.info("remove: " + fno);

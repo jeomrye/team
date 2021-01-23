@@ -7,29 +7,29 @@
 
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header">Free Register</h1>
+		<h1 class="page-header">자유게시판</h1>
 	</div>
 </div>
 
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-			<div class="panel-heading">Free Register</div>
+			<div class="panel-heading">새 글 작성</div>
 			<div class="panel-body">
 				<form role="form" action="/free/register" method="post">
 					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 					<div class="form-group">
-						<label>Title</label> <input class="form-control" name="title">
+						<label>제목</label> <input class="form-control" name="title">
 					</div>
 					<div class="form-group">
-						<label>Text area</label>
+						<label>내용</label>
 						<textarea class="form-control" rows="3" name="content"></textarea>
 					</div>
 						<div class="form-group">
-						<label>Writer</label> <input class="form-control" name='writer' value='<sec:authentication property="principal.username"/>' readonly="readonly">
+						<label>작성자</label> <input class="form-control" name='writer' value='<sec:authentication property="principal.username"/>' readonly="readonly">
 					</div>
-					<button type="submit" class="btn btn-default">Submit Button</button>
-					<button type="reset" class="btn btn-default">Reset Button</button>
+					<button type="submit" class="btn btn-default">글 등록</button>
+					<button type="reset" class="btn btn-default">리셋</button>
 				</form>
 			</div>
 		</div>

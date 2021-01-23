@@ -60,7 +60,7 @@
 						<input type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword }"/>'> 
 						<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"/>'> 
 						<input type="hidden" name="amount" value='<c:out value="${pageMaker.cri.amount }"/>'>
-						<button class="btn btn-default">Search</button>
+						<button class="btn btn-default">검색</button>
 					</form>
 				
 				</div>
@@ -69,7 +69,7 @@
 				<ul class="pagination">
 					<c:if test="${pageMaker.prev }">
 						<li class="paginate_button previous"><a
-							href="${pageMaker.startPage -1 }">Previous</a></li>
+							href="${pageMaker.startPage -1 }">이전</a></li>
 					</c:if>
 					<c:forEach var="num" begin="${pageMaker.startPage }"
 						end="${pageMaker.endPage}">
@@ -79,7 +79,7 @@
 					</c:forEach>
 					<c:if test="${pageMaker.next }">
 						<li class="paginate_button next"><a
-							href="${pageMaker.endPage +1 }">Next</a></li>
+							href="${pageMaker.endPage +1 }">다음</a></li>
 					</c:if>
 
 				</ul>

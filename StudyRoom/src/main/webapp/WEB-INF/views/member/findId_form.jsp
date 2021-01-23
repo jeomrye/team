@@ -39,10 +39,7 @@
                         <form method="post" action="/member/findId.do">
                             <fieldset>
                                 <div class="form-group">
-                                    	이름 : <input class="form-control" name="username" type="text" autofocus>
-                                </div>
-                                <div class="form-group">
-                                    	메일 :<input class="form-control" name="email" type="text" required>
+                                    	메일 :<input class="form-control" name="email" type="text" placeholder="이메일주소를 입력하세요"  required>
                                 </div>
                             	<button type="submit" class="btn btn-lg btn-success btn-block">아이디 찾기</button>
                        			<button type="button" onclick="history.go(-1)" class="btn btn-lg btn-dark btn-block">취소</button>

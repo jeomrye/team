@@ -8,13 +8,30 @@
 	rel="stylesheet">
 
 <%@ include file="../includes/header.jsp"%>
+<div class="row" style="width:100%; height:100%;background-size:100% 100%; background-repeat:no-repeat;  background-position:inherit;  background-image:url('/resources/main/srfsback.PNG'); ">
 
-<div class="row" style=" width: 100%; height:100%; background-size:100% 100%; background-attachment:fixed; background-image: url('/resources/img/main.png'); background-position:center; background-repeat:no-repeat;">
-	<div><img alt="srfs" src="/resources/img/SRFS.png" width="50%" height="30%" style=" margin-left:350px; text-align:  center;">
-	</div>
-	<form id="searchForm" action="/place/list" method="get">
+<!-- <img alt="/resources/main/srfsback.png" src="/resources/main/srfsback.png" style=" width: 100%;"> -->
+
+	<a href="/main/mainpage" style="color: black; text-decoration: none; ">
+		<img alt="/main/mainpage" src="/resources/main/srfs.PNG"
+		style=" padding-left: 500px; padding-top:200px; width:auto; height:550px;" >
+	</a> <br> <br>
+	
+	
+	<form id="searchForm" action="/notice/list" method="get">
+		<!-- <select name="type"> -->
+		<!-- 			<option value="" -->
+		<%-- 				<c:out value="${pageMaker.cri.type == null ? 'selected' :'' }" />>-----선 택-----</option> --%>
+		<!-- 			<option value="T" -->
+		<%-- 				<c:out value="${pageMaker.cri.type eq 'T'? 'selected' :'' }" />>지역</option> --%>
+		<!-- 			<option value="C" -->
+		<%-- 				<c:out value="${pageMaker.cri.type eq 'C'? 'selected' :'' }" />>독서실이름</option> --%>
+		<!-- 			<option value="TC" -->
+		<%-- 				<c:out value="${pageMaker.cri.type eq 'TC'? 'selected' :'' }" />>지역 or 독서실이름</option> --%>
+		<!-- 		</select>  -->
 		<div class="search-wrapper">
 			<div class="input-holder">
+
 				<input type="text" class="search-input" name="keyword"
 					onfocus="this.value=''"
 					value='지역/독서실이름 입력하세요<c:out value="${pageMaker.cri.keyword }"/>'>
@@ -27,6 +44,10 @@
 		</div>
 	</form>
 </div>
+
+<!-- <div class="col-md-6" style="background-color: silver; height: 100%;"> -->
+<!-- 	<img alt="" src="/resources/main/srfs_main_side.PNG"> -->
+<!-- </div> -->
 
 <script>
 	function searchToggle(obj, evt) {
@@ -43,19 +64,17 @@
 	}
 </script>
 <style>
-#background {
-	background-image:  url("/resources/img/study.jpg");
-}
 .search-wrapper {
 	position: absolute;
 	transform: translate(-50%, -50%);
-	top: 100%;
-	padding-left: 75%;
-	padding-top: 100px;
+	top: 75%;
+	padding-left: 105%;
 }
+
 .search-wrapper.active {
 	
 }
+
 .search-wrapper .input-holder {
 	height: 70px;
 	width: 70px;
@@ -65,12 +84,14 @@
 	position: relative;
 	transition: all 0.3s ease-in-out;
 }
+
 .search-wrapper.active .input-holder {
 	width: 450px;
 	border-radius: 50px;
 	background: rgba(0, 0, 0, 0.5);
 	transition: all .5s cubic-bezier(0.000, 0.105, 0.035, 1.570);
 }
+
 .search-wrapper .input-holder .search-input {
 	width: 100%;
 	height: 50px;
@@ -92,10 +113,12 @@
 	transition: all .3s cubic-bezier(0.000, 0.105, 0.035, 1.570);
 	transition-delay: 0.3s;
 }
+
 .search-wrapper.active .input-holder .search-input {
 	opacity: 1;
 	transform: translate(0, 10px);
 }
+
 .search-wrapper .input-holder .search-icon {
 	width: 70px;
 	height: 70px;
@@ -110,12 +133,14 @@
 	cursor: pointer;
 	transition: all 0.3s ease-in-out;
 }
+
 .search-wrapper.active .input-holder .search-icon {
 	width: 50px;
 	height: 50px;
 	margin: 10px;
 	border-radius: 30px;
 }
+
 .search-wrapper .input-holder .search-icon span {
 	width: 22px;
 	height: 22px;
@@ -125,14 +150,17 @@
 	transform: rotate(45deg);
 	transition: all .4s cubic-bezier(0.650, -0.600, 0.240, 1.650);
 }
+
 .search-wrapper.active .input-holder .search-icon span {
 	transform: rotate(-45deg);
 }
+
 .search-wrapper .input-holder .search-icon span::before, .search-wrapper .input-holder .search-icon span::after
 	{
 	position: absolute;
 	content: '';
 }
+
 .search-wrapper .input-holder .search-icon span::before {
 	width: 4px;
 	height: 11px;
@@ -141,6 +169,7 @@
 	border-radius: 2px;
 	background: #FE5F55;
 }
+
 .search-wrapper .input-holder .search-icon span::after {
 	width: 14px;
 	height: 14px;
@@ -149,6 +178,7 @@
 	border-radius: 16px;
 	border: 4px solid #FE5F55;
 }
+
 .search-wrapper .close {
 	position: absolute;
 	z-index: 1;
@@ -160,8 +190,8 @@
 	transform: rotate(-180deg);
 	transition: all .3s cubic-bezier(0.285, -0.450, 0.935, 0.110);
 	transition-delay: 0.2s;
-	padding-top: 100px;
 }
+
 .search-wrapper.active .close {
 	right: -50px;
 	transform: rotate(45deg);
@@ -169,24 +199,28 @@
 	transition-delay: 0.5s;
 	padding-top: 100px;
 }
+
 .search-wrapper .close::before, .search-wrapper .close::after {
 	position: absolute;
 	content: '';
 	background: #FE5F55;
 	border-radius: 2px;
 }
+
 .search-wrapper .close::before {
 	width: 5px;
 	height: 25px;
 	left: 10px;
 	top: 0px;
 }
+
 .search-wrapper .close::after {
 	width: 25px;
 	height: 5px;
 	left: 0px;
 	top: 10px;
 }
+
 input {
 	width: 50%;
 	padding: .8em .5em;
@@ -197,6 +231,7 @@ input {
 	border: 1px solid #999;
 	border-radius: 0px;
 }
+
 select {
 	width: 30%;
 	padding: .8em .5em;
