@@ -573,9 +573,9 @@ var emailnumCheck = false;        // 이메일 인증번호 확인
 	$(document).ready(function() {
 		var code = "";
 		var formObj = $("#update");
+		var userid = $(".userid_input").val();
 		$("button[data-oper='cancel']").on("click", function(e) {
-			formObj.attr("action","/main");
-			formObj.submit();
+			history.go(-1)
 		});
 
 		var formObj = $("#update");
@@ -633,7 +633,8 @@ var emailnumCheck = false;        // 이메일 인증번호 확인
 	       }
 			
 	       if(passwordCheck&&passwordCkCheck&&passwordDCkCheck&&emailCheck&&emailnumCheck&&phoneCheck ){
-	    	   
+	    	   formObj.attr("action","/mypage/deleteinfo");
+			
 	    	  formObj.submit();
 					       }    
 	       
@@ -696,7 +697,7 @@ var emailnumCheck = false;        // 이메일 인증번호 확인
 	       }
 			
 	       if(passwordCheck&&passwordCkCheck&&passwordDCkCheck&&emailCheck&&emailnumCheck&&phoneCheck ){
-	    	   
+	    	   	formObj.attr("action","/mypage/modifyinfo");
 		    	  formObj.submit();
 						       }   
 	       

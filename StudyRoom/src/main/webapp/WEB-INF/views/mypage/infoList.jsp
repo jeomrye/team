@@ -44,7 +44,8 @@
 					
 					<c:forEach items="${list }" var="member">
 						<tr>
-							<td><a class="move" href='<c:out value="${member.uno }"/>'>
+							
+							<td><a class="move" href='<c:out value="${member.userid }"/>'>
 							<c:out value="${member.userid }"></c:out></a></td>
 							<td><c:out value="${member.memberno }"></c:out></td>
 							<td><c:out value="${member.username }"></c:out></td>
@@ -169,7 +170,7 @@
 					function(e) {
 						e.preventDefault();
 						actionForm
-								.append("<input type='hidden' name='uno' value='"
+								.append("<input type='hidden' name='userid' value='"
 										+ $(this).attr(
 												"href")
 										+ "'>");

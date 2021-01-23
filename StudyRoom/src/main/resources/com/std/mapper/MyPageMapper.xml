@@ -30,12 +30,12 @@
 	   <select id="getListWithPaging" resultType="com.std.domain.MemVO">
   <![CDATA[
     select 
-    uno,userid,memberno,username,password,email,phone,gender,regdate,updatedate,mileage,coupon,companynumber 
+    userid,memberno,username,password,email,phone,gender,regdate,updatedate,mileage,companynumber 
      from
      (
      select 
-     /*+INDEX_DESC(uno) */ 
-     rownum rn,uno,userid,memberno,username,password,email,phone,gender,regdate,updatedate,mileage,coupon,companynumber 
+     /*+INDEX_DESC(userid) */ 
+     rownum rn,userid,memberno,username,password,email,phone,gender,regdate,updatedate,mileage,companynumber 
       from 
       member
       where
@@ -49,9 +49,9 @@
   </select>
   <select id="getTotalCount" resultType="int">
 		select count(*) from member
-		where
+		
 		<include refid="criteria"></include>
-		uno > 0
+		
 	</select>
   
   
@@ -79,12 +79,12 @@
 	
 	<!-- 회원 정보 가져오기 -->
 	<select id="selectinfo" resultType="com.std.domain.MemVO" >
-		select * from member where uno = #{uno}
+		select * from member where userid = #{userid}
 	</select>
 	
 	<!-- 회원정보 삭제하기 -->
 	<delete id="deleteinfo" >
-		delete from member where uno = #{uno}
+		delete from member where userid = #{userid}
 	</delete>
 	
 	<!-- 회원정보 수정하기 -->
@@ -92,7 +92,7 @@
 		update member set 
 		password = #{password},
 		phone = #{phone},
-		updatedate = sysdate where uno = #{uno}
+		updatedate = sysdate where userid = #{userid}
 		
 	</update>
 

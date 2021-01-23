@@ -61,7 +61,7 @@
                                 <!-- Change this to a button or input when using this as a form -->
                                 <a href="#" onclick="history.go(-1);" class="btn btn-lg btn-success btn-block">로그인</a>
                                 <!-- 회원가입페이지 이동 -->       
-                                <a href="/member/joinForm1" class="btn btn-lg btn-info btn-block">회원가입</a>
+                                <a href="/member/insertMem" class="btn btn-lg btn-info btn-block">회원가입</a>
                             </fieldset>
                             <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
                         </form>

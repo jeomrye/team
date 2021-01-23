@@ -370,14 +370,14 @@
 
 <div class="password_wrap">
 <div class="password_name">비밀번호</div>
-<div class="password_input_box"><input type="text" class="password_input" name="password">
+<div class="password_input_box"><input type="password" class="password_input" name="password">
 </div>
 <span class="pw_ck">비밀번호를 입력해주세요</span>
 </div>
 <div class="passwordCk_wrap">
 <div class="passwordCk_name">비밀번호 확인</div>
 <div class="passwordCk_input_box">
-<input class="passwordCk_input">
+<input class="passwordCk_input" type="password">
 </div>
 	<span class="pwCk_ck">비밀번호 확인을 입력해주세요</span>
 	<span class="passwordCk_input_re_1">비밀번호가 일치합니다.</span>
@@ -567,8 +567,8 @@
 	        
 	        
 	        if(useridCheck&&useridCkCheck&&membernoCheck&&usernameCheck&&passwordCheck&&passwordCkCheck&&passwordDCkCheck&&emailCheck&&emailnumCheck&&phoneCheck&&genderCheck ){
-	        	
-	        	$("#insert").attr("action","/main/mainpage");
+	        	alert("회원가입이 완료되었습니다");
+	        	$("#insert").attr("action","/member/joinForm1");
 				$("#insert").submit();
 	        }    
 	        

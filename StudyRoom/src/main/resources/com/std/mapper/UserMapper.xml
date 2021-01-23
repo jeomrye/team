@@ -3,8 +3,8 @@
 <mapper namespace="com.std.mapper.UserMapper">
 <!-- 회원가입 -->
 <insert id="insertMem">
-	insert into member (uno,userid,memberno,username, password, email,phone, gender, regdate, updatedate,mileage,coupon, companynumber) 
-	values ((uno_seq.nextval),#{userid,jdbcType=VARCHAR },#{memberno},#{username,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},#{gender,jdbcType=VARCHAR},sysdate,sysdate,0,null,#{companynumber}) 
+	insert into member (userid,memberno,username, password, email,phone, gender, regdate, updatedate,mileage, companynumber) 
+	values (#{userid,jdbcType=VARCHAR },#{memberno},#{username,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},#{gender,jdbcType=VARCHAR},sysdate,sysdate,0,#{companynumber,jdbcType=VARCHAR}) 
 </insert>
 
 <!-- 아이디 중복검사 -->
