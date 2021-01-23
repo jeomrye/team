@@ -454,10 +454,7 @@
 	var phoneCheck = false;			//핸드폰번호
 	var genderCheck = true;		//성별
 	
-	
-	
-	
-	
+
 
 	$(document).ready(function() {
 		//회원가입 버튼작동
@@ -571,7 +568,7 @@
 	        
 	        if(useridCheck&&useridCkCheck&&membernoCheck&&usernameCheck&&passwordCheck&&passwordCkCheck&&passwordDCkCheck&&emailCheck&&emailnumCheck&&phoneCheck&&genderCheck ){
 	        	
-	        	$("#insert").attr("action","/member/joinForm");
+	        	$("#insert").attr("action","/main/mainpage");
 				$("#insert").submit();
 	        }    
 	        

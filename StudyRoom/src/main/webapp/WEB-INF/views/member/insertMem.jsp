@@ -32,6 +32,19 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+<style type="text/css">
+.gradient-buttons .btn {
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(255,255,255,0.2) 49%, rgba(0,0,0,0.15) 51%, rgba(0,0,0,0.05));
+    background-repeat: repeat-x;
+    text-align:center;
+    width: 50%; 
+    height: 200px;
+}
+
+
+</style>
+
+
 </head>
 
 <body>
@@ -40,10 +53,10 @@
 
 
  
- 
-<button type="button" onclick="movemember();">일반사용자 가입페이지로이동</button>
-<button type="button" onclick="movecom();">기업사용자 가입페이지로이동</button>
-
+ <div class="card-body gradient-buttons">
+<button type="button" class="btn btn-success btn-lg btn-block" onclick="movemember();">일반사용자 가입페이지로이동</button>
+<button type="button" class="btn btn-info btn-lg btn-block" onclick="movecom();">기업사용자 가입페이지로이동</button>
+</div>
 
 
 
