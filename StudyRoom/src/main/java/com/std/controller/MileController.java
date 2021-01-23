@@ -224,7 +224,8 @@ public class MileController {
 		
 		log.info("CouponRegister : " + vo);
 		log.info("auth : "+auth);
-		
+		log.info("couponName : " + couponName);
+		log.info("couponPrice : " + couponPrice);
 		
 		service.couponDetailRegister(vo);
 		
