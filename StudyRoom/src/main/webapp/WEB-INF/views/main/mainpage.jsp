@@ -18,17 +18,7 @@
 	</a> <br> <br>
 	
 	
-	<form id="searchForm" action="/notice/list" method="get">
-		<!-- <select name="type"> -->
-		<!-- 			<option value="" -->
-		<%-- 				<c:out value="${pageMaker.cri.type == null ? 'selected' :'' }" />>-----선 택-----</option> --%>
-		<!-- 			<option value="T" -->
-		<%-- 				<c:out value="${pageMaker.cri.type eq 'T'? 'selected' :'' }" />>지역</option> --%>
-		<!-- 			<option value="C" -->
-		<%-- 				<c:out value="${pageMaker.cri.type eq 'C'? 'selected' :'' }" />>독서실이름</option> --%>
-		<!-- 			<option value="TC" -->
-		<%-- 				<c:out value="${pageMaker.cri.type eq 'TC'? 'selected' :'' }" />>지역 or 독서실이름</option> --%>
-		<!-- 		</select>  -->
+	<form id="searchForm" action="/place/list" method="get">
 		<div class="search-wrapper">
 			<div class="input-holder">
 
