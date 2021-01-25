@@ -101,5 +101,4 @@ function movecom(){
     <script src="/resources/dist/js/sb-admin-2.js"></script>
 
 </body>
-
 </html>
