@@ -245,17 +245,6 @@ function movecom(){
 </script>
 
 
-
-
-
-
-
-
-
-
-
-
-
     <!-- jQuery -->
     <script src="/resources/vendor/jquery/jquery.min.js"></script>
 
@@ -269,4 +258,5 @@ function movecom(){
     <script src="/resources/dist/js/sb-admin-2.js"></script>
 
 </body>
+
 </html>
