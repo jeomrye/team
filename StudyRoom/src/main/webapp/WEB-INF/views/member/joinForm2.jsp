@@ -590,7 +590,7 @@
 	        	
 	        		
 	        	
-	        	$("#insert").attr("action","/main/mainpage");
+	        	$("#insert").attr("action","/member/joinForm2");
 				$("#insert").submit();
 	        }
 	        
