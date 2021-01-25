@@ -4,7 +4,7 @@
 <!-- 회원가입 -->
 <insert id="insertMem">
 	insert into member (uno,userid,memberno,username, password, email,phone, gender, regdate, updatedate,mileage,coupon, companynumber) 
-	values ((uno_seq.nextval),#{userid},#{memberno},#{username},#{password},#{email},#{phone},#{gender},sysdate,sysdate,0,null,#{companynumber}) 
+	values (uno_seq.nextval,#{userid },#{memberno},#{username},#{password},#{email},#{phone},#{gender},sysdate,sysdate,0,null,#{companynumber}) 
 </insert>
 
 <!-- 아이디 중복검사 -->
@@ -50,5 +50,8 @@
 <update id="updatePw">
 	update member set password = #{password} where userid = #{userid}
 </update>
-</mapper>
 
+<insert id="insertAuth">
+   insert into auth (userid,auth) values (#{userid},#{auth})
+</insert>
+</mapper>

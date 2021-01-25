@@ -41,35 +41,72 @@ public class UserController {
 	@Autowired
 	private JavaMailSender mailSender;
 	
-	//회원가입페이지로 가는 메소드
-	@RequestMapping(method = RequestMethod.GET, value = "/joinForm")
-	public void insertMem() {
+	//회원가입페이지로 가는 메소드--일반회원
+	@RequestMapping(method = RequestMethod.GET, value = "/joinForm1")
+	public void insertMember() {
 		log.info("회원가입 페이지로 이동");
 		
 		}
 	
+	//회원가입페이지에서 오는 메소드 --일반회원
+	@RequestMapping(method = RequestMethod.POST, value = "/joinForm1")
+	public String insertMemberSusscess(MemVO vo,AuthVO avo) throws Exception {
+		log.info("insertMem 진입");
+	      String enPassword = passwordEncoder.encode(vo.getPassword());
+	      vo.setPassword(enPassword);
+	      service.register(vo);
+	      //권한주기
+	      if(vo.getMemberno() == 1) {
+	         String ROLE_USER ="ROLE_USER";
+	         avo.setAuth(ROLE_USER);
+	         service.auth(avo);
+	      } else if(vo.getMemberno() == 2) {
+	         String ROLE_MANAGER = "ROLE_MANAGER";
+	         avo.setAuth(ROLE_MANAGER);
+	         service.auth(avo);
+	      }
+	      
+	      log.info("insert Service 성공");
+	      
+	      return "redirect:/main/mainpage";
+	}
+	//회원가입페이지로 가는 메소드
+	@RequestMapping(method = RequestMethod.GET, value = "/joinForm2")
+	public void insertMem() {
+		log.info("회원가입 페이지로 이동");
+		
+	}
+	
 	//회원가입페이지에서 오는 메소드
-	@RequestMapping(method = RequestMethod.POST, value = "/joinForm")
+	@RequestMapping(method = RequestMethod.POST, value = "/joinForm2")
 	public String insertMemSusscess(MemVO vo,AuthVO avo) throws Exception {
 		log.info("insertMem 진입");
-		String enPassword = passwordEncoder.encode(vo.getPassword());
-		vo.setPassword(enPassword);
-		service.register(vo);
-		//권한주기
-		if(vo.getMemberno() == 1) {
-			String ROLE_USER ="ROLE_USER";
-			avo.setAuth(ROLE_USER);
-			service.auth(avo);
-		} else if(vo.getMemberno() == 2) {
-			String ROLE_MANAGER = "ROLE_MANAGER";
-			avo.setAuth(ROLE_MANAGER);
-			service.auth(avo);
-		}
-		
-		log.info("insert Service 성공");
-		
-		return "redirect:/main/mainpage";
+	      String enPassword = passwordEncoder.encode(vo.getPassword());
+	      vo.setPassword(enPassword);
+	      service.register(vo);
+	      //권한주기
+	      if(vo.getMemberno() == 1) {
+	         String ROLE_USER ="ROLE_USER";
+	         avo.setAuth(ROLE_USER);
+	         service.auth(avo);
+	      } else if(vo.getMemberno() == 2) {
+	         String ROLE_MANAGER = "ROLE_MANAGER";
+	         avo.setAuth(ROLE_MANAGER);
+	         service.auth(avo);
+	      }
+	      
+	      log.info("insert Service 성공");
+	      
+	      return "redirect:/main/mainpage";
 	}
+	
+	//회원가입 선택페이지로 가는 메소드
+	@RequestMapping(method = RequestMethod.GET, value = "/insertMem")
+	public void insert() {
+		log.info("회원가입 페이지로 이동");
+		
+	}
+
 	//아이디 중복 검사
 	@RequestMapping(method = RequestMethod.POST, value = "/memberIdChk")
 	@ResponseBody
@@ -118,7 +155,7 @@ public class UserController {
         log.info("인증번호"+checkNum);
         
         
-        String From = "clcko30@naver.com";	//보낸는 사람메일
+        String From = "jisuh12@naver.com";	//보낸는 사람메일
         String toEmail = email;	//받는사람 메일 입력 (입력받은 메일가져와서 변수입력)
         String title = "Study Room Finding Service:SRFS 회원가입 인증 메일입니다.";	//메일 제목입력
         String content = 
@@ -142,6 +179,7 @@ public class UserController {
         String num = Integer.toString(checkNum);//int로 받은 값을 String으로 변환
         return num;
     }
+	
 	
     @RequestMapping(value="/findId_form")
     public String findId_form() throws Exception {

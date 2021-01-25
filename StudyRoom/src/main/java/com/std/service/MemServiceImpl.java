@@ -11,11 +11,14 @@ import org.springframework.stereotype.Service;
 
 import com.std.domain.AuthVO;
 import com.std.domain.MemVO;
+import com.std.mapper.MyPageMapper;
 import com.std.mapper.UserMapper;
+
+import lombok.Setter;
 @Service
 public class MemServiceImpl implements MemService {
 
-	@Autowired
+	@Setter(onMethod_ = @Autowired)
 	UserMapper mapper;
 	
 	//회원가입
@@ -36,7 +39,7 @@ public class MemServiceImpl implements MemService {
 		
 		return mapper.idCheck(userid);
 	}
-
+	//사업자 등록번호 체크
 	@Override
 	public int companyNumCheck(String companynumber) throws Exception {
 		

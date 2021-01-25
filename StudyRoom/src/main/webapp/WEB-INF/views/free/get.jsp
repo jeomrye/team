@@ -31,7 +31,7 @@
 					<sec:authentication property="principal" var="pinfo"/>
 					<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')">
 					<c:if test="${pinfo.username eq free.writer or pinfo.authorities eq '[ROLE_ADMIN]' }">
-					<button data-oper="modify" class="btn btn-default">Modify</button>
+					<button data-oper="modify" class="btn btn-default">수정</button>
 					</c:if>
 					</sec:authorize>
 					<button data-oper="list" class="btn btn-info">목록</button>
@@ -54,9 +54,7 @@
 					<i class="fa fa-comments fa-fw"></i> 댓글
 					<sec:authentication property="principal" var="pinfo"/> 	<!-- 조회 화면에서 댓글 추가버튼 -->
 					<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')">
-					<c:if test="${pinfo.username eq free.writer or pinfo.authorities eq '[ROLE_ADMIN]' }"> 
 					<button id="addReplyBtn" class="btn btn-primary btn-xs pull-right">새 댓글 작성</button>
-					</c:if>
 					</sec:authorize>
 			</div>   
 			
@@ -65,8 +63,7 @@
 				
 					<li class="left clearfix" data-rno="12">
 					<div>
-						<div class="header">
-						</div>
+						<div class="header"></div>
 					</div>
 					</li>
 				</ul>
@@ -101,11 +98,9 @@
 			<div class="modal-footer">
 				<sec:authentication property="principal" var="pinfo"/> 	<!-- 조회 화면에서 댓글 추가버튼 -->
 				<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')">
-				<c:if test="${pinfo.username eq free.writer or pinfo.authorities eq '[ROLE_ADMIN]' }"> 
 				<button id="modalModBtn" type="button" class="btn btn-warning">수정</button>
 				<button id="modalRemoveBtn" type="button" class="btn btn-danger">삭제</button>
 				<button id="modalRegisterBtn" type="button" class="btn btn-default">등록</button>
-				</c:if>
 				</sec:authorize>
 				<button id="modalCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 			</div>
@@ -204,8 +199,7 @@ $(document).ready(function(){
   	replyer ='<sec:authentication property="principal.username"/>';
   	ROLE_ADMIN = '<sec:authentication property="principal.authorities"/>';
   	</sec:authorize>
-  	var csrfHeaderName ="${_csrf.headerName}";
-  	var csrfTokenValue="${_csrf.token}";
+  	
   	
   	$("#addReplyBtn").on("click",function(e){
   		modal.find("input").val("");
@@ -217,6 +211,9 @@ $(document).ready(function(){
   		$(".modal").modal("show");
   	});
   	
+  	
+  	var csrfHeaderName ="${_csrf.headerName}";
+  	var csrfTokenValue="${_csrf.token}";
   	//Ajax spring security header	== ajax 를 이용한 csrf 토큰 전송
   	$(document).ajaxSend(function(e, xhr, options){
   		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
@@ -314,7 +311,7 @@ $(document).ready(function(){
 
 
   		FreeReplyService.remove(rno, originalReplyer, function(result){
-  			alert(result);
+  			alert("삭제완료");
   			modal.modal("hide");
   			showList(pageNum);
   		});

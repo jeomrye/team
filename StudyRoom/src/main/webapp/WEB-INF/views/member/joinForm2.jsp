@@ -590,7 +590,7 @@
 	        	
 	        		
 	        	
-	        	$("#insert").attr("action","/member/joinForm");
+	        	$("#insert").attr("action","/main/mainpage");
 				$("#insert").submit();
 	        }
 	        
@@ -599,6 +599,10 @@
 					
 		});
 			        
+		$(".return_button").click(function() {
+			$("#insert").attr("action","/main/mainpage");
+			$("#insert").submit();
+		});
 	    });
 				
 		
