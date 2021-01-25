@@ -38,7 +38,7 @@
 
 <style>
 body{
-  background-color:#F7F8E0;
+  background-color:#8a8de0;
   font-family:sans-serif;
 }
 h3{
@@ -56,7 +56,7 @@ h3{
   height: 250px;
   
   position:relative;
-  background-color:#FF8000;
+  background-color:#de9693;
   padding:1.4rem 1.8rem;
   border:none;
   font-size:4rem;
@@ -74,7 +74,7 @@ h3{
   height: 250px;
   
   position:relative;
-  background-color:#0B614B;
+  background-color:#82ca98;
   padding:1.4rem 1.8rem;
   border:none;
   font-size:4rem;
