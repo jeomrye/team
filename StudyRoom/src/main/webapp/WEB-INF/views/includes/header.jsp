@@ -61,7 +61,7 @@
                <li><a href="/free/list"><h4>자유게시판</h4></a></li>
                <li><a href="/place/list"><h4>장소</h4></a></li>
                <li><a href="/notice/list"><h4>쿠폰구매하기</h4></a></li>
-               <li><a href="/notice/list"><h4>Q&A</h4></a></li>
+               <li><a href="/qna/list"><h4>Q&A</h4></a></li>
                <li><a href="/mypage/myinfo"><h4>마이페이지</h4></a></li>
                <sec:authorize access="isAuthenticated()">
                <li><a href="/customLogout"><h4>로그아웃</h4></a></li>
