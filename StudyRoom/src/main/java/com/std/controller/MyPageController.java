@@ -8,6 +8,7 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.std.domain.Criteria;
 import com.std.domain.MemVO;
 import com.std.domain.PageDTO;
+import com.std.security.domain.CustomUser;
 import com.std.service.MyPageService;
 
 import lombok.AllArgsConstructor;
@@ -65,15 +67,18 @@ public class MyPageController {
 	
 	
 	//내정보 보기, 수정, 삭제페이지로 이동
+	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping({"/myinfo","/modifyinfo"})
-	public void getmodify(@RequestParam("uno")Long uno,Model model) {
+	public void getmodify(@RequestParam("userid") String userid,Model model) {
 		log.info("내정보 보기,수정, 삭제 페이지 이동");
-		model.addAttribute("vo",service.getinfo(uno));
-		log.info(service.getinfo(uno));
+		model.addAttribute("vo",service.getinfo(userid));
+		log.info(service.getinfo(userid));
 	}
 	
 	
 	//회원정보 수정
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/modifyinfo")
 	public String modifyinfo(MemVO vo, RedirectAttributes rttr) {
 		log.info("modify:" + vo);
@@ -81,16 +86,16 @@ public class MyPageController {
 		if(service.modifyinfo(vo)) {
 			rttr.addFlashAttribute("result","success");
 		}
-		return "redirect:/main";
+		return "redirect:/main/mainpage";
 	}
 	//회원탈퇴하기
 	@PostMapping("/deleteinfo")
-	public String removeinfo(@RequestParam("uno")Long uno, RedirectAttributes rttr) {
-		log.info("remove"+uno);
-		if(service.removeinfo(uno)) {
+	public String removeinfo(@RequestParam("userid")String userid, RedirectAttributes rttr) {
+		log.info("remove"+userid);
+		if(service.removeinfo(userid)) {
 			rttr.addFlashAttribute("result","success");
 		}
-		return "redirect:/main";
+		return "redirect:/main/mainpage";
 	}
 	
 	

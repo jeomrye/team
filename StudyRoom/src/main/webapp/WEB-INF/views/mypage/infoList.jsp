@@ -37,14 +37,14 @@
 							<th>가입일자</th>
 							<th>최근 수정일자</th>
 							<th>현재 마일리지</th>
-							<th>구매 쿠폰</th>
 							<th>사업자등록번호</th>
 						</tr>
 					</thead>
 					
 					<c:forEach items="${list }" var="member">
 						<tr>
-							<td><a class="move" href='<c:out value="${member.uno }"/>'>
+							
+							<td><a class="move" href='<c:out value="${member.userid }"/>'>
 							<c:out value="${member.userid }"></c:out></a></td>
 							<td><c:out value="${member.memberno }"></c:out></td>
 							<td><c:out value="${member.username }"></c:out></td>
@@ -55,7 +55,6 @@
 							<td><c:out value="${member.regdate }"></c:out></td>
 							<td><c:out value="${member.updatedate }"></c:out></td>
 							<td><c:out value="${member.mileage }"></c:out></td>
-							<td><c:out value="${member.coupon }"></c:out></td>
 							<td><c:out value="${member.companynumber }"></c:out></td>
 						</tr>
 					</c:forEach>
@@ -169,7 +168,7 @@
 					function(e) {
 						e.preventDefault();
 						actionForm
-								.append("<input type='hidden' name='uno' value='"
+								.append("<input type='hidden' name='userid' value='"
 										+ $(this).attr(
 												"href")
 										+ "'>");

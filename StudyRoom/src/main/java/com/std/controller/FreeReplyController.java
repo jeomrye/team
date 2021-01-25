@@ -48,6 +48,7 @@ public class FreeReplyController {
 		return new ResponseEntity<>(replyservice.getListPage(cri, fno), HttpStatus.OK);		
 	}
 	
+	
 	@GetMapping(value="/{rno}", produces = {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<FreeReplyVO> get(@PathVariable("rno") Long rno){
 		log.info("get : "+rno);

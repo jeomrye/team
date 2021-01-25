@@ -1,18 +1,15 @@
-package com.std.Mapper;
-
-
-
-import java.util.List;
+package com.std.Service;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.std.domain.Criteria;
 import com.std.domain.MemVO;
 import com.std.mapper.MyPageMapper;
+import com.std.service.MyPageService;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -20,43 +17,36 @@ import lombok.extern.log4j.Log4j;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Log4j
-public class MypageTest {
+public class MypageServiceTest {
 
 	@Setter(onMethod_ = @Autowired)
-	private MyPageMapper mapper;
+	private MyPageService service;
 	
 	/*
-	 * @Test public void testGetList() { mapper.getList().forEach(member ->
+	 * @Test public void testGetList() { service.getList().forEach(member ->
 	 * log.info(member)); }
 	 */
 	
 	@Test
 	public void testGet() {
-		log.info(mapper.selectinfo(6L));
+		log.info(service.getinfo(6L));
 	}
 	
 	@Test
 	public void testDelete() {
-		log.info("remove result"+mapper.deleteinfo(6L));
+		log.info("remove result"+service.removeinfo(6L));
 	}
 	@Test
 	public void testUpdate() {
-		MemVO vo = new MemVO();
-		vo.setUno(1L);
-		vo.setPassword("123456");
-		vo.setPhone("01098765432");
+		MemVO vo = service.getinfo(5L);
 		
-		
-		int count = mapper.updateinfo(vo);
-		log.info("Update Count:" + count);
+		if(vo == null) {
+			return;
+		}
+		vo.setPhone("010-8765-4321");
+		log.info("modify result" + service.modifyinfo(vo));
 	}
 	
-	@Test
-	public void testPaging() {
-		Criteria cri = new Criteria();
-		List<MemVO> list = mapper.getListWithPaging(cri);
-		list.forEach(member -> log.info(member));
-	}
 	
 	
 	
