@@ -93,4 +93,9 @@ public class PlaceReServiceImpl implements PlaceReService {
 	public void deleteReview(String replyer, String userid) { //댓글 삭제시 마일리지 감소
 		mapper.deleteReview(replyer, userid);
 	}
+
+	@Override
+	public MemVO forDelete(String replyer, String userid) { //댓글 작성자 불러오기
+		return mapper.forDelete(replyer, userid);
+	}
 }

@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		select seq_place.nextval from dual
   		</selectKey>
   		insert into place (bno, title, offer, extra, content, time, clean, tel, address, page, writer)
-  		values (seq_place.nextval, #{title}, #{offer, jdbcType=VARCHAR}, #{extra, jdbcType=VARCHAR}, #{content}, 
+  		values (#{bno}, #{title}, #{offer, jdbcType=VARCHAR}, #{extra, jdbcType=VARCHAR}, #{content}, 
   		#{time}, #{clean}, #{tel}, #{address}, #{page, jdbcType=VARCHAR}, #{writer})
   </insert>
   

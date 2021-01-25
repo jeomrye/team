@@ -61,8 +61,15 @@
                <li><a href="/free/list"><h4>자유게시판</h4></a></li>
                <li><a href="/place/list"><h4>장소</h4></a></li>
                <li><a href="/notice/list"><h4>쿠폰구매하기</h4></a></li>
-               <li><a href="/qna/list"><h4>Q&A</h4></a></li>
-               <li><a href="/mypage/myinfo"><h4>마이페이지</h4></a></li>
+               <li><a href="/notice/list"><h4>Q&A</h4></a></li>
+               
+               
+               <sec:authorize access="hasAnyRole('ROLE_MANAGER','ROLE_USER')">
+               <li><a href="#" onclick="myinfo();"><h4>마이페이지</h4></a></li>
+               </sec:authorize>
+               <sec:authorize access="hasRole('ROLE_ADMIN')">
+               <li><form></form><a href="/mypage/infoList"><h4>마이페이지</h4></a></li>
+               </sec:authorize>
                <sec:authorize access="isAuthenticated()">
                <li><a href="/customLogout"><h4>로그아웃</h4></a></li>
                </sec:authorize>
@@ -78,4 +85,16 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
            
-        
+      	<script type="text/javascript">
+      	
+      		function myinfo(){
+      			var userid =null;
+      			<sec:authorize access="isAuthenticated()">
+      			userid ='<sec:authentication property="principal.username"/>';
+      			</sec:authorize>
+      			console.log(userid);
+       			location.href="/mypage/myinfo?userid="+userid;
+      		}
+      		
+      	
+      	</script>

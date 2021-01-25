@@ -37,7 +37,7 @@ import net.coobird.thumbnailator.Thumbnailator;
 
 @Controller
 @Log4j
-@RequestMapping("/aa/*")
+@RequestMapping("/dd/*")
 public class UploadController {
 
 	@GetMapping("/uploadForm")
@@ -272,31 +272,4 @@ public class UploadController {
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

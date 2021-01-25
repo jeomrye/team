@@ -564,6 +564,8 @@
 	        //사업자 등록번호 유효성검사
 	        if(companynumber == ""){
 	   		 $('.companynumber_ck').css('display','block');
+	   		 alert("사업자 등록번호를 입력해주세요");
+	   		companynumberCheck = false;
 	   		
 	   		}else if(companynumber != ""){
 	   		$('.companynumber_ck').css('display', 'none');
@@ -590,7 +592,7 @@
 	        	
 	        		
 	        	
-	        	$("#insert").attr("action","/member/joinForm");
+	        	$("#insert").attr("action","/member/joinForm2");
 				$("#insert").submit();
 	        }
 	        
@@ -599,6 +601,10 @@
 					
 		});
 			        
+		$(".return_button").click(function() {
+			$("#insert").attr("action","/main/mainpage");
+			$("#insert").submit();
+		});
 	    });
 				
 		
