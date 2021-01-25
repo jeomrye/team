@@ -21,7 +21,7 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class MainController {
 
-	@GetMapping("/mainpage")
+	@RequestMapping(value ="/mainpage",method= {RequestMethod.GET, RequestMethod.POST})
 	public String MainPage() {
 	
 		return "/main/mainpage";

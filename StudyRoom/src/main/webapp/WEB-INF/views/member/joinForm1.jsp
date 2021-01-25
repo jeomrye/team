@@ -568,7 +568,7 @@
 	        
 	        if(useridCheck&&useridCkCheck&&membernoCheck&&usernameCheck&&passwordCheck&&passwordCkCheck&&passwordDCkCheck&&emailCheck&&emailnumCheck&&phoneCheck&&genderCheck ){
 	        	
-	        	$("#insert").attr("action","/main/mainpage");
+	        	$("#insert").attr("action","/member/joinForm1");
 				$("#insert").submit();
 	        }    
 	        
