@@ -50,7 +50,7 @@ public class PlaceReController {
 				
 				//삼항 연산자
 				return insertCount==1 
-				? new ResponseEntity<>("success",HttpStatus.OK)
+				? new ResponseEntity<>("register review",HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}	
@@ -73,28 +73,29 @@ public class PlaceReController {
 	}
 
 	//댓글 삭제
-	@PreAuthorize("principal.username == #placeRe.replyer")
+	@PreAuthorize("(principal.username == #placeRe.replyer) or hasRole('ROLE_ADMIN')")
 	@DeleteMapping(value = "/{rno}", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
-	public ResponseEntity<String> remove(
-			/* @PathVariable("rno") Long rno, */@RequestBody PlaceReVO placeRe, MemVO member){
+	public ResponseEntity<String> remove(@RequestBody PlaceReVO placeRe, MemVO member){
 		long rno = placeRe.getRno();
 		log.info("reply remove : "+rno);
 		
+		member = service.forDelete(placeRe.getReplyer(), member.getUserid());
+
+		log.info(member.getUserid());
 		if(member.getMileage() > 0) {
 			service.deleteReview(placeRe.getReplyer(), member.getUserid()); //댓글 삭제시 해당 작성자 마일리지 회수
 		}else {
 			member.setMileage(0);
 		}
-		//log.info("replyer : "+placeRe.getReplyer());
 		
 		//삼항연산자
 		return service.remove(placeRe) == 1 
-		? new ResponseEntity<>("success",HttpStatus.OK)
+		? new ResponseEntity<>("delete review, mileage back",HttpStatus.OK)
 		: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	//댓글 수정
-	@PreAuthorize("principal.username == #placeRe.replyer")		
+	@PreAuthorize("(principal.username == #placeRe.replyer) or hasRole('ROLE_ADMIN')")		
 	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH},
 			value="/{rno}", consumes = "application/json")
 	public ResponseEntity<String> modify(@RequestBody PlaceReVO placeRe, @PathVariable("rno") Long rno){
@@ -103,7 +104,7 @@ public class PlaceReController {
 		log.info("reply modify : "+placeRe);
 		
 		return service.modify(placeRe)==1 
-		? new ResponseEntity<>("success",HttpStatus.OK)
+		? new ResponseEntity<>("modify review",HttpStatus.OK)
 		: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

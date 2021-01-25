@@ -22,7 +22,7 @@ import com.std.service.FreeReplyService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-@RequestMapping("/replies/")
+@RequestMapping("/Freereplies/")
 @RestController
 @Log4j
 @AllArgsConstructor

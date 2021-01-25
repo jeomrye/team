@@ -7,7 +7,7 @@
 <%@ include file="../includes/header.jsp" %>
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header">Study Modify</h1>
+		<h1 class="page-header">장소 수정</h1>
 	</div>
 </div>
 
@@ -20,7 +20,7 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-			<div class="panel-heading">Files</div>
+			<div class="panel-heading">첨부파일</div>
 			<div class="panel-body">
 			
 			<div class="form-group uploadDiv">
@@ -53,19 +53,19 @@
 			
 			<!-- 글번호-->
 			<div class="form-group">
-			<label>Bno</label>
+			<label>번호</label>
 			<input class="form-control" name='bno' value="<c:out value='${place.bno}'/>" readonly="readonly">
 			</div>
 			
 			<!-- 상호명 -->
 			<div class="form-group">
-			<label>Title<span>(필수)</span></label>
+			<label>상호명<span>(필수)</span></label>
 			<input class="form-control" name='title' placeholder="서울 광진구 랭스터디카페(카페형/무인)" value="<c:out value='${place.title}'/>">
 			</div>
 			
 			<!-- 기본 구비품 -->
 			<div class="form-group">
-			<label>Offer<span>(필수)</span></label><br>
+			<label>기본 구비품<span>(필수)</span></label><br>
 			<input type="checkbox" name='offer' value="공기청정기"> 공기청정기<br>
 			<input type="checkbox" name='offer' value="개인 사물함"> 개인 사물함<br>
 			<input type="checkbox" name='offer' value="냉난방기"> 냉난방기<br>
@@ -79,74 +79,73 @@
 			
 			<!-- 추가적인 제공품 -->
 			<div class="form-group">
-			<label>Extra</label>
+			<label>추가 제공품</label>
 			<input class="form-control" name='extra' placeholder="카누,맥심,담요,충전기,개인 스탠드,귀마개,인쇄(흑:100/칼:500),팩스" value="<c:out value='${place.extra}'/>">
 			</div>
 			
 			<!-- 내용 -->
 			<div class="form-group">
-			<label>Content<span>(필수)</span></label>
-			<textarea rows="3" class="form-control" name='content' placeholder="테이블형 15석, 독서실형 10석	 1층:카페형/2층:독서실형 분리 	1시간권:1,500원/4시간권:3,500원/8시간권:8,500원/종일권:1만원">
-			<c:out value="${place.content}"/></textarea>
+			<label>내용<span>(필수)</span></label>
+			<textarea rows="3" class="form-control" name='content' 
+			placeholder="테이블형 15석, 독서실형 10석	 1층:카페형/2층:독서실형 분리 	1시간권:1,500원/4시간권:3,500원/8시간권:8,500원/종일권:1만원"><c:out value="${place.content}"/></textarea>
 			</div>
 			
 			<!-- 운영시간 -->
 			<div class="form-group">
-			<label>Time<span>(필수)</span></label>
-			<input class="form-control" name='time' placeholder="새벽4시~다음날 새벽3시(연중무휴)" value="<c:out value='${place.time}'/>">
+			<label>운영시간<span>(필수)</span></label><input class="form-control" name='time' placeholder="새벽4시~다음날 새벽3시(연중무휴)" value="<c:out value='${place.time}'/>">
 			</div>
 			
 			<!-- 청소시간 -->
 			<div class="form-group">
-			<label>Clean<span>(필수)</span></label>
+			<label>청소시간<span>(필수)</span></label>
 			<input class="form-control" name='clean' placeholder="새벽3시~새벽4시" value="<c:out value='${place.clean}'/>">
 			</div>
 			
 			<!-- 연락처 -->
 			<div class="form-group">
-			<label>Tel<span>(필수)</span></label>
+			<label>연락처<span>(필수)</span></label>
 			<input class="form-control" name='tel' value="<c:out value='${place.tel}'/>">
 			</div>
 			
 			<!-- 주소 -->
 			<div class="form-group">
-			<label>Address<span>(필수)</span></label>
+			<label>주소<span>(필수)</span></label>
 			<input class="form-control" name='address' value="<c:out value='${place.address}'/>">
 			</div>
 			
 			<!-- 홈페이지,SNS계정 -->
 			<div class="form-group">
-			<label>Page</label>
+			<label>홈페이지/SNS계정</label>
 			<input class="form-control" name='page' placeholder="홈페이지/SNS계정" value="<c:out value='${place.page}'/>">
 			</div>
 			
 			<!-- 작성자 -->
 			<div class="form-group">
-			<label>Writer<span>(필수)</span></label>
-			<input class="form-control" name='writer' value="<c:out value='${place.writer}'/>">
+			<label>Writer</label>
+			<input class="form-control" name='writer' value="<c:out value='${place.writer}'/>" readonly="readonly">
 			</div>
 			
 			<!-- 작성일 -->
 			<div class="form-group">
-			<label>RegDate</label>
+			<label>작성일</label>
 			<input class="form-control" name="regDate" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${place.regdate }"/>' readonly="readonly">
 			</div>
 			
 			<!-- 수정일 -->
 			<div class="form-group">
-			<label>UpdateDate</label>
+			<label>수정일</label>
 			<input class="form-control" name="updateDate" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${place.updateDate }"/>' readonly="readonly">
 			</div>
 			
 			<sec:authentication property="principal" var="pinfo"/>
-				<sec:authorize access="isAuthenticated()">
-					<c:if test="${pinfo.username eq board.writer }">
-						<button type="submit" data-oper='modify' class="btn btn-default">Modify</button>
-						<button type="submit" data-oper='remove' class="btn btn-danger">Remove</button>
+				<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')">
+					<c:if test="${pinfo.username eq place.writer or pinfo.authorities eq '[ROLE_ADMIN]' }">
+						<button type="submit" data-oper='modify' class="btn btn-default">수정</button>
+						<button type="submit" data-oper='remove' class="btn btn-danger">삭제</button>
 					</c:if>
 				</sec:authorize>	
 
-			<button type="submit" data-oper='list' class="btn btn-info">List</button>
+			<button type="submit" data-oper='list' class="btn btn-info">목록</button>
 			
 			</form>
 			</div>
@@ -282,7 +281,7 @@ $(document).ready(function(){
 	           str += "<span> "+photo.fileName+"</span><br/>";//상단에 파일 이름
 	           str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' ";
 	           str += "class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>" 
-	           str += "<img src='/display?fileName="+fileCallPath+"'>";
+	           str += "<img src='/placePho/display?fileName="+fileCallPath+"'>";
 	           str += "</div>";
 	           str +="</li>";
 	         }else{//이미지 아닌 파일
@@ -342,7 +341,7 @@ $(document).ready(function(){
 			}
 			
 			$.ajax({
-				url : '/uploadAjaxAction',
+				url : '/placePho/uploadAjaxAction',
 				processData : false,
 				contentType : false,
 				data : formData,
@@ -373,7 +372,7 @@ $(document).ready(function(){
 					str += "<span> "+obj.fileName+"</span>";
 					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' class='btn btn-warning btn-circle'>";
 					str += "<i class='fa fa-times'></i></button><br>";
-					str += "<img src='/display?fileName="+fileCallPath+"'>";
+					str += "<img src='/placePho/display?fileName="+fileCallPath+"'>";
 					str += "</div></li>";
 				} else{
 					var fileCallPath = encodeURIComponent(obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);

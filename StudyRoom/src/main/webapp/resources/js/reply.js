@@ -27,7 +27,7 @@ var placeReService = (function(){
 	function getList(param, callback, error){
 		var bno = param.bno;
 		var page = param.page || 1; //댓글 페이지 목록
-		
+		console.log("bno"+param.bno);
 		$.getJSON("/placeRe/pages/" + bno + "/" + page + ".json",
 			function(data){
 				if(callback){
@@ -41,12 +41,12 @@ var placeReService = (function(){
 	}
 	
 	//댓글 삭제
-	function remove(reply, callback, error){
+	function remove(rno, replyer, callback, error){
 		console.log("- - - delete reply - - -");
 		$.ajax({
 			type : 'delete',
-			url : '/placeRe/' + reply.rno,
-			data : JSON.stringify(reply),
+			url : '/placeRe/' + rno,
+			data : JSON.stringify({rno:rno, replyer:replyer}),
 			contentType : "application/json; charset=utf-8",
 			success : function(deleteResult, status, xhr) {
 				if(callback){
@@ -136,7 +136,7 @@ var FreeReplyService = (function(){
 		
 		$.ajax({
 			type : 'post',
-			url : '/replies/new',
+			url : '/Freereplies/new',
 			data : JSON.stringify(reply),
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr) { //xhr:객체
@@ -156,7 +156,7 @@ var FreeReplyService = (function(){
 		var fno = param.fno;
 		var page = param.page || 1;
 		
-		$.getJSON("/replies/pages/" + fno + "/" + page + ".json",
+		$.getJSON("/Freereplies/pages/" + fno + "/" + page + ".json",
 			function(data){
 				if(callback){
 				
@@ -172,7 +172,7 @@ var FreeReplyService = (function(){
 	function remove(rno, replyer, callback, error){
 		$.ajax({
 			type : 'delete',
-			url : '/replies/' + rno,
+			url : '/Freereplies/' + rno,
 			data : JSON.stringify({rno:rno, replyer:replyer}),
 			contentType : "application/json; charset=utf-8",
 			success : function(deleteResult, status, xhr) {
@@ -192,7 +192,7 @@ var FreeReplyService = (function(){
 	console.log("RNO : "+reply.rno);
 		$.ajax({
 			type : 'put',
-			url : '/replies/' + reply.rno,
+			url : '/Freereplies/' + reply.rno,
 			data : JSON.stringify(reply),
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr) {
@@ -209,7 +209,7 @@ var FreeReplyService = (function(){
 	}
 	
 	function get(rno, callback, error) {
-		$.get("/replies/" + rno + ".json", function(result){
+		$.get("/Freereplies/" + rno + ".json", function(result){
 			if(callback){
 					callback(result);
 				}

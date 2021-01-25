@@ -11,11 +11,14 @@ import org.springframework.stereotype.Service;
 
 import com.std.domain.AuthVO;
 import com.std.domain.MemVO;
+import com.std.mapper.MyPageMapper;
 import com.std.mapper.UserMapper;
+
+import lombok.Setter;
 @Service
 public class MemServiceImpl implements MemService {
 
-	@Autowired
+	@Setter(onMethod_ = @Autowired)
 	UserMapper mapper;
 	
 	//회원가입
