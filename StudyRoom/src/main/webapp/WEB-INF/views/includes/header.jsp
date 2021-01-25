@@ -65,10 +65,10 @@
                
                
                <sec:authorize access="hasAnyRole('ROLE_MANAGER','ROLE_USER')">
-               <li><a href="#" onclick="myinfo();"><h4>마이페이지</h4></a></li>
+               <li><a class="myinfo"><h4>마이페이지</h4></a></li>
                </sec:authorize>
                <sec:authorize access="hasRole('ROLE_ADMIN')">
-               <li><form></form><a href="/mypage/infoList"><h4>마이페이지</h4></a></li>
+               <li><a href="/mypage/infoList" ><h4>마이페이지</h4></a></li>
                </sec:authorize>
                <sec:authorize access="isAuthenticated()">
                <li><a href="/customLogout"><h4>로그아웃</h4></a></li>
@@ -82,19 +82,33 @@
             <!-- /.navbar-top-links -->
 
         </nav>
+   
+   	
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
            
       	<script type="text/javascript">
       	
-      		function myinfo(){
-      			var userid =null;
+      		/* function myinfo(){
+      				var userid =null;
       			<sec:authorize access="isAuthenticated()">
       			userid ='<sec:authentication property="principal.username"/>';
       			</sec:authorize>
       			console.log(userid);
        			location.href="/mypage/myinfo?userid="+userid;
-      		}
+      		} */
+      		
+      		var csrfHeaderName ="${_csrf.headerName}";
+      	  	var csrfTokenValue="${_csrf.token}";
+      	  	//Ajax spring security header	== ajax 를 이용한 csrf 토큰 전송
+      	  	$(document).ajaxSend(function(e, xhr, options){
+      	  		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+      	  	});
+      		$(".myinfo").on("click", function() {
+      		
+      			$(".form").submit();
+			});
+      		
       		
       	
       	</script>

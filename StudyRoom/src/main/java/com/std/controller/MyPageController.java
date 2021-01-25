@@ -68,10 +68,20 @@ public class MyPageController {
 	
 	//내정보 보기, 수정, 삭제페이지로 이동
 	
+	
+	
 	@PreAuthorize("isAuthenticated()")
-	@GetMapping({"/myinfo","/modifyinfo"})
+	@PostMapping("/myinfo")
+	public void getinfo(@RequestParam("userid") String userid,Model model) {
+		log.info("내정보 보기페이지 이동");
+		model.addAttribute("vo",service.getinfo(userid));
+		log.info(service.getinfo(userid));
+	}
+
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/modifyinfo")
 	public void getmodify(@RequestParam("userid") String userid,Model model) {
-		log.info("내정보 보기,수정, 삭제 페이지 이동");
+		log.info("수정, 삭제 페이지 이동");
 		model.addAttribute("vo",service.getinfo(userid));
 		log.info(service.getinfo(userid));
 	}
@@ -79,10 +89,9 @@ public class MyPageController {
 	
 	//회원정보 수정
 	@PreAuthorize("isAuthenticated()")
-	@PostMapping("/modifyinfo")
-	public String modifyinfo(MemVO vo, RedirectAttributes rttr) {
+	@PostMapping("/modifyinfo1")
+	public String modifyinfo(MemVO vo,Model model, RedirectAttributes rttr) {
 		log.info("modify:" + vo);
-		
 		if(service.modifyinfo(vo)) {
 			rttr.addFlashAttribute("result","success");
 		}

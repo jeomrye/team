@@ -532,8 +532,12 @@
 	<button type="button" data-oper='mile' class="mile_button">마일리지 확인</button>
 	<button type="button" data-oper='return' class="return_button" >돌아가기</button>
 </div>
-<form id="operForm" action="/mypage/modify" method="get">
-	<input type="hidden" id="userid" name="userid" value='<c:out value="${vo.userid }"></c:out>'>
+<form id="operForm" action="/mypage/modifyinfo" method="post">
+		<input type="hidden" id="userid" name="userid" value='<c:out value="${vo.userid }"></c:out>'>
+		<input type="hidden" id="password" name="password" value='<c:out value="${vo.password }"></c:out>'>
+		<input type="hidden" id="phone" name="phone" value='<c:out value="${vo.phone }"></c:out>'>
+		<input type="hidden" id="updatedate"  name="updatedate" value='<fmt:formatDate pattern= "yy/MM/dd" value="${vo.updatedate }" />'>
+		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>	<!-- csrf토큰 -->
 </form>
 
 </div>
@@ -545,6 +549,14 @@
 <script type="text/javascript">
 	
 	$(document).ready(function() {
+		
+		var csrfHeaderName ="${_csrf.headerName}";
+  	  	var csrfTokenValue="${_csrf.token}";
+  	  	//Ajax spring security header	== ajax 를 이용한 csrf 토큰 전송
+  	  	$(document).ajaxSend(function(e, xhr, options){
+  	  		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+  	  	});
+  	  	
 		var operForm = $("#operForm");
 		
 		$("button[data-oper='modify']").on("click", function(e) {
@@ -552,7 +564,7 @@
 		});
 		
 		$("button[data-oper='return']").on("click", function(e) {
-			operForm.find("#uno").remove();
+			
 			operForm.find("#userid").remove();
 			operForm.attr("action","/main/mainpage");
 			operForm.submit();

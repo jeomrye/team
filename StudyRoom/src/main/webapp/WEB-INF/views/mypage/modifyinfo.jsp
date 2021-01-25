@@ -442,6 +442,7 @@
 
 <div class="wrapper">
 <form method="post" role="form" id="update" >
+	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>	<!-- csrf토큰 -->
 <div class="wrap">
 	<div class="col-lg-12">
 		<h1 class="page-header">회원정보 수정페이지</h1>
@@ -543,7 +544,7 @@
 
 	<button type="submit" class="update_button" data-oper='modify'>수정완료</button>
 	<button type="submit" class="remove_button" data-oper='remove'>탈퇴하기</button>
-	<button type="submit" class="return_button" data-oper='cancel'>취소하기</button>
+	<button type="button" class="return_button" data-oper='cancel'>취소하기</button>
 
 
 
@@ -562,11 +563,20 @@ var emailnumCheck = false;        // 이메일 인증번호 확인
 
 
 	$(document).ready(function() {
+		
+		var csrfHeaderName ="${_csrf.headerName}";
+  	  	var csrfTokenValue="${_csrf.token}";
+  	  	//Ajax spring security header	== ajax 를 이용한 csrf 토큰 전송
+  	  	$(document).ajaxSend(function(e, xhr, options){
+  	  		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+  	  	});
+  	  	
+  	  	
 		var code = "";
 		var formObj = $("#update");
 		var userid = $(".userid_input").val();
 		$("button[data-oper='cancel']").on("click", function(e) {
-			history.go(-1)
+			history.go(-1);
 		});
 
 		var formObj = $("#update");
@@ -688,7 +698,7 @@ var emailnumCheck = false;        // 이메일 인증번호 확인
 	       }
 			
 	       if(passwordCheck&&passwordCkCheck&&passwordDCkCheck&&emailCheck&&emailnumCheck&&phoneCheck ){
-	    	   	formObj.attr("action","/mypage/modifyinfo");
+	    	   	formObj.attr("action","/mypage/modifyinfo1");
 		    	  formObj.submit();
 						       }   
 	       
