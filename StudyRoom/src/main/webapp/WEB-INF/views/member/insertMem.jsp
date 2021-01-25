@@ -245,17 +245,6 @@ function movecom(){
 </script>
 
 
-
-
-
-
-
-
-
-
-
-
-
     <!-- jQuery -->
     <script src="/resources/vendor/jquery/jquery.min.js"></script>
 
