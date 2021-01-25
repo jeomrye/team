@@ -43,6 +43,7 @@ body{
 }
 h3{
   color:black;
+  font-size:4rem;
   font-family:sans-serif;
   margin-bottom:40px;
 }
@@ -52,13 +53,13 @@ h3{
   margin-bottom:50px;
   
   width:500px;
-  height: 100px;
+  height: 250px;
   
   position:relative;
   background-color:#FF8000;
   padding:1.4rem 1.8rem;
   border:none;
-  font-size:2rem;
+  font-size:4rem;
   font-weight:bold;
   letter-spacing:3px;
   color:#eee;
@@ -70,13 +71,13 @@ h3{
   margin-bottom:50px;
   
   width:500px;
-  height: 100px;
+  height: 250px;
   
   position:relative;
   background-color:#0B614B;
   padding:1.4rem 1.8rem;
   border:none;
-  font-size:2rem;
+  font-size:4rem;
   font-weight:bold;
   letter-spacing:3px;
   color:#eee;
