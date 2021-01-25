@@ -1,7 +1,7 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+     
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,7 +60,6 @@ color: black;
 
                 <a class="navbar-brand" href="/main/mainpage">
                 <img alt="/resources/main/top.png" src="/resources/main/top.png" style="padding-top: 10px;">
-<!--                 <h4>SRFS</h4> -->
                 </a>
             
             <!-- /.navbar-header -->
@@ -90,3 +89,5 @@ color: black;
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
            
+        
+

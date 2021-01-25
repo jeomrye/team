@@ -60,11 +60,11 @@
 	</insert>
 
 	<insert id="insertSelectKey">
-		<selectKey keyProperty="faqNo" order="BEFORE" resultType="int">
+		<selectKey keyProperty="faqNo" order="BEFORE" resultType="long">
 			select seq_FAQ.nextval from dual
 		</selectKey>
 		insert into FAQ(faqNo,title,content,writer,writedate)
-		values(seq_FAQ.nextval,#{title},#{content},#{writer},sysdate)
+		values(#{faqNo},#{title},#{content},#{writer},sysdate)
 	</insert>
 
 	<select id="read" resultType="com.std.domain.FaqVO">
