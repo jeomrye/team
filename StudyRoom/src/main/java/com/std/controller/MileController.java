@@ -63,6 +63,7 @@ public class MileController {
 		log.info("total : " + total);
 		
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		model.addAttribute("member", new MemVO());
 	}
 	
 	
@@ -88,11 +89,11 @@ public class MileController {
 	
 	//쿠폰 조회 와 수정
 	@GetMapping({"/couponGet", "/couponModify"})
-	public void couponGet(@RequestParam("couponNumber") int couponNumber, @ModelAttribute("cri") Criteria cri, Model model) {
+	public void couponGet(@RequestParam("couponNumber") int couponNumber, @ModelAttribute("cri") Criteria cri, Model model,String userid) {
 		
 		log.info("/couponGet or /couponModify");
-		
 		model.addAttribute("coupon", service.couponGet(couponNumber));
+		model.addAttribute("member", service.mileGet(userid));
 	}
 	
 		
@@ -186,10 +187,10 @@ public class MileController {
 	
 	//내가 산 쿠폰 보기
 	@GetMapping("/couponDetail")
-	public void couponDetailList(String userId, Model model) {
+	public void couponDetailList(String userid, Model model) {
 		
-		log.info("couponDetailList : " + userId);
-		model.addAttribute("dl", service.couponGetDetail(userId));
+		log.info("couponDetailList : " + userid);
+		model.addAttribute("dl", service.couponGetDetail(userid));
 		
 		
 		
@@ -198,15 +199,17 @@ public class MileController {
 	//쿠폰 구매 확정 페이지로 이동
 	@GetMapping("/couponBuy")
 	public void couponDetailRegister(AuthVO auth,
+			CouponVO coupon,
 			@RequestParam("couponNumber")int couponNumber, 
-			MemVO member, 
+			@RequestParam("userid")String userid ,@ModelAttribute("member")MemVO member, 
 			Model model) {
+		
+		model.addAttribute(service.couponGet(couponNumber));
 		model.addAttribute("coupon1", service.Getcoupon(couponNumber));
 		model.addAttribute("member", service.mileGet(member.getUserid()));
-		model.addAttribute("auth", service.authGet(member.getUserid()));
 		
 		log.info("쿠폰 구매 확정 페이지로 이동");
-		
+		log.info(member.getUserid());
 	}
 	
 	
@@ -215,18 +218,22 @@ public class MileController {
 	@PostMapping("/couponBuy")
 	public String couponDetailResister(AuthVO auth,
 			CouponDetailVO vo, 
+			CouponVO c,
 			@RequestParam("userid")String userid,
-			@RequestParam("couponnumber")int couponnumber,
 			@RequestParam("couponname")String couponName, 
 			@RequestParam("couponprice")int couponPrice) {
 		
 		log.info("==============================");
-		
 		log.info("CouponRegister : " + vo);
 		log.info("auth : "+auth);
 		log.info("couponName : " + couponName);
 		log.info("couponPrice : " + couponPrice);
-		
+		log.info("c : " + c);
+		c = service.couponGet(vo.getCouponnumber());
+		vo.setCouponName(c.getCouponName());
+		vo.setCouponPrice(c.getCouponPrice());
+		vo.setCouponuse(c.getCouponUse());
+		vo.setCouponbuydate(c.getCouponregDate());
 		service.couponDetailRegister(vo);
 		
 		log.info("insert Service 성공");

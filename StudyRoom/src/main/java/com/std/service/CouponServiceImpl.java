@@ -137,14 +137,14 @@ public class CouponServiceImpl implements CouponService {
 	@Override
 	public List<CouponDetailVO> couponGetDetail(String userId) {
 		
-		log.info("couponGetDetail....." + userId);
-		mapper.couponGetDetail(userId);	
+		log.info("couponGetDetail....." + userId);	
 		return mapper.couponGetDetail(userId);
 	}
 	//쿠폰 구매하기
 	@Override
 	public void couponDetailRegister(CouponDetailVO vo) {
 		log.info("couponBuy: "+vo);
+		
 		mapper.couponDetailInsert(vo);
 	}
 
@@ -166,9 +166,6 @@ public class CouponServiceImpl implements CouponService {
 		log.info("Getcoupon"+couponNumber);
 		return mapper.Getcoupon(couponNumber);
 	}
-
-
-	
 
 
 

@@ -103,8 +103,9 @@ $('button').on("click", function(e){
 				alert("구매 완료");
 				console.log(finMileage);
 				return finMileage;
+				
 			}
-			formObj.attr("action", "/coupon/couponList").attr("method", "get");
+			
 		}
 		
 		formObj.submit();

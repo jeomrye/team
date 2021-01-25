@@ -156,6 +156,7 @@
 
 
 
+
 <!-- <update id="finMileage"> -->
 <!-- update member set mileage = (mileage - coupon.couponprice) where userid = #{userid} -->
 <!-- </update> -->

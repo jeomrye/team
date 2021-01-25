@@ -51,7 +51,7 @@ public interface CouponMapper {
 	//쿠폰 가져오기
 	public CouponVO Getcoupon(int couponNumber);
 	
-	
+
 	
 	
 }

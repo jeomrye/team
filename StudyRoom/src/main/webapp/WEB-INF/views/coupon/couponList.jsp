@@ -99,6 +99,8 @@
 	<input type='hidden' name='amount' value='${pageMaker.cri.amount }'>
 	<input type='hidden' name='type' value='${pageMaker.cri.type }'>
 	<input type='hidden' name='keyword' value='${pageMaker.cri.keyword }'>
+	<sec:authentication property="principal" var="pinfo"/>
+	<input type='hidden' name="userid" value='${pinfo.username }'>
 </form>
 
 	<!-- Modal 추가 -->

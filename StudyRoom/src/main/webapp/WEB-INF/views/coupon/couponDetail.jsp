@@ -26,12 +26,12 @@
 					</thead>
 					<c:forEach items="${dl }" var="ca">
 						<tr>
-							<td><c:out value="${ca.userId }"></c:out></td>
-							<td><c:out value="${ca.couponNumber }"></c:out></td>
+							<td><c:out value="${ca.userid }"></c:out></td>
+							<td><c:out value="${ca.couponnumber }"></c:out></td>
 							<td><c:out value="${ca.couponName }"></c:out></td>
 							<td><c:out value="${ca.couponPrice }"></c:out></td>
-							<td><c:out value="${ca.couponUse }"></c:out></td>
-							<td><c:out value="${ca.couponBuyDate }"></c:out></td>
+							<td><c:out value="${ca.couponuse }"></c:out></td>
+							<td><c:out value="${ca.couponbuydate }"></c:out></td>
 							
 							
 						</tr>
