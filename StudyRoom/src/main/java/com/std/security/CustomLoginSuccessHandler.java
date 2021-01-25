@@ -30,11 +30,11 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 		//로그인시 권한에 따라 다른페이지 호출
 		if(roleNames.contains("ROLE_ADMIN")) {
-			 response.sendRedirect("/main/mainpage");
+			 response.sendRedirect("/sample/admin");
 			return; 
 		}
 		if(roleNames.contains("ROLE_USER")) {
-			response.sendRedirect("/main/mainpage");
+			response.sendRedirect("/sample/member");
 			return;
 		}
 		response.sendRedirect("/");

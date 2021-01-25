@@ -32,36 +32,205 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<style type="text/css">
-.gradient-buttons .btn {
-    background-image: linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(255,255,255,0.2) 49%, rgba(0,0,0,0.15) 51%, rgba(0,0,0,0.05));
-    background-repeat: repeat-x;
-    text-align:center;
-    width: 50%; 
-    height: 200px;
-}
-
-
-</style>
-
-
 </head>
 
 <body>
 
+<style>
+body{
+  background-color:#F7F8E0;
+  font-family:sans-serif;
+}
+h3{
+  color:black;
+  font-size:4rem;
+  font-family:sans-serif;
+  margin-bottom:40px;
+}
+#button-one{
+  display:block;
+  margin:0px auto;
+  margin-bottom:50px;
+  
+  width:500px;
+  height: 250px;
+  
+  position:relative;
+  background-color:#FF8000;
+  padding:1.4rem 1.8rem;
+  border:none;
+  font-size:4rem;
+  font-weight:bold;
+  letter-spacing:3px;
+  color:#eee;
+  cursor:pointer;
+}
+#button-two{
+  display:block;
+  margin:0px auto;
+  margin-bottom:50px;
+  
+  width:500px;
+  height: 250px;
+  
+  position:relative;
+  background-color:#0B614B;
+  padding:1.4rem 1.8rem;
+  border:none;
+  font-size:4rem;
+  font-weight:bold;
+  letter-spacing:3px;
+  color:#eee;
+  cursor:pointer;
+}
+.btn-wrapper{
+  text-align:center;
+  padding-top:5%;
+}
 
+@-webkit-keyframes top-frames{
+  0%{
+    top:0px;
+    border-color:#eee;
+    border-width:5px;
+    opacity:1;
+  }
+  100%{
+    top:1rem;
+    opacity:0;
+    border-width:1px;
+  }
+}
+@-moz-keyframes top-frames{
+  0%{
+    top:0px;
+    border-color:#eee;
+    border-width:5px;
+    opacity:1;
+  }
+  100%{
+    top:1rem;
+    opacity:0;
+    border-width:1px;
+  }
+}
+@keyframes top-frames{
+  0%{
+    top:0px;
+    border-color:#eee;
+    border-width:5px;
+    opacity:1;
+  }
+  100%{
+    top:1rem;
+    opacity:0;
+    border-width:1px;
+  }
+}
+@-webkit-keyframes bottom-frames{
+  0%{
+    bottom:0px;
+    border-color:#eee;
+    border-width:5px;
+    opacity:1;
+  }
+  100%{
+    bottom:1rem;
+    border-width:1px;
+    opacity:0;
+  }
+}
+@-moz-keyframes bottom-frames{
+  0%{
+    bottom:0px;
+    border-color:#eee;
+    border-width:5px;
+    opacity:1;
+  }
+  100%{
+    bottom:1rem;
+    border-width:1px;
+    opacity:0;
+  }
+}
+@keyframes bottom-frames{
+  0%{
+    bottom:0px;
+    border-color:#eee;
+    border-width:5px;
+    opacity:1;
+  }
+  100%{
+    bottom:1rem;
+    border-width:1px;
+    opacity:0;
+  }
+}
+#button-one:hover{
+  -webkit-animation:button-two .5s;
+  -moz-animation:button-two .5s;
+  animation:button-two .5s;
+}
+#button-two:hover{
+  -webkit-animation:button-two .5s;
+  -moz-animation:button-two .5s;
+  animation:button-two .5s;
+}
+@-webkit-keyframes button-one{
+  50%{
+    letter-spacing:6px;
+  }
+  100%{
+    letter-spacing:3px;
+  }
+}
+@-webkit-keyframes button-two{
+  50%{
+    letter-spacing:6px;
+  }
+  100%{
+    letter-spacing:3px;
+  }
+}
+@-moz-keyframes button-one{
+  50%{
+    letter-spacing:6px;
+  }
+  100%{
+    letter-spacing:3px;
+  }
+}
+@-moz-keyframes button-two{
+  50%{
+    letter-spacing:6px;
+  }
+  100%{
+    letter-spacing:3px;
+  }
+}
+@keyframes button-one{
+  50%{
+    letter-spacing:6px;
+  }
+  100%{
+    letter-spacing:3px;
+  }
+}
+@keyframes button-two{
+  50%{
+    letter-spacing:6px;
+  }
+  100%{
+    letter-spacing:3px;
+  }
+}
+</style>
 
-
- 
- <div class="card-body gradient-buttons">
-<button type="button" class="btn btn-success btn-lg btn-block" onclick="movemember();">일반사용자 가입페이지로이동</button>
-<button type="button" class="btn btn-info btn-lg btn-block" onclick="movecom();">기업사용자 가입페이지로이동</button>
+<div class="btn-wrapper">
+  <h3>회원가입</h3><br/>
+  <button id="button-one" onclick="movemember();">일반 사용자</button>
+  <button id="button-two" onclick="movecom();">기업 사용자</button>
 </div>
-
-
-
-
-
 
 
 
@@ -74,17 +243,6 @@ function movecom(){
      location.href = "/member/joinForm2";
 }
 </script>
-
-
-
-
-
-
-
-
-
-
-
 
 
     <!-- jQuery -->

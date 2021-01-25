@@ -28,10 +28,10 @@ public interface MyPageMapper {
 	//관리자가 맴버 모두 가져오기
 	//public List<MemVO> getList();
 		
-	public MemVO selectinfo(Long uno);
+	public MemVO selectinfo(String userid);
 	
-	public int deleteinfo(Long uno);
+	public String deleteinfo(String userid);
 	
-	public int updateinfo(MemVO vo);
+	public String updateinfo(MemVO vo);
 	
 }

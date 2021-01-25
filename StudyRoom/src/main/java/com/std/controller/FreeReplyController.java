@@ -22,7 +22,7 @@ import com.std.service.FreeReplyService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-@RequestMapping("/replies/")
+@RequestMapping("/Freereplies/")
 @RestController
 @Log4j
 @AllArgsConstructor
@@ -47,6 +47,7 @@ public class FreeReplyController {
 		log.info("cri : "+cri);
 		return new ResponseEntity<>(replyservice.getListPage(cri, fno), HttpStatus.OK);		
 	}
+	
 	
 	@GetMapping(value="/{rno}", produces = {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<FreeReplyVO> get(@PathVariable("rno") Long rno){
