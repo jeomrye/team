@@ -51,21 +51,21 @@ public class MyPageServiceImpl implements MyPageService {
 	
 	
 	@Override
-	public MemVO getinfo(Long uno) {
-		log.info("get"+uno);
-		return mapper.selectinfo(uno);
+	public MemVO getinfo(String userid) {
+		log.info("get"+userid);
+		return mapper.selectinfo(userid);
 	}
 
 	@Override
 	public boolean modifyinfo(MemVO vo) {
 		log.info("modify"+vo);
-		return mapper.updateinfo(vo) ==1;
+		return mapper.updateinfo(vo) != null;
 	}
 
 	@Override
-	public boolean removeinfo(Long uno) {
-		log.info("remove"+uno);
-		return mapper.deleteinfo(uno) ==1;
+	public boolean removeinfo(String userid) {
+		log.info("remove"+userid);
+		return mapper.deleteinfo(userid) != null;
 	}
 
 	

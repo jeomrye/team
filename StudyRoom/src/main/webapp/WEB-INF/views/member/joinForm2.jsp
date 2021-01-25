@@ -564,6 +564,8 @@
 	        //사업자 등록번호 유효성검사
 	        if(companynumber == ""){
 	   		 $('.companynumber_ck').css('display','block');
+	   		 alert("사업자 등록번호를 입력해주세요");
+	   		companynumberCheck = false;
 	   		
 	   		}else if(companynumber != ""){
 	   		$('.companynumber_ck').css('display', 'none');

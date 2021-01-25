@@ -447,9 +447,6 @@
 		<h1 class="page-header">회원정보 수정페이지</h1>
 	</div>
 
-<input type="hidden" id="uno" name="uno" value='<c:out value="${vo.uno }"></c:out>'>
-
-
 
 <div class="userid_wrap">
 <div class="userid_name">아이디</div>
@@ -528,12 +525,6 @@
 <div class="mileage_input_box"><input type="text" class="mileage_input" name="mileage" value='<c:out value="${vo.mileage }"></c:out>' ></div>
 </div>
 
-<div class="coupon_wrap">
-<div class="coupon_name">쿠폰 정보</div>
-<div class="coupon_input_box"><input type="text" class="coupon_input" name="coupon" value='<c:out value="${vo.coupon }"></c:out>' ></div>
-</div>
-
-
 <div class="companynumber_wrap" >
 <div class="companynumber_name">사업자 등록번호</div>
 <div class="companynumber_input_box"><input type="text" class="companynumber_input" name="companynumber"  value='<c:out value="${vo.companynumber }"></c:out>' readonly="readonly"></div>
@@ -573,9 +564,9 @@ var emailnumCheck = false;        // 이메일 인증번호 확인
 	$(document).ready(function() {
 		var code = "";
 		var formObj = $("#update");
+		var userid = $(".userid_input").val();
 		$("button[data-oper='cancel']").on("click", function(e) {
-			formObj.attr("action","/main");
-			formObj.submit();
+			history.go(-1)
 		});
 
 		var formObj = $("#update");
@@ -633,7 +624,8 @@ var emailnumCheck = false;        // 이메일 인증번호 확인
 	       }
 			
 	       if(passwordCheck&&passwordCkCheck&&passwordDCkCheck&&emailCheck&&emailnumCheck&&phoneCheck ){
-	    	   
+	    	   formObj.attr("action","/mypage/deleteinfo");
+			
 	    	  formObj.submit();
 					       }    
 	       
@@ -696,7 +688,7 @@ var emailnumCheck = false;        // 이메일 인증번호 확인
 	       }
 			
 	       if(passwordCheck&&passwordCkCheck&&passwordDCkCheck&&emailCheck&&emailnumCheck&&phoneCheck ){
-	    	   
+	    	   	formObj.attr("action","/mypage/modifyinfo");
 		    	  formObj.submit();
 						       }   
 	       
