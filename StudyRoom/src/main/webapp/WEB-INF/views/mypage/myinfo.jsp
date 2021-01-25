@@ -533,7 +533,6 @@
 	<button type="button" data-oper='return' class="return_button" >돌아가기</button>
 </div>
 <form id="operForm" action="/mypage/modify" method="get">
-	<input type="hidden" id="uno" name="uno" value='<c:out value="${vo.uno }"></c:out>'>
 	<input type="hidden" id="userid" name="userid" value='<c:out value="${vo.userid }"></c:out>'>
 </form>
 

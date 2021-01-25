@@ -68,6 +68,7 @@ public class MyPageController {
 	
 	//내정보 보기, 수정, 삭제페이지로 이동
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping({"/myinfo","/modifyinfo"})
 	public void getmodify(@RequestParam("userid") String userid,Model model) {
 		log.info("내정보 보기,수정, 삭제 페이지 이동");
