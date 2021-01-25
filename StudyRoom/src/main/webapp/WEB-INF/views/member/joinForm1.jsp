@@ -370,14 +370,14 @@
 
 <div class="password_wrap">
 <div class="password_name">비밀번호</div>
-<div class="password_input_box"><input type="text" class="password_input" name="password">
+<div class="password_input_box"><input type="password" class="password_input" name="password">
 </div>
 <span class="pw_ck">비밀번호를 입력해주세요</span>
 </div>
 <div class="passwordCk_wrap">
 <div class="passwordCk_name">비밀번호 확인</div>
 <div class="passwordCk_input_box">
-<input class="passwordCk_input">
+<input class="passwordCk_input" type="password">
 </div>
 	<span class="pwCk_ck">비밀번호 확인을 입력해주세요</span>
 	<span class="passwordCk_input_re_1">비밀번호가 일치합니다.</span>
@@ -454,10 +454,7 @@
 	var phoneCheck = false;			//핸드폰번호
 	var genderCheck = true;		//성별
 	
-	
-	
-	
-	
+
 
 	$(document).ready(function() {
 		//회원가입 버튼작동
@@ -571,7 +568,7 @@
 	        
 	        if(useridCheck&&useridCkCheck&&membernoCheck&&usernameCheck&&passwordCheck&&passwordCkCheck&&passwordDCkCheck&&emailCheck&&emailnumCheck&&phoneCheck&&genderCheck ){
 	        	
-	        	$("#insert").attr("action","/member/joinForm");
+	        	$("#insert").attr("action","/member/joinForm1");
 				$("#insert").submit();
 	        }    
 	        
@@ -580,13 +577,17 @@
 			
 			
 		});
-		
-				
-		
-		
-		
-		
+	
+		$(".return_button").click(function() {
+			$("#insert").attr("action","/main/mainpage");
+			$("#insert").submit();
+		});
 	});
+	
+	
+	
+	
+	
 	//아이디 중복검사
 	$(".userid_input").on("propertychange change keyup paste input", function() {
 		var userid = $('.userid_input').val();
