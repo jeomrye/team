@@ -20,7 +20,7 @@ import com.std.service.QaReplyService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-@RequestMapping("/replies/")
+@RequestMapping("/123replies/")
 @RestController
 @Log4j
 @AllArgsConstructor
