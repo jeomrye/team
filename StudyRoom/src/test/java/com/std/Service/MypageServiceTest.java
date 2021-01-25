@@ -29,7 +29,7 @@ public class MypageServiceTest {
 	
 	@Test
 	public void testGet() {
-		log.info(service.getinfo(6L));
+		log.info(service.getinfo(userid)(6L));
 	}
 	
 	@Test
