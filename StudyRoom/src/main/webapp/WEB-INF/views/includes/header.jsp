@@ -60,8 +60,8 @@
                <li><a href="/notice/list"><h4>공지사항</h4></a></li>
                <li><a href="/free/list"><h4>자유게시판</h4></a></li>
                <li><a href="/place/list"><h4>장소</h4></a></li>
-               <li><a href="/notice/list"><h4>쿠폰구매하기</h4></a></li>
-               <li><a href="/notice/list"><h4>Q&A</h4></a></li>
+               <li><a href="/coupon/list"><h4>쿠폰구매하기</h4></a></li>
+               <li><a href="/qna/list"><h4>Q&A</h4></a></li>
                
                
                <sec:authorize access="hasAnyRole('ROLE_MANAGER','ROLE_USER')">
