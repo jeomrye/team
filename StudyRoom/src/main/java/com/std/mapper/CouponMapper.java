@@ -51,7 +51,8 @@ public interface CouponMapper {
 	//쿠폰 가져오기
 	public CouponVO Getcoupon(int couponNumber);
 	
-
+	//맴버 테이블 정보가져오기
+	public List<MemVO> getList();
 	
 	
 }

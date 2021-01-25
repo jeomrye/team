@@ -52,18 +52,20 @@ public class MileController {
 //			
 //		model.addAttribute("list", service.couponGetList());
 //	}
+	
 	@GetMapping("/couponList")
-	public void couponList(Criteria cri, Model model) {
+	public void couponList(Criteria cri, Model model,@RequestParam("userid")String userid) {
 		
 		log.info("couponList : " + cri);
 		model.addAttribute("couponList", service.couponGetList(cri));
 		//model.addAttribute("pageMaker", new PageDTO(cri, 123));
 		int total = service.getTotal(cri);
 		
+		/* model.addAttribute("member", service.getList()); */
 		log.info("total : " + total);
-		
+		model.addAttribute("member", service.mileGet(userid));
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
-		model.addAttribute("member", new MemVO());
+		
 	}
 	
 	
@@ -88,11 +90,16 @@ public class MileController {
 		
 	
 	//쿠폰 조회 와 수정
+	
 	@GetMapping({"/couponGet", "/couponModify"})
-	public void couponGet(@RequestParam("couponNumber") int couponNumber, @ModelAttribute("cri") Criteria cri, Model model,String userid) {
+	public void couponGet(@RequestParam("couponNumber") int couponNumber, @RequestParam("userid") String userid, Model model) {
+		
 		
 		log.info("/couponGet or /couponModify");
 		model.addAttribute("coupon", service.couponGet(couponNumber));
+		log.info("sssssssssssssssssssssssssssss : "+userid);
+		log.info("ssssssssss : "+service.mileGet(userid));
+		
 		model.addAttribute("member", service.mileGet(userid));
 	}
 	
@@ -203,12 +210,12 @@ public class MileController {
 			@RequestParam("couponNumber")int couponNumber, 
 			@RequestParam("userid")String userid ,@ModelAttribute("member")MemVO member, 
 			Model model) {
-		
+		log.info("쿠폰 구매 확정 페이지로 이동");
 		model.addAttribute(service.couponGet(couponNumber));
 		model.addAttribute("coupon1", service.Getcoupon(couponNumber));
-		model.addAttribute("member", service.mileGet(member.getUserid()));
+		model.addAttribute("member", service.mileGet(userid));
+		model.addAttribute("auth", service.authGet(userid));
 		
-		log.info("쿠폰 구매 확정 페이지로 이동");
 		log.info(member.getUserid());
 	}
 	

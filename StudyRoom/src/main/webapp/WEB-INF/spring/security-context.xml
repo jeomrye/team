@@ -9,7 +9,7 @@
 	<!-- 패스워드 암호화 -->
 	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	<bean id="customUserDetailsService" class="com.std.security.CustomUserDetailsService"></bean>
-	
+
  	<security:http pattern="/member/**" security="none"></security:http>
  	<security:http pattern="/coupon/**" security="none"></security:http>
 	<!-- login 시 사용자 권한에 따라 다른페이지 호출 -->

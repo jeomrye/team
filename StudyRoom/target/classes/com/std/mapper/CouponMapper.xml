@@ -143,7 +143,7 @@
 </insert>
 
 <select id="mileGet" resultType="com.std.domain.MemVO">
-	select * from member where userId = #{userId , jdbcType=VARCHAR}
+	select * from member where userid = #{userid, jdbcType=VARCHAR}
 </select>
 
 <select id="authGet" resultType="com.std.domain.AuthVO">
@@ -154,6 +154,15 @@
 	select * from coupon where couponNumber = #{couponNumber}
 </select>
 
+
+<!-- 맴버 리스트 -->
+<select id="getList" resultType="com.std.domain.MemVO">
+	<![CDATA[
+		select * from member
+	]]>
+	
+	
+</select>
 
 
 

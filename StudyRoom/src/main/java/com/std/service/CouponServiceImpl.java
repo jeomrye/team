@@ -167,6 +167,13 @@ public class CouponServiceImpl implements CouponService {
 		return mapper.Getcoupon(couponNumber);
 	}
 
+	//맴버테이블에서 모든것 가져오기
+	@Override
+	public List<MemVO> getList() {
+		log.info("getList");
+		return mapper.getList();
+	}
+
 
 
 	

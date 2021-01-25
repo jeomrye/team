@@ -42,7 +42,8 @@ public interface CouponService {
 	//쿠폰테이블에서 쿠폰 가져오기
 	public CouponVO Getcoupon(int couponNumber);
 	
-	
+	//맴버테이블에서 모든것 가져오기
+	public List<MemVO> getList();
 	
 	
 	

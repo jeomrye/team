@@ -99,8 +99,12 @@
 	<input type='hidden' name='amount' value='${pageMaker.cri.amount }'>
 	<input type='hidden' name='type' value='${pageMaker.cri.type }'>
 	<input type='hidden' name='keyword' value='${pageMaker.cri.keyword }'>
-	<sec:authentication property="principal" var="pinfo"/>
-	<input type='hidden' name="userid" value='${pinfo.username }'>
+	<!-- <input type="hidden"> -->
+	<%-- <c:forEach items="${member }" var="member">
+		<input type="hidden" name="userid" value="${member.userid }">
+	</c:forEach> --%>
+	 <input type="hidden" class="userid" name="userid" value="${member.userid }">
+             <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>   <!-- csrf토큰 -->
 </form>
 
 	<!-- Modal 추가 -->
@@ -135,6 +139,16 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	
+	
+	
+	
+	var csrfHeaderName ="${_csrf.headerName}";
+  	var csrfTokenValue="${_csrf.token}";
+ 	//Ajax spring security header	== ajax 를 이용한 csrf 토큰 전송
+  	$(document).ajaxSend(function(e, xhr, options){
+  		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+  	});
 	
 	var result = '<c:out value="${result}"/>';
 	
@@ -177,8 +191,10 @@ $(document).ready(function(){
 		
 		e.preventDefault();
 		actionForm.append("<input type='hidden' name='couponNumber' value='"+$(this).attr("href")+"'>");
+		
 		actionForm.attr("action","/coupon/couponGet");
 		actionForm.submit();
+		
 	});
 	
 	var searchForm = $('#searchForm');

@@ -116,8 +116,11 @@ width:600px;
 			        <input type='hidden' id='couponNumber' name='couponNumber' value='<c:out value="${coupon.couponNumber}"/>'>
 			        <input type='hidden' id='couponName' name='couponName' value='<c:out value="${coupon.couponName}"/>'>
 			        <input type='hidden' id='couponPrice' name='couponPrice' value='<c:out value="${coupon.couponPrice}"/>'>
-			        <input type="hidden" id="userid" name="userid" value="${member.userid }">
-			        
+ 			        <input type="hidden" id="usertoken" name="${_csrf.parameterName }" value="${_csrf.token }"/>	<!-- csrf토큰 -->
+			        <%-- <input type='hidden' id="userid" name="userid" value='<sec:authentication property="principal.username"/>'>   --%>
+			        <input type='hidden' id='t' name="userid" class="userid" value='<c:out value="${member.userid}"/>'> 
+<!-- 			        <input type="hidden" id="auth" name="auth" value=""> -->
+								        
 			        <input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
 			        <input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
 			        <input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'>
@@ -134,9 +137,7 @@ width:600px;
 $(document).ready(function(){
 
 var formObj = $("form");
-	
-	
-	
+
 	var operForm = $("#operForm");
 	var csrfHeaderName ="${_csrf.headerName}";
   	var csrfTokenValue="${_csrf.token}";
@@ -146,30 +147,11 @@ var formObj = $("form");
   	});
 	
 	$("button[data-oper='submit']").on("click", function(e){
-		e.preventDefault();
-		var couponNumber = $("#couponNumber").val();
-		var couponName = $("#couponName").val();
-		var couponPrice = $("#couponPrice").val();
-		var userid = $("#userid").val();
 		
-		
-		var auth = $("#auth").val();
-		
-		var data1 = {couponNumber : couponNumber}
-		var data2 = {couponName : couponName}
-		var data3 = {couponPrice : couponPrice}
-		var data4 = {userid :userid}
 		
 		operForm.attr("action", "/coupon/couponBuy").attr("method", "get").submit();
 		
-		$.ajax({
-			url : '/coupon/couponBuy',
-			data : {data1,data2,data3,data4},
-			type : 'GET',
-			success : function(result){
-				console.log(result);
-			}
-		});//ajax 끝
+		//ajax 끝
 		
 		
 		
