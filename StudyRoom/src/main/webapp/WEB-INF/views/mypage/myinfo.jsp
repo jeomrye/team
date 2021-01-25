@@ -554,7 +554,7 @@
 		$("button[data-oper='return']").on("click", function(e) {
 			operForm.find("#uno").remove();
 			operForm.find("#userid").remove();
-			operForm.attr("action","/main");
+			operForm.attr("action","/main/mainpage");
 			operForm.submit();
 		});
 		//쿠폰 내역 확인 페이지로 가는 동작
