@@ -14,7 +14,7 @@
 	<security:http pattern="/resources/**" security="none"></security:http>
 	
 	<!-- login 시 사용자 권한에 따라 다른페이지 호출 -->
-	<security:http>
+	<security:http auto-config="true" use-expressions="true">
 		<security:form-login login-page="/customLogin" />
 
  		<security:intercept-url pattern="/notice/register" access="hasRole('ROLE_ADMIN')"/>
