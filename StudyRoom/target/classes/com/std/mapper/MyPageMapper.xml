@@ -57,9 +57,9 @@
   
     
   <!-- 쿠폰정보확인 -->
-  <select id="getCoupon" resultType="com.std.domain.CouponDetailVO">
+  <select id="getCoupon" resultType="com.std.domain.CouponVO">
   
-    select * from coupon_detail where userid = #{userid,jdbcType=VARCHAR}
+    select * from coupon where userid = #{userid,jdbcType=VARCHAR}
      
   </select>
 
