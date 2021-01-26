@@ -340,6 +340,7 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 	</div> <!-- modal-dialog -->
 </div> <!-- modal -->
 
+<%@ include file="../includes/footer.jsp" %>
 <script type="text/javascript" src="/resources/js/reply.js"></script>
 
 <!-- 지도 API -->
@@ -750,5 +751,3 @@ $(document).ready(function(){
   });
 });
 </script>
-
-<%@ include file="../includes/footer.jsp" %>

@@ -39,7 +39,7 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Log4j
 @RequestMapping("/placePho/*")
 public class PlacePhotoController {
-	
+
 	@GetMapping("/uploadForm")
 	public void uploadForm() {
 		log.info("upload form");
@@ -68,8 +68,7 @@ public class PlacePhotoController {
 		}//end catch
 		}//end for
 	}
-	
-	@PreAuthorize("isAuthenticated()")
+
 	@GetMapping("/uploadAjax")
 	public void uploadAjax() {
 		log.info("upload ajax");

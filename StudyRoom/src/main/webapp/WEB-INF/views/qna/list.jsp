@@ -40,6 +40,8 @@
 					</tr>
 				</c:forEach>
 			</table>
+			
+			
 			<div class="pull-left">
 				<div class="col-lg-12" style="padding-top: 25px; padding-left: 0">
 					<form id="searchForm" action="/qna/list" method="get">
@@ -121,7 +123,7 @@
 								return;
 							}
 							if (parseInt(result) > 0) {
-								$(".madal-body").html(
+								$(".modal-body").html(
 										"게시글" + parseInt(result)
 												+ "번이 등록 되었습니다.")
 							}
