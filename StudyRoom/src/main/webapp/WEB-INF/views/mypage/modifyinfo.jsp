@@ -566,7 +566,8 @@ var emailnumCheck = false;        // 이메일 인증번호 확인
 		var formObj = $("#update");
 		var userid = $(".userid_input").val();
 		$("button[data-oper='cancel']").on("click", function(e) {
-			history.go(-1);
+			location.href="/main/mainpage";
+			
 		});
 
 		var formObj = $("#update");

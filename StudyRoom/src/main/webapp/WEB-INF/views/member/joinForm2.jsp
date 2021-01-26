@@ -602,8 +602,7 @@
 		});
 			        
 		$(".return_button").click(function() {
-			$("#insert").attr("action","/main/mainpage");
-			$("#insert").submit();
+			location.href="/member/insertMem";
 		});
 	    });
 				

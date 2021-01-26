@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>수정페이지</title>
+    <title>탈퇴페이지</title>
 <style>
 	.wrapper{
 		width: 1900px;	
@@ -138,7 +138,7 @@
 		var formObj = $("#delete");
 		
 		$("button[data-oper='cancel']").on("click", function(e) {
-			history.go(-1);
+			location.href="/main/mainpage";
 		});
 
 		var formObj = $("#delete");
