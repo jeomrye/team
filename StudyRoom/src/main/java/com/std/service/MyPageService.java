@@ -27,10 +27,10 @@ public interface MyPageService {
 	
 	
 	//회원 정보 가져오기
-	public MemVO getinfo(Long uno);
+	public MemVO getinfo(String userid);
 	//회원 정보 변경하기
-	public boolean modifyinfo(MemVO vo);
+	public void modifyinfo(MemVO vo);
 	//회원 정보 삭제
-	public boolean removeinfo(Long uno);
+	public void removeinfo(String userid);
 	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.std.domain.Criteria;
+import com.std.domain.MemVO;
 import com.std.domain.PlaceReVO;
 import com.std.domain.ReplyPageDTO;
 
@@ -23,4 +24,6 @@ public interface PlaceReService {
 	public void writeReview(@Param("replyer") String replyer, @Param("userid") String userid);//댓글 작성시 마일리지 증가
 	
 	public void deleteReview(@Param("replyer") String replyer, @Param("userid") String userid);//댓글 삭제시 마일리지 감소
+	
+	public MemVO forDelete(@Param("replyer") String replyer, @Param("userid") String userid);//댓글 작성자 불러오기
 }

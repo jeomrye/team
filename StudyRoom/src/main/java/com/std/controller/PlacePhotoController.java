@@ -43,7 +43,7 @@ public class PlacePhotoController {
 		log.info("upload form");
 	}
 	
-	@PostMapping("uploadFormAction")
+	@PostMapping("/uploadFormAction")
 	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
 		
 		//place폴더를 업로드 폴더로 지정

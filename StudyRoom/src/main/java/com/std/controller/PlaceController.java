@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.std.domain.Criteria;
 import com.std.domain.PageDTO;
 import com.std.domain.PlacePhotoVO;
+import com.std.domain.PlaceReVO;
 import com.std.domain.PlaceVO;
 import com.std.service.PlaceReService;
 import com.std.service.PlaceService;
@@ -78,9 +79,10 @@ public class PlaceController {
 	}
 	
 	//글 상세보기
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping({"/get","/modify"})
 	//@RequestParam : 하나의 값만을 request방식으로 전달, @ModelAttribute : 객체 통으로 값 전달 
-	public void get(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model) {
+	public void get(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model,PlaceReVO placeRe) {
 		log.info("/get or /modify");
 		model.addAttribute("place",service.get(bno)); //해당 글 가져오기
 		
@@ -93,16 +95,17 @@ public class PlaceController {
 			result = score/replyCnt;
 		}
 		model.addAttribute("score",result);
+		model.addAttribute("replyer", serviceRe.get(placeRe.getRno()));
 	}
 	
 	//글 수정
-	@PreAuthorize("principal.username == #place.writer")
+	@PreAuthorize("(principal.username == #place.writer) or hasRole('ROLE_ADMIN')")
 	@PostMapping("/modify")//modify.jsp
-	public String modify(PlaceVO place, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+	public String modify(PlaceVO place, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr, String writer) {
 		log.info("place modify : "+place);
 		
 		if(service.modify(place)) {
-			rttr.addFlashAttribute("result","success");
+			rttr.addFlashAttribute("result","글이 수정되었습니다.");
 		}
 		
 		//넘기는 페이지에 값 전달
@@ -116,10 +119,10 @@ public class PlaceController {
 	}
 	
 	//글 삭제
-	@PreAuthorize("principal.username == #writer")
+	@PreAuthorize("(principal.username == #writer) or hasRole('ROLE_ADMIN')")
 	@PostMapping("/remove")
 	public String remove(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri,
-			RedirectAttributes rttr) {
+			RedirectAttributes rttr, String writer) {
 		log.info("place remove : "+bno);
 		
 		List<PlacePhotoVO> photoList = service.getPhotoList(bno);
@@ -127,7 +130,7 @@ public class PlaceController {
 			//delete photo files
 			deleteFiles(photoList);
 			
-			rttr.addFlashAttribute("result","success");
+			rttr.addFlashAttribute("result","글이 삭제되었습니다.");
 		}
 		
 		//넘기는 페이지에 값 전달
@@ -172,13 +175,4 @@ public class PlaceController {
 			}//end catch			
 		});//end foreach
 	}
-	/*
-	 * @RequestMapping(value = "/test_check", method = RequestMethod.POST)
-	 * 
-	 * @ResponseBody public void testCheck(@RequestParam(value = "valueArrTest[]")
-	 * List<String> valueArr, PlaceVO place) { String[] checkList =
-	 * place.getOffer().split(","); System.out.println(checkList); }
-	 */
-
-
 }

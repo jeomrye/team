@@ -3,10 +3,16 @@
     pageEncoding="UTF-8"%>
 	</div>
         <!-- /#page-wrapper -->
-
+     
+       	 <form class="form" method="post" action="/mypage/myinfo">
+          	<input type="hidden" class="userid" name="userid" value="<sec:authentication property="principal.username"/>">
+          	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>	<!-- csrf토큰 -->
+        </form>
+        
     </div>
     <!-- /#wrapper -->
 
+<!-- 너 AJAX 가 아래 jquery 에서 사용하는건데 얘가 없는데 지금 먼저 불러서그럼 -->
     <!-- jQuery -->
     <script src="/resources/vendor/jquery/jquery.min.js"></script>
 

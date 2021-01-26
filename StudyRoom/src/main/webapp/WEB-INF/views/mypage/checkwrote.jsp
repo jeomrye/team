@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
 <title>내가 쓴 댓글 확인</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 <body>
 <div class="row">
@@ -24,13 +25,13 @@
 			<div class="panel-heading">댓글 목록</div>
 			<div class="panel-body">
 				<table class="table table-striped table-bordered table-hover">
-					<thead>
-						<tr>
-							
-							<th>댓글 번호</th>
-							<th>댓글내용</th>
-							<th>점수</th>
-							<th>작성자</th>
+					<thead >
+					
+						<tr style="width: 10000px;">
+							<th style="width: 5%;">댓글 번호</th>
+ 							<th style="width: 50%;">댓글내용</th> 
+							<th style="width: 5%;">점수</th>
+							<th style="width: 10%;">작성자</th>
 							<th>작성일</th>
 							<th>수정일</th>
 							<th>댓글쓴 게시글 번호</th>
@@ -43,8 +44,8 @@
 						<tr>
 						
 							<td><c:out value="${rp.rno }"></c:out></td>
-							<td><c:out value="${rp.reply }"></c:out></td>
-							<td><c:out value="${rp.score }"></c:out></td>
+							<td><c:out value="${rp.reply }"></c:out></td> 
+							<td><c:out value="50"></c:out></td>
 							<td><c:out value="${rp.replyer }"></c:out></td>
 							<td><c:out value="${rp.replydate }"></c:out></td>
 							<td><c:out value="${rp.updatedate }"></c:out></td>
@@ -64,3 +65,4 @@
 				
 </body>
 </html>
+<%@ include file="../includes/footer.jsp"%>

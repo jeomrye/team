@@ -21,8 +21,8 @@
 
 	.wrap{
 		width : 800px;
-		margin: auto;
-		float: left;
+		margin-left: 670px;
+		float: none;
 	}
 	
 	.id_input_re_1{
@@ -371,22 +371,13 @@
 .update_button{
 	width: 30%;
     height: 60px;
-    background-color: #6AAFE6;
+    background-color: #8a8de0;
     font-size: 40px;
     font-weight: 900;
     color: white;
     float: left;
 }
-/* 리셋하기 버튼 */
-.remove_button{
-	width: 30%;
-    height: 60px;
-    background-color: green;
-    font-size: 40px;
-    font-weight: 900;
-    color: white;
-    float: none;
-}
+
 /* 취소하기 버튼 */
 .return_button{
 	width: 30%;
@@ -442,13 +433,11 @@
 
 <div class="wrapper">
 <form method="post" role="form" id="update" >
+	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>	<!-- csrf토큰 -->
 <div class="wrap">
 	<div class="col-lg-12">
 		<h1 class="page-header">회원정보 수정페이지</h1>
 	</div>
-
-<input type="hidden" id="uno" name="uno" value='<c:out value="${vo.uno }"></c:out>'>
-
 
 
 <div class="userid_wrap">
@@ -525,14 +514,8 @@
 
 <div class="mileage_wrap">
 <div class="mileage_name">마일리지 정보</div>
-<div class="mileage_input_box"><input type="text" class="mileage_input" name="mileage" value='<c:out value="${vo.mileage }"></c:out>' ></div>
+<div class="mileage_input_box"><input type="text" class="mileage_input" name="mileage" value='<c:out value="${vo.mileage }"></c:out>' readonly="readonly"></div>
 </div>
-
-<div class="coupon_wrap">
-<div class="coupon_name">쿠폰 정보</div>
-<div class="coupon_input_box"><input type="text" class="coupon_input" name="coupon" value='<c:out value="${vo.coupon }"></c:out>' ></div>
-</div>
-
 
 <div class="companynumber_wrap" >
 <div class="companynumber_name">사업자 등록번호</div>
@@ -551,8 +534,7 @@
 
 
 	<button type="submit" class="update_button" data-oper='modify'>수정완료</button>
-	<button type="submit" class="remove_button" data-oper='remove'>탈퇴하기</button>
-	<button type="submit" class="return_button" data-oper='cancel'>취소하기</button>
+	<button type="button" class="return_button" data-oper='cancel'>취소하기</button>
 
 
 
@@ -571,11 +553,21 @@ var emailnumCheck = false;        // 이메일 인증번호 확인
 
 
 	$(document).ready(function() {
+		
+		var csrfHeaderName ="${_csrf.headerName}";
+  	  	var csrfTokenValue="${_csrf.token}";
+  	  	//Ajax spring security header	== ajax 를 이용한 csrf 토큰 전송
+  	  	$(document).ajaxSend(function(e, xhr, options){
+  	  		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+  	  	});
+  	  	
+  	  	
 		var code = "";
 		var formObj = $("#update");
+		var userid = $(".userid_input").val();
 		$("button[data-oper='cancel']").on("click", function(e) {
-			formObj.attr("action","/main");
-			formObj.submit();
+			location.href="/main/mainpage";
+			
 		});
 
 		var formObj = $("#update");
@@ -633,7 +625,8 @@ var emailnumCheck = false;        // 이메일 인증번호 확인
 	       }
 			
 	       if(passwordCheck&&passwordCkCheck&&passwordDCkCheck&&emailCheck&&emailnumCheck&&phoneCheck ){
-	    	   
+	    	   formObj.attr("action","/mypage/deleteinfo");
+			
 	    	  formObj.submit();
 					       }    
 	       
@@ -696,7 +689,7 @@ var emailnumCheck = false;        // 이메일 인증번호 확인
 	       }
 			
 	       if(passwordCheck&&passwordCkCheck&&passwordDCkCheck&&emailCheck&&emailnumCheck&&phoneCheck ){
-	    	   
+	    	   	formObj.attr("action","/mypage/modifyinfo1");
 		    	  formObj.submit();
 						       }   
 	       
