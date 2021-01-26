@@ -174,6 +174,13 @@ public class CouponServiceImpl implements CouponService {
 		return mapper.getList();
 	}
 
+	@Override
+	public void mileage(MemVO vo) {
+		mapper.mileage(vo);
+	}
+
+
+	
 
 
 	

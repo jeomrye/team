@@ -45,6 +45,7 @@ public interface CouponMapper {
 	
 	//마일리지 가져오기
 	public MemVO mileGet(String userid);
+	
 	//마일리지 가져오기
 	public AuthVO authGet(String userid);
 	
@@ -54,5 +55,7 @@ public interface CouponMapper {
 	//맴버 테이블 정보가져오기
 	public List<MemVO> getList();
 	
+	//마일리지 업데이트
+	public int mileage(MemVO vo);
 	
 }

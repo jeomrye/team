@@ -103,42 +103,48 @@ width:600px;
 </div>
 
 
-
 <!-- 쿠폰 상세보기 에서 수정이나 목록페이지로 이동 -->
 
 <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')">
-<button data-oper='modify' class="btn btn-default">수정</button>
+<button style="float: left;" data-oper='modify' class="btn btn-default">수정</button>
 </sec:authorize>
-<button data-oper='submit' class="btn btn-primary">구입</button>
-<button data-oper='list' class="btn btn-info">목록</button>
+<form style="float: left;" id="operBuy" action="/coupon/couponBuy" method="post">
+<input type='hidden' id='couponNumber' name='couponNumber' value='<c:out value="${coupon.couponNumber}"/>'>
+<input type="hidden" class="userid" name="userid" value="<sec:authentication property="principal.username" />">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+<!-- <button class="btn btn-primary">구입</button> -->
+<input type="button" class="btn btn-primary" value="구입">
+</form>
+<button style="float: left;"data-oper='list' class="btn btn-info">목록</button>
 
  <form id='operForm' action="/coupon/couponModify" method="get">
+ 	
 			        <input type='hidden' id='couponNumber' name='couponNumber' value='<c:out value="${coupon.couponNumber}"/>'>
-			        <input type='hidden' id='couponName' name='couponName' value='<c:out value="${coupon.couponName}"/>'>
-			        <input type='hidden' id='couponPrice' name='couponPrice' value='<c:out value="${coupon.couponPrice}"/>'>
- 			        <input type="hidden" id="usertoken" name="${_csrf.parameterName }" value="${_csrf.token }"/>	<!-- csrf토큰 -->
-			        <%-- <input type='hidden' id="userid" name="userid" value='<sec:authentication property="principal.username"/>'>   --%>
-			        <input type='hidden' id='t' name="userid" class="userid" value='<c:out value="${member.userid}"/>'> 
-<!-- 			        <input type="hidden" id="auth" name="auth" value=""> -->
-								        
-			        <input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
-			        <input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
-			        <input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'>
-			        <input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>
-    
-			      
+			 		<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum }"/>'>
+					<input type="hidden" name="amount" value='<c:out value="${cri.amount }"/>'>
+					<input type="hidden" name="keyword" value='<c:out value="${cri.keyword }"/>'>
+					<input type="hidden" name="type" value='<c:out value="${cri.type }"/>'>
 			      </form>  
-
 
 
 <%@include file="../includes/footer.jsp" %>
 
+
 <script type="text/javascript">
 $(document).ready(function(){
+	
+	
+	var csrfHeaderName ="${_csrf.headerName}";
+  	var csrfTokenValue="${_csrf.token}";
+ 	//Ajax spring security header	== ajax 를 이용한 csrf 토큰 전송
+  	$(document).ajaxSend(function(e, xhr, options){
+  		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+  	});
 
 var formObj = $("form");
 
 	var operForm = $("#operForm");
+	var operBuy = $("#operBuy");
 	var csrfHeaderName ="${_csrf.headerName}";
   	var csrfTokenValue="${_csrf.token}";
  	//Ajax spring security header	== ajax 를 이용한 csrf 토큰 전송
@@ -146,23 +152,13 @@ var formObj = $("form");
   		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
   	});
 	
-	$("button[data-oper='submit']").on("click", function(e){
+	$("input[type='button']").on("click", function(e){
+// 		<input type='hidden' id='couponNumber' name='couponNumber' value='<c:out value="${coupon.couponNumber}"/>'>
+// 		<input type="hidden" class="userid" name="userid" value="<sec:authentication property="principal.username" />">
+// 		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+		operBuy.attr("action", "/coupon/couponBuy").attr("method", "post").submit();
 		
-		
-		operForm.attr("action", "/coupon/couponBuy").attr("method", "get").submit();
-		
-		//ajax 끝
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		//ajax 끝		
 		
 	});
 	

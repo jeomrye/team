@@ -52,59 +52,11 @@
 </table>
 
 
-
-<div class='pull-right'>
-<ul class="pagination">
-
-<c:if test="${pageMaker.prev}">
-<li class="paginate_button previous">
-<a href="${pageMaker.startPage -1 }">이전</a>
-</li>
-</c:if>
-
-<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-	<li class="paginate_button ${pageMaker.cri.pageNum == num ? "active" : ""}">
-	<a href="${num }">${num }</a>
-	</li>
-</c:forEach>
-
-<c:if test="${pageMaker.next}">
-<li class="paginate_button next">
-<a href="${pageMaker.endPage + 1 }">다음</a>
-</li>
-</c:if>
-
-</ul>
-</div>
-
-<div class='row'>
-<div class="col-lg-12">
-
-<form id='searchForm' action="/coupon/couponList" method='get'>
-	<select name='type'>
-		<option value="" <c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
-			<option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>쿠폰이름</option>
-	</select>
-	<input type='text' name='keyword' value='<c:out value="${pageMaker.cri.keyword}"/>'/>
-	<input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum}"/>'/>
-	<input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount}"/>'/>
-	<button class='btn btn-default'>검색</button>
-</form>
-
-</div>
-</div>
-
 <form id='actionForm' action="/coupon/couponList" method='get'>
 	<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum }'>
 	<input type='hidden' name='amount' value='${pageMaker.cri.amount }'>
 	<input type='hidden' name='type' value='${pageMaker.cri.type }'>
 	<input type='hidden' name='keyword' value='${pageMaker.cri.keyword }'>
-	<!-- <input type="hidden"> -->
-	<%-- <c:forEach items="${member }" var="member">
-		<input type="hidden" name="userid" value="${member.userid }">
-	</c:forEach> --%>
-	 <input type="hidden" class="userid" name="userid" value="${member.userid }">
-             <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>   <!-- csrf토큰 -->
 </form>
 
 	<!-- Modal 추가 -->
@@ -127,13 +79,54 @@
 	          		<!-- /.modal-dialog -->
 	          	</div>
 	          	<!-- /.modal -->
-</div>
+		</div>
 <!-- end panel body -->
-</div>
+	</div>
 <!-- end panel -->
-</div>
+	</div>
 </div>
 <!-- /.row -->
+
+
+
+
+<div class='pull-left' >
+<div class="col-lg-12" style="padding-top: 25px; padding-left: 0">
+<form id='searchForm' action="/coupon/couponList" method='get'>
+	<select name='type'>
+		<option value="" <c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
+			<option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>쿠폰이름</option>
+	</select>
+	<input type='text' name='keyword' value='<c:out value="${pageMaker.cri.keyword}"/>'/>
+	<input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum}"/>'/>
+	<input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount}"/>'/>
+	<button class='btn btn-default'>검색</button>
+</form>
+
+</div>
+</div>
+
+<div class='pull-right' >
+<ul class="pagination">
+
+<c:if test="${pageMaker.prev}">
+<li class="paginate_button previous">
+<a href="${pageMaker.startPage -1 }">이전</a>
+</li>
+</c:if>
+<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+	<li class="paginate_button ${pageMaker.cri.pageNum == num ? "active" : ""}">
+	<a href="${num }">${num }</a>
+	</li>
+</c:forEach>
+
+<c:if test="${pageMaker.next}">
+<li class="paginate_button next">
+<a href="${pageMaker.endPage + 1 }">다음</a>
+</li>
+</c:if>
+</ul>
+</div>
 
  <%@include file="../includes/footer.jsp" %>
 
@@ -141,14 +134,6 @@
 $(document).ready(function(){
 	
 	
-	
-	
-	var csrfHeaderName ="${_csrf.headerName}";
-  	var csrfTokenValue="${_csrf.token}";
- 	//Ajax spring security header	== ajax 를 이용한 csrf 토큰 전송
-  	$(document).ajaxSend(function(e, xhr, options){
-  		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-  	});
 	
 	var result = '<c:out value="${result}"/>';
 	

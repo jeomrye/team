@@ -72,10 +72,10 @@ color: black;
                <li><a class="bar" href="/notice/list" ><h4>공지사항</h4></a></li>
                <li><a class="bar" href="/free/list"><h4>자유게시판</h4></a></li>
                <li><a class="bar" href="/place/list"><h4>장소</h4></a></li>
-               <li><a class="bar" id="coupon"><h4>쿠폰구매하기</h4></a></li>
                <li><a class="bar" href="/qna/list"><h4>Q&A</h4></a></li>
                <li><a class="bar" href="/faq/list"><h4>FAQ</h4></a></li>
                <sec:authorize access="isAuthenticated()">
+               <li><a class="bar" href="/coupon/couponList"><h4>쿠폰구매하기</h4></a></li>
                <li><a class="bar" href="/mypage/myinfo"><h4>마이페이지</h4></a></li>
                <li><a class="bar" href="/customLogout"><h4>로그아웃</h4></a></li>
                </sec:authorize>
@@ -92,15 +92,15 @@ color: black;
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
            <script type="text/javascript">
            
-           var csrfHeaderName ="${_csrf.headerName}";
-           var csrfTokenValue="${_csrf.token}";
-           //Ajax spring security header   == ajax 를 이용한 csrf 토큰 전송
-           $(document).ajaxSend(function(e, xhr, options){
-              xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-           });
+//            var csrfHeaderName ="${_csrf.headerName}";
+//            var csrfTokenValue="${_csrf.token}";
+//            //Ajax spring security header   == ajax 를 이용한 csrf 토큰 전송
+//            $(document).ajaxSend(function(e, xhr, options){
+//               xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+//            });
            
-           $("#coupon").on("click", function() {
+//            $("#coupon").on("click", function() {
                
-               $(".form").submit();
-         });
+//                $(".form").submit();
+//          });
          </script>

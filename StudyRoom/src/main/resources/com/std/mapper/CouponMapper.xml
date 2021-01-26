@@ -165,6 +165,10 @@
 </select>
 
 
+<!-- 마일리지 업데이트 -->
+<update id="mileage">
+	update member set mileage = #{mileage} where userid =#{userid}
+</update>
 
 <!-- <update id="finMileage"> -->
 <!-- update member set mileage = (mileage - coupon.couponprice) where userid = #{userid} -->

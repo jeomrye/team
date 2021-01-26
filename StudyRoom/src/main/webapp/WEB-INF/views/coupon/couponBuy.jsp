@@ -8,16 +8,14 @@
 
 
 
-<form action="/coupon/couponBuy" method="post" role="form">
+<form action="/coupon/couponBuy1" method="post" class="operForm">
 	
 	<input type="hidden" class="q" name="couponnumber" value='<c:out value="${coupon1.couponNumber}"/>'>
 	<input type="hidden" class="w" name="couponname" value='<c:out value="${coupon1.couponName}"/>'>
     <input type='hidden' id='e' name='couponprice' value='<c:out value="${coupon1.couponPrice}"/>'>
     <input type='hidden' id='r' name='mileage' value='<c:out value="${member.mileage}"/>'>
-  <%--  <input type='hidden' class="userid" id="userid" name="userid" value='<sec:authentication property="principal.username"/>'> --%>
+ 	<input type='hidden' class="userid" id="userid" name="userid" value='<sec:authentication property="principal.username"/>'>
     <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
-    <input type="hidden" class="userid" name="userid" value="${member.userid}">
-    <input type="hidden" class="auth" name="auth" value="${auth.auth }">
 
 </form>
 
@@ -36,7 +34,7 @@ $(document).ready(function(e){
 	
 	var userid = $(".userid").val();
 	var auth = $(".auth").val();
-	var formObj = $("form");
+	var formObj = $(".operForm");
 	var num = $(".q").val();
 	var name = $(".w").val();
 	var price = $("#e").val();
@@ -69,13 +67,14 @@ $(document).ready(function(e){
 		console.log(mile);
 		console.log(userid);
 		console.log(auth);
-
+		
+		console.log(operation);
 		
 		if(operation === 'return'){
 			formObj.attr("action", "/main/mainpage").attr("method", "get");
 			
 		}else if(operation === 'submit'){
-			formObj.attr("action","/coupon/couponBuy").attr("method","post");
+			
 			var finMileage = "";
 			var couponPrice = price;
 			var mileage = mile;
@@ -83,10 +82,11 @@ $(document).ready(function(e){
 			if(mileage - couponPrice < 0){
 				alert("구매 실패 마일리지 부족");
 			}else if(mileage - couponPrice >= 0){
-			finMile = mileage - couponPrice;
-			alert("구매 완료");
+			finMileage = mileage - couponPrice;
 			console.log(finMileage);
-			return finMileage;
+			alert("구매 완료");
+			formObj.submit();
+			
 			
 		}
 			
