@@ -297,7 +297,7 @@ var QaReplyService = (function(){
 		});
 	}
 	
-	function remove(rno, replyer, callback, error){ // 3개인데 지금 콜백으로
+	function remove(rno, replyer, callback, error){ 
 		$.ajax({
 			type : 'delete',
 			url : '/qnaRe/' + rno,
@@ -310,7 +310,7 @@ var QaReplyService = (function(){
 				console.log("댓글삭제성공");
 				
 				if(callback){
-					// 콜백으로 데이터를 보내줘야
+					
 					callback(deleteResult);
 				}
 			},
