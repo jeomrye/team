@@ -10,14 +10,11 @@
 <%@ include file="../includes/header.jsp"%>
 <div class="row" style="width:100vw; height:100vh;background-size:100% 100%; background-repeat:no-repeat;  background-position:inherit;  background-image:url('/resources/main/srfsback.PNG'); ">
 
-<!-- <img alt="/resources/main/srfsback.png" src="/resources/main/srfsback.png" style=" width: 100%;"> -->
 <div style="max-width: 100%">
 	<a href="/main/mainpage" style="color: black; text-decoration: none; ">
 		<img alt="/main/mainpage" src="/resources/main/srfs.PNG" style="padding-left:23%; padding-top:5%; max-width: 80%;">
-<!-- 		style=" padding-left: 500px; padding-top:200px; width:auto; height:550px;" > -->
 	</a> </div><br> <br>
-	
-	
+
 	<form id="searchForm" action="/place/list" method="get">
 		<div class="search-wrapper">
 			<div class="input-holder">
@@ -236,6 +233,14 @@ select {
 	appearance: none;
 	border: 1px solid #999;
 	border-radius: 0px;
+}
+.main{
+	padding-left: 28.3%;
+	padding-right:26.5%; 
+	padding-top:27.7%;
+/* 	padding-bottom : 43.5%;  */
+	max-width:100%; 
+	height:550px;
 }
 </style>
 <%@ include file="../includes/footer.jsp"%>

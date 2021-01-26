@@ -275,7 +275,7 @@ var QaReplyService = (function(){
 				error(er);
 				}
 			}
-		})
+		});
 	}	
 	
 	function getList(param, callback, error){

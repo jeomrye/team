@@ -43,6 +43,7 @@
 
 <body>
 <style>
+
 .bar{
 color: white;
 }
