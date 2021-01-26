@@ -155,7 +155,7 @@
 			<div class="form-group">
 			<label>주소</label><input class="form-control" name='address' value="<c:out value='${place.address}'/>" readonly="readonly">
 			<div><a href="https://map.kakao.com/link/search/${place.address }" target="_blank">지도로 알아보기(Click)</a></div>
-			<div id="map" style="width:1230px;height:300px;"></div>
+			<div id="map" style="width:100%;height:400px;"></div>
 			<div style="text-align: center;"><br>
 			<button id="mapbtn" onclick="setZoomable(false)">지도 확대/축소 끄기</button>
 			<button id="mapbtn" onclick="setZoomable(true)">지도 확대/축소 켜기</button>

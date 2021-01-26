@@ -1,5 +1,6 @@
 package com.std.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,17 +37,21 @@ public class QaController {
 	}
 	
 	@PostMapping("/register")
+	@PreAuthorize("isAuthenticated()")
 	public String questionRegi(QaVO qa, RedirectAttributes rttr) {
 		log.info("QuestionRegister: " + qa);
 		service.questionRegi(qa);
+		rttr.addFlashAttribute("result",qa.getQuestionNo());
 		return "redirect:/qna/list";
 		
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
 	public void register() {
 		
 	}
+	
 	
 	@GetMapping({ "/get", "/modify" })
 	public void get(@RequestParam("questionNo") Long questionNo, @ModelAttribute("cri") Criteria cri, Model model) {
@@ -54,8 +59,9 @@ public class QaController {
 		model.addAttribute("qna", service.get(questionNo));
 	}
 
+	@PreAuthorize("(principal.username == #writer) or hasRole('ROLE_ADMIN')")
 	@PostMapping("/modify")
-	public String modify(QaVO qa,@ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+	public String modify(QaVO qa,@ModelAttribute("cri") Criteria cri, RedirectAttributes rttr,String writer) {
 		
 		log.info("modify : " + qa);
 
@@ -73,8 +79,9 @@ public class QaController {
 //		return mv;
 //	}
 	
+	@PreAuthorize("(principal.username == #writer) or hasRole('ROLE_ADMIN')")
 	@PostMapping("/qRemove")
-	public String remove(@RequestParam("questionNo") Long questionNo, Criteria cri,  RedirectAttributes rttr) {
+	public String remove(@RequestParam("questionNo") Long questionNo, Criteria cri,  RedirectAttributes rttr,String writer) {
 		log.info("remove..." + questionNo);
 		if (service.questionDel(questionNo)) {
 			rttr.addFlashAttribute("result", "success");

@@ -24,15 +24,15 @@
 		<![CDATA[
 		select
 		questionNo,title,content,writer,writedate,updatedate,qnacnt,
-    	replywritedate,replyupdatedate,status,pub,password,userid 
+    	status,pub,password,userid 
 		from
 			(
 			SELECT
-				/*+INDEX_DESC(QuestionAndAnswer pk_question)*/
+				/*+INDEX_DESC(QuestionAndAnswer PK_QuestionAndAnswer)*/
 				rownum rn,questionNo,title,content,writer,writedate,updatedate,qnacnt,
-    	replywritedate,replyupdatedate,status,pub,password,userid 
+    	status,pub,password,userid 
 			FROM 
-				QuestionAndAnswer 
+				questionAndAnswer 
 			WHERE
 			]]>
 			<include refid="criteria"></include>
@@ -58,7 +58,7 @@
 
 	<insert id="insert">
 		insert into QuestionAndAnswer(questionNo,title,content,writer,writedate,updatedate,qnacnt,
-    	replywritedate,replyupdatedate,status,pub,password,userid)
+    	status,pub,password,userid)
 		values(seq_QuestionAndAnswer.nextval,#{title},#{content},#{writer})
 	</insert>
 
@@ -67,7 +67,7 @@
 			select seq_QuestionAndAnswer.nextval from dual
 		</selectKey>
 		insert into QuestionAndAnswer(questionNo,title,content,writer,writedate,updatedate)
-		values(seq_questionandanswer.nextval,#{title},#{content},#{writer},sysdate,sysdate)
+		values(#{questionNo},#{title},#{content},#{writer},sysdate,sysdate)
 	</insert>
 
 	<select id="read" resultType="com.std.domain.QaVO">

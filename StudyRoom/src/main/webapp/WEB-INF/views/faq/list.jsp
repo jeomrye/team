@@ -13,9 +13,11 @@
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				FAQ
-				<button id='regBtn' type="button" class="btn btn-xs pull-right">FAQ 작성</button>
 <!-- 					관리자만 볼수있게 -->
+				FAQ
+				<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+				<button id='regBtn' type="button" class="btn btn-xs pull-right">FAQ 작성</button>
+				</sec:authorize>
 			</div>
 			<table class="table eable-striped table-bordered table-hover">
 				<thead>
@@ -54,7 +56,7 @@
 						<input type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword }"/>'> 
 						<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"/>'> 
 						<input type="hidden" name="amount" value='<c:out value="${pageMaker.cri.amount }"/>'>
-						<button class="btn btn-default">Search</button>
+						<button class="btn btn-default">검색</button>
 					</form>
 				
 				</div>

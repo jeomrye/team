@@ -15,7 +15,6 @@
 			<div class="panel-heading">
 				Q&A
 				<button id='regBtn' type="button" class="btn btn-xs pull-right">Q&A 작성</button>
-
 			</div>
 			<table class="table eable-striped table-bordered table-hover">
 				<thead>
@@ -41,6 +40,8 @@
 					</tr>
 				</c:forEach>
 			</table>
+			
+			
 			<div class="pull-left">
 				<div class="col-lg-12" style="padding-top: 25px; padding-left: 0">
 					<form id="searchForm" action="/qna/list" method="get">
@@ -57,7 +58,7 @@
 						<input type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword }"/>'> 
 						<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"/>'> 
 						<input type="hidden" name="amount" value='<c:out value="${pageMaker.cri.amount }"/>'>
-						<button class="btn btn-default">Search</button>
+						<button class="btn btn-default">검색</button>
 					</form>
 				
 				</div>
@@ -122,7 +123,7 @@
 								return;
 							}
 							if (parseInt(result) > 0) {
-								$(".madal-body").html(
+								$(".modal-body").html(
 										"게시글" + parseInt(result)
 												+ "번이 등록 되었습니다.")
 							}

@@ -591,7 +591,7 @@
 	        if(useridCheck&&useridCkCheck&&membernoCheck&&usernameCheck&&passwordCheck&&passwordCkCheck&&passwordDCkCheck&&emailCheck&&emailnumCheck&&phoneCheck&&genderCheck&&companynumberCheck ){
 	        	
 	        		
-	        	alert("회원가입이 완료되었습니다");
+	        	
 	        	$("#insert").attr("action","/member/joinForm2");
 				$("#insert").submit();
 	        }
