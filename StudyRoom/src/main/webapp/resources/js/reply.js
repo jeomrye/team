@@ -304,11 +304,10 @@ var QaReplyService = (function(){
 			data : JSON.stringify({rno:rno},{replyer:replyer}),
 			contentType : "application/json; charset=utf-8",
 			success : function(deleteResult, status, xhr) {
-				console.log("오류");
 				console.log(deleteResult);
 				console.log(status);
 				console.log(xhr);
-				console.log("무슨오류");
+				console.log("댓글삭제성공");
 				
 				if(callback){
 					// 콜백으로 데이터를 보내줘야
