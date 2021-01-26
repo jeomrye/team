@@ -134,6 +134,8 @@
 <!-- 		/.modal -->
 
 
+<%@ include file="../includes/footer.jsp"%> 
+
 			<script type="text/javascript" src="/resources/js/reply.js"></script>
 			<script type="text/javascript">
 			console.log("=================");
@@ -263,7 +265,7 @@
 				questionNo: questionNoValue
 		};
 		QaReplyService.add(reply, function(result){
-			alert(result);
+			alert("등록완료");
 			
 			modal.find("input").val("");
 			$(".modal").modal("hide");
@@ -301,15 +303,16 @@
   			return;
   		}
   		console.log("Original Replyer : "+originalReplyer);
+  		
   		if(ROLE_ADMIN != '&#91;ROLE&#95;ADMIN&#93;'){
-  		if(replyer != originalReplyer){
-  			alert("자신의 글이 아닙니다.수정불가");
-  			modal.modal("hide");
-  			return;
-  			}
+	  		if(replyer != originalReplyer){
+	  			alert("자신의 글이 아닙니다.수정불가");
+	  			modal.modal("hide");
+	  			return;
+	  			}
   		}
 		QaReplyService.update(reply, function(result){
-			alert(result);
+			alert("수정완료");
 			$(".modal").modal("hide");
 			showList(pageNum);
 		});	
@@ -340,7 +343,7 @@
 		QaReplyService.remove(rno, originalReplyer, function(result){
 			
 			console.log("결과접근")
-			alert(result);
+			alert("삭제완료");
 			$(".modal").modal("hide");
 			showList(pageNum);
 		});
@@ -377,5 +380,3 @@ $(document).ready(function(){
 	
 });
 </script>
-
-<%@ include file="../includes/footer.jsp"%>

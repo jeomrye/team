@@ -72,9 +72,12 @@ public class QaReplyController {
 		return returnValue == 1 ? new ResponseEntity<String>("success", HttpStatus.OK)
 				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR); 
 	}
+	
+	
+	
 	@PreAuthorize("(principal.username ==#vo.replyer) or hasRole('ROLE_ADMIN')")
 	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH },
-			value = "/{rno}",
+			value = "/update/{rno}",
 			consumes = "application/json",
 			produces = { MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> modify(
