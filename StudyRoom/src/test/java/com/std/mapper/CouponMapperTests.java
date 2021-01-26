@@ -1,4 +1,4 @@
-package com.std.mapper;
+package com.std.Mapper;
 
 import static org.junit.Assert.*;
 
@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.std.domain.CouponVO;
 import com.std.domain.Criteria;
+import com.std.mapper.CouponMapper;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;

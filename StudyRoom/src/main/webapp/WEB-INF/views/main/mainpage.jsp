@@ -8,28 +8,14 @@
 	rel="stylesheet">
 
 <%@ include file="../includes/header.jsp"%>
-<div class="row" style="width:100%; height:100%;background-size:100% 100%; background-repeat:no-repeat;  background-position:inherit;  background-image:url('/resources/main/srfsback.PNG'); ">
+<div class="row" style="width:100vw; height:100vh;background-size:100% 100%; background-repeat:no-repeat;  background-position:inherit;  background-image:url('/resources/main/srfsback.PNG'); ">
 
-
-
-
-<!-- <img alt="/resources/main/srfsback.png" src="/resources/main/srfsback.png" style=" width: 100%;"> -->
-
+<div style="max-width: 100%">
 	<a href="/main/mainpage" style="color: black; text-decoration: none; ">
-		<img alt="/main/mainpage" src="/resources/main/srfs.PNG"
-		style=" padding-left: 600px; padding-top:200px; width:auto; height:550px;" >
-	</a> <br> <br>
-	<form id="searchForm" action="/notice/list" method="get">
-		<!-- <select name="type"> -->
-		<!-- 			<option value="" -->
-		<%-- 				<c:out value="${pageMaker.cri.type == null ? 'selected' :'' }" />>-----선 택-----</option> --%>
-		<!-- 			<option value="T" -->
-		<%-- 				<c:out value="${pageMaker.cri.type eq 'T'? 'selected' :'' }" />>지역</option> --%>
-		<!-- 			<option value="C" -->
-		<%-- 				<c:out value="${pageMaker.cri.type eq 'C'? 'selected' :'' }" />>독서실이름</option> --%>
-		<!-- 			<option value="TC" -->
-		<%-- 				<c:out value="${pageMaker.cri.type eq 'TC'? 'selected' :'' }" />>지역 or 독서실이름</option> --%>
-		<!-- 		</select>  -->
+		<img alt="/main/mainpage" src="/resources/main/srfs.PNG" style="padding-left:23%; padding-top:5%; max-width: 80%;">
+	</a> </div><br> <br>
+
+	<form id="searchForm" action="/place/list" method="get">
 		<div class="search-wrapper">
 			<div class="input-holder">
 
@@ -64,6 +50,7 @@
 		}
 	}
 </script>
+
 <style>
 .search-wrapper {
 	position: absolute;
@@ -246,5 +233,6 @@ select {
 	border: 1px solid #999;
 	border-radius: 0px;
 }
+
 </style>
 <%@ include file="../includes/footer.jsp"%>

@@ -31,7 +31,7 @@
 					<sec:authentication property="principal" var="pinfo"/>
 					<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')">
 					<c:if test="${pinfo.username eq free.writer or pinfo.authorities eq '[ROLE_ADMIN]' }">
-					<button data-oper="modify" class="btn btn-default">Modify</button>
+					<button data-oper="modify" class="btn btn-default">수정</button>
 					</c:if>
 					</sec:authorize>
 					<button data-oper="list" class="btn btn-info">목록</button>
@@ -204,8 +204,7 @@ $(document).ready(function(){
   	replyer ='<sec:authentication property="principal.username"/>';
   	ROLE_ADMIN = '<sec:authentication property="principal.authorities"/>';
   	</sec:authorize>
-  	var csrfHeaderName ="${_csrf.headerName}";
-  	var csrfTokenValue="${_csrf.token}";
+  	
   	
   	$("#addReplyBtn").on("click",function(e){
   		modal.find("input").val("");
@@ -217,6 +216,9 @@ $(document).ready(function(){
   		$(".modal").modal("show");
   	});
   	
+  	
+  	var csrfHeaderName ="${_csrf.headerName}";
+  	var csrfTokenValue="${_csrf.token}";
   	//Ajax spring security header	== ajax 를 이용한 csrf 토큰 전송
   	$(document).ajaxSend(function(e, xhr, options){
   		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
@@ -244,7 +246,7 @@ $(document).ready(function(){
   		 FreeReplyService.get(rno, function(reply){
   			 modalInputReply.val(reply.reply);
   			 modalInputReplyer.val(reply.replyer).attr("readonly","readonly");
-  			 modalInputReplyDate.val(FreeReplyService.displayTime( reply.replyDate)).attr("readonly","readonly");
+  			 modalInputReplyDate.val(FreeReplyService.displayTime(reply.replyDate)).attr("readonly","readonly");
   			 modal.data("rno", reply.rno);
   			 
   			 modal.find("button[id !='modalCloseBtn']").hide();
