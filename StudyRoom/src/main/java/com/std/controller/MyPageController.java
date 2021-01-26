@@ -3,12 +3,14 @@ package com.std.controller;
 
 import java.util.Random;
 
+import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,13 +39,16 @@ public class MyPageController {
 
 	@Setter(onMethod_ = @Autowired)
 	private MyPageService service;
-	
+	// 암호화하기
+	@Inject	
+	PasswordEncoder passwordEncoder;
 	
 	//메일샌더를 이용하기위한 의존성 주입
 	@Setter(onMethod_ = @Autowired)
 	private JavaMailSender mailSender;
 	
 	//관리자가 회원목록가져오기
+	
 	@GetMapping("/infoList")
 	public void getList(Criteria cri,Model model) {
 		log.info("list...: "+ cri);
@@ -58,8 +63,11 @@ public class MyPageController {
 		log.info("CheckCoupon 페이지");
 		model.addAttribute("cplist", service.getCoupon(userid));
 	}
+	
+	
 	//내가 쓴 댓글 가져오기
-	@GetMapping("/checkwrote")
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/checkwrote")
 	public void getiwrote(@RequestParam("userid") String userid,Model model) {
 		log.info("Checkwrote 페이지");
 		model.addAttribute("replylist", service.getwrote(userid));
@@ -68,35 +76,71 @@ public class MyPageController {
 	
 	//내정보 보기, 수정, 삭제페이지로 이동
 	
+	
+	
 	@PreAuthorize("isAuthenticated()")
-	@GetMapping({"/myinfo","/modifyinfo"})
+	@PostMapping("/myinfo")
+	public void getinfo(@RequestParam("userid") String userid,Model model) {
+		log.info("내정보 보기페이지 이동");
+		model.addAttribute("vo",service.getinfo(userid));
+		log.info(service.getinfo(userid));
+	}
+
+	
+	//회원정보 수정페이지로 이동
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/modifyinfo")
 	public void getmodify(@RequestParam("userid") String userid,Model model) {
-		log.info("내정보 보기,수정, 삭제 페이지 이동");
+		log.info("수정, 삭제 페이지 이동");
 		model.addAttribute("vo",service.getinfo(userid));
 		log.info(service.getinfo(userid));
 	}
 	
 	
-	//회원정보 수정
+	//회원정보 수정페이지에서 오는 메소드
 	@PreAuthorize("isAuthenticated()")
-	@PostMapping("/modifyinfo")
-	public String modifyinfo(MemVO vo, RedirectAttributes rttr) {
+	@PostMapping("/modifyinfo1")
+	public void modifyinfo(@RequestParam("userid") String userid,MemVO vo,Model model, RedirectAttributes rttr) {
 		log.info("modify:" + vo);
+		model.addAttribute("vo",service.getinfo(userid));
+		 String enPassword = passwordEncoder.encode(vo.getPassword());
+	      vo.setPassword(enPassword);
+	      
+		service.modifyinfo(vo);
 		
-		if(service.modifyinfo(vo)) {
-			rttr.addFlashAttribute("result","success");
-		}
-		return "redirect:/main/mainpage";
 	}
-	//회원탈퇴하기
+	
+	//회원탈퇴페이지로 가기
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/deleteinfo")
-	public String removeinfo(@RequestParam("userid")String userid, RedirectAttributes rttr) {
-		log.info("remove"+userid);
-		if(service.removeinfo(userid)) {
-			rttr.addFlashAttribute("result","success");
-		}
-		return "redirect:/main/mainpage";
+	public void removeinfopage(@RequestParam("userid")String userid,Model model, RedirectAttributes rttr) {
+		log.info("삭제 페이지로 이동"+userid);
+		model.addAttribute("vo",service.getinfo(userid));
+		
+		
 	}
+	
+	//회원탈퇴 페이지에서 서비스로 보내기
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/deleteinfo1")
+	public void removeinfo(@RequestParam("userid")String userid, RedirectAttributes rttr) {
+		log.info("회원탈퇴 진행"+userid);
+		service.removeinfo(userid);
+		
+		
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	//이메일 변경하기 인증

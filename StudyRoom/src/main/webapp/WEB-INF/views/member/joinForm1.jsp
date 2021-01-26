@@ -11,12 +11,13 @@
 <style>
 	.wrapper{
 		width: 1900px;	
+		
 	}
 
 	.wrap{
 		width : 800px;
-		margin: auto;
-		float: left;
+		margin-left: 670px;
+		float: none;
 	}
 	
 	.id_input_re_1{
@@ -272,7 +273,7 @@
 .insert_button{
 	width: 30%;
     height: 60px;
-    background-color: #6AAFE6;
+    background-color:  #8a8de0;
     font-size: 40px;
     font-weight: 900;
     color: white;
@@ -282,7 +283,7 @@
 .reset_button{
 	width: 30%;
     height: 60px;
-    background-color: green;
+    background-color:  #de9693;
     font-size: 40px;
     font-weight: 900;
     color: white;
@@ -292,7 +293,7 @@
 .return_button{
 	width: 30%;
     height: 60px;
-    background-color: red;
+    background-color:  #82ca98;
     font-size: 40px;
     font-weight: 900;
     color: white;
@@ -579,8 +580,7 @@
 		});
 	
 		$(".return_button").click(function() {
-			$("#insert").attr("action","/membeer/joinForm1");
-			$("#insert").submit();
+			location.href="/member/insertMem";
 		});
 	});
 	

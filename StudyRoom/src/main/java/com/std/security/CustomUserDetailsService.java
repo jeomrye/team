@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {	//DB에서
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		log.warn("Load User By UserName : "+username);
 		MemVO vo = mapper.read(username);
-		log.warn("queried by member mapper :"+vo);
+		log.warn("queried by member mapper :"+vo);	
 		return vo == null ? null : new CustomUser(vo);
 	}
 

@@ -3,7 +3,12 @@
     pageEncoding="UTF-8"%>
 	</div>
         <!-- /#page-wrapper -->
-
+     
+       	 <form class="form" method="post" action="/mypage/myinfo">
+          	<input type="hidden" class="userid" name="userid" value="<sec:authentication property="principal.username"/>">
+          	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>	<!-- csrf토큰 -->
+        </form>
+        
     </div>
     <!-- /#wrapper -->
 

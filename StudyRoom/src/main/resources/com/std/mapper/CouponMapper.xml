@@ -6,13 +6,13 @@
 <mapper namespace="com.std.mapper.CouponMapper">
 
 <!-- 쿠폰 리스트 가져오기 -->
-<select id="couponGetList" resultType="com.std.domain.CouponVO">
+ <select id="couponGetList" resultType="com.std.domain.CouponVO">
 	
 	<![CDATA[
 	select * from coupon where couponNumber > 0
 	]]>
 	
-</select>
+ </select>
 
 <!-- insert문만 처리되고 생성된 PK값을 알 필요가 없는 경우 -->
 <insert id="couponInsert">
@@ -102,12 +102,77 @@
 </select>
 
 <select id="finMile">
-	select mileage from member where userid = #{userid} 
+	select mileage from member where userId = #{userId} 
 </select>
 
 <select id="couponPrice">
-	select couponPrice from coupon where couponNumber = #{couponNUmber}
+	select couponPrice from coupon where couponNumber = #{couponNumber}
 </select>
+
+<!-- <insert id="couponGetDetail"> -->
+<!-- 	insert into coupon_detail (userId, couponNumber, couponName, couponPrice, couponUse, couponBuyDate)  -->
+<!-- 	values(#{userId}, #{couponNumber}, #{couponName}, #{couponPrice}, #{couponUse}, sysdate) -->
+<!-- </insert> -->
+<!-- 인증/ 권한 -->
+<resultMap type="com.std.domain.CouponDetailVO" id="couponMap">
+	<id property="userId" column="userId"/>
+	<result property="userId" column="userId"/>
+	<result property="couponNumber" column="couponNumber"/>
+	<result property="couponName" column="couponName"/>
+	<result property="couponPrice" column="couponPrice"/>
+	<result property="couponUse" column="couponUse"/>
+	<result property="couponBuyDate" column="couponBuyDate"/>
+	<collection property="authList" resultMap="authMap"></collection>
+</resultMap>
+<resultMap type="com.std.domain.AuthVO" id="authMap">
+	<result property="userid" column="userid"/>
+	<result property="auth" column="auth"/>
+</resultMap>
+
+<select id="read" resultMap="couponMap">
+	select cou.userid, couponNumber, couponName, couponPrice, couponUse, couponBuyDate, auth from coupon_detail cou 
+	 LEFT OUTER JOIN auth auth on cou.userid = auth.userid where cou.userid = #{userid}
+</select>
+
+<select id="couponGetDetail" resultType="com.std.domain.CouponDetailVO">
+	select * from coupon_detail where userId = #{userId , jdbcType=VARCHAR}
+</select>
+
+<insert id="couponDetailInsert">
+	insert into coupon_detail(userid, couponnumber, couponName, couponPrice, couponuse, couponbuydate) values(#{userid}, #{couponnumber},#{couponName, jdbcType=VARCHAR},#{couponPrice},0,sysdate)
+</insert>
+
+<select id="mileGet" resultType="com.std.domain.MemVO">
+	select * from member where userid = #{userid, jdbcType=VARCHAR}
+</select>
+
+<select id="authGet" resultType="com.std.domain.AuthVO">
+	select * from auth where userid = #{userid, jdbcType = VARCHAR}
+</select>
+
+<select id="Getcoupon" resultType="com.std.domain.CouponVO">
+	select * from coupon where couponNumber = #{couponNumber}
+</select>
+
+
+<!-- 맴버 리스트 -->
+<select id="getList" resultType="com.std.domain.MemVO">
+	<![CDATA[
+		select * from member
+	]]>
+	
+	
+</select>
+
+
+<!-- 마일리지 업데이트 -->
+<update id="mileage">
+	update member set mileage = #{mileage} where userid =#{userid}
+</update>
+
+<!-- <update id="finMileage"> -->
+<!-- update member set mileage = (mileage - coupon.couponprice) where userid = #{userid} -->
+<!-- </update> -->
 
 
 </mapper>

@@ -30,8 +30,8 @@ public interface MyPageMapper {
 		
 	public MemVO selectinfo(String userid);
 	
-	public String deleteinfo(String userid);
+	public void deleteinfo(String userid);
 	
-	public String updateinfo(MemVO vo);
+	public void updateinfo(MemVO vo);
 	
 }

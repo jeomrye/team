@@ -26,7 +26,6 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,15 +36,14 @@ import net.coobird.thumbnailator.Thumbnailator;
 
 @Controller
 @Log4j
-@RequestMapping("/placePho/*")
 public class PlacePhotoController {
-	
+
 	@GetMapping("/uploadForm")
 	public void uploadForm() {
 		log.info("upload form");
 	}
-
-	@PostMapping("uploadFormAction")
+	
+	@PostMapping("/uploadFormAction")
 	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
 		
 		//place폴더를 업로드 폴더로 지정
@@ -68,8 +66,7 @@ public class PlacePhotoController {
 		}//end catch
 		}//end for
 	}
-	
-	@PreAuthorize("isAuthenticated()")
+
 	@GetMapping("/uploadAjax")
 	public void uploadAjax() {
 		log.info("upload ajax");
@@ -96,7 +93,7 @@ public class PlacePhotoController {
 		return str.replace("-", File.separator); //windows : File.seperator(\\)
 	}
 
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenricated()")
 	@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<PlaceFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile){
@@ -212,7 +209,7 @@ public class PlacePhotoController {
 	}
 
 	//파일 삭제
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenricated()")
 	@PostMapping("/deleteFile")
 	@ResponseBody
 	public ResponseEntity<String> deleteFile(String fileName, String type){

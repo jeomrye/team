@@ -9,21 +9,28 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.std.domain.AuthVO;
 import com.std.domain.CouponAttachVO;
+import com.std.domain.CouponDetailVO;
 import com.std.domain.CouponVO;
 import com.std.domain.Criteria;
+import com.std.domain.MemVO;
 import com.std.domain.PageDTO;
 import com.std.service.CouponService;
+import com.std.service.MemService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -35,6 +42,7 @@ import lombok.extern.log4j.Log4j;
 public class MileController {
 
 	private CouponService  service;
+	private MemService service1;
 	
 	//쿠폰 목록에 대한 처리
 //	@GetMapping("/couponList")
@@ -44,6 +52,7 @@ public class MileController {
 //			
 //		model.addAttribute("list", service.couponGetList());
 //	}
+	
 	@GetMapping("/couponList")
 	public void couponList(Criteria cri, Model model) {
 		
@@ -52,39 +61,47 @@ public class MileController {
 		//model.addAttribute("pageMaker", new PageDTO(cri, 123));
 		int total = service.getTotal(cri);
 		
+		/* model.addAttribute("member", service.getList()); */
 		log.info("total : " + total);
-		
+//		model.addAttribute("member", service.mileGet(userid));
+//		log.info("userid : "+userid);
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		
 	}
 	
-	//쿠폰 등록 처리와 테스트
-	@PostMapping("/couponRegister")
-	public String couponResister(CouponVO coupon, RedirectAttributes rttr) {
-		
-		log.info("==============================");
-		
-		log.info("CouponRegister : " + coupon);
+	
+	//쿠폰 등록 처리
+		@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
+		@PostMapping("/couponRegister")
+		public String couponResister(CouponVO coupon, RedirectAttributes rttr) {
 			
-		if(coupon.getAttachList() != null) {
-			coupon.getAttachList().forEach(attach -> log.info(attach));
+			log.info("==============================");
+			
+			log.info("CouponRegister : " + coupon);
+				
+			if(coupon.getAttachList() != null) {
+				coupon.getAttachList().forEach(attach -> log.info(attach));
+			}
+			log.info("================================");
+			service.couponRegister(coupon);
+			rttr.addFlashAttribute("result", coupon.getCouponNumber());
+			
+			return "redirect:/coupon/couponList";
 		}
-		log.info("================================");
-		service.couponRegister(coupon);
-		rttr.addFlashAttribute("result", coupon.getCouponNumber());
 		
-		return "redirect:/coupon/couponList";
-	}
 	
 	//쿠폰 조회 와 수정
+	
 	@GetMapping({"/couponGet", "/couponModify"})
-	public void couponGet(@RequestParam("couponNumber") int couponNumber, @ModelAttribute("cri") Criteria cri, Model model) {
-		
+	public void couponGet(@RequestParam("couponNumber") int couponNumber,@ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("/couponGet or /couponModify");
-		
 		model.addAttribute("coupon", service.couponGet(couponNumber));
+		
 	}
 	
+		
 	//쿠폰 수정 
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/couponModify")
 	public String couponModify(CouponVO coupon, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		log.info("couponModify : " + coupon);
@@ -92,14 +109,14 @@ public class MileController {
 		if(service.couponModify(coupon)) {
 			rttr.addFlashAttribute("result", "success");
 		}
-		
 	
 		return "redirect:/coupon/couponList" + cri.getListLink();
 	}
 	
-	//쿠폰 삭제 처리와 테스트
+	//쿠폰 삭제 처리
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/couponRemove")
-	public String couponRemove(@RequestParam("couponNumber") int couponNumber, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+	public String couponRemove(@RequestParam("couponNumber") int couponNumber,Criteria cri, RedirectAttributes rttr) {
 		
 		log.info("couponRemove : " + couponNumber);
 		
@@ -117,6 +134,7 @@ public class MileController {
 	}
 	
 	//등록 입력 페이지와 등록 처리
+	 @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
 	@GetMapping("/couponRegister")
 	public void couponRegister() {
 		
@@ -156,5 +174,93 @@ public class MileController {
 		});
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//내가 산 쿠폰 보기
+	@GetMapping("/couponDetail")
+	public void couponDetailList(String userid, Model model) {
+		
+		log.info("couponDetailList : " + userid);
+		model.addAttribute("dl", service.couponGetDetail(userid));
+		
+		
+		
+	}
+	
+	//쿠폰 구매 확정 페이지로 이동
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/couponBuy")
+	public void couponDetailRegister(CouponVO coupon,
+			@RequestParam("couponNumber")int couponNumber, 
+			@ModelAttribute("member")MemVO member, 
+			Model model) {
+		log.info("쿠폰 구매 확정 페이지로 이동");
+		model.addAttribute(service.couponGet(couponNumber));
+		model.addAttribute("coupon1", service.Getcoupon(couponNumber));
+		log.info(member.getUserid());
+		log.info("마일리지 :::::"+member.getUserid());
+		log.info("마일리지 :::::"+service.mileGet(member.getUserid()));
+		model.addAttribute("member",service.mileGet(member.getUserid()));
+		log.info("마일리지 :::::"+member.getMileage());
+	}
+	
+	
+	
+	//쿠폰 구매 확정 페이지에서 서비스로 가는것
+	@PostMapping("/couponBuy1")
+	public String couponDetailResister(AuthVO auth,
+			CouponDetailVO vo, 
+			CouponVO c, MemVO mvo,
+			@RequestParam("userid")String userid,
+			@RequestParam("couponname")String couponName, 
+			@RequestParam("couponprice")int couponPrice) {
+		
+		log.info("==============================");
+		log.info("CouponRegister : " + vo);
+		log.info("auth : "+auth);
+		log.info("couponName : " + couponName);
+		log.info("couponPrice : " + couponPrice);
+		log.info("c : " + c);
+		c = service.couponGet(vo.getCouponnumber());
+		vo.setUserid(mvo.getUserid());
+		vo.setCouponName(c.getCouponName());
+		vo.setCouponPrice(c.getCouponPrice());
+		vo.setCouponuse(c.getCouponUse());
+		vo.setCouponbuydate(c.getCouponregDate());
+		service.couponDetailRegister(vo);
+		
+		log.info("insert Service 성공");
+		
+		log.info("마일리지 차감:"+(mvo.getMileage() - vo.getCouponPrice()));
+		int result= (mvo.getMileage() - vo.getCouponPrice());
+		mvo.setMileage(result);
+		service.mileage(mvo);
+		return "redirect:/coupon/couponList";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

@@ -8,16 +8,13 @@
 	rel="stylesheet">
 
 <%@ include file="../includes/header.jsp"%>
-<div class="row" style="width:1920px; height:100%;background-size:100% 100%; background-repeat:no-repeat;  background-position:inherit;  background-image:url('/resources/main/srfsback.PNG'); ">
+<div class="row" style="width:100vw; height:100vh;background-size:100% 100%; background-repeat:no-repeat;  background-position:inherit;  background-image:url('/resources/main/srfsback.PNG'); ">
 
-<!-- <img alt="/resources/main/srfsback.png" src="/resources/main/srfsback.png" style=" width: 100%;"> -->
-
+<div style="max-width: 100%">
 	<a href="/main/mainpage" style="color: black; text-decoration: none; ">
-		<img alt="/main/mainpage" src="/resources/main/srfs.PNG"
-		style=" padding-left: 500px; padding-top:200px; width:auto; height:550px;" >
-	</a> <br> <br>
-	
-	
+		<img alt="/main/mainpage" src="/resources/main/srfs.PNG" style="padding-left:23%; padding-top:5%; max-width: 80%;">
+	</a> </div><br> <br>
+
 	<form id="searchForm" action="/place/list" method="get">
 		<div class="search-wrapper">
 			<div class="input-holder">
@@ -40,8 +37,6 @@
 <!-- </div> -->
 
 <script>
-	
-	
 	function searchToggle(obj, evt) {
 		var container = $(obj).closest('.search-wrapper');
 		if (!container.hasClass('active')) {
@@ -55,6 +50,7 @@
 		}
 	}
 </script>
+
 <style>
 .search-wrapper {
 	position: absolute;
@@ -237,5 +233,6 @@ select {
 	border: 1px solid #999;
 	border-radius: 0px;
 }
+
 </style>
 <%@ include file="../includes/footer.jsp"%>
