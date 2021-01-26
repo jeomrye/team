@@ -21,7 +21,7 @@ import com.std.service.QaReplyService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-@RequestMapping("/qnaRe/")
+@RequestMapping("/replies/")
 @RestController
 @Log4j
 @AllArgsConstructor
@@ -29,16 +29,16 @@ public class QaReplyController {
 
 	private QaReplyService replyservice;
 	
-	@PreAuthorize("isAuthenticated()")
 	@PostMapping(value = "/new",
 			consumes = "application/json",
 			produces = { MediaType.TEXT_PLAIN_VALUE })
+	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<String> create(@RequestBody QaReplyVO vo){
 		log.info("QaReplyVO: " + vo);
 		int insertCount = replyservice.register(vo);
 		log.info("Reply INSERT COUNT: " + insertCount);
-		return insertCount == 1 ? new ResponseEntity<>("success", HttpStatus.OK)//200
-			: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);//500
+		return insertCount == 1 ? new ResponseEntity<String>("success", HttpStatus.OK)//200
+			: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);//500
 		//삼항 연산자 처리
 	}
 	
@@ -65,13 +65,14 @@ public class QaReplyController {
 	}
 	@PreAuthorize("(principal.username ==#vo.replyer) or hasRole('ROLE_ADMIN')")
 	@DeleteMapping(value = "/{rno}" , produces = { MediaType.TEXT_PLAIN_VALUE })
-	public ResponseEntity<String> remove(@RequestBody QaReplyVO vo,@PathVariable("rno") Long rno) {
+	public ResponseEntity<String> remove(@PathVariable("rno") Long rno) {
 		log.info("remove: " + rno);
 		int returnValue = replyservice.remove(rno);
 		System.out.println("삭제확인");
 		return returnValue == 1 ? new ResponseEntity<String>("success", HttpStatus.OK)
 				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR); 
 	}
+	
 	@PreAuthorize("(principal.username ==#vo.replyer) or hasRole('ROLE_ADMIN')")
 	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH },
 			value = "/{rno}",

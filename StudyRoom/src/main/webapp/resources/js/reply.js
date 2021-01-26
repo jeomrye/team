@@ -255,6 +255,8 @@ var FreeReplyService = (function(){
 		};
 })();
 
+console.log("Reply Module.........");
+
 var QaReplyService = (function(){
 
 	function add(reply, callback, error){
@@ -262,7 +264,7 @@ var QaReplyService = (function(){
 		
 		$.ajax({
 			type : 'post',
-			url : '/qnaRe/new',
+			url : '/replies/new',
 			data : JSON.stringify(reply),
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr) { //xhr:객체
@@ -275,7 +277,7 @@ var QaReplyService = (function(){
 				error(er);
 				}
 			}
-		});
+		})
 	}	
 	
 	function getList(param, callback, error){
@@ -283,7 +285,7 @@ var QaReplyService = (function(){
 		var page = param.page || 1;
 		console.log(questionNo);
 		
-		$.getJSON("/qnaRe/pages/" + questionNo + "/" + page + ".json",
+		$.getJSON("/replies/pages/" + questionNo + "/" + page + ".json",
 			function(data){
 				if(callback){
 				
@@ -299,7 +301,7 @@ var QaReplyService = (function(){
 	function remove(rno , callback, error){ // 3개인데 지금 콜백으로
 		$.ajax({
 			type : 'delete',
-			url : '/qnaRe/' + rno,
+			url : '/replies/' + rno,
 			data : JSON.stringify({rno:rno}),
 			contentType : "application/json; charset=utf-8",
 			success : function(deleteResult, status, xhr) {
@@ -327,7 +329,7 @@ var QaReplyService = (function(){
 	console.log("RNO : "+reply.rno);
 		$.ajax({
 			type : 'put',
-			url : '/qnaRe/' + reply.rno,
+			url : '/replies/' + reply.rno,
 			data : JSON.stringify(reply),
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr) {
@@ -344,7 +346,7 @@ var QaReplyService = (function(){
 	}
 	
 	function get(rno, callback, error) {
-		$.get("/qnaRe/" + rno + ".json", function(result){
+		$.get("/replies/" + rno + ".json", function(result){
 			if(callback){
 					callback(result);
 				}
