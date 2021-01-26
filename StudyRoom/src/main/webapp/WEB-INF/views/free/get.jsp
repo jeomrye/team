@@ -246,7 +246,7 @@ $(document).ready(function(){
   		 FreeReplyService.get(rno, function(reply){
   			 modalInputReply.val(reply.reply);
   			 modalInputReplyer.val(reply.replyer).attr("readonly","readonly");
-  			 modalInputReplyDate.val(FreeReplyService.displayTime( reply.replyDate)).attr("readonly","readonly");
+  			 modalInputReplyDate.val(FreeReplyService.displayTime(reply.replyDate)).attr("readonly","readonly");
   			 modal.data("rno", reply.rno);
   			 
   			 modal.find("button[id !='modalCloseBtn']").hide();
