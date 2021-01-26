@@ -44,7 +44,7 @@
 						
 							<td><c:out value="${rp.rno }"></c:out></td>
 							<td><c:out value="${rp.reply }"></c:out></td>
-							<td><c:out value="${rp.score }"></c:out></td>
+							<td><c:out value="50"></c:out></td>
 							<td><c:out value="${rp.replyer }"></c:out></td>
 							<td><c:out value="${rp.replydate }"></c:out></td>
 							<td><c:out value="${rp.updatedate }"></c:out></td>
