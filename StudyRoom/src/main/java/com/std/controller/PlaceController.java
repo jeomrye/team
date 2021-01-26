@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.std.domain.Criteria;
 import com.std.domain.PageDTO;
 import com.std.domain.PlacePhotoVO;
+import com.std.domain.PlaceReVO;
 import com.std.domain.PlaceVO;
 import com.std.service.PlaceReService;
 import com.std.service.PlaceService;
@@ -81,7 +82,7 @@ public class PlaceController {
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping({"/get","/modify"})
 	//@RequestParam : 하나의 값만을 request방식으로 전달, @ModelAttribute : 객체 통으로 값 전달 
-	public void get(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model) {
+	public void get(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model,PlaceReVO placeRe) {
 		log.info("/get or /modify");
 		model.addAttribute("place",service.get(bno)); //해당 글 가져오기
 		
@@ -94,6 +95,7 @@ public class PlaceController {
 			result = score/replyCnt;
 		}
 		model.addAttribute("score",result);
+		model.addAttribute("replyer", serviceRe.get(placeRe.getRno()));
 	}
 	
 	//글 수정
