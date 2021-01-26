@@ -57,15 +57,16 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public boolean modifyinfo(MemVO vo) {
+	public void modifyinfo(MemVO vo) {
 		log.info("modify"+vo);
-		return mapper.updateinfo(vo) != null;
+		mapper.updateinfo(vo);
+		
 	}
 
 	@Override
-	public boolean removeinfo(String userid) {
+	public void removeinfo(String userid) {
 		log.info("remove"+userid);
-		return mapper.deleteinfo(userid) != null;
+		mapper.deleteinfo(userid);
 	}
 
 	

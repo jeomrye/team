@@ -41,6 +41,7 @@ public class QaController {
 	public String questionRegi(QaVO qa, RedirectAttributes rttr) {
 		log.info("QuestionRegister: " + qa);
 		service.questionRegi(qa);
+		rttr.addFlashAttribute("result",qa.getQuestionNo());
 		return "redirect:/qna/list";
 		
 	}
@@ -51,7 +52,7 @@ public class QaController {
 		
 	}
 	
-	@PreAuthorize("isAuthenticated()")
+	
 	@GetMapping({ "/get", "/modify" })
 	public void get(@RequestParam("questionNo") Long questionNo, @ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("/get or modify");

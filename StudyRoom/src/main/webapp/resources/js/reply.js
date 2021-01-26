@@ -255,6 +255,8 @@ var FreeReplyService = (function(){
 		};
 })();
 
+console.log("Reply Module.........");
+
 var QaReplyService = (function(){
 
 	function add(reply, callback, error){
@@ -296,7 +298,7 @@ var QaReplyService = (function(){
 		});
 	}
 	
-	function remove(rno , callback, error){ // 3개인데 지금 콜백으로
+	function remove(rno, callback, error){ // 3개인데 지금 콜백으로
 		$.ajax({
 			type : 'delete',
 			url : '/qnaRe/' + rno,

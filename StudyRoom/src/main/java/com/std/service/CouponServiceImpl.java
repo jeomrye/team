@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.std.domain.AuthVO;
 import com.std.domain.CouponAttachVO;
+import com.std.domain.CouponDetailVO;
 import com.std.domain.CouponVO;
 import com.std.domain.Criteria;
+import com.std.domain.MemVO;
 import com.std.mapper.CouponAttachMapper;
 import com.std.mapper.CouponMapper;
 
@@ -26,6 +29,16 @@ public class CouponServiceImpl implements CouponService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private CouponAttachMapper attachMapper;
+	
+	
+//	
+//	@Override
+//	public void couponRegDetail(CouponDetailVO couponDetail) {
+//
+//		log.info("couponRegDetail...." + couponDetail);
+//		mapper.couponRegDetail(couponDetail);
+//		
+//	}
 	
 	@Transactional
 	@Override
@@ -120,5 +133,58 @@ public class CouponServiceImpl implements CouponService {
 		
 		return mapper.getTotalCount(cri);
 	}
+	//내가 산 쿠폰확인
+	@Override
+	public List<CouponDetailVO> couponGetDetail(String userId) {
+		
+		log.info("couponGetDetail....." + userId);	
+		return mapper.couponGetDetail(userId);
+	}
+	//쿠폰 구매하기
+	@Override
+	public void couponDetailRegister(CouponDetailVO vo) {
+		log.info("couponBuy: "+vo);
+		
+		mapper.couponDetailInsert(vo);
+	}
+
+	@Override
+	public MemVO mileGet(String userid) {
+		log.info("mileGet: "+userid);
+		
+		return mapper.mileGet(userid);
+	}
+
+	@Override
+	public AuthVO authGet(String userid) {
+		log.info("authGet: "+userid);
+		return mapper.authGet(userid);
+	}
+
+	@Override
+	public CouponVO Getcoupon(int couponNumber) {
+		log.info("Getcoupon"+couponNumber);
+		return mapper.Getcoupon(couponNumber);
+	}
+
+	//맴버테이블에서 모든것 가져오기
+	@Override
+	public List<MemVO> getList() {
+		log.info("getList");
+		return mapper.getList();
+	}
+
+	@Override
+	public void mileage(MemVO vo) {
+		mapper.mileage(vo);
+	}
+
+
+	
+
+
+	
+
+	
 	
 }
