@@ -14,7 +14,6 @@
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">Q&A</div>
-			<div class="panel-body">
 <!-- 			Q&A 상세보기 -->
 <!-- 화면에 보이는 부분 -->
 			<div class="form-group">
@@ -30,10 +29,10 @@
 			<sec:authentication property="principal" var="pinfo"/>
 			<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')">
 			<c:if test="${pinfo.username eq qna.writer or pinfo.authorities eq '[ROLE_ADMIN]' }">
-			<button data-oper='modify' class="btn bnt-default">수정</button>
+			<button data-oper='modify' class="btn bnt-default" onclick="location.href='/qna/modify?questionNo=<c:out value="${qna.questionNo }"/>'">수정</button>
 			</c:if>
 			</sec:authorize>
-			<button data-oper='list' class="btn bnt-default">목록</button>
+			<button data-oper='list' class="btn bnt-default" onclick="location.href='/qna/list'">목록</button>
 			<form action="/qna/modify" id="operForm" method="get">
 				<input type="hidden" id="questionNo" name="questionNo" value='<c:out value="${qna.questionNo }"/>'>
 				<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
@@ -41,7 +40,6 @@
 				<input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'>
 				<input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>
 			</form>
-			</div>
 		</div>
 	</div>
 </div>
@@ -104,24 +102,27 @@
 					<div class="modal-body">
 						<div class="form-group">
 						<label>댓글</label>
-						<input class="form-control" name="reply" value="">						</div>
+						<input class="form-control" name='reply' value='New Reply!!!!'>
+						</div>
 						<div class="form-group">
 						<label>댓글 작성자</label>
-						<input class="form-control" name="replyer" value="" readonly="readonly">						</div>
+						<input class="form-control" name='replyer' value='replyer' readonly="readonly">
+						</div>
 						<div class="form-group">
 						<label>댓글 작성일</label>
-						<input class="form-control" name="replyDate" value="">
+						<input class="form-control" name='replyDate' value=''>
 						</div>
 					</div>
 				<div class="modal-footer">
-					<sec:authentication property="principal" var="pinfo"/> 	<!-- 조회 화면에서 댓글 추가버튼 -->
-					<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')">
-					<c:if test="${pinfo.username eq qna.writer or pinfo.authorities eq '[ROLE_ADMIN]' }"> 
+				<sec:authentication property="principal" var="pinfo"/> 	<!-- 조회 화면에서 댓글 추가버튼 -->
+				<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')">
+				<c:if test="${pinfo.username eq qna.writer or pinfo.authorities eq '[ROLE_ADMIN]' }"> 
 					<button id='modalModBtn' type="button" class="btn btn-warning">수정</button>
 					<button id='modalRemoveBtn' type="button" class="btn btn-danger">삭제</button>
-					<button id='modalRegisterBtn' type="button" class="btn btn-success">등록</button>
-					</c:if>
-					</sec:authorize>
+						</c:if>
+				</sec:authorize>
+					<button id='modalRegisterBtn' type="button" class="btn btn-success" data-dismiss='modal'>등록</button>
+				
 					<button id='modalCloseBtn' type="button" class="btn btn-default" data-dismiss='modal'>닫기</button>
 				</div>
 				
@@ -145,10 +146,11 @@
 			
 			function showList(page){
 				console.log("show list " + page);
-				QaReplyService.getList({questionNo:questionNoValue,page: page||1}, function(replyCnt, list){
+				QaReplyService.getList({questionNo:questionNoValue,page: page|| 1}, function(replyCnt, list){
 					
 					console.log("replyCnt: " + replyCnt);
 					console.log("list: " + list);
+					console.log(list);
 					
 					if(page == -1){//마지막 페이지를 찾아서 다시 호출
 						pageNum = Math.ceil(replyCnt / 10.0);
@@ -163,7 +165,7 @@
 					}
 					for (var i = 0, len = list.length || 0; i < len; i++){
 						str +="<li class= 'left clearfix' data-rno='"+list[i].rno+"'>";
-						str +=" <div><div class='header'><strong class='primary-font'>["+list[i].rno+"]"+list[i].replyer+"</strong>";
+						str +=" <div><div class='header'><strong class='primary-font'>"+list[i].replyer+"</strong>";
 						str +=" <small class='pull-right text-muted'>"+QaReplyService.displayTime(list[i].replyDate)+"</small></div>";
 						str +=" <p>"+list[i].reply+"</p></div></li>";
 					}
@@ -228,13 +230,13 @@
 	
 	var replyer = null;
   	var ROLE_ADMIN = null;
-  	
   	<sec:authorize access="isAuthenticated()">
   	replyer ='<sec:authentication property="principal.username"/>';
   	ROLE_ADMIN = '<sec:authentication property="principal.authorities"/>';
   	</sec:authorize>
-  	
-
+  	var csrfHeaderName ="${_csrf.headerName}";
+  	var csrfTokenValue="${_csrf.token}";
+	
 	
 	
 	$("#addReplyBtn").on("click", function(e) {
@@ -248,9 +250,6 @@
 		$(".modal").modal("show");
 	});
 	
-	
-  	var csrfHeaderName ="${_csrf.headerName}";
-  	var csrfTokenValue="${_csrf.token}";
  	//Ajax spring security header	== ajax 를 이용한 csrf 토큰 전송
   	$(document).ajaxSend(function(e, xhr, options){
   		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
@@ -267,10 +266,10 @@
 			alert(result);
 			
 			modal.find("input").val("");
-			modal.modal("hide");
+			$(".modal").modal("hide");
 			
 			//showList(1) //수정 후 댓글목록 갱신
-			showList(-1); // page번호가 -1로 전달되면 마지막페이지를 다시 찾아서 호출 >> 전체댓글 숫자 파악 >> 마지막페이지 호출
+			showList(-1) // page번호가 -1로 전달되면 마지막페이지를 다시 찾아서 호출 >> 전체댓글 숫자 파악 >> 마지막페이지 호출
 		});
 	});
 	
@@ -289,6 +288,7 @@
 			
 			$(".modal").modal("show");
 		});
+		console.log(rno);
 	});
 	
 	//댓글 수정
@@ -310,7 +310,7 @@
   		}
 		QaReplyService.update(reply, function(result){
 			alert(result);
-			modal.modal("hide");
+			$(".modal").modal("hide");
 			showList(pageNum);
 		});	
 	});
@@ -341,7 +341,7 @@
 			
 			console.log("결과접근")
 			alert(result);
-			modal.modal("hide");
+			$(".modal").modal("hide");
 			showList(pageNum);
 		});
 	});
@@ -370,7 +370,7 @@ $(document).ready(function(){
 		operForm.attr("action","/qna/modify").submit();
 	});
 	$("button[data-oper = 'list']").on("click",function(e){
-		operForm.find("#questionNo").remove();
+		operForm.find("questionNo").remove();
 		operForm.attr("action","/qna/list")
 		operForm.submit();
 	});
