@@ -23,16 +23,16 @@
 		resultType="com.std.domain.QaVO">
 		<![CDATA[
 		select
-		questionNo,title,content,writer,writedate,updatedate,qnacnt,
+		questionno,title,content,writer,writedate,updatedate,qnacnt,
     	status,pub,password,userid 
 		from
 			(
 			SELECT
-				/*+INDEX_DESC(QuestionAndAnswer pk_question)*/
+				/*+INDEX_DESC(questionandanswer PK_QuestionAndAnswer)*/
 				rownum rn,questionNo,title,content,writer,writedate,updatedate,qnacnt,
     	status,pub,password,userid 
 			FROM 
-				QuestionAndAnswer 
+				questionandanswer 
 			WHERE
 			]]>
 			<include refid="criteria"></include>
