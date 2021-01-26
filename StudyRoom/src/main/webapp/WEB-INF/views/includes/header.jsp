@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+     
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,36 +39,94 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 
 <body>
+<style>
 
-    <div id="wrapper">
+.bar{
+color: white;
+}
+ .bar:hover{
+ 
+color: black;
+}
+</style>
+
+    <div id="wrapper" >
 
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="border-color: black; background-color :black ; margin-bottom: 0;">
             
 
-                <a class="navbar-brand" href="/main/mainpage"><h4>SRFS</h4></a>
+                <a class="navbar-brand" href="/main/mainpage">
+                <img alt="/resources/main/top.png" src="/resources/main/top.png" style="padding-top: 10px;">
+                </a>
             
             <!-- /.navbar-header -->
 			
 			<!-- 상단 배너 -->
             <ul class="nav navbar-top-links navbar-right">
 			<!-- 각 리스트로 -->
-               <li><a href="/notice/list"><h4>공지사항</h4></a></li>
-               <li><a href="/notice/list"><h4>자유게시판</h4></a></li>
-               <li><a href="/notice/list"><h4>장소</h4></a></li>
-               <li><a href="/notice/list"><h4>Q&A</h4></a></li>
-               <li><a href="/notice/list"><h4>마이페이지</h4></a></li>
-               <li><a href="/notice/list"><h4>로그인</h4></a></li>
+
+               <li><a class="bar" href="/notice/list"><h4>공지사항</h4></a></li>
+               <li><a class="bar" href="/free/list"><h4>자유게시판</h4></a></li>
+               <li><a class="bar" href="/place/list"><h4>장소</h4></a></li>
+               <li><a class="bar"  href="/coupon/couponList"><h4>쿠폰구매하기</h4></a></li>
+               <li><a class="bar" href="/qna/list"><h4>Q&A</h4></a></li>
+               <li><a class="bar" href="/faq/list"><h4>FAQ</h4></a></li>
+               
+                <sec:authorize access="isAuthenticated()">
+               <sec:authorize access="hasAnyRole('ROLE_MANAGER','ROLE_USER')">
+               <li><a class="bar" href="#" id="myinfo"><h4>마이페이지</h4></a></li>
+               </sec:authorize>
+               <sec:authorize access="hasRole('ROLE_ADMIN')">
+               <li><a class="bar" href="/mypage/infoList" ><h4>마이페이지</h4></a></li>
+               </sec:authorize>
+
+               <li><a class="bar" href="/customLogout"><h4>로그아웃</h4></a></li>
+               </sec:authorize>
+               <sec:authorize access="isAnonymous()">
+               <li><a class="bar" href="/customLogin"><h4>로그인</h4></a></li>
+               </sec:authorize>
+               	 
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
 
         </nav>
+   
+   	
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
            
+
+      	<script type="text/javascript">
+      	
+      		/* function myinfo(){
+      				var userid =null;
+      			<sec:authorize access="isAuthenticated()">
+      			userid ='<sec:authentication property="principal.username"/>';
+      			</sec:authorize>
+      			console.log(userid);
+       			location.href="/mypage/myinfo?userid="+userid;
+      		} */
+      		
+      		var csrfHeaderName ="${_csrf.headerName}";
+      	  	var csrfTokenValue="${_csrf.token}";
+      	  	//Ajax spring security header	== ajax 를 이용한 csrf 토큰 전송
+      	  	$(document).ajaxSend(function(e, xhr, options){
+      	  		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+      	  	});
+      		$("#myinfo").on("click", function() {
+      		
+      			$(".form").submit();
+			});
+      		
+      		
+      	
+      	</script>
+
         
+
+
