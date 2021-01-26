@@ -10,11 +10,13 @@
                         </div>
 
 <form role="form" action="/coupon/couponModify" method="post">
-
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 <input type="hidden" name='pageNum' value='<c:out value="${cri.pageNum }" />'>
 <input type="hidden" name='amount' value='<c:out value="${cri.amount }" />'>
 <input type="hidden" name='keyword' value='<c:out value="${cri.keyword }" />'>
 <input type="hidden" name='type' value='<c:out value="${cri.type }" />'>
+<input type="hidden" name='couponNumber' value='<c:out value="${coupon.couponNumber}"/>'>
+
 
 <div class="form-group">
 	<label>쿠폰 번호</label>
@@ -126,6 +128,8 @@ width:600px;
 <script type="text/javascript">
 $(document).ready(function(){
 	
+	
+	
 	var formObj = $("form");
 	
 	$('button').on("click", function(e){
@@ -141,7 +145,15 @@ $(document).ready(function(){
 		}else if(operation === 'list'){
 			//리스트로 이동
 			formObj.attr("action", "/coupon/couponList").attr("method", "get")
-			
+			var pageNumTag=$("input[name='pageNum']").clone();	//from 태그에서 필요한 부분만 잠시 복사 보관ㄴ
+			var amountTag=$("input[name='amount']").clone();
+			var keywordTag=$("input[name='keyword']").clone();
+			var typeTag=$("input[name='type']").clone();
+			formObj.empty();	//form태그내에 모든걸 지운다
+			formObj.append(pageNumTag);		//필요한 태그만 추가해서 호출
+			formObj.append(amountTag);
+			formObj.append(keywordTag);
+			formObj.append(typeTag);
 			
 		}else if(operation === 'modify'){
 			console.log("submit clicked");
