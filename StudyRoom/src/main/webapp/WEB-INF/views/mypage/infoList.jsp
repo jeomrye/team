@@ -113,6 +113,7 @@
 					<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
 					<input type='hidden' name='type' value='<c:out value="${pageMaker.cri.type }"/>'>
 					<input type='hidden' name='keyword' value='<c:out value="${pageMaker.cri.keyword }"/>'>
+					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>	<!-- csrf토큰 -->
 				</form>
 				
 			
@@ -150,7 +151,12 @@
 
 
 <script type="text/javascript">
-	
+var csrfHeaderName ="${_csrf.headerName}";
+	var csrfTokenValue="${_csrf.token}";
+	//Ajax spring security header	== ajax 를 이용한 csrf 토큰 전송
+	$(document).ajaxSend(function(e, xhr, options){
+		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+	});
 
 	var actionForm = $("#actionForm");
 	$(".paginate_button a").on(
@@ -174,6 +180,7 @@
 										+ "'>");
 						actionForm.attr("action",
 								"/mypage/myinfo");
+						actionForm.attr("method","post");
 						actionForm.submit();
 					});
 	var searchForm = $("#searchForm");

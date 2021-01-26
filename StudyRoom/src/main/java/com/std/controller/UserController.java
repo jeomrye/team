@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,15 +57,9 @@ public class UserController {
 	      vo.setPassword(enPassword);
 	      service.register(vo);
 	      //권한주기
-	      if(vo.getMemberno() == 1) {
 	         String ROLE_USER ="ROLE_USER";
 	         avo.setAuth(ROLE_USER);
 	         service.auth(avo);
-	      } else if(vo.getMemberno() == 2) {
-	         String ROLE_MANAGER = "ROLE_MANAGER";
-	         avo.setAuth(ROLE_MANAGER);
-	         service.auth(avo);
-	      }
 	      
 	      log.info("insert Service 성공");
 	      
@@ -85,15 +80,9 @@ public class UserController {
 	      vo.setPassword(enPassword);
 	      service.register(vo);
 	      //권한주기
-	      if(vo.getMemberno() == 1) {
-	         String ROLE_USER ="ROLE_USER";
-	         avo.setAuth(ROLE_USER);
-	         service.auth(avo);
-	      } else if(vo.getMemberno() == 2) {
 	         String ROLE_MANAGER = "ROLE_MANAGER";
 	         avo.setAuth(ROLE_MANAGER);
 	         service.auth(avo);
-	      }
 	      
 	      log.info("insert Service 성공");
 	      
@@ -155,7 +144,7 @@ public class UserController {
         log.info("인증번호"+checkNum);
         
         
-        String From = "jisuh12@naver.com";	//보낸는 사람메일
+        String From = "kayo2006@naver.com";	//보낸는 사람메일
         String toEmail = email;	//받는사람 메일 입력 (입력받은 메일가져와서 변수입력)
         String title = "Study Room Finding Service:SRFS 회원가입 인증 메일입니다.";	//메일 제목입력
         String content = 

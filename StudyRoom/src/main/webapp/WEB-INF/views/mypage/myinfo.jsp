@@ -22,8 +22,8 @@
 
 	.wrap{
 		width : 800px;
-		margin: auto;
-		float: left;
+		margin-left: 670px;
+		float: none;
 	}
 	
 	.id_input_re_1{
@@ -369,10 +369,19 @@
 
 
 /* 가입하기 버튼 */
-.insert_button{
+.modify_button{
 	width: 20%;
     height: 60px;
-    background-color: #6AAFE6;
+    background-color: #8a8de0;
+    font-size: 25px;
+    font-weight: 900;
+    color: white;
+    float: left;
+}
+.delete_button{
+	width: 20%;
+    height: 60px;
+    background-color: #ff69b4;
     font-size: 25px;
     font-weight: 900;
     color: white;
@@ -382,7 +391,7 @@
 .coupon_button{
 	width: 20%;
     height: 60px;
-    background-color: green;
+    background-color: #82ca98;
     font-size: 25px;
     font-weight: 900;
     color: white;
@@ -392,7 +401,7 @@
 .mile_button{
 	width: 20%;
     height: 60px;
-    background-color: green;
+    background-color: #82ca98;
     font-size: 20px;
     font-weight: 900;
     color: white;
@@ -478,11 +487,11 @@
 </div>
 </div>
 
-<div class="password_wrap">
+<%-- <div class="password_wrap">
 <div class="password_name">비밀번호</div>
-<div class="password_input_box"><input type="text" class="password_input" name="password" value='<c:out value="${vo.password }"></c:out>' readonly="readonly">
+<div class="password_input_box"><input type="hidde" class="password_input" name="password" value='<c:out value="${vo.password }"></c:out>' readonly="readonly">
 </div>
-</div>
+</div> --%>
 
 
 
@@ -527,13 +536,18 @@
 
 
 <div>
-	<button type="button" data-oper='modify' class="insert_button" >수정하기</button>
+	<button type="button" data-oper='modify' class="modify_button" >수정하기</button>
+	<button type="button" data-oper='delete' class="delete_button" >탈퇴하기</button>
 	<button type="button" data-oper='coupon' class="coupon_button">쿠폰 확인</button>
 	<button type="button" data-oper='mile' class="mile_button">마일리지 확인</button>
 	<button type="button" data-oper='return' class="return_button" >돌아가기</button>
 </div>
-<form id="operForm" action="/mypage/modify" method="get">
-	<input type="hidden" id="userid" name="userid" value='<c:out value="${vo.userid }"></c:out>'>
+<form id="operForm" action="/mypage/modifyinfo" method="post">
+		<input type="hidden" id="userid" name="userid" value='<c:out value="${vo.userid }"></c:out>'>
+		<input type="hidden" id="password" name="password" value='<c:out value="${vo.password }"></c:out>'>
+		<input type="hidden" id="phone" name="phone" value='<c:out value="${vo.phone }"></c:out>'>
+		<input type="hidden" id="updatedate"  name="updatedate" value='<fmt:formatDate pattern= "yy/MM/dd" value="${vo.updatedate }" />'>
+		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>	<!-- csrf토큰 -->
 </form>
 
 </div>
@@ -545,26 +559,35 @@
 <script type="text/javascript">
 	
 	$(document).ready(function() {
+		
+		var csrfHeaderName ="${_csrf.headerName}";
+  	  	var csrfTokenValue="${_csrf.token}";
+  	  	//Ajax spring security header	== ajax 를 이용한 csrf 토큰 전송
+  	  	$(document).ajaxSend(function(e, xhr, options){
+  	  		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+  	  	});
+  	  	
 		var operForm = $("#operForm");
 		
 		$("button[data-oper='modify']").on("click", function(e) {
 			operForm.attr("action","/mypage/modifyinfo").submit();
 		});
+		$("button[data-oper='delete']").on("click", function(e) {
+			operForm.attr("action","/mypage/deleteinfo").submit();
+		});
 		
 		$("button[data-oper='return']").on("click", function(e) {
-			operForm.find("#uno").remove();
+			
 			operForm.find("#userid").remove();
-			operForm.attr("action","/main");
+			operForm.attr("action","/main/mainpage");
 			operForm.submit();
 		});
 		//쿠폰 내역 확인 페이지로 가는 동작
 		$("button[data-oper='coupon']").on("click", function(e) {
-			operForm.find("#uno").remove();
 			operForm.attr("action","/mypage/checkCoupon").submit();
 		});
 		//마일리지 확인 페이지로 가는 동작
 		$("button[data-oper='mile']").on("click", function(e) {
-			operForm.find("#uno").remove();
 			operForm.attr("action","/mypage/checkwrote").submit();
 		});
 		

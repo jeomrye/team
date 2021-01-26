@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@include file="../includes/header.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -245,17 +246,6 @@ function movecom(){
 </script>
 
 
-
-
-
-
-
-
-
-
-
-
-
     <!-- jQuery -->
     <script src="/resources/vendor/jquery/jquery.min.js"></script>
 
@@ -269,4 +259,7 @@ function movecom(){
     <script src="/resources/dist/js/sb-admin-2.js"></script>
 
 </body>
+
 </html>
+
+<%@ include file="../includes/footer.jsp" %>

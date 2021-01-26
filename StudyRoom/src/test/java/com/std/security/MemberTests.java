@@ -15,7 +15,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.std.domain.AuthVO;
+import com.std.domain.CouponDetailVO;
 import com.std.domain.MemVO;
+import com.std.mapper.CouponMapper;
 import com.std.mapper.UserMapper;
 
 import lombok.Setter;
@@ -34,16 +36,19 @@ public class MemberTests {
 	
 	@Setter(onMethod_ = @Autowired)
 	private  UserMapper mapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private CouponMapper coumapper;
 
 	
 	//@Test
 	public void testRead() {
-		MemVO vo = mapper.read("user0");
+		CouponDetailVO vo = coumapper.read("홍길동");
 		log.info(vo);
 		vo.getAuthList().forEach(authVO -> log.info(authVO));
 	}
 
-	@Test
+	//@Test
 	public void test() {
 		String sql = "insert into member(uno, userid,password,username) values (member_seq.nextval , ?,?,?)";
 		for(int i=0; i<10; i++) {
