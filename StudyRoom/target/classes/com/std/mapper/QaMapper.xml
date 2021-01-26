@@ -28,7 +28,7 @@
 		from
 			(
 			SELECT
-				/*+INDEX_DESC(QuestionAndAnswer pk_question)*/
+				/*+INDEX_DESC(QuestionAndAnswer PK_QuestionAndAnswer)*/
 				rownum rn,questionNo,title,content,writer,writedate,updatedate,qnacnt,
     	status,pub,password,userid 
 			FROM 

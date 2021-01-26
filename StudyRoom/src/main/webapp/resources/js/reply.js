@@ -296,11 +296,11 @@ var QaReplyService = (function(){
 		});
 	}
 	
-	function remove(rno , callback, error){ // 3개인데 지금 콜백으로
+	function remove(rno ,replyer, callback, error){ // 3개인데 지금 콜백으로
 		$.ajax({
 			type : 'delete',
 			url : '/qnaRe/' + rno,
-			data : JSON.stringify({rno:rno}),
+			data : JSON.stringify({rno:rno, replyer:replyer}),
 			contentType : "application/json; charset=utf-8",
 			success : function(deleteResult, status, xhr) {
 				console.log("성공 접근");
