@@ -21,8 +21,8 @@
 
 	.wrap{
 		width : 800px;
-		margin: auto;
-		float: left;
+		margin-left: 670px;
+		float: none;
 	}
 	
 	.id_input_re_1{
@@ -514,7 +514,7 @@
 
 <div class="mileage_wrap">
 <div class="mileage_name">마일리지 정보</div>
-<div class="mileage_input_box"><input type="text" class="mileage_input" name="mileage" value='<c:out value="${vo.mileage }"></c:out>' ></div>
+<div class="mileage_input_box"><input type="text" class="mileage_input" name="mileage" value='<c:out value="${vo.mileage }"></c:out>' readonly="readonly"></div>
 </div>
 
 <div class="companynumber_wrap" >
@@ -566,7 +566,8 @@ var emailnumCheck = false;        // 이메일 인증번호 확인
 		var formObj = $("#update");
 		var userid = $(".userid_input").val();
 		$("button[data-oper='cancel']").on("click", function(e) {
-			history.go(-1);
+			location.href="/main/mainpage";
+			
 		});
 
 		var formObj = $("#update");
