@@ -32,7 +32,7 @@
 				rownum rn,questionNo,title,content,writer,writedate,updatedate,qnacnt,
     	status,pub,password,userid 
 			FROM 
-				QuestionAndAnswer 
+				questionAndAnswer 
 			WHERE
 			]]>
 			<include refid="criteria"></include>
