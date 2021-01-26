@@ -112,12 +112,7 @@ color: black;
        			location.href="/mypage/myinfo?userid="+userid;
       		} */
       		
-      		var csrfHeaderName ="${_csrf.headerName}";
-      	  	var csrfTokenValue="${_csrf.token}";
-      	  	//Ajax spring security header	== ajax 를 이용한 csrf 토큰 전송
-      	  	$(document).ajaxSend(function(e, xhr, options){
-      	  		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-      	  	});
+      		
       		$("#myinfo").on("click", function() {
       		
       			$(".form").submit();
