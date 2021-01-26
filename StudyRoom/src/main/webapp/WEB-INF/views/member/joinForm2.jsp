@@ -272,7 +272,7 @@
 .insert_button{
 	width: 30%;
     height: 60px;
-    background-color: #6AAFE6;
+    background-color:  #8a8de0;
     font-size: 40px;
     font-weight: 900;
     color: white;
@@ -282,7 +282,7 @@
 .reset_button{
 	width: 30%;
     height: 60px;
-    background-color: green;
+    background-color:  #de9693;
     font-size: 40px;
     font-weight: 900;
     color: white;
@@ -292,7 +292,7 @@
 .return_button{
 	width: 30%;
     height: 60px;
-    background-color: red;
+    background-color:  #82ca98;
     font-size: 40px;
     font-weight: 900;
     color: white;
@@ -370,14 +370,14 @@
 
 <div class="password_wrap">
 <div class="password_name">비밀번호</div>
-<div class="password_input_box"><input type="text" class="password_input" name="password">
+<div class="password_input_box"><input type="password" class="password_input" name="password">
 </div>
 <span class="pw_ck">비밀번호를 입력해주세요</span>
 </div>
 <div class="passwordCk_wrap">
 <div class="passwordCk_name">비밀번호 확인</div>
 <div class="passwordCk_input_box">
-<input class="passwordCk_input">
+<input class="passwordCk_input" type="password">
 </div>
 	<span class="pwCk_ck">비밀번호 확인을 입력해주세요</span>
 	<span class="passwordCk_input_re_1">비밀번호가 일치합니다.</span>

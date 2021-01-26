@@ -371,22 +371,13 @@
 .update_button{
 	width: 30%;
     height: 60px;
-    background-color: #6AAFE6;
+    background-color: #8a8de0;
     font-size: 40px;
     font-weight: 900;
     color: white;
     float: left;
 }
-/* 리셋하기 버튼 */
-.remove_button{
-	width: 30%;
-    height: 60px;
-    background-color: green;
-    font-size: 40px;
-    font-weight: 900;
-    color: white;
-    float: none;
-}
+
 /* 취소하기 버튼 */
 .return_button{
 	width: 30%;
@@ -543,7 +534,6 @@
 
 
 	<button type="submit" class="update_button" data-oper='modify'>수정완료</button>
-	<button type="submit" class="remove_button" data-oper='remove'>탈퇴하기</button>
 	<button type="button" class="return_button" data-oper='cancel'>취소하기</button>
 
 

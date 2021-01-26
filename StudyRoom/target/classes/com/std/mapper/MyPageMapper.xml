@@ -88,10 +88,23 @@
 	<!-- 회원정보 수정하기 -->
 	<update id="updateinfo" >
 		update member set 
-		password = #{password},
-		phone = #{phone},
-		updatedate = sysdate where userid = #{userid}
+		password = #{password,jdbcType=VARCHAR},
+		phone = #{phone,jdbcType=VARCHAR},
+		updatedate = sysdate where userid = #{userid,jdbcType=VARCHAR}
 		
 	</update>
+	
+	<!-- 아이디 중복검사 -->
+<select id="idCheck" resultType="int">
+	select count(*) from member where userid = #{userid} 
+</select>
+	
+	
+	
+	
+	
+	
+	
+	
 
 </mapper>
