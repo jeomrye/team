@@ -15,8 +15,8 @@
 
 	.wrap{
 		width : 800px;
-		margin: auto;
-		float: left;
+		margin-left: 670px;
+		float: none;
 	}
 	
 	.id_input_re_1{

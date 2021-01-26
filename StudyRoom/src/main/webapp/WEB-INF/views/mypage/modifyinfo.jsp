@@ -21,8 +21,8 @@
 
 	.wrap{
 		width : 800px;
-		margin: auto;
-		float: left;
+		margin-left: 670px;
+		float: none;
 	}
 	
 	.id_input_re_1{
@@ -514,7 +514,7 @@
 
 <div class="mileage_wrap">
 <div class="mileage_name">마일리지 정보</div>
-<div class="mileage_input_box"><input type="text" class="mileage_input" name="mileage" value='<c:out value="${vo.mileage }"></c:out>' ></div>
+<div class="mileage_input_box"><input type="text" class="mileage_input" name="mileage" value='<c:out value="${vo.mileage }"></c:out>' readonly="readonly"></div>
 </div>
 
 <div class="companynumber_wrap" >

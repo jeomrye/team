@@ -69,18 +69,18 @@ color: black;
             <ul class="nav navbar-top-links navbar-right">
 			<!-- 각 리스트로 -->
 
-               <li><a href="/notice/list"><h4>공지사항</h4></a></li>
-               <li><a href="/free/list"><h4>자유게시판</h4></a></li>
-               <li><a href="/place/list"><h4>장소</h4></a></li>
-               <li><a href="/notice/list"><h4>쿠폰구매하기</h4></a></li>
-               <li><a href="/notice/list"><h4>Q&A</h4></a></li>
+               <li><a class="bar" href="/notice/list"><h4>공지사항</h4></a></li>
+               <li><a class="bar" href="/free/list"><h4>자유게시판</h4></a></li>
+               <li><a class="bar" href="/place/list"><h4>장소</h4></a></li>
+               <li><a class="bar" href="/notice/list"><h4>쿠폰구매하기</h4></a></li>
+               <li><a class="bar" href="/notice/list"><h4>Q&A</h4></a></li>
                
                 <sec:authorize access="isAuthenticated()">
                <sec:authorize access="hasAnyRole('ROLE_MANAGER','ROLE_USER')">
-               <li><a class="myinfo"><h4>마이페이지</h4></a></li>
+               <li><a class="bar" id="myinfo" href="#"><h4>마이페이지</h4></a></li>
                </sec:authorize>
                <sec:authorize access="hasRole('ROLE_ADMIN')">
-               <li><a href="/mypage/infoList" ><h4>마이페이지</h4></a></li>
+               <li><a class="bar" href="/mypage/infoList" ><h4>마이페이지</h4></a></li>
                </sec:authorize>
 
                <li><a class="bar" href="/customLogout"><h4>로그아웃</h4></a></li>
@@ -117,7 +117,7 @@ color: black;
       	  	$(document).ajaxSend(function(e, xhr, options){
       	  		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
       	  	});
-      		$(".myinfo").on("click", function() {
+      		$("#myinfo").on("click", function() {
       		
       			$(".form").submit();
 			});

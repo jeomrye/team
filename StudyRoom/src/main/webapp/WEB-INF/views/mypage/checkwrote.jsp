@@ -10,6 +10,14 @@
 <meta charset="UTF-8">
 <title>내가 쓴 댓글 확인</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+  table, th, td {
+    border: 1px solid #bcbcbc;
+  }
+  table {
+    width: 100%;
+  }
+</style>
 </head>
 <body>
 <div class="row">
@@ -44,7 +52,7 @@
 						
 							<td><c:out value="${rp.rno }"></c:out></td>
 							<td><c:out value="${rp.reply }"></c:out></td>
-							<td><c:out value="${rp.score }"></c:out></td>
+							<td><c:out value="50"></c:out></td>
 							<td><c:out value="${rp.replyer }"></c:out></td>
 							<td><c:out value="${rp.replydate }"></c:out></td>
 							<td><c:out value="${rp.updatedate }"></c:out></td>
