@@ -31,17 +31,18 @@ public class QaReplyController {
 	private QaReplyService replyservice;
 	
 	@PreAuthorize("isAuthenticated()")
-	@PostMapping(value = "/new",consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
+	@PostMapping(value="/new",consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> create(@RequestBody QaReplyVO vo){
 		log.info("QaReplyVO: " + vo);
 		int insertCount = replyservice.register(vo);
 		log.info("Reply INSERT COUNT: " + insertCount);
 		return insertCount == 1 ? 
-				new ResponseEntity<>("success", HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);//500
+				new ResponseEntity<String>("success", HttpStatus.OK) : new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);//500
 		//삼항 연산자 처리
 	}
 	
-	@GetMapping(value = "/pages/{questionNo}/{page}",produces = {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
+	@GetMapping(value = "/pages/{questionNo}/{page}",produces = {MediaType.APPLICATION_XML_VALUE,
+																MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<QaReplyPageDTO> getList(
 			@PathVariable("page") int page,@PathVariable("questionNo") Long questionNo) {
 		Criteria cri = new Criteria(page,10);

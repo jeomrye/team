@@ -132,20 +132,21 @@
 		</div>
 <!-- 		/.modal -->
 
+<%@ include file="../includes/footer.jsp"%>
 
 			<script type="text/javascript" src="/resources/js/reply.js"></script>
 			<script type="text/javascript">
 			console.log("=================");
 			console.log("JS TEST");
 			
-			var questionNoValue = '<c:out value= "${qna.questionNo}"/>';
+			var questionNoValue = '<c:out value="${qna.questionNo}"/>';
 			var replyUL = $(".chat");
 			
 			showList(1);
 			
 			function showList(page){
 				console.log("show list " + page);
-				QaReplyService.getList({questionNo:questionNoValue,page: page||1}, function(replyCnt, list){
+				QaReplyService.getList({questionNo:questionNoValue, page:page||1}, function(replyCnt, list){
 					
 					console.log("replyCnt: " + replyCnt);
 					console.log("list: " + list);
@@ -259,13 +260,12 @@
 	//댓글 등록 및 목록 갱신
 	modalRegisterBtn.on("click",function(e){
 		var reply = {
-				reply: modalInputReply.val(),
-				replyer: modalInputReplyer.val(),
-				questionNo: questionNoValue
+				reply : modalInputReply.val(),
+				replyer : modalInputReplyer.val(),
+				questionNo : questionNoValue
 		};
 		QaReplyService.add(reply, function(result){
 			alert(result);
-			
 			modal.find("input").val("");
 			modal.modal("hide");
 			
@@ -378,4 +378,3 @@ $(document).ready(function(){
 });
 </script>
 
-<%@ include file="../includes/footer.jsp"%>
