@@ -234,13 +234,6 @@ select {
 	border: 1px solid #999;
 	border-radius: 0px;
 }
-.main{
-	padding-left: 28.3%;
-	padding-right:26.5%; 
-	padding-top:27.7%;
-/* 	padding-bottom : 43.5%;  */
-	max-width:100%; 
-	height:550px;
-}
+
 </style>
 <%@ include file="../includes/footer.jsp"%>
