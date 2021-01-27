@@ -78,7 +78,7 @@ color: black;
                
                 <sec:authorize access="isAuthenticated()">
                <sec:authorize access="hasAnyRole('ROLE_MANAGER','ROLE_USER')">
-               <li><a class="bar" href="#" id="myinfo"><h4>마이페이지</h4></a></li>
+               <li><a class="bar" href="/mypage/mypagelogin" id="myinfo"><h4>마이페이지</h4></a></li>
                </sec:authorize>
                <sec:authorize access="hasRole('ROLE_ADMIN')">
                <li><a class="bar" href="/mypage/infoList" ><h4>마이페이지</h4></a></li>
@@ -96,27 +96,8 @@ color: black;
 
         </nav>
    
-   	
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
            
-
-      	<script type="text/javascript">
-      	
-      		/* function myinfo(){
-      				var userid =null;
-      			<sec:authorize access="isAuthenticated()">
-      			userid ='<sec:authentication property="principal.username"/>';
-      			</sec:authorize>
-      			console.log(userid);
-       			location.href="/mypage/myinfo?userid="+userid;
-      		} */
-      		
-      
-      		
-      		
-      	
-      	</script>
 
         
 

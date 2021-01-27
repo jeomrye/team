@@ -154,7 +154,7 @@
 			<!-- 주소 -->
 			<div class="form-group">
 			<label>주소</label><input class="form-control" name='address' value="<c:out value='${place.address}'/>" readonly="readonly">
-			<div><a href="https://map.kakao.com/link/search/${place.address }" target="_blank">지도로 알아보기(Click)</a></div>
+<%-- 			<div><a href="https://map.kakao.com/link/search/${place.address }" target="_blank">지도로 알아보기(Click)</a></div> --%>
 			<div id="map" style="width:100%;height:400px;"></div>
 			<div style="text-align: center;"><br>
 			<button id="mapbtn" onclick="setZoomable(false)">지도 확대/축소 끄기</button>
@@ -368,6 +368,8 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
  		var address = '<c:out value="${place.address}"/>';
         var myAddress = [address];
  		console.log("address : "+myAddress);
+
+ 		
         function myMarker(number, address) {
             // 주소로 좌표를 검색합니다
             geocoder
@@ -389,7 +391,21 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 
                                     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
                                     map.setCenter(coords);
+                                    console.log(coords);
+                                    var iwContent = '<div style="padding:5px;"><c:out value="${place.title}"/><br><a href="https://map.kakao.com/link/map/<c:out value="${place.title}"/>,'+coords.Ma+','+coords.La+'" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/'+address+','+coords.Ma+','+coords.La+'" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+                                    iwPosition = new kakao.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
+
+                                // 인포윈도우를 생성합니다
+                                var infowindow = new kakao.maps.InfoWindow({
+                                    position : iwPosition, 
+                                    content : iwContent 
+                                });
+                                  
+                                // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+                                infowindow.open(map, marker); 
                                 }
+                            	
+                                
                             });
         }
  
