@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,15 +57,9 @@ public class UserController {
 	      vo.setPassword(enPassword);
 	      service.register(vo);
 	      //권한주기
-	      if(vo.getMemberno() == 1) {
 	         String ROLE_USER ="ROLE_USER";
 	         avo.setAuth(ROLE_USER);
 	         service.auth(avo);
-	      } else if(vo.getMemberno() == 2) {
-	         String ROLE_MANAGER = "ROLE_MANAGER";
-	         avo.setAuth(ROLE_MANAGER);
-	         service.auth(avo);
-	      }
 	      
 	      log.info("insert Service 성공");
 	      
@@ -85,15 +80,9 @@ public class UserController {
 	      vo.setPassword(enPassword);
 	      service.register(vo);
 	      //권한주기
-	      if(vo.getMemberno() == 1) {
-	         String ROLE_USER ="ROLE_USER";
-	         avo.setAuth(ROLE_USER);
-	         service.auth(avo);
-	      } else if(vo.getMemberno() == 2) {
 	         String ROLE_MANAGER = "ROLE_MANAGER";
 	         avo.setAuth(ROLE_MANAGER);
 	         service.auth(avo);
-	      }
 	      
 	      log.info("insert Service 성공");
 	      

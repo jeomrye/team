@@ -580,8 +580,7 @@
 		});
 	
 		$(".return_button").click(function() {
-			$("#insert").attr("action","/membeer/joinForm1");
-			$("#insert").submit();
+			location.href="/member/insertMem";
 		});
 	});
 	

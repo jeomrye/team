@@ -14,8 +14,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.std.Mapper.MypageTest;
-
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
