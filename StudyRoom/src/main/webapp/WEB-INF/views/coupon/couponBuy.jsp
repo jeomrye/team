@@ -3,7 +3,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<style>
+#buy{
+padding-top: 15%;
+padding-left: 40%;
+}
+#cou{
+margin-left: 10%;
+}
 
+</style>
 <%@include file="../includes/header.jsp" %>
 
 
@@ -19,12 +28,12 @@
 
 </form>
 
-<h1>쿠폰을 구매하시겠습니까?</h1>
-<button type="submit" data-oper='submit' class="btn btn-primary">구입</button>
-<button type="submit" data-oper='return' class="btn btn-default">돌아가기</button>
+<div id="buy">
+<h1>쿠폰을 구매하시겠습니까? </h1>
+<button type="submit" id="cou" data-oper='submit' class="btn btn-primary">구입</button>
+<button type="submit" id="return" data-oper='return' class="btn btn-default">돌아가기</button>
+</div>
 
-<input type="number" class="s" value='<c:out value="${coupon1.couponPrice}"/>'>
-<input type="number" class="m" value='<c:out value="${member.mileage}"/>'>
 
 
 <%@include file="../includes/footer.jsp" %>
