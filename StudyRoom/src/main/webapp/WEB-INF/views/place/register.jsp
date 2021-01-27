@@ -175,7 +175,7 @@ function chkword(obj, maxByte){
     for(var i=0; i<strLen; i++){
        oneChar = strValue.charAt(i);
        if(escape(oneChar).length >4){
-          totalByte +=2;
+          totalByte +=3;
        } else {
           totalByte++;
     }
