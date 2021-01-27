@@ -191,6 +191,8 @@ public class UserController {
     public String findId(HttpServletResponse response, @RequestParam("email") String email,Model model) throws Exception{
     	log.info("아이디 찾기 결과");
     	model.addAttribute("id",service.findId(response, email));
+    	
+    	
     	return "/member/findId";
     }
     

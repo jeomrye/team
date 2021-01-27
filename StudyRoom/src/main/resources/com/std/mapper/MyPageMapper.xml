@@ -57,11 +57,14 @@
   
     
   <!-- 쿠폰정보확인 -->
-  <select id="getCoupon" resultType="com.std.domain.CouponVO">
+  <select id="getCoupon" resultType="com.std.domain.CouponDetailVO">
   
-    select * from coupon where userid = #{userid,jdbcType=VARCHAR}
+    select * from coupon_detail where userid = #{userid,jdbcType=VARCHAR}
      
   </select>
+
+
+
 
 
   <!-- 내가 쓴 댓글 확인 -->
@@ -99,7 +102,15 @@
 	select count(*) from member where userid = #{userid} 
 </select>
 	
+	<!-- 쿠폰사용여부 조회하기 -->
+	<select id="checkusecoupon" resultType="com.std.domain.CouponDetailVO">
+	select couponuse from coupon_detail where coup = #{coup,jdbcType=NUMERIC}
+	</select>
 	
+	<!-- 쿠폰사용 등록하기 -->
+	<update id="usecoupon">
+		update coupon_detail set couponuse = 1 where coup= #{coup}
+	</update>
 	
 	
 	
