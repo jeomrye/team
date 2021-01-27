@@ -112,11 +112,7 @@ color: black;
        			location.href="/mypage/myinfo?userid="+userid;
       		} */
       		
-      		
-      		$("#myinfo").on("click", function() {
-      		
-      			$(".form").submit();
-			});
+      
       		
       		
       	

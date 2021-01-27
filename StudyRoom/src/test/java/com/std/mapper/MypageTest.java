@@ -1,4 +1,4 @@
-package com.std.Mapper;
+package com.std.mapper;
 
 
 
@@ -47,7 +47,7 @@ public class MypageTest {
 		vo.setPhone("01098765432");
 		
 		
-		int count = mapper.updateinfo(vo);
+		String count = mapper.updateinfo(vo);
 		log.info("Update Count:" + count);
 	}
 	
