@@ -346,7 +346,7 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 <!-- 지도 API -->
  <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=63fb6aced8c696fa4afe90f914194f7a&libraries=services"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=63fb6aced8c696fa4afe90f914194f7a&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ee625889bb79159eb35ac638afa725f1&libraries=services,clusterer,drawing"></script>
     <script>    
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
         mapOption = {
