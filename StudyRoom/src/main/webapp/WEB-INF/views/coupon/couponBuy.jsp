@@ -24,7 +24,7 @@ margin-left: 10%;
     <input type='hidden' id='e' name='couponprice' value='<c:out value="${coupon1.couponPrice}"/>'>
     <input type='hidden' id='r' name='mileage' value='<c:out value="${member.mileage}"/>'>
  	<input type='hidden' class="userid" id="userid" name="userid" value='<sec:authentication property="principal.username"/>'>
-    <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+    <input type="hidden" class='tk' name="${_csrf.parameterName }" value="${_csrf.token }"/>
 
 </form>
 
@@ -80,7 +80,13 @@ $(document).ready(function(e){
 		console.log(operation);
 		
 		if(operation === 'return'){
-			formObj.attr("action", "/main/mainpage").attr("method", "get");
+			formObj.find(".userid").remove();
+			formObj.find(".q").remove();
+			formObj.find(".w").remove();
+			formObj.find("#e").remove();
+			formObj.find("#r").remove();
+			formObj.find(".tk").remove();
+			formObj.attr("action", "/main/mainpage").attr("method", "get").submit();
 			
 		}else if(operation === 'submit'){
 			
@@ -100,7 +106,7 @@ $(document).ready(function(e){
 		}
 			
 		}
-		formObj.submit();
+		
 	});
 	
 
