@@ -14,6 +14,7 @@ public class CouponDetailVO {
 	 private int couponPrice;
 	 private int couponuse;
 	 private Date couponbuydate;
+	 private int coup;
 	 
 	 private List<AuthVO> authList;
 	 
