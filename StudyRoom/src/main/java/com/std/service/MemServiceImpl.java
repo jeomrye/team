@@ -111,7 +111,7 @@ public class MemServiceImpl implements MemService {
 				String hostSMTPpwd = "";	//이메일 비밀번호
 
 				// 보내는 사람 EMail, 제목, 내용
-				String fromEmail = "clcko30@naver.com";
+				String fromEmail = ""; //이메일 아이디
 				String fromName = "Study Room Finding Service:SRFS";
 				String subject = "";
 				String msg = "";
