@@ -99,7 +99,7 @@
 					<div class="modal-body">
 						<div class="form-group">
 						<label>답변 내용</label>
-						<input class="form-control" name='reply' value='New Reply!!!!'>
+						<input class="form-control" name='reply' value='New Reply!!!!' onkeyup="chkword(this, 4000)">
 						</div>
 						<div class="form-group">
 						<label>답변 작성자</label>
@@ -113,7 +113,7 @@
 				<div class="modal-footer">
 				<sec:authentication property="principal" var="pinfo"/> 	<!-- 조회 화면에서 댓글 추가버튼 -->
 				<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')">
-				<c:if test="${pinfo.username eq qna.writer or pinfo.authorities eq '[ROLE_ADMIN]' }"> 
+				<c:if test="${pinfo.username eq qna.writer or pinfo.authorities eq '[ROLE_ADMIN]' or pinfo.authorities eq '[ROLE_MANAGER]' }"> 
 					<button id='modalModBtn' type="button" class="btn btn-warning">수정</button>
 					<button id='modalRemoveBtn' type="button" class="btn btn-danger">삭제</button>
 						</c:if>
@@ -360,6 +360,40 @@
 	});
 	
 	</script>
+	
+	<script>
+function chkword(obj, maxByte){
+    var strValue = obj.value;
+    var strLen = strValue.length;
+    var totalByte = 0;
+    var len=0;
+    var oneChar="";
+    var str2="";
+    
+    for(var i=0; i<strLen; i++){
+       oneChar = strValue.charAt(i);
+       if(escape(oneChar).length >4){
+          totalByte +=3;
+       } else {
+          totalByte++;
+    }
+    
+    //입력한 문자 길이보다 넘치면 잘라내기 위해 저장
+    if(totalByte <= maxByte){
+       len = i+1;
+    }
+ }
+ 
+ // 넘어가는 글자는 자른다.
+ if(totalByte > maxByte){
+    alert(maxByte+"자를 초과 입력 할 수 없습니다.");
+    str2= strValue.substr(0, len);
+    obj.value = str2;
+    chkword(obj, 4000);
+ }
+}
+</script>
+	
 
 <script type="text/javascript">
 $(document).ready(function(){
