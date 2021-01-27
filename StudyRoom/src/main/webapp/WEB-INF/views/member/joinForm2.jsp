@@ -10,15 +10,16 @@
 
 <style>
 	.wrapper{
-		width: 1900px;	
+		width: 100vw;
+		height: 100vh;	
+		
 	}
 
 	.wrap{
-		width : 800px;
-		margin-left: 670px;
+		width : 50%;
+		margin-left: 25%;
 		float: none;
-	}
-	
+	}	
 	.id_input_re_1{
 		color: green;
 		display: none;
@@ -591,7 +592,7 @@
 	        if(useridCheck&&useridCkCheck&&membernoCheck&&usernameCheck&&passwordCheck&&passwordCkCheck&&passwordDCkCheck&&emailCheck&&emailnumCheck&&phoneCheck&&genderCheck&&companynumberCheck ){
 	        	
 	        		
-	        	
+	        	alert("회원가입이 완료되었습니다");
 	        	$("#insert").attr("action","/member/joinForm2");
 				$("#insert").submit();
 	        }
