@@ -328,8 +328,11 @@ aria-labelledby='myModalLabel' aria-hidden='true'>
 				<input class='form-control' name='replyDate' value="">
 			</div>
 		<div class="modal-footer">
+
+
 			<button type="button" id='modalModBtn' class="btn btn-warning">수정</button>
 			<button type="button" id='modalRemoveBtn' class="btn btn-danger">삭제</button>
+
 			<button type="button" id='modalRegisterBtn' class="btn btn-primary">등록</button>
 			<button type="button" id='modalCloseBtn' class="btn btn-default" data-dismiss="modal">닫기</button>
 		</div>

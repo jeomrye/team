@@ -1,4 +1,4 @@
-package com.std.Mapper;
+package com.std.mapper;
 
 import static org.junit.Assert.*;
 

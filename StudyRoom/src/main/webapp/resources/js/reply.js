@@ -255,8 +255,7 @@ var FreeReplyService = (function(){
 		};
 })();
 
-console.log("Reply Module.........");
-
+//Q&A 게시판 댓글
 var QaReplyService = (function(){
 
 	function add(reply, callback, error){
@@ -298,21 +297,20 @@ var QaReplyService = (function(){
 		});
 	}
 	
-	function remove(rno, callback, error){ // 3개인데 지금 콜백으로
+	function remove(rno, replyer, callback, error){ 
 		$.ajax({
 			type : 'delete',
 			url : '/qnaRe/' + rno,
-			data : JSON.stringify({rno:rno}),
+			data : JSON.stringify({rno:rno},{replyer:replyer}),
 			contentType : "application/json; charset=utf-8",
 			success : function(deleteResult, status, xhr) {
-				console.log("성공 접근");
 				console.log(deleteResult);
 				console.log(status);
 				console.log(xhr);
-				console.log("성공 접근");
+				console.log("댓글삭제성공");
 				
 				if(callback){
-					// 콜백으로 데이터를 보내줘야
+					
 					callback(deleteResult);
 				}
 			},
@@ -329,7 +327,7 @@ var QaReplyService = (function(){
 	console.log("RNO : "+reply.rno);
 		$.ajax({
 			type : 'put',
-			url : '/qnaRe/' + reply.rno,
+			url : '/qnaRe/update/' + reply.rno,
 			data : JSON.stringify(reply),
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr) {

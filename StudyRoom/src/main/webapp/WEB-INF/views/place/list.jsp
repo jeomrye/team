@@ -24,7 +24,7 @@
 					<thead>
 					<tr>
 						<th style="width: 10%">번호</th>
-						<th style="width: 40%">제목</th>
+						<th style="width: 40%">상호명</th>
 						<th style="width: 10%">작성자</th>
 						<th style="width: 10%">작성일</th>
 						<th style="width: 10%">수정일</th>
