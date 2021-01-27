@@ -4,7 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@include file="../includes/header.jsp" %>
-<sec:authentication property="principal" var="pinfo"/>
 
 
 
@@ -153,9 +152,7 @@ var formObj = $("form");
   	});
 	
 	$("input[type='button']").on("click", function(e){
-// 		<input type='hidden' id='couponNumber' name='couponNumber' value='<c:out value="${coupon.couponNumber}"/>'>
-// 		<input type="hidden" class="userid" name="userid" value="<sec:authentication property="principal.username" />">
-// 		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+
 		operBuy.attr("action", "/coupon/couponBuy").attr("method", "post").submit();
 		
 		//ajax 끝		
@@ -192,7 +189,7 @@ var formObj = $("form");
 					var fileCallPath = encodeURIComponent(attach.uploadPath+"/s_"+attach.uuid+"_"+attach.fileName);
 					
 					str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"'><div>";
-					str += "<img src='/display?fileName="+fileCallPath+"'>";
+					str += "<img src='/coupon/display?fileName="+fileCallPath+"'>";
 					str += "</div>";
 					str += "</li>";
 				}else{
@@ -220,7 +217,7 @@ var formObj = $("form");
 			showImage(path.replace(new RegExp(/\\/g), "/"));
 		}else{
 			//download
-			self.location = "/download?fileName="+path
+			self.location = "/coupon/download?fileName="+path
 		}
 	});
 	
@@ -230,7 +227,7 @@ var formObj = $("form");
 		
 		$(".bigPictureWrapper").css("display", "flex").show();
 		
-		$(".bigPicture").html("<img src='/display?fileName="+fileCallPath+"'>").animate({width:'100%', height:'100%'}, 1000);
+		$(".bigPicture").html("<img src='/coupon/display?fileName="+fileCallPath+"'>").animate({width:'100%', height:'100%'}, 1000);
 		
 		
 	}
