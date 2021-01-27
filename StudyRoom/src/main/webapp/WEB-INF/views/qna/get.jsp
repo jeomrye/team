@@ -57,11 +57,8 @@
 
 						<div class="panel-heading">
 							<i class="fa fa-comments fa-fw"></i> Q&A 답변
-							<sec:authentication property="principal" var="pinfo"/> 	<!-- 조회 화면에서 댓글 추가버튼 -->
-							<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')">
-							<c:if test="${pinfo.username eq qna.writer or pinfo.authorities eq '[ROLE_ADMIN]' }"> 
+							<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')">
 							<button id="addReplyBtn" class='btn btn-primary btn-xs pull-right'>Q&A 답변달기</button>
-							</c:if>
 							</sec:authorize>
 						</div>
 						
@@ -96,20 +93,20 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">댓글창</h4>
+						<h4 class="modal-title" id="myModalLabel">답변</h4>
 					</div>
 					
 					<div class="modal-body">
 						<div class="form-group">
-						<label>댓글</label>
+						<label>답변 내용</label>
 						<input class="form-control" name='reply' value='New Reply!!!!'>
 						</div>
 						<div class="form-group">
-						<label>댓글 작성자</label>
+						<label>답변 작성자</label>
 						<input class="form-control" name='replyer' value='replyer' readonly="readonly">
 						</div>
 						<div class="form-group">
-						<label>댓글 작성일</label>
+						<label>답변 작성일</label>
 						<input class="form-control" name='replyDate' value=''>
 						</div>
 					</div>

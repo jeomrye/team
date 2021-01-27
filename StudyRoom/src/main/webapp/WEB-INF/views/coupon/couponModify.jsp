@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@include file="../includes/header.jsp" %>
 
          <div class="panel-heading">
@@ -128,6 +129,12 @@ width:600px;
 <script type="text/javascript">
 $(document).ready(function(){
 	
+	var csrfHeaderName ="${_csrf.headerName}";
+  	var csrfTokenValue="${_csrf.token}";
+  	//Ajax spring security header	== ajax 를 이용한 csrf 토큰 전송
+  	$(document).ajaxSend(function(e, xhr, options){
+  		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+  	});
 	
 	
 	var formObj = $("form");
@@ -193,7 +200,7 @@ $(document).ready(function(){
 					str += "<span> "+attach.fileName+"</span>";
 					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' ";
 					str += "class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-					str += "<img src='/display?fileName="+fileCallPath+"'>";
+					str += "<img src='/coupon/display?fileName="+fileCallPath+"'>";
 					str += "</div>";
 					str += "</li>";
 				}else{
@@ -255,7 +262,7 @@ $(document).ready(function(){
 		}
 		
 		$.ajax({
-			url : '/uploadAjaxAction',
+			url : '/coupon/uploadAjaxAction',
 			processData : false,
 			contentType : false,
 			data : formData,
@@ -287,7 +294,7 @@ $(document).ready(function(){
 					str += "<span>" + obj.fileName + "</span>";
 					str += "<button type='button' data-file=\'"+fileCallPath+"\' ";
 					str += "data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-					str += "<img src='/display?fileName="+fileCallPath+"'>";
+					str += "<img src='/coupon/display?fileName="+fileCallPath+"'>";
 					str += "</div>";
 					str += "</li>";
 				}else{

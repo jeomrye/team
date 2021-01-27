@@ -139,7 +139,7 @@
 </select>
 
 <insert id="couponDetailInsert">
-	insert into coupon_detail(userid, couponnumber, couponName, couponPrice, couponuse, couponbuydate) values(#{userid}, #{couponnumber},#{couponName, jdbcType=VARCHAR},#{couponPrice},0,sysdate)
+	insert into coupon_detail(userid, couponnumber, couponName, couponPrice, couponuse, couponbuydate, coup) values(#{userid}, #{couponnumber},#{couponName, jdbcType=VARCHAR},#{couponPrice},0,sysdate, coup_seq.nextval)
 </insert>
 
 <select id="mileGet" resultType="com.std.domain.MemVO">
@@ -169,6 +169,7 @@
 <update id="mileage">
 	update member set mileage = #{mileage} where userid =#{userid}
 </update>
+
 
 <!-- <update id="finMileage"> -->
 <!-- update member set mileage = (mileage - coupon.couponprice) where userid = #{userid} -->
