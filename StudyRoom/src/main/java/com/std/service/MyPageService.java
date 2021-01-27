@@ -2,7 +2,7 @@ package com.std.service;
 
 import java.util.List;
 
-
+import com.std.domain.CouponDetailVO;
 import com.std.domain.CouponVO;
 import com.std.domain.Criteria;
 import com.std.domain.MemVO;
@@ -32,5 +32,9 @@ public interface MyPageService {
 	public void modifyinfo(MemVO vo);
 	//회원 정보 삭제
 	public void removeinfo(String userid);
+	
+	public CouponDetailVO checkusecoupon(int coup);
+	
+	public void usecoupon(int coup);
 	
 }

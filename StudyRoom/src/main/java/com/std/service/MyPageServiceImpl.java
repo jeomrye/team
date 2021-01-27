@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.std.domain.CouponDetailVO;
 import com.std.domain.CouponVO;
 import com.std.domain.Criteria;
 import com.std.domain.MemVO;
@@ -67,6 +68,18 @@ public class MyPageServiceImpl implements MyPageService {
 	public void removeinfo(String userid) {
 		log.info("remove"+userid);
 		mapper.deleteinfo(userid);
+	}
+
+	@Override
+	public CouponDetailVO checkusecoupon(int coup) {
+		log.info("couponcheck"+coup);
+		return mapper.checkusecoupon(coup);
+	}
+
+	@Override
+	public void usecoupon(int coup) {
+		mapper.usecoupon(coup);
+		
 	}
 
 	

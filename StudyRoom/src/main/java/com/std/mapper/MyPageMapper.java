@@ -4,6 +4,7 @@ package com.std.mapper;
 
 import java.util.List;
 
+import com.std.domain.CouponDetailVO;
 import com.std.domain.CouponVO;
 import com.std.domain.Criteria;
 import com.std.domain.MemVO;
@@ -33,5 +34,12 @@ public interface MyPageMapper {
 	public void deleteinfo(String userid);
 	
 	public void updateinfo(MemVO vo);
+	
+	public CouponDetailVO checkusecoupon(int coup);
+	
+	public void usecoupon(int coup);
+	
+	
+	
 	
 }
