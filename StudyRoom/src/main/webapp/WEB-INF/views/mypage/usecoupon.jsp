@@ -45,7 +45,7 @@
                                 </div>
                                 <span style="text-align:center; font-size: 15px; color: red;" id="result">${result }</span>
                             	<button type="submit" class="btn btn-lg btn-success btn-block">쿠폰사용등록하기</button>
-                       			<button type="submit" id="cancel" class="btn btn-lg btn-dark btn-block">취소</button>
+                       			<button type="submit" id="cancel" class="btn btn-lg btn-dark btn-block">메인으로 돌아가기</button>
                             </fieldset>
           
             
@@ -79,7 +79,7 @@
     	});
     	
 		$("#cancel").on("click", function() {
-			$("form").attr("action","/mypage/checkCoupon").submit();
+			$("form").attr("action","/main/mainpage").submit();
 			
 			/* $("form").find(".userid").remove(); 
 			$("form").find(".csrf").remove(); 
