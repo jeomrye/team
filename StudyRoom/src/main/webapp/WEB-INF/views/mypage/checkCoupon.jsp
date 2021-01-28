@@ -32,6 +32,7 @@
 							<th style="width: 10%">아이디</th>
 							<th style="width: 40%">넘버</th>
 							<th style="width: 10%">쿠폰이름</th>
+							<th style="width: 10%">시리얼넘버</th>
 							<th style="width: 10%">가격</th>
 							<th style="width: 10%">사용여부</th>
 							<th style="width: 10%">구매일자</th>
@@ -42,6 +43,7 @@
 							<td><c:out value="${ca.userid }"></c:out></td>
 							<td><c:out value="${ca.couponnumber }"></c:out></td>
 							<td><c:out value="${ca.couponName }"></c:out></td>
+							<td><c:out value="${ca.coup }"></c:out></td>
 							<td><c:out value="${ca.couponPrice }"></c:out></td>
 							<td><c:out value="${ca.couponuse }"></c:out></td>
 							<td><c:out value="${ca.couponbuydate }"></c:out></td>
@@ -50,36 +52,10 @@
 						</tr>
 					</c:forEach>
 				</table>
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">새로운 장소 등록!</h4>
-						</div>
-						<div class="modal-body">처리가 완료되었습니다.</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-						</div>
-						</div>
-					</div>
-				</div>			
+				
 				<script type="text/javascript">
 				
-				var placeResult = '<c:out value="${placeResult}"/>'; //register했을 때 등장
-				checkModal(placeResult);
 				
-				history.replaceState({},null,null);
-				
-				function checkModal(placeResult){
-					if(placeResult==='' || history.state){
-						return;
-					}
-					if(parseInt(placeResult) > 0){
-						$(".modal-body").html("새로운 게시글이 등록되었습니다.");
-					}
-					$("#myModal").modal("show");
-				}
 				
 				$("#regBtn").on("click",function(){ //Register New Place!버튼
 					$(".gocoup").submit();
