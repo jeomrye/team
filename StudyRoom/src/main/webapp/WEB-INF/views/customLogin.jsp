@@ -53,11 +53,15 @@
                                     <label>
                                         <input name="remember-me" type="checkbox">자동 로그인
                                     </label>
+                                    <span style="padding-left: 70px">
+                                    	<a href="/member/findId_form">아이디찾기</a>
+                                    	<a href="/member/findPw">비밀번호찾기</a>
+                                    </span>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a href="index.html" class="btn btn-lg btn-success btn-block">로그인</a>
+                                <a href="#" onclick="history.go(-1);" class="btn btn-lg btn-success btn-block">로그인</a>
                                 <!-- 회원가입페이지 이동 -->       
-                                <a href="/member/joinForm" class="btn btn-lg btn-info btn-block">회원가입</a>
+                                <a href="/member/insertMem" class="btn btn-lg btn-info btn-block">회원가입</a>
                             </fieldset>
                             <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
                         </form>

@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +22,7 @@ import com.std.service.FreeReplyService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-@RequestMapping("/replies/")
+@RequestMapping("/Freereplies/")
 @RestController
 @Log4j
 @AllArgsConstructor
@@ -47,13 +48,14 @@ public class FreeReplyController {
 		return new ResponseEntity<>(replyservice.getListPage(cri, fno), HttpStatus.OK);		
 	}
 	
+	
 	@GetMapping(value="/{rno}", produces = {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<FreeReplyVO> get(@PathVariable("rno") Long rno){
 		log.info("get : "+rno);
 		return new ResponseEntity<>(replyservice.get(rno),HttpStatus.OK);
 	}
-	
-	@PreAuthorize("principal.username ==#vo.replyer")
+
+	@PreAuthorize("(principal.username ==#vo.replyer) or hasRole('ROLE_ADMIN')")
 	@DeleteMapping(value="/{rno}")
 	public ResponseEntity<String> remove(@RequestBody FreeReplyVO vo, @PathVariable("rno") Long rno){
 		log.info("remove: "+rno);
@@ -62,7 +64,7 @@ public class FreeReplyController {
 			new ResponseEntity<>("success",HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@PreAuthorize("principal.username ==#vo.replyer")
+	@PreAuthorize("(principal.username ==#vo.replyer) or hasRole('ROLE_ADMIN')")
 	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH},value= "/{rno}",consumes = "application/json")
 	public ResponseEntity<String> modify(@RequestBody FreeReplyVO vo, @PathVariable("rno") Long rno){
 		

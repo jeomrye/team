@@ -1,12 +1,13 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     
-  		</div>
+	</div>
         <!-- /#page-wrapper -->
-
+     
     </div>
     <!-- /#wrapper -->
 
+<!-- 너 AJAX 가 아래 jquery 에서 사용하는건데 얘가 없는데 지금 먼저 불러서그럼 -->
     <!-- jQuery -->
     <script src="/resources/vendor/jquery/jquery.min.js"></script>
 
@@ -24,7 +25,7 @@
     <!-- Custom Theme JavaScript -->
     <script src="/resources/dist/js/sb-admin-2.js"></script>
 
-    <!--p.235 ::  Page-Level Demo Scripts - Tables - Use for reference -->
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
     $(document).ready(function() {
         $('#dataTables-example').DataTable({
@@ -40,3 +41,4 @@
 </body>
 
 </html>
+
