@@ -60,7 +60,7 @@ public class QaReplyController {
 		return new ResponseEntity<QaReplyVO>(replyservice.get(rno), HttpStatus.OK);
 	}
 	
-	@PreAuthorize("(principal.username ==#vo.replyer) or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("(principal.username ==#vo.replyer) or hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
 	@DeleteMapping(value = "/{rno}" , produces = { MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> remove(@RequestBody QaReplyVO vo,@PathVariable("rno") Long rno) {
 		log.info("remove: " + rno);
