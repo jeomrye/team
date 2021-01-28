@@ -117,7 +117,7 @@ width:600px;
 	<input class="form-control" name='couponupdateDate' value='<fmt:formatDate pattern="yyyy/MM/dd" value="${coupon.couponupdateDate}"/>' readonly='readnoly'>
 </div>
 
-<button type="submit" data-oper='modify' class="btn btn-default">수정.</button>
+<button type="submit" data-oper='modify' class="btn btn-default">수정</button>
 <button type="submit" data-oper='remove' class="btn btn-danger">삭제</button>
 <button type="submit" data-oper='list' class="btn btn-info">목록</button>
 </form>
