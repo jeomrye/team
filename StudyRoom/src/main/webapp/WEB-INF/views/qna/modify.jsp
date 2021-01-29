@@ -34,10 +34,10 @@
 			</div>
 			
 			<div class="form-group">
-				<label>RegDate</label><input class="form-control" name='writedate' value='<fmt:formatDate value="${qna.writedate }" pattern="yyyy-MM-dd" />' readonly="readonly">
+				<label>작성일</label><input class="form-control" name='writedate' value='<fmt:formatDate value="${qna.writedate }" pattern="yyyy-MM-dd" />' readonly="readonly">
 			</div>
 			<div class="form-group">
-				<label>UpDate Date</label><input class="form-control" name='updateDate' value='<fmt:formatDate value="${qna.updatedate }" pattern="yyyy-MM-dd" />' readonly="readonly">
+				<label>수정일</label><input class="form-control" name='updateDate' value='<fmt:formatDate value="${qna.updatedate }" pattern="yyyy-MM-dd" />' readonly="readonly">
 			</div>
 				<!-- 게시물의 작성자인 경우만 수정 삭제 -->
 			<sec:authentication property="principal" var="pinfo"/> 	<!-- 조회 화면에서 댓글 추가버튼 -->

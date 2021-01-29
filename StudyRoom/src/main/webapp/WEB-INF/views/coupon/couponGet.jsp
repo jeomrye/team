@@ -98,7 +98,7 @@ width:600px;
 </div>
 </div>
 <div class="form-group">
-<label>쿠폰 가격</label><input class="form-control" name='couponPrice' value='<fmt:formatNumber value="${coupon.couponPrice}" pattern="###,###,###"/>' readonly="readonly">
+<label>쿠폰 가격</label><input class="form-control" name='couponPrice' value='<fmt:formatNumber value="${coupon.couponPrice}"/>' readonly="readonly">
 </div>
 
 
