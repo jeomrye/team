@@ -30,14 +30,14 @@
 				<label>제목</label><input class="form-control" name='title' value='<c:out value="${qna.title }"/>'>
 			</div>
 			<div class="form-group">
-				<label>내용</label><textarea class="form-control" rows="3" name='content' ><c:out value="${qna.content }"/></textarea>
+				<label>내용</label><textarea class="form-control" rows="3" name='content' onkeyup="chkword(this, 4000)"><c:out value="${qna.content }"/></textarea>
 			</div>
 			
 			<div class="form-group">
-				<label>RegDate</label><input class="form-control" name='writedate' value='<fmt:formatDate value="${qna.writedate }" pattern="yyyy-MM-dd" />' readonly="readonly">
+				<label>작성일</label><input class="form-control" name='writedate' value='<fmt:formatDate value="${qna.writedate }" pattern="yyyy-MM-dd" />' readonly="readonly">
 			</div>
 			<div class="form-group">
-				<label>UpDate Date</label><input class="form-control" name='updateDate' value='<fmt:formatDate value="${qna.updatedate }" pattern="yyyy-MM-dd" />' readonly="readonly">
+				<label>수정일</label><input class="form-control" name='updateDate' value='<fmt:formatDate value="${qna.updatedate }" pattern="yyyy-MM-dd" />' readonly="readonly">
 			</div>
 				<!-- 게시물의 작성자인 경우만 수정 삭제 -->
 			<sec:authentication property="principal" var="pinfo"/> 	<!-- 조회 화면에서 댓글 추가버튼 -->
@@ -80,7 +80,40 @@ $(document).ready(function(){
       formObj.submit();
    });
    
-});         
+});
+</script>
+
+<script>
+function chkword(obj, maxByte){
+    var strValue = obj.value;
+    var strLen = strValue.length;
+    var totalByte = 0;
+    var len=0;
+    var oneChar="";
+    var str2="";
+    
+    for(var i=0; i<strLen; i++){
+       oneChar = strValue.charAt(i);
+       if(escape(oneChar).length >4){
+          totalByte +=3;
+       } else {
+          totalByte++;
+    }
+    
+    //입력한 문자 길이보다 넘치면 잘라내기 위해 저장
+    if(totalByte <= maxByte){
+       len = i+1;
+    }
+ }
+ 
+ // 넘어가는 글자는 자른다.
+ if(totalByte > maxByte){
+    alert(maxByte+"자를 초과 입력 할 수 없습니다.");
+    str2= strValue.substr(0, len);
+    obj.value = str2;
+    chkword(obj, 4000);
+ }
+}
 </script>
 
 <%@ include file="../includes/footer.jsp"%>

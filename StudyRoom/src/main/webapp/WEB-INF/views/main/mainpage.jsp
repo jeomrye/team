@@ -21,8 +21,8 @@
 
 				<input type="text" class="search-input" name="keyword"
 					onfocus="this.value=''"
-					value='지역/독서실이름 입력하세요<c:out value="${pageMaker.cri.keyword }"/>'>
-
+					value='지역/독서실이름 입력하세요<c:out value="${placePage.cri.keyword }"/>'>
+				<input type="hidden" name="type" value='TR'>
 				<button class="search-icon" onclick="searchToggle(this, event);">
 					<span></span>
 				</button>

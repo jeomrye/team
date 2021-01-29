@@ -3,7 +3,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<style>
+#buy{
+padding-top: 15%;
+padding-left: 40%;
+}
+#cou{
+margin-left: 10%;
+}
 
+</style>
 <%@include file="../includes/header.jsp" %>
 
 
@@ -15,16 +24,16 @@
     <input type='hidden' id='e' name='couponprice' value='<c:out value="${coupon1.couponPrice}"/>'>
     <input type='hidden' id='r' name='mileage' value='<c:out value="${member.mileage}"/>'>
  	<input type='hidden' class="userid" id="userid" name="userid" value='<sec:authentication property="principal.username"/>'>
-    <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+    <input type="hidden" class='tk' name="${_csrf.parameterName }" value="${_csrf.token }"/>
 
 </form>
 
-<h1>쿠폰을 구매하시겠습니까?</h1>
-<button type="submit" data-oper='submit' class="btn btn-primary">구입</button>
-<button type="submit" data-oper='return' class="btn btn-default">돌아가기</button>
+<div id="buy">
+<h1>쿠폰을 구매하시겠습니까? </h1>
+<button type="submit" id="cou" data-oper='submit' class="btn btn-primary">구입</button>
+<button type="submit" id="return" data-oper='return' class="btn btn-default">돌아가기</button>
+</div>
 
-<input type="number" class="s" value='<c:out value="${coupon1.couponPrice}"/>'>
-<input type="number" class="m" value='<c:out value="${member.mileage}"/>'>
 
 
 <%@include file="../includes/footer.jsp" %>
@@ -71,7 +80,13 @@ $(document).ready(function(e){
 		console.log(operation);
 		
 		if(operation === 'return'){
-			formObj.attr("action", "/main/mainpage").attr("method", "get");
+			formObj.find(".userid").remove();
+			formObj.find(".q").remove();
+			formObj.find(".w").remove();
+			formObj.find("#e").remove();
+			formObj.find("#r").remove();
+			formObj.find(".tk").remove();
+			formObj.attr("action", "/main/mainpage").attr("method", "get").submit();
 			
 		}else if(operation === 'submit'){
 			
@@ -91,7 +106,7 @@ $(document).ready(function(e){
 		}
 			
 		}
-		formObj.submit();
+		
 	});
 	
 

@@ -144,7 +144,7 @@ public class UserController {
         log.info("인증번호"+checkNum);
         
         
-        String From = "kayo2006@naver.com";	//보낸는 사람메일
+        String From = "coals147@naver.com";	//보낸는 사람메일
         String toEmail = email;	//받는사람 메일 입력 (입력받은 메일가져와서 변수입력)
         String title = "Study Room Finding Service:SRFS 회원가입 인증 메일입니다.";	//메일 제목입력
         String content = 
@@ -180,6 +180,8 @@ public class UserController {
     public String findId(HttpServletResponse response, @RequestParam("email") String email,Model model) throws Exception{
     	log.info("아이디 찾기 결과");
     	model.addAttribute("id",service.findId(response, email));
+    	
+    	
     	return "/member/findId";
     }
     

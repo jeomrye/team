@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@include file="../includes/header.jsp"%>
 
 <div class="row">
@@ -19,6 +19,7 @@
 			<!-- /.panel-heading -->
 			<div class="panel-body">
 				<form role="form" action="/coupon/couponRegister" method="post">
+				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 					<div class="form-group">
 						<label>쿠폰 이름</label> <input class="form-control"
 							name='couponName'>
@@ -47,8 +48,7 @@
 
 
 					<div class="form-group">
-						<label>쿠폰 가격</label> <input class="form-control"
-							name='couponPrice'>
+						<label>쿠폰 가격</label> <input class="form-control" name='couponPrice'>
 					</div>
 					<button type="submit" class="btn btn-default">등록</button>
 					<button type="reset" class="btn btn-default">취소</button>
@@ -68,6 +68,13 @@
 <script>
 
 $(document).ready(function(e){
+	
+	var csrfHeaderName ="${_csrf.headerName}";
+  	var csrfTokenValue="${_csrf.token}";
+  	//Ajax spring security header	== ajax 를 이용한 csrf 토큰 전송
+  	$(document).ajaxSend(function(e, xhr, options){
+  		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+  	});
 	
 	var formObj = $("form[role='form']");
 	
@@ -131,7 +138,7 @@ $(document).ready(function(e){
 					str += "<span>" + obj.fileName + "</span>";
 					str += "<button type='button' data-file=\'"+fileCallPath+"\' ";
 					str += "data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-					str += "<img src='/display?fileName="+fileCallPath+"'>";
+					str += "<img src='/coupon/display?fileName="+fileCallPath+"'>";
 					str += "</div>";
 					str += "</li>";
 				}else{
@@ -167,7 +174,7 @@ $(document).ready(function(e){
 			}
 			
 			$.ajax({
-				url : '/uploadAjaxAction',
+				url : '/coupon/uploadAjaxAction',
 				processData : false,
 				contentType : false,
 				data : formData,
@@ -191,7 +198,7 @@ $(document).ready(function(e){
 				var targetLi = $(this).closet("li");
 				
 				$.ajax({
-					url:'/deleteFile',
+					url:'/coupon/deleteFile',
 					data:{fileName:targetFile, type:type},
 					dataType:'text',
 					type:'POST',
