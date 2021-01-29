@@ -53,6 +53,8 @@
 					</c:forEach>
 				</table>
 				
+				<button class='btn btn-default' id="gomain">메인으로 가기</button>
+				
 				<script type="text/javascript">
 				
 				
@@ -62,7 +64,9 @@
 				});
 				
 				
-				
+				$("#gomain").on("click", function() {
+					location.href="/main/mainpage";
+				})
 				
 				
 				</script>

@@ -16,6 +16,7 @@
     <title>탈퇴페이지</title>
 <style>
 	.wrapper{
+		margin-top: 12%;
 		width: 100vw;
 		height: 100vh;	
 		
@@ -32,23 +33,25 @@
 
 /* 리셋하기 버튼 */
 .remove_button{
-	width: 30%;
+	width: 25%;
     height: 60px;
     background-color: #8583e7;
     font-size: 40px;
     font-weight: 900;
     color: white;
     float: none;
+	border-left: 20%;    
 }
 /* 취소하기 버튼 */
 .return_button{
-	width: 30%;
+	width: 25%;
     height: 60px;
     background-color: #e0364f;
     font-size: 40px;
     font-weight: 900;
     color: white;
-    float: right;
+    float: none;
+    border-left: 20%;    
 }
 
 /* float 속성 해제 */
@@ -62,26 +65,7 @@
 .incorrect{
     color : red;
 }
-/* 유효성검사 span부분 */
 
-.pw_ck{
-	display: none;
-}
-.pwCk_ck{
-	display: none;
-}
-.email_ck{
-	display: none;
-}
-.phone_ck{
-	display: none;
-}
-.gender_ck{
-	display: none;
-}
-.companynumber_ck{
-	display: none;
-}
 
 
 
@@ -103,17 +87,17 @@
 
 <div class="wrap">
 	<div class="col-lg-12">
-		<h1 class="page-header">회원 탈퇴페이지</h1>
+		<h1 class="page-header" style="text-align: center;">회원 탈퇴페이지</h1>
 	</div>
 
 
-<h1>정말로 탈퇴하시겠습니까??</h1>
-
+<h1 style="text-align: center;">정말로 탈퇴하시겠습니까??</h1>
+<br>
 
 
 	
-	<button type="submit" class="remove_button" data-oper='remove'>탈퇴하기</button>
-	<button type="button" class="return_button" data-oper='cancel'>취소하기</button>
+	<div style="text-align: center;"><button type="submit" class="remove_button" data-oper='remove'>탈퇴하기</button>
+	<button type="button" class="return_button" data-oper='cancel'>취소하기</button></div>
 
 
 
