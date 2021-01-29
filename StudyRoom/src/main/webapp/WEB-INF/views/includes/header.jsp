@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>SRFS</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -72,7 +72,9 @@ color: black;
                <li><a class="bar" href="/notice/list"><h4>공지사항</h4></a></li>
                <li><a class="bar" href="/free/list"><h4>자유게시판</h4></a></li>
                <li><a class="bar" href="/place/list"><h4>장소</h4></a></li>
+                <sec:authorize access="hasAnyRole('ROLE_MANAGER','ROLE_USER','ROLE_ADMIN')">
                <li><a class="bar"  href="/coupon/couponList"><h4>쿠폰구매하기</h4></a></li>
+                </sec:authorize>
                <li><a class="bar" href="/qna/list"><h4>Q&A</h4></a></li>
                <li><a class="bar" href="/faq/list"><h4>FAQ</h4></a></li>
                
