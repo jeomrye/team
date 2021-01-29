@@ -99,10 +99,8 @@
 			<div class="modal-footer">
 				<sec:authentication property="principal" var="pinfo"/> 	<!-- 조회 화면에서 댓글 추가버튼 -->
 				<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')">
-				<c:if test="${pinfo.username eq free.writer or pinfo.authorities eq '[ROLE_ADMIN]' }"> 
 				<button id="modalModBtn" type="button" class="btn btn-warning">수정</button>
 				<button id="modalRemoveBtn" type="button" class="btn btn-danger">삭제</button>
-				</c:if>
 				<button id="modalRegisterBtn" type="button" class="btn btn-default">등록</button>
 				
 				</sec:authorize>
