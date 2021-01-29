@@ -43,7 +43,7 @@
 								<!-- a태그 걸어줘서 쿠폰 상세정보 보기 페이지로 이동 -->
                                 		<td><a class='move' href='<c:out value="${coupon.couponNumber}"/>'>
                                 		<c:out value="${coupon.couponName}"/></a></td>
-                                		<td><fmt:formatNumber value="${coupon.couponPrice}" pattern="###,###,###"/></td>
+                                		<td><fmt:formatNumber value="${coupon.couponPrice}"/></td>
                                 		<td><fmt:formatDate pattern="yyyy-MM-dd" value="${coupon.couponregDate}"/></td>
                                 		<td><fmt:formatDate pattern="yyyy-MM-dd" value="${coupon.couponupdateDate}"/></td>
                                 	</tr>
