@@ -48,8 +48,7 @@
 
 
 					<div class="form-group">
-						<label>쿠폰 가격</label> <input class="form-control"
-							name='couponPrice'>
+						<label>쿠폰 가격</label> <input class="form-control" name='couponPrice'>
 					</div>
 					<button type="submit" class="btn btn-default">등록</button>
 					<button type="reset" class="btn btn-default">취소</button>
