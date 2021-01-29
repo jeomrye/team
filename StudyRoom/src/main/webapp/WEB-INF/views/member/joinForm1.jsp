@@ -10,13 +10,14 @@
 
 <style>
 	.wrapper{
-		width: 1900px;	
+	width:100vw;
+	height:100vh;
 		
 	}
 
 	.wrap{
-		width : 800px;
-		margin-left: 670px;
+		width : 50%;
+		margin-left: 25%;
 		float: none;
 	}
 	
