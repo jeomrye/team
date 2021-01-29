@@ -30,9 +30,9 @@
 					<thead>
 						<tr>
 							<th style="width: 10%">아이디</th>
-							<th style="width: 40%">넘버</th>
+							<th style="width: 40%">시리얼넘버</th>
 							<th style="width: 10%">쿠폰이름</th>
-							<th style="width: 10%">시리얼넘버</th>
+						
 							<th style="width: 10%">가격</th>
 							<th style="width: 10%">사용여부</th>
 							<th style="width: 10%">구매일자</th>
@@ -41,9 +41,9 @@
 					<c:forEach items="${cplist }" var="ca">
 						<tr>
 							<td><c:out value="${ca.userid }"></c:out></td>
-							<td><c:out value="${ca.couponnumber }"></c:out></td>
-							<td><c:out value="${ca.couponName }"></c:out></td>
 							<td><c:out value="${ca.coup }"></c:out></td>
+							<td><c:out value="${ca.couponName }"></c:out></td>
+							
 							<td><c:out value="${ca.couponPrice }"></c:out></td>
 							<td><c:out value="${ca.couponuse }"></c:out></td>
 							<td><c:out value="${ca.couponbuydate }"></c:out></td>
