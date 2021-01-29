@@ -334,7 +334,7 @@
 	  			alert("자신의 글이 아닙니다. 삭제 불가!");
 	  			modal.modal("hide");
 	  			return;
-	  		}
+	  			}
 	  		}
 			
 		QaReplyService.remove(rno, originalReplyer, function(result){
