@@ -466,7 +466,7 @@
 
 <div class="password_wrap">
 <div class="password_name">비밀번호</div>
-<div class="password_input_box"><input type="text" class="password_input" name="password" value='<c:out value="${vo.password }"></c:out>' >
+<div class="password_input_box"><input type="text" class="password_input" name="password" value='' >
 </div>
 </div>
 <div class="passwordCk_wrap">
