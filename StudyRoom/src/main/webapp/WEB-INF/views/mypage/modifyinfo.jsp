@@ -16,12 +16,14 @@
     <title>수정페이지</title>
 <style>
 	.wrapper{
-		width: 1900px;	
+		width: 100vw;
+		height: 100vh;	
+		
 	}
 
 	.wrap{
-		width : 800px;
-		margin-left: 670px;
+		width : 50%;
+		margin-left: 25%;
 		float: none;
 	}
 	
@@ -464,7 +466,7 @@
 
 <div class="password_wrap">
 <div class="password_name">비밀번호</div>
-<div class="password_input_box"><input type="text" class="password_input" name="password" value='<c:out value="${vo.password }"></c:out>' >
+<div class="password_input_box"><input type="text" class="password_input" name="password" value='' >
 </div>
 </div>
 <div class="passwordCk_wrap">
