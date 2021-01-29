@@ -107,11 +107,20 @@ public class MemServiceImpl implements MemService {
 		// Mail Server 설정
 				String charSet = "utf-8";
 				String hostSMTP = "smtp.naver.com";
+<<<<<<< HEAD
 				String hostSMTPid = "coals147@naver.com";	//이메일 아이디
 				String hostSMTPpwd = "lcm!1597890";	//이메일 비밀번호
+=======
+				String hostSMTPid = "sscc57017@naver.com";	//이메일 아이디
+				String hostSMTPpwd = "ehdeh@01";	//이메일 비밀번호
+>>>>>>> branch 'test' of https://github.com/jeomrye/team
 
 				// 보내는 사람 EMail, 제목, 내용
+<<<<<<< HEAD
 				String fromEmail = "coals147@naver.com"; //이메일 아이디
+=======
+				String fromEmail = "sscc57017@naver.com"; //이메일 아이디
+>>>>>>> branch 'test' of https://github.com/jeomrye/team
 				String fromName = "Study Room Finding Service:SRFS";
 				String subject = "";
 				String msg = "";
