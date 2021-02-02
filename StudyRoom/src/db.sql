@@ -395,3 +395,5 @@ alter table QuestionAndAnswer_reply add constraint fk_reply_QuestionAndAnswer fo
 
 --Q&A 답변 시퀸스
 create sequence seq_reply;
+
+commit;
