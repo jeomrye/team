@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.std.mapper.UserMapper">
+<!-- 회원가입 -->
+<insert id="insertMem">
+	insert into member (userid,memberno,username, password, email,phone, gender, regdate, updatedate,mileage, companynumber) 
+	values (#{userid,jdbcType=VARCHAR },#{memberno},#{username,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},#{gender,jdbcType=VARCHAR},sysdate,sysdate,0,#{companynumber,jdbcType=VARCHAR}) 
+</insert>
+
+<!-- 아이디 중복검사 -->
+<select id="idCheck" resultType="int">
+	select count(*) from member where userid = #{userid} 
+</select>
+
+<!-- 사업자등록번호 검사 -->
+<select id="companyNumCheck" resultType="int">
+	select count(*) from company where companynumber = #{companynumber}
+</select>
+
+<!-- 인증/ 권한 -->
+<resultMap type="com.std.domain.MemVO" id="memberMap">
+	<id property="userid" column="userid"/>
+	<result property="userid" column="userid"/>
+	<result property="password" column="password"/>
+	<result property="username" column="username"/>
+	<result property="regdate" column="regdate"/>
+	<result property="updatedate" column="updatedate"/>
+	<collection property="authList" resultMap="authMap"></collection>
+</resultMap>
+<resultMap type="com.std.domain.AuthVO" id="authMap">
+	<result property="userid" column="userid"/>
+	<result property="auth" column="auth"/>
+</resultMap>
+
+<select id="read" resultMap="memberMap">
+	select mem.userid, password, username, memberno, regdate, updatedate, auth from member mem 
+	 LEFT OUTER JOIN auth auth on mem.userid = auth.userid where mem.userid = #{userid,jdbcType=VARCHAR}
+</select>
+
+<!-- 아이디 찾기 -->
+<select id="findId" parameterType="String" resultType="String">
+	select userid from member where email=#{email}
+</select>
+<!-- 이메일 찾기(비밀번호) -->
+<select id="findEmail" parameterType="String" resultType="String">
+	select email from member where userid =#{userid}
+</select>
+
+<!-- 비밀번호 찾기(임시비밀번호업데이트) -->
+<update id="updatePw">
+	update member set password = #{password} where userid = #{userid}
+</update>
+
+<insert id="insertAuth">
+   insert into auth (userid,auth) values (#{userid, jdbcType=VARCHAR},#{auth,jdbcType=VARCHAR})
+</insert>
+</mapper>
+
