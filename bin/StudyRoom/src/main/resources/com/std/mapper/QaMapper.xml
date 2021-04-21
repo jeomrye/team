@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.std.mapper.QaMapper">
+			<sql id="criteria">
+			<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+				<foreach item="type" collection="typeArr">
+					<trim prefix="OR">
+						<choose>
+							<when test="type == 'T'.toString()">
+								title like '%'||#{keyword}||'%'
+							</when>
+							<when test="type == 'C'.toString()">
+								content like '%'||#{keyword}||'%'
+							</when>
+						</choose>
+					</trim>
+				</foreach>
+			</trim>
+		</sql>
+	<select id="getListWithPaging"
+		resultType="com.std.domain.QaVO">
+		<![CDATA[
+		select
+		questionNo,title,content,writer,writedate,updatedate,qnacnt,
+    	status,pub,password,userid 
+		from
+			(
+			SELECT
+				/*+INDEX_DESC(QuestionAndAnswer PK_QuestionAndAnswer)*/
+				rownum rn,questionNo,title,content,writer,writedate,updatedate,qnacnt,
+    	status,pub,password,userid 
+			FROM 
+				questionAndAnswer 
+			WHERE
+			]]>
+			<include refid="criteria"></include>
+			<![CDATA[
+			 rownum <= #{pageNum}*#{amount}
+			)
+		WHERE rn > (#{pageNum}-1)*#{amount}
+		]]>
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		select count(*) from QuestionAndAnswer
+		where
+		<include refid="criteria"></include>
+		questionNo > 0
+	</select>
+	
+	<select id="getList" resultType="com.std.domain.QaVO">
+		<![CDATA[
+		select * from QuestionAndAnswer where questionNo > 0
+		]]>
+	</select>
+
+	<insert id="insert">
+		insert into QuestionAndAnswer(questionNo,title,content,writer,writedate,updatedate,qnacnt,
+    	status,pub,password,userid)
+		values(seq_QuestionAndAnswer.nextval,#{title},#{content},#{writer})
+	</insert>
+
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="questionNo" order="BEFORE" resultType="long">
+			select seq_QuestionAndAnswer.nextval from dual
+		</selectKey>
+		insert into QuestionAndAnswer(questionNo,title,content,writer,writedate,updatedate)
+		values(#{questionNo},#{title},#{content},#{writer},sysdate,sysdate)
+	</insert>
+
+	<select id="read" resultType="com.std.domain.QaVO">
+		select * from QuestionAndAnswer where questionNo =
+		#{questionNo}
+
+	</select>
+
+	<delete id="delete">
+		delete from QuestionAndAnswer where questionNo = #{questionNo}
+	</delete>
+
+	<update id="update">
+		update QuestionAndAnswer set title=#{title}, content=#{content}, writer=#{writer} where questionNo  = #{questionNo }
+	</update>
+</mapper>
